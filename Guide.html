@@ -1,0 +1,783 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENCA MPE Ultra Continuum - Operations Manual</title>
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --section-bg: #1a1a1a;
+            --accent-color: #00ff99;
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border-color: #333;
+            --header-bg: #000;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            padding: 2.5rem 1rem 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 0.5rem 0 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .lang-toggle {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lang-toggle button {
+            background: #111;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-toggle button.active {
+            background: var(--accent-color);
+            color: #000;
+            border-color: #fff;
+        }
+
+        nav {
+            background: #222;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: sticky;
+            top: 140px;
+            z-index: 90;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 5px 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        nav a:hover {
+            background: var(--accent-color);
+            color: #000;
+            border-color: #fff;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            background-color: var(--section-bg);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: #fff;
+            margin-top: 1.8rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h3::before {
+            content: "\25B6";
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+
+        ul { padding-left: 1.5rem; }
+        li { margin-bottom: 0.8rem; }
+
+        code {
+            background: #000;
+            color: var(--accent-color);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+        }
+
+        .pro-tip {
+            background: rgba(0, 255, 153, 0.07);
+            border-left: 5px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        [data-lang] { display: none; }
+        [data-lang].active { display: block; }
+
+        @media (max-width: 768px) {
+            nav { position: relative; top: 0; }
+            header h1 { font-size: 1.8rem; }
+            section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>GENCA MPE Ultra Continuum</h1>
+    <p>Operations Manual - Web App</p>
+    <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="langEn" class="active" type="button">EN</button>
+        <button id="langIt" type="button">IT</button>
+    </div>
+</header>
+
+<nav>
+    <div data-lang="en" class="active">
+        <a href="#intro">Overview</a>
+        <a href="#quickstart">Quick Start</a>
+        <a href="#ui">UI Structure</a>
+        <a href="#playground">Playground</a>
+        <a href="#topbar">Top Bar & Icons</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#performance">Performance</a>
+        <a href="#fx">FX</a>
+        <a href="#midi">MIDI &amp; Synth</a>
+        <a href="#sampler">Sampler</a>
+        <a href="#scale">Scale &amp; Harmony</a>
+        <a href="#melody">Melody</a>
+        <a href="#advanced">Advanced</a>
+        <a href="#recording">Recording</a>
+        <a href="#troubleshooting">Troubleshooting</a>
+    </div>
+    <div data-lang="it">
+        <a href="#intro">Panoramica</a>
+        <a href="#quickstart">Avvio rapido</a>
+        <a href="#ui">Struttura UI</a>
+        <a href="#playground">Playground</a>
+        <a href="#topbar">Top Bar & Icone</a>
+        <a href="#workflow">Flusso operativo</a>
+        <a href="#performance">Performance</a>
+        <a href="#fx">FX</a>
+        <a href="#midi">MIDI &amp; Synth</a>
+        <a href="#sampler">Sampler</a>
+        <a href="#scale">Scale &amp; Armonia</a>
+        <a href="#melody">Melody</a>
+        <a href="#advanced">Advanced</a>
+        <a href="#recording">Recording</a>
+        <a href="#troubleshooting">Problemi</a>
+    </div>
+</nav>
+
+<main>
+    <div data-lang="en" class="active">
+        <section id="intro">
+            <h2>Overview</h2>
+            <p><strong>GENCA MPE Ultra Continuum</strong> is a browser-based performance instrument that combines a <strong>Wavetable Synth</strong>, a <strong>Multi‑Sampler</strong>, and a complete <strong>MPE control system</strong>. It can operate as an internal sound engine, a MIDI controller, or both.</p>
+            <p>Play directly on the canvas with touch/mouse, or connect external MIDI devices. The app supports <strong>scale snapping</strong>, <strong>chords/arp</strong>, per‑note expression (press/timbre/pitch), melody import, and a full <strong>melody engine</strong> with Piano Roll + Sequencer.</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Xu-06yUo0B0?si=icEBnL6FFZJaF61e" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        
+        </section>
+
+        <section id="quickstart">
+            <h2>Quick Start</h2>
+            <ol>
+                <li>Click once on the page to enable audio (required by browsers).</li>
+                <li>Open <strong>MIDI &amp; SYNTH</strong> and select <code>MIDI In</code>/<code>MIDI Out</code> if needed.</li>
+                <li>Turn on <strong>Internal Synth</strong> to hear sound without external gear.</li>
+                <li>With <strong>Internal Synth ON</strong> you can use only synth, only sampler, or mix.</li>
+                <li>Play on the canvas or via MIDI. Use <strong>Scale</strong> to snap notes.</li>
+            </ol>
+            <div class="pro-tip">
+                <strong>Tip:</strong> If no sound, click the page and toggle <code>Internal Synth</code> off/on.
+            </div>
+        </section>
+
+        <section id="ui">
+            <h2>UI Structure</h2>
+            <ul>
+                <li><strong>Top Bar:</strong> access to panels (MIDI/SYNTH, FX, SAMPLER, SCALE, MELODY, REC).</li>
+                <li><strong>Main Canvas:</strong> performance surface with MPE visual feedback.</li>
+                <li><strong>Performance Bar:</strong> live controls at the bottom.</li>
+                <li><strong>Melody Panel:</strong> generator, editor, import and continue tools.</li>
+            </ul>
+        </section>
+
+        <section id="playground">
+            <h2>Physical Playground</h2>
+            <ul>
+                <li><strong>Physics Mode:</strong> enables a second canvas with material-based bodies and collision-triggered notes.</li>
+                <li><strong>Materials:</strong> Bamboo/Stone/Rubber/Clay/Glass/Felt/Steel/Water change both physics behavior and envelope feel.</li>
+                <li><strong>Actions:</strong> Rain, Spawn, Clear and Wind quick switch for immediate performance gestures.</li>
+                <li><strong>Live Macros:</strong> Energy/Chaos/Gravity/Density/Wind + Stream for continuous scene control.</li>
+                <li><strong>Presets:</strong> Rain Pad, Glass Burst, Tube Drone, Chaos Perc for instant setups.</li>
+                <li><strong>Tubes Mode:</strong> drag templates into canvas and edit with SEL/PLC/PLY/CUT/DEL tools.</li>
+                <li><strong>Tube Advanced:</strong> material, surface, length, diameter, end mode, quantize and wind-play.</li>
+            </ul>
+        </section>
+
+        <section id="topbar">
+            <h2>Top Bar & Icons</h2>
+            <ul>
+                <li><strong>Guide (?)</strong>: open this manual in a new tab.</li>
+                <li><strong>Record (●)</strong>: start recording the internal audio.</li>
+                <li><strong>Stop (■)</strong>: stop and save the take.</li>
+                <li><strong>Tabs:</strong> MIDI &amp; SYNTH, SAMPLER, SCALE, MELODY, ADVANCED.</li>
+                <li><strong>FX</strong>: opens the effects panel.</li>
+                <li><strong>MIX</strong>: opens the overlay mixer.</li>
+            </ul>
+        </section>
+
+        <section id="workflow">
+            <h2>Workflow (Suggested)</h2>
+            <ol>
+                <li>Set <strong>Scale</strong> and <strong>Chord</strong> context.</li>
+                <li>Choose sound: <strong>Synth</strong>, <strong>Sampler</strong> or Mix.</li>
+                <li>Shape performance: <strong>ARP/Chord</strong> or free play.</li>
+                <li>Build Melody: <strong>Generate</strong> or <strong>Import</strong>.</li>
+                <li>Edit in <strong>Piano Roll</strong> and <strong>Sequence</strong>.</li>
+                <li>Record and export your take.</li>
+            </ol>
+        </section>
+
+        <section id="performance">
+            <h2>Performance Bar</h2>
+            <p>The bottom bar switches between <strong>General Performance</strong> and <strong>Melody Performance</strong>.</p>
+            <h3>General Performance</h3>
+            <ul>
+                <li><strong>Transpose:</strong> octave up/down.</li>
+                <li><strong>KEEP:</strong> freeze the captured notes (still draggable).</li>
+                <li><strong>HOLD:</strong> latch current notes/chords.</li>
+                <li><strong>STOP:</strong> panic stop.</li>
+                <li><strong>FADE:</strong> smooth fade-out (seconds on the right).</li>
+                <li><strong>CHORD:</strong> chord mode control.</li>
+                <li><strong>ARP:</strong> arpeggiator on/off and rate.</li>
+            </ul>
+            <h3>Melody Performance Controls</h3>
+            <ul>
+                <li><strong>Melody:</strong> toggle generator on/off.</li>
+                <li><strong>Latch:</strong> lock melody to current scale/chord context.</li>
+                <li><strong>Volume:</strong> melody velocity scale.</li>
+                <li><strong>Rate:</strong> step rate for playback.</li>
+                <li><strong>Generate:</strong> rebuild melody from current params.</li>
+                <li><strong>BPM:</strong> direct tempo control for melody.</li>
+            </ul>
+        </section>
+
+        <section id="fx">
+            <h2>FX Panel</h2>
+            <ul>
+                <li><strong>FX Toggle:</strong> open/close the effects panel.</li>
+                <li><strong>Filter:</strong> envelope + cutoff/res controls.</li>
+                <li><strong>Chorus:</strong> rate and depth.</li>
+                <li><strong>Delay:</strong> time, feedback, dry/wet, reverse.</li>
+                <li><strong>Reverb:</strong> decay and dry/wet mix.</li>
+                <li><strong>Presets:</strong> save, load, and delete FX presets.</li>
+            </ul>
+        </section>
+
+        <section id="midi">
+            <h2>MIDI &amp; Synth</h2>
+            <ul>
+                <li><strong>Global Preset:</strong> save/load full app state.</li>
+                <li><strong>MIDI In/Out:</strong> select hardware/virtual ports.</li>
+                <li><strong>MPE Out:</strong> per‑note MPE to external synths.</li>
+                <li><strong>Internal Synth:</strong> built‑in wavetable engine.</li>
+                <li><strong>Mode:</strong> synth/sampler/layer modes.</li>
+                <li><strong>Wavetable:</strong> choose waveform type.</li>
+                <li><strong>Mix:</strong> blend synth and sampler.</li>
+                <li><strong>Sampler Set (mini):</strong> quick set selection from MIDI tab.</li>
+                <li><strong>MIDI Thru:</strong> pass incoming MIDI to output.</li>
+                <li><strong>Pitch Bend Range:</strong> global bend range.</li>
+                <li><strong>Curve/Smoothing:</strong> gesture response shaping.</li>
+            </ul>
+        </section>
+
+        <section id="sampler">
+            <h2>Sampler</h2>
+            <ul>
+                <li><strong>Factory/User Sets:</strong> load presets or create your own.</li>
+                <li><strong>New/Save/Delete:</strong> manage user sets.</li>
+                <li><strong>Slots:</strong> each slot has file, root note and gain.</li>
+                <li><strong>Clear:</strong> remove a loaded sample from a slot.</li>
+                <li><strong>Loop &amp; Gain:</strong> per‑slot controls.</li>
+                <li><strong>Layering:</strong> mix sampler and synth from MIX.</li>
+            </ul>
+        </section>
+
+        <section id="scale">
+            <h2>Scale &amp; Harmony</h2>
+            <ul>
+                <li><strong>Scale Presets:</strong> select scale and root.</li>
+                <li><strong>Microtonal:</strong> manage cents and micro scales.</li>
+                <li><strong>Custom:</strong> notes list or cents list.</li>
+                <li><strong>Save/Load:</strong> store custom scales.</li>
+                <li><strong>Microtonalize Input:</strong> apply micro scale to incoming notes.</li>
+                <li><strong>Chord Modes:</strong> triads, 7ths, sus, etc.</li>
+                <li><strong>Arp + Chord:</strong> combine with KEEP/HOLD.</li>
+            </ul>
+        </section>
+
+        <section id="melody">
+            <h2>Melody (Generator + Editor)</h2>
+            <p>The Melody engine can generate, import, or continue phrases. It is controlled from MAIN and Performance.</p>
+            <h3>Generator (MAIN)</h3>
+            <ul>
+                <li><strong>Generate:</strong> rebuild melody with current parameters.</li>
+                <li><strong>Pattern / Rules / Rhythm Pattern:</strong> melodic style and rhythmic masks.</li>
+                <li><strong>Length / Density / Range / Seed / Cadence:</strong> base structure.</li>
+                <li><strong>Poly Gen + Chord %:</strong> auto chords.</li>
+                <li><strong>Dur Var:</strong> note length variability (visual in piano roll).</li>
+                <li><strong>Rhythm Var / Motif Var / Density Drift:</strong> dynamic generation variations.</li>
+                <li><strong>Rate + BPM:</strong> playback speed.</li>
+            </ul>
+            <h3>Humanize Parameters</h3>
+            <ul>
+                <li><strong>Timing/Velocity/Swing/Legato:</strong> timing and dynamics.</li>
+                <li><strong>Ornament:</strong> grace/neighbor notes.</li>
+                <li><strong>Press/Timbre/Pitch:</strong> expressive MPE.</li>
+                <li><strong>Phrase/Accent/Length Rand:</strong> phrasing and accents.</li>
+                <li><strong>Y Motion:</strong> virtual Y movement.</li>
+            </ul>
+            <h3>Piano Roll (Editor)</h3>
+            <ul>
+                <li><strong>Click empty:</strong> add note.</li>
+                <li><strong>Click note:</strong> select and open note panel.</li>
+                <li><strong>Double click:</strong> delete note.</li>
+                <li><strong>Drag:</strong> move notes (single or group).</li>
+                <li><strong>Handle:</strong> resize duration (free, not step-locked).</li>
+                <li><strong>Follow/Stop:</strong> auto follow playback; STOP freezes.</li>
+            </ul>
+            <h3>Sequence (Matrix)</h3>
+            <ul>
+                <li><strong>Step grid:</strong> quick edit with multi‑selection and drag.</li>
+                <li><strong>Aligned editing:</strong> same logic as Piano Roll.</li>
+            </ul>
+            <h3>Import &amp; Continue</h3>
+            <ul>
+                <li><strong>Import WAV/MXL/MID:</strong> build notes from file/audio.</li>
+                <li><strong>Advanced Import:</strong> Magenta transcription (more accurate).</li>
+                <li><strong>Continue:</strong> extend with Magenta (steps + temperature + rhythm similarity).</li>
+                <li><strong>Reset:</strong> revert to pre‑continue sequence.</li>
+                <li><strong>Force Scale:</strong> force current scale on continuation.</li>
+            </ul>
+            <h3>Save / Load</h3>
+            <ul>
+                <li><strong>Save Melody:</strong> notes, params, and humanize.</li>
+                <li><strong>Load Melody:</strong> restores full configuration.</li>
+            </ul>
+        </section>
+
+        <section id="advanced">
+            <h2>Advanced (ARP / CHORD / MPE / MATRIX)</h2>
+            <h3>ARP</h3>
+            <ul>
+                <li><strong>Preset:</strong> quick arpeggio styles.</li>
+                <li><strong>Gate / Sync / BPM:</strong> timing and sync mode.</li>
+                <li><strong>Mode / Oct Range:</strong> direction and range.</li>
+                <li><strong>Probability / Ratchet:</strong> step probability and repeats.</li>
+                <li><strong>Euclidean / Shift / Swing:</strong> groove shaping.</li>
+                <li><strong>Step Pattern:</strong> 16-step on/off + ratchet badges.</li>
+            </ul>
+            <h3>CHORD</h3>
+            <ul>
+                <li><strong>Inversion:</strong> root/1st/2nd/3rd.</li>
+                <li><strong>Spread:</strong> widen chord voicing.</li>
+            </ul>
+            <h3>MPE</h3>
+            <ul>
+                <li><strong>MPE Preset:</strong> save/load MPE configurations.</li>
+                <li><strong>PB Range:</strong> pitch bend range.</li>
+                <li><strong>Snap/Dead Center:</strong> stabilize center pitch.</li>
+                <li><strong>Curve / Smooth:</strong> gesture shaping.</li>
+                <li><strong>Link Y:</strong> map Y to press or velocity.</li>
+                <li><strong>Touch Sens / Y Deadzone:</strong> response tuning.</li>
+                <li><strong>Quantize Release:</strong> release quantization.</li>
+            </ul>
+            <h3>MATRIX</h3>
+            <ul>
+                <li><strong>Matrix Mode:</strong> macro modulation engine.</li>
+                <li><strong>Macro Scene:</strong> predefined scene sets.</li>
+                <li><strong>AM Tone / Bias:</strong> modulation parameters.</li>
+            </ul>
+        </section>
+
+        <section id="recording">
+            <h2>Recording</h2>
+            <ol>
+                <li>Press <strong>Record</strong>.</li>
+                <li>Press <strong>Stop</strong> to save.</li>
+                <li>Trim and export WAV in the editor.</li>
+            </ol>
+            <h3>Recording Editor</h3>
+            <ul>
+                <li><strong>Selection:</strong> drag to choose a region.</li>
+                <li><strong>Play/Stop:</strong> audition the selection.</li>
+                <li><strong>Select All:</strong> reset selection to full file.</li>
+                <li><strong>Filename:</strong> set export name.</li>
+                <li><strong>Save WAV / Discard:</strong> export or delete take.</li>
+            </ul>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>Troubleshooting</h2>
+            <ul>
+                <li><strong>No sound:</strong> click page and toggle Internal Synth.</li>
+                <li><strong>MIDI not visible:</strong> refresh after connecting device.</li>
+                <li><strong>Advanced import not working:</strong> internet required (Magenta).</li>
+                <li><strong>Piano roll not following:</strong> ensure STOP is in FOLLOW.</li>
+            </ul>
+        </section>
+    </div>
+
+    <div data-lang="it">
+        <section id="intro">
+            <h2>Panoramica</h2>
+            <p><strong>GENCA MPE Ultra Continuum</strong> è una web app per performance musicale che integra: <strong>Wavetable Synth</strong>, <strong>Multi‑Sampler</strong> e un sistema completo di <strong>MPE (per‑note expression)</strong>. Può funzionare come generatore audio interno, come controller MIDI o come entrambi.</p>
+            <p>Suoni direttamente sul canvas con mouse/touch, oppure da MIDI esterno. La app offre <strong>snap di scala</strong>, <strong>chord/arp</strong>, controllo di <strong>pressione/timbro/pitch</strong>, import di melodie e un <strong>melody engine</strong> con editor Piano Roll + Sequencer.</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Xu-06yUo0B0?si=icEBnL6FFZJaF61e" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        
+        
+        
+        </section>
+
+        <section id="quickstart">
+            <h2>Avvio rapido</h2>
+            <ol>
+                <li>Clicca una volta sulla pagina per abilitare l’audio (obbligatorio nei browser).</li>
+                <li>Apri <strong>MIDI &amp; SYNTH</strong> e scegli <code>MIDI In</code>/<code>MIDI Out</code> se usi hardware.</li>
+                <li>Attiva <strong>Internal Synth</strong> per ascoltare senza strumenti esterni.</li>
+                <li>Con <strong>Internal Synth ON</strong> puoi usare SOLO SYNTH, SOLO SAMPLER o MIX.</li>
+                <li>Suona sul canvas o via MIDI. Usa <strong>Scale</strong> per lo snap.</li>
+            </ol>
+            <div class="pro-tip">
+                <strong>Tip:</strong> Se non senti audio, riclicca la pagina e disattiva/riattiva <code>Internal Synth</code>.
+            </div>
+        </section>
+
+        <section id="ui">
+            <h2>Struttura UI</h2>
+            <ul>
+                <li><strong>Top Bar:</strong> accesso ai pannelli (MIDI/SYNTH, FX, SAMPLER, SCALE, MELODY, REC).</li>
+                <li><strong>Canvas principale:</strong> superficie di gioco; supporta gesture e MPE visuale.</li>
+                <li><strong>Performance Bar:</strong> controlli rapidi live.</li>
+                <li><strong>Pannello Melody:</strong> generazione, editor, import e continuazioni.</li>
+            </ul>
+        </section>
+
+        <section id="playground">
+            <h2>Physical Playground</h2>
+            <ul>
+                <li><strong>Physics Mode:</strong> attiva un canvas secondario con corpi fisici e note triggerate da collisioni.</li>
+                <li><strong>Materiali:</strong> Bamboo/Stone/Rubber/Clay/Glass/Felt/Steel/Water modificano fisica e risposta audio.</li>
+                <li><strong>Azioni:</strong> Rain, Spawn, Clear e switch rapido del vento per gesture immediate.</li>
+                <li><strong>Live Macros:</strong> Energy/Chaos/Gravity/Density/Wind + Stream per controllo continuo della scena.</li>
+                <li><strong>Preset:</strong> Rain Pad, Glass Burst, Tube Drone, Chaos Perc per setup istantanei.</li>
+                <li><strong>Modalità Tubes:</strong> trascina template nel canvas e usa gli strumenti SEL/PLC/PLY/CUT/DEL.</li>
+                <li><strong>Tube Advanced:</strong> materiale, superficie, lunghezza, diametro, end mode, quantize e wind-play.</li>
+            </ul>
+        </section>
+
+        <section id="topbar">
+            <h2>Top Bar & Icone</h2>
+            <ul>
+                <li><strong>Guida (?)</strong>: apre questo manuale in nuova scheda.</li>
+                <li><strong>Record (●)</strong>: avvia la registrazione audio interna.</li>
+                <li><strong>Stop (■)</strong>: ferma e salva la take.</li>
+                <li><strong>Tab:</strong> MIDI &amp; SYNTH, SAMPLER, SCALE, MELODY, ADVANCED.</li>
+                <li><strong>FX</strong>: apre il pannello effetti.</li>
+                <li><strong>MIX</strong>: apre il mixer overlay.</li>
+            </ul>
+        </section>
+
+        <section id="workflow">
+            <h2>Flusso operativo (consigliato)</h2>
+            <ol>
+                <li>Imposta <strong>Scale</strong> e contesto armonico.</li>
+                <li>Scegli il suono: <strong>Synth</strong>, <strong>Sampler</strong> o Mix.</li>
+                <li>Configura performance: <strong>ARP/Chord</strong> o suona libero.</li>
+                <li>Costruisci la Melody: <strong>Generate</strong> o <strong>Import</strong>.</li>
+                <li>Modifica con <strong>Piano Roll</strong> e <strong>Sequence</strong>.</li>
+                <li>Registra ed esporta la take.</li>
+            </ol>
+        </section>
+
+        <section id="performance">
+            <h2>Performance</h2>
+            <p>La barra in basso passa tra <strong>Performance generale</strong> e <strong>Performance Melody</strong>.</p>
+            <h3>Performance generale</h3>
+            <ul>
+                <li><strong>Transpose:</strong> ottava su/giù.</li>
+                <li><strong>KEEP:</strong> congela le note correnti (restano trascinabili).</li>
+                <li><strong>HOLD:</strong> latch di note/accordi.</li>
+                <li><strong>STOP:</strong> panic stop globale.</li>
+                <li><strong>FADE:</strong> dissolve graduale (secondi a destra).</li>
+                <li><strong>CHORD:</strong> attiva modalità accordo.</li>
+                <li><strong>ARP:</strong> arpeggiatore on/off e rate.</li>
+            </ul>
+            <h3>Controlli Performance Melody</h3>
+            <ul>
+                <li><strong>Melody:</strong> attiva/disattiva il generatore.</li>
+                <li><strong>Latch:</strong> blocca la melody su scala/accordo attuale.</li>
+                <li><strong>Volume:</strong> scala la velocity della melody.</li>
+                <li><strong>Rate:</strong> velocità degli step.</li>
+                <li><strong>Generate:</strong> rigenera con i parametri correnti.</li>
+                <li><strong>BPM:</strong> controllo diretto del tempo.</li>
+            </ul>
+        </section>
+
+        <section id="fx">
+            <h2>Pannello FX</h2>
+            <ul>
+                <li><strong>FX Toggle:</strong> apre/chiude il pannello effetti.</li>
+                <li><strong>Filter:</strong> inviluppo + cutoff/res.</li>
+                <li><strong>Chorus:</strong> rate e depth.</li>
+                <li><strong>Delay:</strong> time, feedback, dry/wet, reverse.</li>
+                <li><strong>Reverb:</strong> decay e mix.</li>
+                <li><strong>Presets:</strong> salva/carica/elimina preset FX.</li>
+            </ul>
+        </section>
+
+        <section id="midi">
+            <h2>MIDI &amp; Synth</h2>
+            <ul>
+                <li><strong>Preset globale:</strong> salva/carica lo stato completo.</li>
+                <li><strong>MIDI In/Out:</strong> seleziona porte hardware/virtuali.</li>
+                <li><strong>MPE Out:</strong> invia MPE per‑nota a synth esterni.</li>
+                <li><strong>Internal Synth:</strong> usa il wavetable engine interno.</li>
+                <li><strong>Mode:</strong> modalità synth/sampler/layer.</li>
+                <li><strong>Wavetable:</strong> selezione forma d’onda.</li>
+                <li><strong>Mix:</strong> bilancia synth e sampler.</li>
+                <li><strong>Sampler Set (mini):</strong> scelta rapida del set.</li>
+                <li><strong>MIDI Thru:</strong> passa i dati in uscita.</li>
+                <li><strong>Pitch Bend Range:</strong> range di bending globale.</li>
+                <li><strong>Curve/Smoothing:</strong> modellano la risposta del gesto.</li>
+            </ul>
+        </section>
+
+        <section id="sampler">
+            <h2>Sampler</h2>
+            <ul>
+                <li><strong>Factory/User Sets:</strong> carica set predefiniti o personali.</li>
+                <li><strong>New/Save/Delete:</strong> gestione set utente.</li>
+                <li><strong>Slot:</strong> ogni slot ha file, root note e gain.</li>
+                <li><strong>Clear:</strong> rimuove un sample dallo slot.</li>
+                <li><strong>Loop &amp; Gain:</strong> controlli per loop e bilanciamento.</li>
+                <li><strong>Layering:</strong> mix tra sampler e synth nel pannello MIX.</li>
+            </ul>
+        </section>
+
+        <section id="scale">
+            <h2>Scale &amp; Armonia</h2>
+            <ul>
+                <li><strong>Scale Presets:</strong> seleziona la scala e la tonica.</li>
+                <li><strong>Microtonal:</strong> gestisci cents e scale microtonali.</li>
+                <li><strong>Custom:</strong> scale a lista di note o cents.</li>
+                <li><strong>Save/Load:</strong> salva e richiama scale personalizzate.</li>
+                <li><strong>Microtonalize Input:</strong> applica la micro‑scala alle note in ingresso.</li>
+                <li><strong>Chord Modes:</strong> triadi, settima, sus, ecc.</li>
+                <li><strong>Arp + Chord:</strong> combinabili con KEEP/HOLD.</li>
+            </ul>
+        </section>
+
+        <section id="melody">
+            <h2>Melody (Generator + Editor)</h2>
+            <p>Il motore Melody può <strong>generare</strong>, <strong>importare</strong> o <strong>continuare</strong> frasi. È controllabile da MAIN e Performance.</p>
+            <h3>Generator (MAIN)</h3>
+            <ul>
+                <li><strong>Generate:</strong> rigenera la melodia con i parametri correnti.</li>
+                <li><strong>Pattern / Rules / Rhythm Pattern:</strong> stile melodico e maschere ritmiche.</li>
+                <li><strong>Length / Density / Range / Seed / Cadence:</strong> struttura base.</li>
+                <li><strong>Poly Gen + Chord %:</strong> accordi automatici.</li>
+                <li><strong>Dur Var:</strong> variabilità della durata delle note (anche visiva nel piano roll).</li>
+                <li><strong>Rhythm Var / Motif Var / Density Drift:</strong> variazioni dinamiche dell’autogenerazione.</li>
+                <li><strong>Rate + BPM:</strong> velocità di playback.</li>
+            </ul>
+            <h3>Humanize Parameters</h3>
+            <ul>
+                <li><strong>Timing/Velocity/Swing/Legato:</strong> umanizzazione temporale e dinamica.</li>
+                <li><strong>Ornament:</strong> note di passaggio.</li>
+                <li><strong>Press/Timbre/Pitch:</strong> MPE espressivo.</li>
+                <li><strong>Phrase/Accent/Length Rand:</strong> fraseggio e accenti.</li>
+                <li><strong>Y Motion:</strong> movimento virtuale su asse Y.</li>
+            </ul>
+            <h3>Piano Roll (Editor)</h3>
+            <ul>
+                <li><strong>Click vuoto:</strong> aggiunge nota.</li>
+                <li><strong>Click su nota:</strong> seleziona e apre pannello note.</li>
+                <li><strong>Doppio click:</strong> cancella nota.</li>
+                <li><strong>Drag:</strong> sposta note (singole o in gruppo).</li>
+                <li><strong>Maniglia:</strong> ridimensiona durata (libera, non vincolata a step).</li>
+                <li><strong>Follow/Stop:</strong> il piano roll segue il playback; STOP lo blocca.</li>
+            </ul>
+            <h3>Sequence (Matrix)</h3>
+            <ul>
+                <li><strong>Griglia step:</strong> editing rapido, selezioni multiple e drag.</li>
+                <li><strong>Allineamento:</strong> stessa logica di editing del piano roll.</li>
+            </ul>
+            <h3>Import &amp; Continue</h3>
+            <ul>
+                <li><strong>Import WAV/MXL/MID:</strong> crea note da file/audio.</li>
+                <li><strong>Advanced Import:</strong> trascrizione Magenta per maggiore precisione.</li>
+                <li><strong>Continue:</strong> estende con Magenta (steps + temperatura + rhythm similarity).</li>
+                <li><strong>Reset:</strong> torna alla sequenza pre‑continue.</li>
+                <li><strong>Force Scale:</strong> forza la scala corrente in continuazione.</li>
+            </ul>
+            <h3>Save / Load</h3>
+            <ul>
+                <li><strong>Save Melody:</strong> salva note, parametri e humanize.</li>
+                <li><strong>Load Melody:</strong> ripristina la configurazione.</li>
+            </ul>
+        </section>
+
+        <section id="advanced">
+            <h2>Advanced (ARP / CHORD / MPE / MATRIX)</h2>
+            <h3>ARP</h3>
+            <ul>
+                <li><strong>Preset:</strong> stili rapidi di arpeggio.</li>
+                <li><strong>Gate / Sync / BPM:</strong> timing e sincronizzazione.</li>
+                <li><strong>Mode / Oct Range:</strong> direzione e range.</li>
+                <li><strong>Probability / Ratchet:</strong> probabilità e ripetizioni.</li>
+                <li><strong>Euclidean / Shift / Swing:</strong> shaping del groove.</li>
+                <li><strong>Step Pattern:</strong> pattern 16 step con ratchet.</li>
+            </ul>
+            <h3>CHORD</h3>
+            <ul>
+                <li><strong>Inversion:</strong> root/1a/2a/3a.</li>
+                <li><strong>Spread:</strong> apertura delle voci.</li>
+            </ul>
+            <h3>MPE</h3>
+            <ul>
+                <li><strong>MPE Preset:</strong> salva/carica configurazioni.</li>
+                <li><strong>PB Range:</strong> range del pitch bend.</li>
+                <li><strong>Snap/Dead Center:</strong> stabilizza il centro.</li>
+                <li><strong>Curve / Smooth:</strong> risposta del gesto.</li>
+                <li><strong>Link Y:</strong> mappa Y su press/velocity.</li>
+                <li><strong>Touch Sens / Y Deadzone:</strong> sensibilità e zona morta.</li>
+                <li><strong>Quantize Release:</strong> quantizzazione rilascio.</li>
+            </ul>
+            <h3>MATRIX</h3>
+            <ul>
+                <li><strong>Matrix Mode:</strong> motore macro‑modulazioni.</li>
+                <li><strong>Macro Scene:</strong> set di scene pronte.</li>
+                <li><strong>AM Tone / Bias:</strong> parametri di modulazione.</li>
+            </ul>
+        </section>
+
+        <section id="recording">
+            <h2>Recording</h2>
+            <ol>
+                <li>Premi <strong>Record</strong>.</li>
+                <li>Premi <strong>Stop</strong> per salvare.</li>
+                <li>Taglia la registrazione nell’editor ed esporta WAV.</li>
+            </ol>
+            <h3>Editor di registrazione</h3>
+            <ul>
+                <li><strong>Selection:</strong> trascina per selezionare.</li>
+                <li><strong>Play/Stop:</strong> ascolta la selezione.</li>
+                <li><strong>Select All:</strong> seleziona tutto.</li>
+                <li><strong>Filename:</strong> nome file di export.</li>
+                <li><strong>Save WAV / Discard:</strong> salva o elimina.</li>
+            </ul>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>Problemi comuni</h2>
+            <ul>
+                <li><strong>Non sento audio:</strong> clicca la pagina e riattiva Internal Synth.</li>
+                <li><strong>MIDI non visibile:</strong> ricarica dopo il collegamento.</li>
+                <li><strong>Import avanzato non funziona:</strong> serve Internet per Magenta.</li>
+                <li><strong>Piano roll non segue:</strong> assicurati che il tasto STOP sia su FOLLOW.</li>
+            </ul>
+        </section>
+    </div>
+</main>
+
+<footer>
+    <p>GENCA MPE Ultra Continuum - Manuale Operativo</p>
+    <p>&copy; 2026 GENCA Hybrid Audio Tools</p>
+</footer>
+
+<script>
+    (function () {
+        const enBtn = document.getElementById('langEn');
+        const itBtn = document.getElementById('langIt');
+        const blocks = document.querySelectorAll('[data-lang]');
+        const setLang = (lang) => {
+            blocks.forEach(el => {
+                const isMatch = el.getAttribute('data-lang') === lang;
+                el.classList.toggle('active', isMatch);
+            });
+            enBtn.classList.toggle('active', lang === 'en');
+            itBtn.classList.toggle('active', lang === 'it');
+            localStorage.setItem('genca_lang', lang);
+            document.documentElement.lang = lang;
+        };
+        enBtn.addEventListener('click', () => setLang('en'));
+        itBtn.addEventListener('click', () => setLang('it'));
+        const saved = localStorage.getItem('genca_lang') || 'en';
+        setLang(saved);
+    })();
+</script>
+
+</body>
+</html>

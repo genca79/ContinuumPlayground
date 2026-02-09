@@ -1,0 +1,1746 @@
+﻿
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENCA MPE Ultra Continuum: Hybrid Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia-wasm.web.js"></script>
+    <script src="https://unpkg.com/essentia.js@0.1.3/dist/essentia.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="Playground.js"></script>
+    
+</head>
+<body>
+
+<!-- uiToggle removed: replaced by gear settings button (#setToggle) -->
+<button id="perfToggle" class="menu-btn btn-accent" title="Toggle Performance" data-legend="Toggle the performance bar (bottom controls)." data-legend-group="top">
+    <span class="perf-icon-main" style="display:none">
+        <!-- Robot/Melody SVG -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="3" r="1" fill="currentColor"/>
+            <path d="M12 4v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <rect x="6" y="7" width="12" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="10" cy="12" r="1.5" fill="currentColor"/>
+            <circle cx="14" cy="12" r="1.5" fill="currentColor"/>
+            <path d="M9 16h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </span>
+    <span class="perf-icon-alt">
+        <!-- Play SVG -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <polygon points="7,4 21,12 7,20" fill="currentColor"/>
+        </svg>
+    </span>
+</button>
+<button id="setToggle" class="menu-btn" title="Settings" aria-label="Settings" data-legend="Open or close the settings panel." data-legend-group="top"></button>
+<button id="fsBtn" class="menu-btn" title="Full Screen" aria-label="Full Screen" data-legend="Toggle fullscreen mode." data-legend-group="top">
+    <span class="btn-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+            <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </span>
+</button>
+<a id="guideBtn" class="menu-btn btn-accent" href="Guide.html" target="_blank" rel="noopener" title="User Guide" data-legend="Open the user guide in a new tab." data-legend-group="top"><span class="btn-text">?</span></a>
+
+<!-- Audio Recorder Controls -->
+<div id="recControls" class="rec-controls-bar">
+    <button id="recStartBtn" class="menu-btn btn-rec" title="Start Recording" data-legend="Start recording the internal audio." data-legend-group="top">
+        <span class="btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="6" fill="currentColor"/>
+            </svg>
+        </span>
+    </button>
+    <button id="recStopBtn" class="menu-btn btn-stop" title="Stop & Save" disabled data-legend="Stop recording and save the take." data-legend-group="top">
+        <span class="btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <rect x="7" y="7" width="10" height="10" rx="1.5" fill="currentColor"/>
+            </svg>
+        </span>
+    </button>
+    <span id="recTimer" class="rec-timer">00:00</span>
+</div>
+
+<div id="ui">
+    <!-- === ROW 1: MAIN TABS (always visible when ui is open) === -->
+    <div class="ui-tabs-row" id="mainTabsRow">
+        <button class="ui-tab active" data-tab="midi" data-legend="MIDI & SYNTH: routing, internal synth settings, and input/output." data-legend-group="tabs">
+            <span class="tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 9v6M10 8v8M13 10v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 9h2a3 3 0 0 1 0 6h-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            MIDI &amp; SYNTH
+        </button>
+        <button class="ui-tab" data-tab="sampler" data-legend="SAMPLER: load samples, sets, and sampler options." data-legend-group="tabs">
+            <span class="tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 15c2-6 4-6 6 0s4 6 6 0 4-6 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            SAMPLER
+        </button>
+        <button class="ui-tab" data-tab="scale" data-legend="SCALE: tuning, scale selection, and microtonal settings." data-legend-group="tabs">
+            <span class="tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M6 5h12M6 9h12M6 13h8M6 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            SCALE
+        </button>
+        <button class="ui-tab" data-tab="melody" data-legend="MELODY: generator, humanize, and sequence tools." data-legend-group="tabs">
+            <span class="tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="3" r="1" fill="currentColor"/><path d="M12 4v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="6" y="7" width="12" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="12" r="1.5" fill="currentColor"/><circle cx="14" cy="12" r="1.5" fill="currentColor"/><path d="M9 16h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            MELODY
+        </button>
+        <button class="ui-tab" data-tab="advanced" data-legend="ADVANCED: MPE presets, sampler tools, and extra settings." data-legend-group="tabs">
+            <span class="tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            ADVANCED
+        </button>
+    </div>
+
+    <!-- === TAB CONTENT: MIDI === -->
+    <div class="ui-tab-content active" id="tabMidi" data-tab-content="midi">
+        <div class="ui-group-inline">
+            <div class="box preset-box"><label>Global Preset</label>
+                <div class="preset-controls">
+                    <select id="presetSelect" style="min-width:90px;" data-param="presetSelect"></select>
+                    <input type="text" id="presetName" placeholder="Name" style="width:70px;">
+                    <button id="presetSave" class="menu-btn btn-ok" aria-label="Save"><span class="btn-text">SAVE</span></button>
+                    <button id="presetDel" class="menu-btn btn-danger" aria-label="Delete"><span class="btn-text">DEL</span></button>
+                </div>
+                <div id="presetDesc" style="font-size:8px; color:#888; margin-top:2px;">&nbsp;</div>
+            </div>
+            <div class="box"><label>MIDI In</label><select id="midiInSelect" data-param="midiInSelect"><option value="">Nessun Input</option></select></div>
+            <div class="box"><label>MIDI Out A</label><select id="midiOutSelect" data-param="midiOutSelect"></select></div>
+            <div class="box"><label>MIDI Out B</label><select id="midiOutSelectB" data-param="midiOutSelectB"></select></div>
+            <div class="box" style="max-width:70px;"><label>DUAL Keyboard</label><input type="checkbox" id="dualMode" data-param="dualMode"></div>
+            <div class="box" style="max-width:60px;"><label>Thru</label><input type="checkbox" id="midiThru" data-param="midiThru"></div>
+            <div class="box" style="max-width:90px;"><label>MPE Out</label><input type="checkbox" id="midiInMpe" data-param="midiInMpe" checked></div>
+            <div class="box"><label>Synth</label><button id="audioStart" class="menu-btn btn-ok audio-toggle"><span class="btn-text">INTERNAL SYNTH</span></button></div>
+            <div class="box" style="max-width:80px;"><label>KEYBOARD</label><select id="audioZoneSelect"><option value="A">A</option><option value="B">B</option></select></div>
+            <div class="box"><label>Mode</label><select id="wtMode"></select></div>
+            <div class="box" id="sampleSetMiniBox"><label>Sampler Set</label><select id="sampleSetSelectMini"></select></div>
+            <div class="box" id="wtMixBox"><label>Mix</label><input type="range" id="wtMix" min="0" max="1" step="0.01" value="0.35"></div>
+            <div class="box" id="wtSelectBox"><label>SYNTH wave</label><select id="wtSelect"></select></div>
+            <div class="box" id="sampleArticulationMiniBox" style="display:flex;"><label>Articulation</label><select id="sampleArticulationSelectMini"></select></div>
+        </div>
+    </div>
+
+    <!-- === TAB CONTENT: SAMPLER === -->
+    <div class="ui-tab-content" id="tabSampler" data-tab-content="sampler">
+        <div class="ui-group-inline sampler-content">
+            <div class="box sampler-factory-box">
+                <label style="color:#aad; border-bottom:1px solid #444; margin-bottom:4px; padding-bottom:2px;">Factory Library</label>
+                <div class="sample-set-row sampler-factory-row" style="margin-bottom:8px;">
+                    <select id="factorySelect">
+                        <option value="">-- Seleziona Strumento --</option>
+                    </select>
+                    <button id="factoryLoadBtn" class="menu-btn btn-accent" title="Load Factory"><span class="btn-text">LOAD</span></button>
+                </div>
+            </div>
+            <div class="box sampler-user-box">
+                <div class="sampler-set-header">
+                    <label>Sampler Set (User)</label>
+                    <div class="sampler-set-actions">
+                        <button id="sampleSetNew" class="menu-btn btn-accent" title="New empty set"><span class="btn-text">NEW</span></button>
+                        <button id="sampleSetSave" class="menu-btn btn-ok" title="Save current set"><span class="btn-text">SAVE</span></button>
+                        <button id="sampleSetDel" class="menu-btn btn-danger" title="Delete set"><span class="btn-text">X</span></button>
+                    </div>
+                </div>
+                <div class="sample-set-row sampler-user-row">
+                    <select id="sampleSetSelect"></select>
+                    <input type="text" id="sampleSetName" placeholder="New name...">
+                </div>
+            </div>
+            <div class="box sampler-articulation-box">
+                <label>Articulation Group</label>
+                <div class="sample-set-row sampler-articulation-row">
+                    <select id="sampleArticulationSelect"></select>
+                    <input type="text" id="sampleArticulationName" placeholder="Group name...">
+                    <button id="sampleArticulationNew" class="menu-btn btn-accent" title="Create articulation group"><span class="btn-text">NEW GRP</span></button>
+                    <button id="sampleArticulationDup" class="menu-btn btn-ok" title="Duplicate current articulation"><span class="btn-text">DUP</span></button>
+                </div>
+            </div>
+            <div class="box sampler-rule-box">
+                <label>Articulation Rules</label>
+                <div class="sample-set-row sampler-rule-row">
+                    <select id="sampleArticulationMode">
+                        <option value="manual">Manual</option>
+                        <option value="keyswitch">Keyswitch</option>
+                        <option value="velocity">Velocity Split</option>
+                    </select>
+                </div>
+                <div class="sample-set-row sampler-rule-row" id="sampleRuleKeyswitchRow" style="display:none;">
+                    <input type="number" id="sampleKeyswitchLow" min="0" max="127" step="1" value="24" title="Keyswitch low MIDI note">
+                    <input type="number" id="sampleKeyswitchHigh" min="0" max="127" step="1" value="35" title="Keyswitch high MIDI note">
+                </div>
+                <div class="sample-set-row sampler-rule-row" id="sampleRuleVelocityRow" style="display:none;">
+                    <input type="number" id="sampleVelocitySplit1" min="1" max="126" step="1" value="40" title="Split 1 (v1-v40)">
+                    <input type="number" id="sampleVelocitySplit2" min="2" max="127" step="1" value="80" title="Split 2 (v41-v80)">
+                    <input type="number" id="sampleVelocitySplit3" min="3" max="127" step="1" value="110" title="Split 3 (v81-v110)">
+                </div>
+                <div class="sample-set-row sampler-rule-row" id="sampleRuleVelocityTargetsRow" style="display:none;">
+                    <select id="sampleVelocityArt1" title="Band 1 articulation"></select>
+                    <select id="sampleVelocityArt2" title="Band 2 articulation"></select>
+                    <select id="sampleVelocityArt3" title="Band 3 articulation"></select>
+                    <select id="sampleVelocityArt4" title="Band 4 articulation"></select>
+                </div>
+            </div>
+            <div class="box" style="max-width:120px;"><label>Sampler Gain</label><input type="range" id="samplerGain" min="0" max="5" step="0.01" value="1"></div>
+            <div class="box" style="max-width:80px;"><label>Max Voices</label><input type="number" id="samplerMaxVoices" min="1" max="64" step="1" value="24" style="width:100%;"></div>
+            <div class="box" style="max-width:100px;"><label>Loop Mode</label><button id="sampleLoopBtn" class="menu-btn toggle-off" style="width:100%; justify-content:center;">LOOP OFF</button></div>
+            <div class="box" style="max-width:130px;"><label>Batch Trim</label><button id="sampleAutoTrimAll" class="menu-btn btn-accent" style="width:100%; justify-content:center;">AUTO TRIM</button></div>
+        </div>
+        <div class="ui-group-inline sampler-slots">
+            <label style="width:100%; margin-bottom:4px;">Samples (load .wav/.flac files)</label>
+            <div id="sampleDropZone" class="sample-drop-zone">
+                <span>Drop WAV/FLAC files here</span>
+                <button id="sampleBatchPick" class="menu-btn btn-accent" type="button"><span class="btn-text">SELECT MULTI</span></button>
+                <button id="sampleBatchFolder" class="menu-btn btn-accent" type="button"><span class="btn-text">SELECT FOLDER</span></button>
+                <input type="file" id="sampleBatchFiles" accept=".wav,.flac,audio/wav,audio/flac" multiple hidden>
+                <input type="file" id="sampleBatchFolderFiles" accept=".wav,.flac,audio/wav,audio/flac" webkitdirectory directory multiple hidden>
+            </div>
+            <div class="sample-grid-compact" id="sampleGridCompact"></div>
+            <div class="sample-grid-footer">
+                <button id="sampleSlotsMore" class="menu-btn btn-accent" type="button"><span class="btn-text">+12 SLOTS</span></button>
+                <span id="sampleSlotsInfo" class="sample-slots-info">12 / 48</span>
+            </div>
+            <datalist id="sampleRootHints">
+                <option value="C2"><option value="C3"><option value="C4"><option value="C5"><option value="C6"><option value="C7">
+                <option value="D2"><option value="D3"><option value="D4"><option value="D5">
+                <option value="E2"><option value="E3"><option value="E4"><option value="E5">
+                <option value="F2"><option value="F3"><option value="F4"><option value="F5">
+                <option value="G2"><option value="G3"><option value="G4"><option value="G5">
+                <option value="A2"><option value="A3"><option value="A4"><option value="A5">
+                <option value="B2"><option value="B3"><option value="B4"><option value="B5">
+            </datalist>
+        </div>
+    </div>
+
+    <!-- === TAB CONTENT: SCALE === -->
+    <div class="ui-tab-content" id="tabScale" data-tab-content="scale">
+        <div class="scale-zone-badge" id="scaleZoneLabel" aria-live="polite">Editing Zone: A</div>
+        <div class="ui-group-inline scale-row-single">
+            <div class="hidden">
+                <input type="radio" name="scaleMode" value="diatonic" id="scaleModeDiatonic" checked>
+                <input type="radio" name="scaleMode" value="microtonal" id="scaleModeMicro">
+                <input type="radio" name="scaleMode" value="custom" id="scaleModeCustom">
+            </div>
+            <div class="box" id="scaleRootBox">
+                <label>ROOT</label>
+                <select id="rootNote" data-param="rootNote">
+                    <option value="0">C</option><option value="1">C#</option><option value="2">D</option><option value="3">D#</option>
+                    <option value="4">E</option><option value="5">F</option><option value="6">F#</option><option value="7">G</option>
+                    <option value="8">G#</option><option value="9">A</option><option value="10">A#</option><option value="11">B</option>
+                </select>
+                <div id="rootNoteLabel" class="root-note-label">C4</div>
+                <button id="rootLearnBtn" class="menu-btn btn-accent root-learn-btn" type="button" title="Learn root from MIDI key">LEARN ROOT</button>
+            </div>
+            <div class="box"><label>OCTAVES</label>
+                <select id="visibleOctaves" data-param="visibleOctaves">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="box" id="pbRangeBox"><label>PB Range</label><select id="pbRange" data-param="pbRange">
+                <option value="2">+/-2</option><option value="12">+/-12</option><option value="24">+/-24</option><option value="48" selected>+/-48</option>
+            </select></div>
+            <div class="box scale-menu" id="scaleDiatonicBox" data-scale-choice="diatonic"><label>Diatonic</label>
+                <select id="scaleType" data-param="scaleType">
+                    <option value="chromatic">Chromatic</option>
+                    <option value="major">Major</option><option value="minor">Minor</option>
+                    <option value="dorian">Dorian</option><option value="phrygian">Phrygian</option>
+                    <option value="lydian">Lydian</option><option value="mixolydian">Mixolydian</option>
+                    <option value="locrian">Locrian</option><option value="harmonicMinor">Harmonic Min</option>
+                    <option value="melodicMinor">Melodic Min</option><option value="pentatonicMaj">Pentatonic Maj</option>
+                    <option value="pentatonicMin">Pentatonic Min</option><option value="blues">Blues</option>
+                    <option value="hirajoshi">Hirajoshi</option><option value="bhairav">Bhairav</option>
+                    <option value="arabic">Arabic</option><option value="wholeTone">Whole Tone</option>
+                    <option value="diminished">Diminished</option>
+                </select>
+            </div>
+            <div class="box scale-menu" id="scaleMicroBox" data-scale-choice="microtonal"><label>Microtonal</label>
+                <select id="microScaleSelect"></select>
+                <div class="micro-scale-import">
+                    <div class="micro-scale-import-row">
+                        <input type="text" id="sclName" placeholder="SCL name (optional)" class="custom-scale-input-wide">
+                        <input type="file" id="sclFile" accept=".scl">
+                        <button id="sclImport" class="menu-btn btn-ok" aria-label="Import SCL"><span class="btn-text">IMPORT</span></button>
+                    </div>
+                    <div class="custom-scale-help">Import Scala .scl microtonal scales.</div>
+                </div>
+            </div>
+            <div class="box scale-menu scale-custom-wide" id="scaleCustomBox" data-scale-choice="custom"><label>Custom Scale</label>
+                <div class="custom-scale-row-compact">
+                    <div class="custom-scale-name-block">
+                        <label class="custom-scale-subtitle">New scale name</label>
+                        <div class="custom-scale-name-row">
+                            <input type="text" id="customScaleName" placeholder="Type name here" list="customScaleNames">
+                            <button id="customScaleSave" class="menu-btn btn-ok" aria-label="Save"><span class="btn-icon">ðŸ’¾</span></button>
+                            <button id="customScaleDel" class="menu-btn btn-danger" aria-label="Delete"><span class="btn-icon">ðŸ—‘</span></button>
+                        </div>
+                        <div class="custom-scale-help">Give your scale a name, then press Save.</div>
+                    </div>
+                    <div class="custom-scale-saved-block">
+                        <label class="custom-scale-subtitle">Saved scales</label>
+                        <select id="customScaleSaved"><option value="">(saved)</option></select>
+                    </div>
+                    <span class="custom-mode-toggle">
+                        <label><input type="radio" name="customScaleMode" value="notes" id="customModeNotes" checked> Notes</label>
+                        <label><input type="radio" name="customScaleMode" value="cents" id="customModeCents"> Cents</label>
+                    </span>
+                    <div class="custom-scale-entry">
+                        <input type="text" id="customScaleNotes" placeholder="Notes: C, D#, F, G, A..." class="custom-scale-input-wide">
+                        <div class="custom-scale-help">Separate notes with commas or spaces.</div>
+                    </div>
+                    <div class="custom-scale-entry hidden" id="customScaleCentsWrap">
+                        <input type="text" id="customScaleCents" placeholder="Cents: 0, 203.91, 386.31, 498..." class="custom-scale-input-wide">
+                        <div class="custom-scale-help">Decimals allowed (e.g., 905.87).</div>
+                    </div>
+                </div>
+                <datalist id="customScaleNames"></datalist>
+            </div>
+        </div>
+        <div class="scale-notes-preview hidden" id="scaleNotesPreview" aria-live="polite"></div>
+
+        <div class="ui-group-inline">
+            <div class="box" style="max-width:120px;"><label>Micro Map</label><input type="checkbox" id="midiInMicroMap" data-param="midiInMicroMap"></div>
+            <div class="box" style="max-width:110px;"><label>Micro Base</label><input type="number" id="midiInMicroBase" min="0" max="127" step="1" value="48"></div>
+        </div>
+    </div>
+
+    <!-- === TAB CONTENT: MELODY === -->
+    <div class="ui-tab-content" id="tabMelody" data-tab-content="melody">
+        <div class="ui-tabs-row ui-subtabs" id="melodySubTabs">
+            <button class="ui-tab active" data-subtab="melody-main">MAIN</button>
+            <button class="ui-tab" data-subtab="melody-human-params">HUMANIZE PARAMETERS</button>
+            <button class="ui-tab" data-subtab="melody-import">IMPORT</button>
+            <button class="ui-tab" data-subtab="melody-continue">CONTINUE</button>
+        </div>
+
+        <div class="ui-subtab-content active" data-subtab-content="melody-main">
+            <div class="melody-main-grid">
+                <div class="melody-main-left">
+            <div class="ui-group-inline">
+                <div class="box" style="max-width:140px;">
+                    <label>Melody</label>
+                    <button id="melodyToggle" class="menu-btn toggle-off">MELODY OFF</button>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Generate</label>
+                    <button id="melodyGenerate" class="menu-btn btn-accent">GENERATE</button>
+                </div>
+                <div class="box" style="min-width:220px;">
+                    <label>Save Preset</label>
+                    <div class="melody-save-inline">
+                        <input type="text" id="melodySaveName" placeholder="Name">
+                        <button id="melodySaveBtn" class="menu-btn btn-accent">SAVE</button>
+                    </div>
+                </div>
+                <div class="box" style="min-width:200px;">
+                    <label>Load Preset</label>
+                    <select id="melodySaveSelect"></select>
+                </div>
+            </div>
+
+        <div class="ui-group-inline">
+            <div class="box" style="max-width:140px;">
+                <label>Pattern</label>
+                <select id="melodyStyle">
+                    <optgroup label="Melodic">
+                        <option value="smooth">Smooth</option>
+                        <option value="balanced" selected>Balanced</option>
+                        <option value="leaps">Leaps</option>
+                        <option value="arpeggio">Arpeggio</option>
+                        <option value="call">Call/Resp</option>
+                    </optgroup>
+                    <optgroup label="Rules">
+                        <option value="rule:all">All rules</option>
+                        <option value="rule:stepwise">Stepwise motion</option>
+                        <option value="rule:motif">Motif repetition</option>
+                        <option value="rule:rhythm">Rhythmic rules</option>
+                        <option value="rule:leaps">Wider leaps</option>
+                    </optgroup>
+                    <optgroup label="Rhythm Patterns">
+                        <option value="pattern:straight_4">4 on the floor</option>
+                        <option value="pattern:straight_8">8th straight</option>
+                        <option value="pattern:straight_16">16th straight</option>
+                        <option value="pattern:offbeat_8">Offbeat 8th</option>
+                        <option value="pattern:syncop_classic">Classic syncopation</option>
+                        <option value="pattern:syncop_push">Push sync</option>
+                        <option value="pattern:backbeat_2_4">Backbeat 2&4</option>
+                        <option value="pattern:rock_8">Rock 8th</option>
+                        <option value="pattern:pop_groove">Pop groove</option>
+                        <option value="pattern:funk_16">Funk 16th</option>
+                        <option value="pattern:funk_james">James-style</option>
+                        <option value="pattern:ghost_dense">Ghost-note feel</option>
+                        <option value="pattern:shuffle_8">Shuffle 8th</option>
+                        <option value="pattern:swing_16">Swing 16th</option>
+                        <option value="pattern:clave_3_2">Son clave 3-2</option>
+                        <option value="pattern:clave_2_3">Son clave 2-3</option>
+                        <option value="pattern:bossa">Bossa feel</option>
+                        <option value="pattern:one_drop">One drop</option>
+                        <option value="pattern:skank">Skank</option>
+                        <option value="pattern:break_classic">Classic break</option>
+                        <option value="pattern:hiphop_sparse">Sparse hip-hop</option>
+                        <option value="pattern:house_4">House 4/4</option>
+                        <option value="pattern:techno_pump">Techno pump</option>
+                        <option value="pattern:dnb_drive">DnB drive</option>
+                        <option value="pattern:meter_3_4">3/4 feel</option>
+                        <option value="pattern:meter_5_4">5/4 feel</option>
+                        <option value="pattern:meter_7_8">7/8 feel</option>
+                        <option value="pattern:poly_3_4">3 over 4</option>
+                        <option value="pattern:poly_5_4">5 over 4</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="box" style="max-width:90px;">
+                <label>Length</label>
+                <input type="number" id="melodyLength" min="4" max="512" value="16">
+            </div>
+            <div class="box" style="max-width:120px;">
+                <label>Density</label>
+                <input type="range" id="melodyDensity" min="20" max="100" value="80">
+            </div>
+            <div class="box" style="max-width:120px;">
+                <label>Range</label>
+                <input type="number" id="melodyRange" min="5" max="36" value="14">
+            </div>
+            <div class="box" style="max-width:140px;">
+                <label>Seed</label>
+                <div class="melody-seed-row">
+                    <input type="number" id="melodySeed" min="1" max="9999" value="1">
+                </div>
+            </div>
+            <div class="box" style="max-width:140px;">
+                <label>Cadence</label>
+                <select id="melodyCadence">
+                    <option value="tonic" selected>Tonic</option>
+                    <option value="dominant">Dominant</option>
+                    <option value="subdominant">Subdominant</option>
+                    <option value="mediant">Mediant</option>
+                    <option value="leading">Leading</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+            <div class="box" style="max-width:160px;">
+                <label>Poly Gen</label>
+                <input type="checkbox" id="melodyPolyGen">
+                <div style="height:6px"></div>
+                <label>Chord %</label>
+                <input type="range" id="melodyPolyChance" min="0" max="100" step="1" value="35">
+            </div>
+            <div class="box" style="max-width:160px;">
+                <label>Dur Var</label>
+                <input type="range" id="melodyDurVar" min="0" max="100" step="1" value="0">
+            </div>
+            <div class="box" style="max-width:160px;">
+                <label>Rhythm Var</label>
+                <input type="range" id="melodyRhythmVar" min="0" max="100" step="1" value="0">
+            </div>
+            <div class="box" style="max-width:160px;">
+                <label>Motif Var</label>
+                <input type="range" id="melodyMotifVar" min="0" max="100" step="1" value="0">
+            </div>
+            <div class="box" style="max-width:160px;">
+                <label>Density Drift</label>
+                <input type="range" id="melodyDensityDrift" min="0" max="100" step="1" value="0">
+            </div>
+        </div>
+
+        <div class="ui-group-inline">
+            <div class="box" style="max-width:110px;">
+                <label>Rate</label>
+                <select id="melodyRate">
+                    <option value="1/2">1/2</option>
+                    <option value="1/4">1/4</option>
+                    <option value="1/4T">1/4T</option>
+                    <option value="1/8">1/8</option>
+                    <option value="1/8T">1/8T</option>
+                    <option value="1/16" selected>1/16</option>
+                    <option value="1/16T">1/16T</option>
+                    <option value="1/32">1/32</option>
+                    <option value="1/32T">1/32T</option>
+                    <option value="1/64">1/64</option>
+                </select>
+            </div>
+            <div class="box" style="max-width:110px;">
+                <label>BPM</label>
+                <input type="number" id="melodyBpm" min="40" max="240" value="120">
+            </div>
+            <div class="box" style="max-width:160px;">
+                <label>General Humanize</label>
+                <input type="range" id="melodyHumanizeAmount" min="0" max="100" value="100">
+            </div>
+            <div class="box" style="max-width:120px;">
+                <label>Layer</label>
+                <button id="melodyLayerToggle" class="menu-btn toggle-off">LAYER OFF</button>
+            </div>
+            <div class="box" style="max-width:120px;">
+                <label>Layer Level</label>
+                <input type="range" id="melodyLayerLevel" min="30" max="110" value="70">
+            </div>
+            <div class="box" style="max-width:160px;">
+                <label>Layer Chord</label>
+                <select id="melodyLayerMode">
+                    <option value="third">Third</option>
+                    <option value="fifth">Fifth</option>
+                    <option value="octave">Octave</option>
+                    <option value="triad" selected>Triad</option>
+                    <option value="sixth">6th</option>
+                    <option value="seventh">7th (Dom)</option>
+                    <option value="maj7">Maj7</option>
+                    <option value="min7">Min7</option>
+                    <option value="sus2">Sus2</option>
+                    <option value="sus4">Sus4</option>
+                    <option value="add9">Add9</option>
+                    <option value="dom9">Dom9</option>
+                    <option value="maj9">Maj9</option>
+                    <option value="min9">Min9</option>
+                    <option value="eleventh">11th</option>
+                    <option value="thirteenth">13th</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="ui-group-inline">
+            <div class="box" style="min-width:220px;">
+                <label>Phrase</label>
+                <div id="melodyPreview" style="font-size:11px; color:#9aa; max-width:520px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">&nbsp;</div>
+            </div>
+        </div>
+        <div class="ui-group-inline">
+            <div class="box melody-seq-box">
+                <label>Sequence</label>
+                <div id="melodySeqEditor" class="melody-seq-grid"></div>
+            </div>
+        </div>
+                </div>
+                <div class="melody-main-right">
+
+        <div class="ui-group-inline melody-roll-tools">
+            <div class="box" style="max-width:140px;">
+                <label>Zoom H</label>
+                <input type="range" id="melodyRollZoomH" min="8" max="80" step="1" value="20">
+            </div>
+            <div class="box" style="max-width:140px;">
+                <label>Zoom V</label>
+                <input type="range" id="melodyRollZoom" min="0.6" max="2.5" step="0.1" value="1">
+            </div>
+            <div class="box" style="max-width:140px;">
+                <label>Scroll</label>
+                <input type="range" id="melodyRollScroll" min="-24" max="24" step="1" value="0">
+            </div>
+            <div class="box" style="max-width:170px;">
+                <label>Auto Snap Scale</label>
+                <label class="microtonalize-row" style="font-size:10px; white-space:nowrap;">
+                    <input type="checkbox" id="melodyAutoSnapScale"> Off
+                </label>
+            </div>
+            <div class="box melody-page-box" style="min-width:210px;">
+                <label>Page</label>
+                <div class="melody-page-controls">
+                    <button id="melodyPagePrev" type="button" class="melody-page-btn">â€¹</button>
+                    <span id="melodyPageLabel" class="melody-page-label">Page 1/1 (1-1)</span>
+                    <button id="melodyPageNext" type="button" class="melody-page-btn">â€º</button>
+                    <button id="melodyPageGo" type="button" class="melody-page-btn">STOP</button>
+                    <select id="melodyPageSize" class="melody-page-size">
+                        <option value="32">32</option>
+                        <option value="64" selected>64</option>
+                        <option value="128">128</option>
+                        <option value="256">256</option>
+                        <option value="512">512</option>
+                        <option value="1024">1024</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="ui-group-inline">
+            <div class="box melody-roll-box">
+                <label>Piano Roll</label>
+                <div id="melodyRollScrollWrap" class="melody-roll-scroll">
+                    <div id="melodyRollLabels" class="melody-roll-labels" aria-hidden="true"></div>
+                    <canvas id="melodyRollCanvas" class="melody-roll" height="520"></canvas>
+                    <div id="melodyNoteEditorBox" class="melody-note-panel">
+                        <div class="melody-note-label">--</div>
+                        <select id="melodyNoteEditorSelect" class="melody-note-select"></select>
+                        <div class="melody-note-len">
+                            <button type="button" class="melody-note-len-btn" data-dir="-1">&lt;</button>
+                            <span class="melody-note-len-val">Len 1</span>
+                            <button type="button" class="melody-note-len-btn" data-dir="1">&gt;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-subtab-content" data-subtab-content="melody-human-params">
+            <div class="ui-group-inline">
+                <div class="box" style="max-width:140px;">
+                    <label>Timing (ms)</label>
+                    <input type="range" id="melodyHumanTiming" min="0" max="30" step="1" value="8">
+                    <div class="param-effective" id="melodyHumanTimingEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Velocity</label>
+                    <input type="range" id="melodyHumanVelocity" min="0" max="60" step="1" value="30">
+                    <div class="param-effective" id="melodyHumanVelocityEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Swing (%)</label>
+                    <input type="range" id="melodyHumanSwing" min="0" max="60" step="1" value="60">
+                    <div class="param-effective" id="melodyHumanSwingEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Legato (%)</label>
+                    <input type="range" id="melodyHumanLegato" min="0" max="100" step="1" value="100">
+                    <div class="param-effective" id="melodyHumanLegatoEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Ornamenti (%)</label>
+                    <input type="range" id="melodyHumanOrnament" min="0" max="40" step="1" value="10">
+                    <div class="param-effective" id="melodyHumanOrnamentEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>MPE Press</label>
+                    <input type="range" id="melodyHumanPress" min="0" max="40" step="1" value="40">
+                    <div class="param-effective" id="melodyHumanPressEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>MPE Timbre</label>
+                    <input type="range" id="melodyHumanTimbre" min="0" max="80" step="1" value="80">
+                    <div class="param-effective" id="melodyHumanTimbreEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Pitch Bend</label>
+                    <input type="range" id="melodyHumanPitch" min="0" max="40" step="1" value="10">
+                    <div class="param-effective" id="melodyHumanPitchEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Phrase Shape</label>
+                    <input type="range" id="melodyHumanPhrase" min="0" max="100" step="1" value="30">
+                    <div class="param-effective" id="melodyHumanPhraseEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Accent</label>
+                    <input type="range" id="melodyHumanAccent" min="0" max="100" step="1" value="25">
+                    <div class="param-effective" id="melodyHumanAccentEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Length Rand</label>
+                    <input type="range" id="melodyHumanLengthRand" min="0" max="40" step="1" value="10">
+                    <div class="param-effective" id="melodyHumanLengthRandEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:160px;">
+                    <label>Humanize Preset</label>
+                    <select id="melodyHumanPreset">
+                        <option value="dry">Dry</option>
+                        <option value="musical" selected>Musical</option>
+                        <option value="expressive">Expressive</option>
+                    </select>
+                    <div class="param-effective" id="melodyHumanPresetEff">Effective: Musical</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Y virtual motion</label>
+                    <input type="range" id="melodyHumanYMotion" min="0" max="100" step="1" value="100">
+                    <div class="param-effective" id="melodyHumanYMotionEff">Effective: 0</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Y motion on</label>
+                    <input type="checkbox" id="melodyHumanYMotionToggle" checked>
+                    <div class="param-effective" id="melodyHumanYMotionToggleEff">Effective: On</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>MPE per nota</label>
+                    <input type="checkbox" id="melodyMpePerNote" checked>
+                </div>
+            </div>
+        </div>
+        <div class="ui-subtab-content" data-subtab-content="melody-import">
+            <div class="ui-group-inline">
+                <div class="box" style="min-width:240px;">
+                    <label>Import WAV/MXL/MID (melody)</label>
+                    <input type="file" id="melodyImportFile" accept=".wav,.mp3,audio/wav,audio/mpeg,.mid,.midi,audio/midi,.xml,.musicxml,application/xml,.mxl">
+                    <label>Part</label>
+                    <select id="melodyImportPart">
+                        <option value="">(single)</option>
+                    </select>
+                    <label class="melody-import-all">
+                        <input type="checkbox" id="melodyImportAllParts">
+                        Import all parts
+                    </label>
+                </div>
+                <div class="box" style="max-width:160px;">
+                    <label>Export</label>
+                    <button id="melodyExportBtn" class="menu-btn btn-accent">EXPORT XML</button>
+                </div>
+                <div class="box" style="max-width:160px;">
+                    <label>Import</label>
+                    <button id="melodyImportBtn" class="menu-btn btn-accent">IMPORT</button>
+                </div>
+                <div class="box" style="max-width:160px;">
+                    <label>Snap Import</label>
+                    <select id="melodyImportSnap">
+                        <option value="off" selected>Off</option>
+                        <option value="semitone">Semitone</option>
+                        <option value="scale">Scale</option>
+                    </select>
+                    <label class="melody-import-all">
+                        <input type="checkbox" id="melodyImportIgnoreXmlKey">
+                        Use app scale (ignore XML key)
+                    </label>
+                </div>
+                <div class="box" style="min-width:220px;">
+                    <label>Status</label>
+                    <div id="melodyImportStatus" style="font-size:11px; color:#9aa;">Idle</div>
+                    <div id="melodyImportMeta" style="font-size:11px; color:#9aa; margin-top:4px;">Tempo: -- | Time: --</div>
+                </div>
+            </div>
+            <div class="ui-group-inline">
+                <div class="box" style="min-width:240px;">
+                    <label>Advanced Import (Magenta)</label>
+                    <button id="melodyImportAdvancedBtn" class="menu-btn btn-accent">ADV IMPORT</button>
+                </div>
+                <div class="box" style="min-width:220px;">
+                    <label>Advanced Status</label>
+                    <div id="melodyImportAdvancedStatus" style="font-size:11px; color:#9aa;">Idle</div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-subtab-content" data-subtab-content="melody-continue">
+            <div class="ui-group-inline">
+                <div class="box" style="min-width:200px;">
+                    <label>Continue (Magenta)</label>
+                    <button id="melodyContinueBtn" class="menu-btn btn-accent">CONTINUE</button>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Reset</label>
+                    <button id="melodyContinueReset" class="menu-btn btn-ghost" title="Reset to pre-continue sequence" disabled>RESET</button>
+                </div>
+                <div class="box" style="max-width:120px;">
+                    <label>Steps</label>
+                    <input type="number" id="melodyContinueSteps" min="4" max="64" value="16">
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Temperature</label>
+                    <input type="range" id="melodyContinueTemp" min="0.4" max="2" step="0.1" value="1">
+                </div>
+                <div class="box" style="max-width:160px;">
+                    <label>Rhythm Similarity</label>
+                    <input type="range" id="melodyContinueRhythm" min="0" max="100" step="1" value="70">
+                </div>
+                <div class="box" style="max-width:160px;">
+                    <label>Force Scale</label>
+                    <label class="microtonalize-row" style="font-size:10px; white-space:nowrap;">
+                        <input type="checkbox" id="melodyContinueScale" checked> On
+                    </label>
+                </div>
+                <div class="box" style="min-width:220px;">
+                    <label>Continue Status</label>
+                    <div id="melodyContinueStatus" style="font-size:11px; color:#9aa;">Idle</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === TAB CONTENT: ADVANCED (just the tab button triggers row 2) === -->
+    <div class="ui-tab-content" id="tabAdvanced" data-tab-content="advanced">
+        <!-- Row 2: Sub-tabs for advanced sections -->
+        <div class="ui-tabs-row ui-subtabs" id="advSubTabs">
+            <button class="ui-tab active" data-subtab="arp">ARP</button>
+            <button class="ui-tab" data-subtab="chord">CHORD</button>
+            <button class="ui-tab" data-subtab="mpe">MPE</button>
+            <button class="ui-tab" data-subtab="matrix">MATRIX</button>
+           
+        </div>
+
+        <!-- Sub-tab: ARP -->
+        <div class="ui-subtab-content active" data-subtab-content="arp">
+            <div class="ui-group-inline">
+                <div class="box" style="min-width:180px;">
+                    <label>ARP Preset</label>
+                    <select id="arpPresetSelect">
+                        <option value="Init" selected>Init</option>
+                        <option value="SlowPulse">Slow Pulse</option>
+                        <option value="Classic">Classic</option>
+                        <option value="Tight">Tight</option>
+                        <option value="Legato">Legato</option>
+                        <option value="HalfTime">Half Time</option>
+                        <option value="FastRoll">Fast Roll</option>
+                        <option value="UltraRoll">Ultra Roll</option>
+                        <option value="TripletGroove">Triplet Groove</option>
+                        <option value="TripletTight">Triplet Tight</option>
+                        <option value="Odd5">Odd 5 (1/20)</option>
+                        <option value="Odd7">Odd 7 (1/28)</option>
+                        <option value="Odd9">Odd 9 (1/36)</option>
+                        <option value="Odd5Wide">Odd 5 Wide (1/10)</option>
+                        <option value="Odd7Wide">Odd 7 Wide (1/14)</option>
+                        <option value="Odd9Wide">Odd 9 Wide (1/18)</option>
+                    </select>
+                    <div id="arpPresetDesc" style="font-size:9px; color:#8a8a8a; margin-top:4px;">&nbsp;</div>
+                </div>
+                <div class="box" style="max-width:100px;"><label>Gate</label><input type="range" id="arpGate" min="10" max="100" value="60" data-param="arpGate"></div>
+                <div class="box" style="max-width:100px;"><label>Sync</label><select id="arpSync" data-param="arpSync">
+                    <option value="internal" selected>Internal</option>
+                    <option value="midi">MIDI</option>
+                </select></div>
+                <div class="box" style="max-width:100px;"><label>BPM</label><input type="number" id="arpBpm" min="40" max="300" value="120" data-param="arpBpm"></div>
+                <div class="box" style="max-width:120px;"><label>Mode</label><select id="arpMode">
+                    <option value="up" selected>Up</option>
+                    <option value="down">Down</option>
+                    <option value="upDown">Up/Down</option>
+                    <option value="random">Random</option>
+                    <option value="asPlayed">As Played</option>
+                    <option value="brownian">Brownian</option>
+                </select></div>
+                <div class="box" style="max-width:100px;"><label>Oct Range</label><input type="number" id="arpOctaveRange" min="1" max="4" value="1"></div>
+                <div class="box" style="max-width:120px;"><label>Oct Mode</label><select id="arpOctaveMode">
+                    <option value="serial" selected>Serial</option>
+                    <option value="interleaved">Interleaved</option>
+                </select></div>
+                <div class="box" style="max-width:120px;"><label title="Probability per step: 100% plays every step, lower values randomly mute steps.">Prob</label><input type="range" id="arpProbability" min="0" max="100" value="100" title="Probability per step: 100% plays every step, lower values randomly mute steps."><div class="param-effective" id="arpProbabilityVal">100%</div></div>
+                <div class="box" style="max-width:100px;">
+                    <label title="Ratchet repeats the note within the same step (stutter/roll).">Ratchet</label>
+                    <div style="display:flex; gap:6px; align-items:center;">
+                        <select id="arpRatchet" title="Ratchet repeats the note within the same step (stutter/roll).">
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        <button id="arpRatchetReset" class="menu-btn" style="min-width:26px; padding:0 6px;" title="Reset ratchet pattern to 1">R</button>
+                    </div>
+                </div>
+                <div class="box" style="max-width:140px;"><label>Euclidean</label><input type="range" id="arpEuclid" min="0" max="16" value="0"><div class="param-effective" id="arpEuclidVal">0</div></div>
+                <div class="box" style="max-width:120px;"><label>Shift (ms)</label><input type="range" id="arpShift" min="-50" max="50" value="0"><div class="param-effective" id="arpShiftVal">0 ms</div></div>
+                <div class="box" style="max-width:120px;"><label>Swing</label><input type="range" id="arpSwing" min="0" max="100" value="0"><div class="param-effective" id="arpSwingVal">0%</div></div>
+                <div class="box" style="min-width:220px;">
+                    <label>Step Pattern</label>
+                    <div id="arpStepPattern" style="display:grid; grid-template-columns: repeat(8, 24px); gap:8px; padding-top:6px;">
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="0" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="1" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="2" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="3" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="4" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="5" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="6" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="7" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="8" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="9" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="10" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="11" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="12" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="13" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="14" checked></div>
+                        <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="15" checked></div>
+                    </div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Humanize su ARP</label>
+                    <input type="checkbox" id="melodyHumanApplyArp">
+                    <div class="param-effective" id="melodyHumanApplyArpEff">Effective: Off</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub-tab: CHORD -->
+        <div class="ui-subtab-content" data-subtab-content="chord">
+            <div class="ui-group-inline">
+                <div class="box" style="max-width:100px;"><label>Inversion</label><select id="chordInversion" data-param="chordInversion">
+                    <option value="0">Root</option><option value="1">1st</option><option value="2">2nd</option><option value="3">3rd</option>
+                </select></div>
+                <div class="box" style="max-width:120px;"><label>Spread</label><input type="range" id="chordSpread" min="0" max="12" value="0" data-param="chordSpread"></div>
+            </div>
+        </div>
+
+        <!-- Sub-tab: MPE -->
+        <div class="ui-subtab-content" data-subtab-content="mpe">
+            <div class="ui-group-inline mpe-controls-row">
+                <div class="box mpe-preset-box"><label>MPE Preset</label>
+                    <div style="display:flex; gap:2px;">
+                        <select id="mpePresetSelect" style="min-width:90px;"></select>
+                        <input type="text" id="mpePresetName" placeholder="Name" style="width:70px;">
+                        <button id="mpePresetSave" class="menu-btn btn-ok" aria-label="Save"><span class="btn-icon">ðŸ’¾</span></button>
+                        <button id="mpePresetDel" class="menu-btn btn-danger" aria-label="Delete"><span class="btn-icon">ðŸ—‘</span></button>
+                    </div>
+                    <div id="mpePresetDesc" style="font-size:8px; color:#888; margin-top:2px;">&nbsp;</div>
+                </div>
+                <div class="box mpe-box-slider"><label>Snap Rate</label><input type="range" id="roundRate" min="0" max="80" value="80" data-param="roundRate"></div>
+                <div class="box mpe-box-check"><label>Hold Detune</label><input type="checkbox" id="holdDetune" data-param="holdDetune"></div>
+                <div class="box mpe-box-check"><label>Dead-Cntr</label><input type="checkbox" id="deadCenter" data-param="deadCenter" checked></div>
+                <div class="box mpe-box-slider" id="boxDeadCenterForce"><label>DC Force</label><input type="range" id="deadCenterForce" min="0" max="100" value="100" data-param="deadCenterForce"></div>
+                <div class="box mpe-box-small"><label>Ex. Curve</label>
+                    <select id="curveType" data-param="curveType">
+                        <option value="linear" selected>Linear</option>
+                        <option value="soft">Soft</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ui-group-inline mpe-controls-row">
+                <div class="box mpe-box-slider"><label>Smooth</label><input type="range" id="smoothAmt" min="0" max="100" value="20" data-param="smoothAmt"></div>
+                <div class="box mpe-box-slider"><label>Grab Return (ms)</label><input type="range" id="grabReturnMs" min="50" max="600" step="10" value="200" data-param="grabReturnMs"></div>
+                <div class="box mpe-box-check"><label>Link Y&gt;Press</label><input type="checkbox" id="linkPressToY" checked data-param="linkPressToY"></div>
+                <div class="box mpe-box-check"><label>Link Y&gt;Vel</label><input type="checkbox" id="linkYToVelocity" checked data-param="linkYToVelocity"></div>
+                <div class="box mpe-box-slider" id="boxTouchSens"><label>Area Sens</label><input type="range" id="touchSensitivity" min="10" max="150" value="75" data-param="touchSensitivity"></div>
+                <div class="box mpe-box-slider"><label>Y Deadzone</label><input type="range" id="yDeadzone" min="0" max="30" value="5" data-param="yDeadzone"></div>
+                <div class="box mpe-box-check"><label>Q Release</label><input type="checkbox" id="quantizeRelease" data-param="quantizeRelease" checked></div>
+            </div>
+        </div>
+        <div class="ui-subtab-content" data-subtab-content="matrix">
+            <div class="ui-group-inline">
+                <div class="box" style="max-width:120px;">
+                    <label>Matrix Mode</label>
+                    <button id="matrixToggle" class="menu-btn toggle-off">MATRIX OFF</button>
+                </div>
+                <div class="box" style="min-width:200px;">
+                    <label>Macro Scene</label>
+                    <select id="matrixSceneSelect"></select>
+                    <div id="matrixSceneDesc" style="font-size:9px; color:#888; margin-top:4px;">&nbsp;</div>
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>AM Tone</label>
+                    <input type="range" id="amTone" min="1000" max="8000" step="10" value="5000">
+                </div>
+                <div class="box" style="max-width:120px;">
+                    <label>AM Bias</label>
+                    <input type="range" id="amBias" min="0" max="1" step="0.01" value="0.15">
+                </div>
+            </div>
+        </div>
+        
+    </div><!-- end #tabAdvanced -->
+</div><!-- end #ui -->
+
+<!-- compact setPanel removed per user request -->
+
+<div id="performance" class="compact">
+    <div class="perf-row perf-compact">
+        <div class="perf-item perf-transpose">
+            <div class="perf-label-top">TRANSPOSE</div>
+            <div class="perf-inline">
+                <button class="perf-btn" id="octDownBtn" title="Oct -" aria-label="Oct -" data-legend="Transpose one octave down." data-legend-group="perf">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <span class="perf-value" id="octVal">0</span>
+                <button class="perf-btn" id="octUpBtn" title="Oct +" aria-label="Oct +" data-legend="Transpose one octave up." data-legend-group="perf">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12M12 6v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+            </div>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">KEEP</div>
+            <button id="keepBtn" class="perf-btn toggle-btn compact-essential" title="Keep" aria-label="Keep" data-legend="Keep held notes playing after HOLD is off." data-legend-group="perf">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 11V6M10 10V5M13 10V5M16 11V6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M7 11c0 4 2 7 5 7s5-3 5-7V9c0-1-1-2-2-2s-2 1-2 2V6c0-1-1-2-2-2s-2 1-2 2v3c0-1-1-2-2-2s-2 1-2 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">HOLD</div>
+            <button id="holdBtn" class="perf-btn toggle-btn has-led compact-essential" title="Hold" aria-label="Hold" data-legend="Hold notes so they keep playing." data-legend-group="perf">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2"/><rect x="6" y="10" width="12" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                <span class="led"></span>
+            </button>
+        </div>
+        <input type="checkbox" id="holdNotes" style="display:none" data-param="holdNotes">
+        <div class="perf-item">
+            <div class="perf-label-top">STOP</div>
+            <button id="panicBtn" class="perf-btn btn-danger compact-essential" title="Stop" aria-label="Stop" data-legend="Stop all notes immediately." data-legend-group="perf">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" fill="currentColor"/></svg>
+            </button>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">FADE</div>
+            <div class="perf-inline perf-inline-compact">
+                <button id="fadeBtn" class="perf-btn toggle-btn compact-essential" title="Fade Out" aria-label="Fade" data-legend="Fade out all active notes." data-legend-group="perf">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16h14M7 12h10M9 8h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <input id="fadeTime" type="range" min="1" max="10" step="0.1" value="2" title="Fade Time">
+            </div>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">CHORD</div>
+            <div id="chordWheel" class="perf-knob compact-essential" title="Rotate to change chord" data-legend="Rotate to change chord type." data-legend-group="perf">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="7" cy="15" r="2" fill="currentColor"/>
+                    <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                    <circle cx="17" cy="9" r="2" fill="currentColor"/>
+                    <path d="M9 15V7M14 12V4M19 9V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">CHORD MODE</div>
+            <select id="chordMode" class="compact-essential" title="Chords" data-param="chordMode" data-legend="Select chord mode." data-legend-group="perf">
+                <option value="off">Off</option>
+                <option value="auto">Auto (Diatonic)</option>
+                <option value="auto7">Auto (Diatonic 7th)</option>
+                <option value="power">Power 5</option>
+                <option value="triad">Triad (Maj)</option>
+                <option value="minTriad">Triad (Min)</option>
+                <option value="dimTriad">Triad (Dim)</option>
+                <option value="augTriad">Triad (Aug)</option>
+                <option value="sus2">Sus2</option>
+                <option value="sus4">Sus4</option>
+                <option value="add9">Add9</option>
+                <option value="sixth">6th</option>
+                <option value="seventh">7th (Dom)</option>
+                <option value="maj7">Maj7</option>
+                <option value="min7">Min7</option>
+                <option value="halfDim7">7th (Half-Dim)</option>
+                <option value="dim7">7th (Dim)</option>
+                <option value="dom9">Dom9</option>
+                <option value="maj9">Maj9</option>
+                <option value="min9">Min9</option>
+                <option value="eleventh">11th</option>
+                <option value="thirteenth">13th</option>
+            </select>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">ARP</div>
+            <div id="arpWheel" class="perf-knob compact-essential" title="Rotate to change rate" data-legend="Rotate to change ARP rate." data-legend-group="perf">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="6" cy="16" r="2" fill="currentColor"/>
+                    <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                    <circle cx="18" cy="8" r="2" fill="currentColor"/>
+                    <path d="M8 16V9M14 12V6M20 8V4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M4 19h16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">ARP RATE</div>
+            <select id="arpRateSelect" class="perf-select compact-essential" title="ARP Rate" data-legend="Select ARP rate." data-legend-group="perf">
+                <option value="1/4">1/4</option>
+                <option value="1/8">1/8</option>
+                <option value="1/8T">1/8T</option>
+                <option value="1/10">1/10</option>
+                <option value="1/12">1/12</option>
+                <option value="1/14">1/14</option>
+                <option value="1/16" selected>1/16</option>
+                <option value="1/16T">1/16T</option>
+                <option value="1/18">1/18</option>
+                <option value="1/20">1/20</option>
+                <option value="1/24">1/24</option>
+                <option value="1/28">1/28</option>
+                <option value="1/32">1/32</option>
+                <option value="1/36">1/36</option>
+                <option value="1/48">1/48</option>
+            </select>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">MIX</div>
+            <button id="overlayToggle" class="perf-btn toggle-btn" title="Gesture Overlay" aria-label="Mix" data-legend="Toggle the MIX overlay faders." data-legend-group="perf">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v16M12 4v16M18 4v16" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="9" r="2" fill="currentColor"/><circle cx="12" cy="14" r="2" fill="currentColor"/><circle cx="18" cy="7" r="2" fill="currentColor"/></svg>
+            </button>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">FX</div>
+            <button id="fxToggle" class="perf-btn" title="FX Panel" aria-label="FX" data-legend="Open the FX panel." data-legend-group="perf">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 4a8 8 0 1 0 0 16h3a2 2 0 0 0 0-4h-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="9" cy="9" r="1.2" fill="currentColor"/>
+                    <circle cx="13" cy="8" r="1.2" fill="currentColor"/>
+                    <circle cx="16" cy="11" r="1.2" fill="currentColor"/>
+                    <circle cx="10" cy="13" r="1.2" fill="currentColor"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="perf-row perf-alt">
+        <div class="perf-item">
+            <div class="perf-label-top">MELODY</div>
+            <button id="melodyPerfToggle" class="perf-btn toggle-btn melody-status-btn" title="Melody Generator" aria-label="Melody" data-legend="Toggle the melody generator." data-legend-group="perf">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="3" r="1" fill="currentColor"/>
+                    <path d="M12 4v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <rect x="6" y="7" width="12" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="10" cy="12" r="1.5" fill="currentColor"/>
+                    <circle cx="14" cy="12" r="1.5" fill="currentColor"/>
+                    <path d="M9 16h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">LATCH</div>
+            <button id="melodyLatchPerf" class="perf-btn toggle-btn" title="Melody Latch" aria-label="Melody Latch" data-legend="Latch the melody to the current scale/chord context." data-legend-group="perf">
+                LATCH
+            </button>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">MELODY VOL</div>
+            <input id="melodyVolumePerf" type="range" min="0" max="100" step="1" value="100" title="Melody Volume" data-legend="Melody volume (velocity scale)." data-legend-group="perf">
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">RATE</div>
+            <select id="melodyRatePerf" class="perf-select perf-select-fit" title="Melody Rate">
+                <option value="1/2">1/2</option>
+                <option value="1/4">1/4</option>
+                <option value="1/4T">1/4T</option>
+                <option value="1/8">1/8</option>
+                <option value="1/8T">1/8T</option>
+                <option value="1/16" selected>1/16</option>
+                <option value="1/16T">1/16T</option>
+                <option value="1/32">1/32</option>
+                <option value="1/32T">1/32T</option>
+                <option value="1/64">1/64</option>
+            </select>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">GENERATE</div>
+            <button id="melodyGeneratePerf" class="perf-btn btn-accent" title="Generate Melody" aria-label="Generate Melody">
+                GENERATE
+            </button>
+        </div>
+        <div class="perf-item">
+            <div class="perf-label-top">BPM</div>
+            <div class="perf-inline">
+                <button id="melodyBpmPerfDown" class="perf-btn" title="BPM -">-</button>
+                <input id="melodyBpmPerf" type="number" min="40" max="240" step="1" value="120" title="Melody BPM">
+                <button id="melodyBpmPerfUp" class="perf-btn" title="BPM +">+</button>
+            </div>
+        </div>
+    </div>
+    <input type="checkbox" id="arpEnabled" data-param="arpEnabled" style="display:none">
+    <input type="checkbox" id="arpLatch" data-param="arpLatch" style="display:none">
+    <select id="arpRate" data-param="arpRate" style="display:none">
+        <option value="1/4">1/4</option>
+        <option value="1/8">1/8</option>
+        <option value="1/8T">1/8T</option>
+        <option value="1/10">1/10</option>
+        <option value="1/12">1/12</option>
+        <option value="1/14">1/14</option>
+        <option value="1/16" selected>1/16</option>
+        <option value="1/16T">1/16T</option>
+        <option value="1/18">1/18</option>
+        <option value="1/20">1/20</option>
+        <option value="1/24">1/24</option>
+        <option value="1/28">1/28</option>
+        <option value="1/32">1/32</option>
+        <option value="1/36">1/36</option>
+        <option value="1/48">1/48</option>
+    </select>
+</div>
+
+<div id="playArea">
+    <canvas id="surface"></canvas>
+    
+    <canvas id="playgroundCanvas"></canvas>
+    
+    <button id="playgroundToggle" class="menu-btn">
+        <span class="btn-text">PHYSICS MODE</span>
+    </button>
+
+    <div id="playgroundControls" class="playground-hud">
+        <div class="playground-top-group" id="pgMaterialsGroup">
+            <span class="hud-label">MATERIALS</span>
+            <div class="hud-row hud-material-row">
+                <button class="menu-btn mat-btn active" data-mat="BAMBOO" type="button" title="Bamboo" aria-label="Bamboo">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M4 12h16M8 9v6M16 9v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 9h2M15 9h2M7 15h2M15 15h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                </button>
+                <button class="menu-btn mat-btn" data-mat="STONE" type="button" title="Stone" aria-label="Stone">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M6 15l2-6 6-3 4 3 1 5-4 4H9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                    </span>
+                </button>
+                <button class="menu-btn mat-btn" data-mat="RUBBER" type="button" title="Rubber" aria-label="Rubber">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 18c1.2-2 2.9-3 6-3s4.8 1 6 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                </button>
+                <button class="menu-btn mat-btn" data-mat="CLAY" type="button" title="Clay" aria-label="Clay">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M6 14c0-3 2.3-5 5.7-5 1.6 0 2.6-1.2 3.8-1.2 1.7 0 2.9 1.2 2.9 2.9 0 .8-.3 1.6-.9 2.2.9.7 1.4 1.7 1.4 2.8 0 2.2-1.8 4-4 4H10c-2.2 0-4-1.8-4-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                    </span>
+                </button>
+                <button class="menu-btn mat-btn" data-mat="GLASS" type="button" title="Glass" aria-label="Glass">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M7 17l4-10 6 4-3 8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M18 5v3M16.5 6.5h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                </button>
+                <button class="menu-btn mat-btn" data-mat="FELT" type="button" title="Felt" aria-label="Felt">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M4 10c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 14c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                </button>
+                <button class="menu-btn mat-btn" data-mat="STEEL" type="button" title="Steel" aria-label="Steel">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M12 4l6 3.5v9L12 20l-6-3.5v-9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                </button>
+                <button class="menu-btn mat-btn" data-mat="WATER" type="button" title="Water" aria-label="Water">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M12 4s4 4.3 4 7.2A4 4 0 0 1 8 11.2C8 8.3 12 4 12 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 18c2.2-1 4.3-1 6.5 0s4.3 1 6.5 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="playground-top-group" id="pgActionsGroup">
+            <span class="hud-label">ACTIONS</span>
+            <div class="hud-row">
+                <button id="btnSpawnRain" class="menu-btn btn-accent pg-action-btn" type="button" title="Rain spawn" aria-label="Rain spawn">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M7 11a4 4 0 0 1 .8-7.9A5 5 0 0 1 17 6a3.5 3.5 0 1 1 0 7H7zM8 16l-1 2M12 16l-1 2M16 16l-1 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                </button>
+                <button id="btnSpawnObject" class="menu-btn pg-action-btn" type="button" title="Spawn object" aria-label="Spawn object">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+                    </span>
+                </button>
+                <button id="pgClearScene" class="menu-btn pg-action-btn" type="button" title="Clear scene" aria-label="Clear scene">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M4 20h11M7 16l6-6 6 6-2.5 2.5h-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8l2-2 3 3-2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                </button>
+                <button id="pgWindQuick" class="menu-btn pg-action-btn toggle-off" type="button" title="Wind OFF" aria-label="Wind quick">
+                    <span class="btn-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M3 8h12a2.6 2.6 0 1 0-2.2-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 12h16a2.6 2.6 0 1 1-2.2 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 16h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
+                </button>
+<span class="hud-action-sep" aria-hidden="true"></span>
+                <button class="tube-template tube-template-quick" type="button" draggable="true" data-material="PVC" data-surface="corrugated" data-length="220" data-diameter="34" title="Drag PVC corrugated tube" aria-label="Drag PVC corrugated tube">
+                    <span class="tube-template-stick tube-mat-pvc"></span><span class="tube-template-name">PVC</span>
+                </button>
+                <button class="tube-template tube-template-quick" type="button" draggable="true" data-material="ALUMINUM" data-surface="smooth" data-length="260" data-diameter="28" title="Drag aluminum smooth tube" aria-label="Drag aluminum smooth tube">
+                    <span class="tube-template-stick tube-mat-aluminum"></span><span class="tube-template-name">ALU</span>
+                </button>
+                <button class="tube-template tube-template-quick" type="button" draggable="true" data-material="BAMBOO" data-surface="corrugated" data-length="280" data-diameter="38" title="Drag bamboo corrugated tube" aria-label="Drag bamboo corrugated tube">
+                    <span class="tube-template-stick tube-mat-bamboo"></span><span class="tube-template-name">BAM</span>
+                </button>
+                <button class="tube-template tube-template-quick" type="button" draggable="true" data-material="GLASS" data-surface="smooth" data-length="200" data-diameter="24" title="Drag glass smooth tube" aria-label="Drag glass smooth tube">
+                    <span class="tube-template-stick tube-mat-glass"></span><span class="tube-template-name">GLA</span>
+                </button>
+            </div>
+        </div>
+        <button id="pgLoopRecord" class="menu-btn pg-loop-toggle toggle-off" type="button" title="Loop Playground notes" data-legend="Record and loop Playground notes (layers). Transfer to Melody when switching to Keyboard" aria-label="Playground loop">
+            <span class="btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 12a6 6 0 0 1 10-4.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 4h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12a6 6 0 0 1-10 4.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10 20H5v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="btn-text">LOOP OFF</span>
+        </button>
+        <button id="pgLoopClear" class="menu-btn pg-loop-clear" type="button" title="Clear Playground loops" data-legend="Clear all Playground loops" aria-label="Clear Playground loops">
+            <span class="btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 7h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 7V5h8v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 11l6 6M15 11l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </span>
+        </button>
+        <button id="pgAdvancedToggle" class="menu-btn pg-settings-toggle" type="button" title="Open settings" aria-label="Open settings">
+            <span class="btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+        </button>
+    </div>
+
+    <div id="pgAdvancedPanel" class="playground-settings-panel hidden">
+    <div class="pg-settings-tabs" id="pgSettingsTabs">
+            <button class="pg-tab-btn active" type="button" data-pg-tab="playability">PLAYABILITY</button>
+            <button class="pg-tab-btn" type="button" data-pg-tab="macros">MACROS</button>
+            <button class="pg-tab-btn" type="button" data-pg-tab="tubes">TUBES</button>
+            <button class="pg-tab-btn" type="button" data-pg-tab="presets">PRESETS</button>
+            <button class="pg-tab-btn" type="button" data-pg-tab="scenes">SCENES</button>
+            <button class="pg-tab-btn" type="button" data-pg-tab="advanced">ADVANCED</button>
+        </div>
+                <div class="pg-tab-content active" data-pg-tab-content="playability">
+            <div class="hud-group">
+                <span class="hud-label">Playability</span>
+                <div class="hud-grid" id="pgPlayabilityGrid">
+                    <label class="hud-control">
+                        <span>Grid (ms)</span>
+                        <input id="pgTimingGrid" type="number" min="0" max="2000" step="10" value="0" data-legend="Quantize note triggers to a time grid (0 = off)" aria-label="Quantize note triggers to a time grid (0 = off)">
+                    </label>
+                    <label class="hud-control">
+                        <span>Loop Q%</span>
+                        <input id="pgLoopQuantizeStrength" type="number" min="0" max="100" step="5" value="35" data-legend="Quantize strength when Playground loop becomes Melody (0=raw, 100=full grid)" aria-label="Quantize strength when Playground loop becomes Melody (0=raw, 100=full grid)">
+                    </label>
+                    <label class="hud-control">
+                        <span>Swing</span>
+                        <input id="pgSwing" type="range" min="0" max="0.6" step="0.01" value="0" data-legend="Swing amount for the timing grid" aria-label="Swing amount for the timing grid">
+                    </label>
+                    <label class="hud-control">
+                        <span>Max Notes/s</span>
+                        <input id="pgMaxNotes" type="number" min="0" max="200" step="1" value="0" data-legend="Limit note rate (0 = unlimited)" aria-label="Limit note rate (0 = unlimited)">
+                    </label>
+                    <label class="hud-control">
+                        <span>Pitch Lanes (0?48)</span>
+                        <input id="pgPitchLanes" type="number" min="0" max="48" step="1" value="0" data-legend="Map X position to fixed scale lanes (0 = off, 1?48 lanes)" aria-label="Map X position to fixed scale lanes (0 = off, 1?48 lanes)">
+                    </label>
+                    <div class="hud-control">
+                        <span>Draw Walls</span>
+                        <button id="pgDrawWalls" class="menu-btn toggle-off" type="button" data-legend="Draw custom walls/floors with mouse or touch" aria-label="Draw walls">WALL OFF</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Clear Walls</span>
+                        <button id="pgClearWalls" class="menu-btn" type="button" data-legend="Remove all custom walls/floors" aria-label="Clear walls">CLEAR</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Anchor Notes</span>
+                        <button id="pgAnchorNotes" class="menu-btn toggle-off" type="button" data-legend="Lock each body to its current note until material changes" aria-label="Lock each body to its current note until material changes">ANCHOR OFF</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Rolling Arp</span>
+                        <button id="pgRollingArp" class="menu-btn toggle-on" type="button" data-legend="Rotate polygons to step through the scale" aria-label="Rotate polygons to step through the scale">ROLL ON</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Harmonic Rain</span>
+                        <button id="pgHarmonicRain" class="menu-btn toggle-on" type="button" data-legend="Rain spawns scale-based triads/sevenths" aria-label="Rain spawns scale-based triads/sevenths">RAIN ON</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Friction Drone</span>
+                        <button id="pgFrictionDrone" class="menu-btn toggle-on" type="button" data-legend="Noise drone tied to motion energy and note" aria-label="Noise drone tied to motion energy and note">DRONE ON</button>
+                    </div>
+                    <label class="hud-control">
+                        <span>Drone Level</span>
+                        <input id="pgDroneLevel" type="range" min="0" max="1" step="0.01" value="0.6" data-legend="Overall drone volume (0 = off)" aria-label="Drone level">
+                    </label>
+                    <div class="hud-control">
+                        <span>Adaptive MPE</span>
+                        <button id="pgAdaptiveMpe" class="menu-btn toggle-on" type="button" data-legend="Adaptive MPE smoothing based on energy/chaos" aria-label="Adaptive MPE smoothing based on energy/chaos">MPE ADAPT</button>
+                    </div>
+                    <label class="hud-control">
+                        <span>Impact ? Timbre</span>
+                        <input id="pgImpactTimbre" type="range" min="0" max="1" step="0.01" value="0.35" data-legend="How much impact boosts timbre (CC74)" aria-label="How much impact boosts timbre (CC74)">
+                    </label>
+                    <div class="hud-control">
+                        <span>Note Flash</span>
+                        <button id="pgNoteFlash" class="menu-btn toggle-on" type="button" data-legend="Flash the body when a note triggers" aria-label="Flash the body when a note triggers">FLASH ON</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Trail Degree</span>
+                        <button id="pgTrailDegree" class="menu-btn toggle-off" type="button" data-legend="Color trails by scale degree" aria-label="Color trails by scale degree">TRAIL OFF</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Rotation Line</span>
+                        <button id="pgRotationLine" class="menu-btn toggle-off" type="button" data-legend="Show body rotation line" aria-label="Show body rotation line">LINE OFF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pg-tab-content" data-pg-tab-content="macros">
+            <div class="hud-group hud-group-macros">
+                <span class="hud-label">Live Macros</span>
+                <div class="hud-grid" id="pgMacrosGrid">
+                    <label class="hud-control">
+                        <span>Energy</span>
+                        <input id="pgMacroEnergy" data-legend="Macro energy: increases impact intensity" aria-label="Macro energy" type="range" min="0" max="1" step="0.01" value="0.6">
+                    </label>
+                    <label class="hud-control">
+                        <span>Chaos</span>
+                        <input id="pgMacroChaos" data-legend="Macro chaos: adds randomness to motion and sound" aria-label="Macro chaos" type="range" min="0" max="1" step="0.01" value="0.4">
+                    </label>
+                    <label class="hud-control">
+                        <span>Gravity</span>
+                        <input id="pgMacroGravity" data-legend="Macro gravity: pulls objects down" aria-label="Macro gravity" type="range" min="0" max="1" step="0.01" value="0.8">
+                    </label>
+                    <label class="hud-control">
+                        <span>Density</span>
+                        <input id="pgMacroDensity" data-legend="Macro density: heavier feel and more bodies" aria-label="Macro density" type="range" min="0" max="1" step="0.01" value="0.5">
+                    </label>
+                    <label class="hud-control">
+                        <span>Wind</span>
+                        <input id="pgMacroWind" data-legend="Macro wind: lateral force and air motion" aria-label="Macro wind" type="range" min="-1" max="1" step="0.01" value="0">
+                    </label>
+                    <div class="hud-control hud-stream-wrap">
+                        <span>Stream</span>
+                        <button id="pgMacroStream" data-legend="Stream: auto-spawn objects periodically" aria-label="Stream" class="menu-btn toggle-off" type="button">STREAM OFF</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Pitch Mode</span>
+                        <button id="pgPitchMode" data-legend="Pitch mode: quantize to scale or free pitch" aria-label="Pitch mode" class="menu-btn toggle-on" type="button">PITCH SCALE</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Internal Synth Safe</span>
+                        <button id="pgSynthSafe" data-legend="Internal synth safe: throttle triggers to avoid overload" aria-label="Internal synth safe" class="menu-btn toggle-on" type="button">SAFE ON</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Engine Follow</span>
+                        <button id="pgAudioFollow" data-legend="Engine follow: macros modulate internal FX" aria-label="Engine follow" class="menu-btn toggle-on" type="button">FOLLOW ON</button>
+                    </div>
+                    <label class="hud-control">
+                        <span>Follow Depth</span>
+                        <input id="pgAudioFollowDepth" data-legend="Depth of macro-driven FX changes" aria-label="Follow depth" type="range" min="0" max="1" step="0.01" value="0.55">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="pg-tab-content" data-pg-tab-content="tubes">
+<div class="hud-group">
+                <span class="hud-label">Tubes</span>
+                <div class="hud-grid">
+                    <label class="hud-control">
+                        <span>Material</span>
+                        <select id="pgTubeMaterial" data-legend="Tube material" aria-label="Tube material">
+                            <option value="PVC">PVC</option>
+                            <option value="BAMBOO">Bamboo</option>
+                            <option value="ALUMINUM">Aluminum</option>
+                            <option value="STEEL">Steel</option>
+                            <option value="GLASS">Glass</option>
+                            <option value="WOOD">Wood</option>
+                        </select>
+                    </label>
+                    <label class="hud-control">
+                        <span>Surface</span>
+                        <select id="pgTubeSurface" data-legend="Tube surface" aria-label="Tube surface">
+                            <option value="smooth">Smooth</option>
+                            <option value="corrugated">Corrugated</option>
+                        </select>
+                    </label>
+                    <label class="hud-control">
+                        <span>Length</span>
+                        <input id="pgTubeLength" type="number" min="80" max="900" step="1" value="220" data-legend="Tube length" aria-label="Tube length">
+                    </label>
+                    <label class="hud-control">
+                        <span>Diameter</span>
+                        <input id="pgTubeDiameter" type="number" min="12" max="100" step="1" value="34" data-legend="Tube diameter" aria-label="Tube diameter">
+                    </label>
+                    <label class="hud-control">
+                        <span>End Mode</span>
+                        <select id="pgTubeEndMode" data-legend="Tube end mode" aria-label="Tube end mode">
+                            <option value="open">Open</option>
+                            <option value="closed">Closed</option>
+                        </select>
+                    </label>
+                    <label class="hud-control">
+                        <span>Tube Voices</span>
+                        <input id="pgTubeMaxVoices" type="number" min="2" max="16" step="1" value="6" data-legend="Max voices per tube" aria-label="Max voices per tube">
+                    </label>
+                    <label class="hud-control">
+                        <span>Max Tubes</span>
+                        <input id="pgTubeMaxCount" type="number" min="4" max="64" step="1" value="24" data-legend="Max tube count" aria-label="Max tube count">
+                    </label>
+                    <div class="hud-control">
+                        <span>Quantize</span>
+                        <button id="pgTubeQuantize" class="menu-btn toggle-on" type="button" data-legend="Quantize tube pitches to scale" aria-label="Tube quantize">Q</button>
+                    </div>
+                    <div class="hud-control">
+                        <span>Mute</span>
+                        <button id="pgTubeMute" class="menu-btn toggle-off" type="button" data-legend="Mute all tube sounds" aria-label="Tube mute">MUTE OFF</button>
+                    </div>
+                    <label class="hud-control">
+                        <span>Q Strength</span>
+                        <input id="pgTubeQuantizeStrength" type="number" min="0" max="100" step="5" value="70" data-legend="Quantize strength for tube pitch (0=raw, 100=full snap)" aria-label="Tube quantize strength">
+                    </label>
+                    <label class="hud-control">
+                        <span>Snap Angle</span>
+                        <input id="pgTubeSnapAngle" type="number" min="0" max="45" step="5" value="0" data-legend="Snap tube rotation to fixed degrees (0=off)" aria-label="Tube snap angle">
+                    </label>
+                    <label class="hud-control">
+                        <span>Tube Mood</span>
+                        <input id="pgTubeMood" type="number" min="0" max="100" step="5" value="50" data-legend="Timbre/decay mood (0=soft, 100=bright)" aria-label="Tube mood">
+                        <input id="pgTubeYExpress" type="number" min="0" max="100" step="5" value="60" data-legend="Y expressivity curve (0=subtle, 100=strong)" aria-label="Tube Y expressivity">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="pg-tab-content" data-pg-tab-content="presets">
+<div class="hud-group hud-group-actions">
+            <span class="hud-label">Playground Presets</span>
+            <div class="hud-row">
+                <button class="menu-btn btn-accent pg-preset-btn" type="button" data-pg-preset="rainPad" data-legend="Preset: soft rain texture" aria-label="Rain Pad" title="Soft rain texture">RAIN PAD</button>
+                <button class="menu-btn pg-preset-btn" type="button" data-pg-preset="glassBurst" data-legend="Preset: bright glass impacts" aria-label="Glass Burst" title="Bright glass impacts">GLASS BURST</button>
+                <button class="menu-btn pg-preset-btn" type="button" data-pg-preset="tubeDrone" data-legend="Preset: wind-driven tube drones" aria-label="Tube Drone" title="Wind-driven tube drones">TUBE DRONE</button>
+                <button class="menu-btn pg-preset-btn" type="button" data-pg-preset="chaosPerc" data-legend="Preset: dense percussive chaos" aria-label="Chaos Perc" title="Dense percussive chaos">CHAOS PERC</button>
+            </div>
+</div>
+        </div>
+        <div class="pg-tab-content" data-pg-tab-content="scenes">
+<div class="hud-group hud-group-actions">
+            <span class="hud-label">Scene Snapshots</span>
+            <div class="hud-row">
+                <select id="pgSceneSelect" data-legend="Select a saved Playground scene" aria-label="Scene select">
+                    <option value="">-- Select Scene --</option>
+                </select>
+                <input id="pgSceneName" data-legend="Name for saving a scene" aria-label="Scene name" type="text" placeholder="Scene name">
+                <button id="pgSceneSave" data-legend="Save current scene" aria-label="Save scene" class="menu-btn btn-ok" type="button">SAVE</button>
+                <button id="pgSceneLoad" data-legend="Load selected scene" aria-label="Load scene" class="menu-btn btn-accent" type="button">LOAD</button>
+                <button id="pgSceneDelete" data-legend="Delete selected scene" aria-label="Delete scene" class="menu-btn btn-danger" type="button">DEL</button>
+                <button id="pgSceneExport" data-legend="Export scenes to file" aria-label="Export scenes" class="menu-btn" type="button">EXPORT</button>
+                <button id="pgSceneImport" data-legend="Import scenes from file" aria-label="Import scenes" class="menu-btn" type="button">IMPORT</button>
+                <input id="pgSceneFile" data-legend="Choose a scene file to import" aria-label="Scene file" type="file" accept="application/json,.json" hidden>
+            </div>
+</div>
+        </div>
+        <div class="pg-tab-content" data-pg-tab-content="advanced">
+<div class="hud-group">
+            <span class="hud-label">Advanced</span>
+            <div class="hud-grid">
+                <label class="hud-control">
+                    <span>Collision Thresh</span>
+                    <input id="pgCollisionThreshold" data-legend="Minimum impact to trigger a note" aria-label="Collision threshold" type="range" min="0.3" max="3" step="0.05" value="1.2">
+                </label>
+                <label class="hud-control">
+                    <span>MPE Smooth (ms)</span>
+                    <input id="pgMpeSmoothing" data-legend="MPE smoothing time in ms" aria-label="MPE smoothing" type="range" min="0" max="120" step="1" value="24">
+                </label>
+                <label class="hud-control">
+                    <span>Min Hold (ms)</span>
+                    <input id="pgNoteHoldMin" data-legend="Minimum hold time for triggered notes" aria-label="Min hold" type="number" min="40" max="2000" step="10" value="120">
+                </label>
+                <label class="hud-control">
+                    <span>Max Hold (ms)</span>
+                    <input id="pgNoteHoldMax" data-legend="Maximum hold time for triggered notes" aria-label="Max hold" type="number" min="60" max="3000" step="10" value="900">
+                </label>
+                <label class="hud-control">
+                    <span>Max Voices</span>
+                    <input id="pgMaxVoices" data-legend="Maximum simultaneous voices" aria-label="Max voices" type="number" min="4" max="64" step="1" value="24">
+                </label>
+                <label class="hud-control">
+                    <span>Spawn Shape</span>
+                    <select id="pgSpawnShape" data-legend="Default shape for new objects" aria-label="Spawn shape">
+                        <option value="auto">Auto</option>
+                        <option value="circle">Circle</option>
+                        <option value="polygon">Polygon</option>
+                        <option value="bar">Bar</option>
+                    </select>
+                </label>
+            </div>
+</div>
+        </div>
+        <div class="hud-status">
+            <span id="pgActiveVoices">Voices: 0</span>
+            <span id="pgCpuHint">CPU: --</span>
+        </div>
+        <div class="legend-inline" id="pgSettingsLegend">Hover a control to see details.</div>
+    </div>
+</div>
+
+    <div id="dualSplitLine" class="dual-split-line" aria-hidden="true"></div>
+    <div class="footer">
+        <div id="midiStatus">HYBRID ENGINE READY</div>
+    </div>
+    <div id="pgOnboard" class="pg-onboard hidden" aria-live="polite" aria-label="Playground onboarding">
+        <div class="pg-onboard-card">
+            <div class="pg-onboard-head">
+                <span class="pg-onboard-title">PHYSICAL PLAYGROUND</span>
+                <button id="pgOnboardClose" class="menu-btn tube-mini-btn" type="button" title="Close">X</button>
+            </div>
+            <div id="pgOnboardBody" class="pg-onboard-body">Welcome.</div>
+            <div class="pg-onboard-actions">
+                <button id="pgOnboardPrev" class="menu-btn" type="button">PREV</button>
+                <button id="pgOnboardNext" class="menu-btn btn-accent" type="button">NEXT</button>
+                <button id="pgOnboardDone" class="menu-btn btn-ok" type="button">DONE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="gestureOverlay" class="gesture-overlay hidden" data-side="right" aria-hidden="true">
+    <div class="overlay-header">
+        <span class="overlay-title">MIX Faders</span>
+        <button id="overlayModeToggle" class="overlay-mode" data-mode="fm" title="AM/FM">FM</button>
+    </div>
+    <div class="overlay-articulation" id="overlayArticulationBox">
+        <label for="overlayArticulationSelect">Articulation</label>
+        <select id="overlayArticulationSelect"></select>
+    </div>
+    <div class="overlay-faders">
+        <div class="overlay-fader" data-fader="wtmix">
+            <div class="fader-track"></div>
+            <div class="fader-fill"></div>
+            <div class="fader-handle" data-handle="wtmix"></div>
+            <div class="fader-marks">
+                <span class="fader-mark" data-pos="0" title="Trumpet">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <g transform="rotate(-25 12 12)">
+                            <path d="M3 12h7l2-2h4l5-2v8l-5-2h-4l-2-2H3z"></path>
+                            <line x1="8" y1="10" x2="8" y2="14"></line>
+                            <line x1="10" y1="9" x2="10" y2="15"></line>
+                            <line x1="12" y1="9" x2="12" y2="15"></line>
+                            <circle cx="4" cy="12" r="1.5"></circle>
+                        </g>
+                    </svg>
+                </span>
+                <span class="fader-mark" data-pos="1" title="Synth">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 16h6v-6h4v6h6"></path>
+                    </svg>
+                </span>
+            </div>
+            <div class="fader-label">MIX</div>
+        </div>
+        <div class="overlay-fader" data-fader="morph">
+            <div class="fader-track"></div>
+            <div class="fader-fill"></div>
+            <div class="fader-handle" data-handle="morph"></div>
+            <div class="fader-marks">
+                <span class="fader-mark" data-pos="0" title="Saw">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 16l5-8v8l5-8v8"></path>
+                    </svg>
+                </span>
+                <span class="fader-mark" data-pos="0.25" title="Square">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 16V8h7v8h7"></path>
+                    </svg>
+                </span>
+                <span class="fader-mark" data-pos="0.5" title="Triangle">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 16l7-8 7 8"></path>
+                    </svg>
+                </span>
+                <span class="fader-mark" data-pos="0.75" title="PWM">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 16V8h4v8h10"></path>
+                    </svg>
+                </span>
+                <span class="fader-mark" data-pos="1" title="Formant">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 14c2-4 6-4 8 0s6 4 8 0"></path>
+                    </svg>
+                </span>
+            </div>
+            <div class="fader-label">MORPH</div>
+        </div>
+        <div class="overlay-fader" data-fader="depth">
+            <div class="fader-track"></div>
+            <div class="fader-fill"></div>
+            <div class="fader-handle" data-handle="depth"></div>
+            <div class="fader-marks">
+                <span class="fader-mark" data-pos="0" title="Dry">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </span>
+                <span class="fader-mark" data-pos="1" title="Modulated">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M4 12c2-4 6-4 8 0s6 4 8 0"></path>
+                    </svg>
+                </span>
+            </div>
+            <div class="fader-label">MOD</div>
+        </div>
+        <div class="overlay-fader" data-fader="texture">
+            <div class="fader-track"></div>
+            <div class="fader-fill"></div>
+            <div class="fader-handle" data-handle="texture"></div>
+            <div class="fader-marks">
+                <span class="fader-mark" data-pos="0" title="Dry">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 12h14"></path>
+                    </svg>
+                </span>
+                <span class="fader-mark" data-pos="1" title="Space">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 16c2-6 10-6 12 0"></path>
+                        <path d="M4 10c3-4 13-4 16 0"></path>
+                    </svg>
+                </span>
+            </div>
+            <div class="fader-label">SPACE</div>
+        </div>
+    </div>
+    <div class="overlay-gesture-zone" aria-hidden="true"></div>
+</div>
+
+<div id="fxPanel" class="fx-panel hidden">
+    <div class="fx-card">
+        <div class="fx-head">
+            <div class="fx-title">FX Control</div>
+            <button id="fxClose" class="menu-btn btn-danger"><span class="btn-text">X</span></button>
+        </div>
+        <label>FX Preset</label>
+        <div class="fx-preset-row">
+            <select id="fxPresetSelect"></select>
+            <button id="fxPresetApply" class="menu-btn btn-accent" title="Apply"><span class="btn-text">OK</span></button>
+        </div>
+        <div class="fx-preset-row">
+            <input type="text" id="fxPresetName" placeholder="Custom preset name...">
+            <button id="fxPresetSave" class="menu-btn btn-ok" title="Save"><span class="btn-text">SAVE</span></button>
+            <button id="fxPresetDel" class="menu-btn btn-danger" title="Delete"><span class="btn-text">DEL</span></button>
+        </div>
+        <div class="fx-grid">
+            <div class="fx-group active" data-fx-group="filter">
+                <div class="fx-toggle-cell">
+                    <button id="fxFilterToggle" class="menu-btn fx-toggle toggle-on">FILTER ON/OFF</button>
+                </div>
+                <div class="fx-item"><label>Attack</label><input type="range" id="fxAttack" min="0" max="5000" value="10"><div class="fx-value" data-fx-value="fxAttack"></div></div>
+                <div class="fx-item"><label>Decay</label><input type="range" id="fxDecay" min="0" max="5000" value="200"><div class="fx-value" data-fx-value="fxDecay"></div></div>
+                <div class="fx-item"><label>Sustain</label><input type="range" id="fxSustain" min="0" max="1" step="0.01" value="0.7"><div class="fx-value" data-fx-value="fxSustain"></div></div>
+                <div class="fx-item"><label>Release</label><input type="range" id="fxRelease" min="0" max="5000" value="300"><div class="fx-value" data-fx-value="fxRelease"></div></div>
+                <div class="fx-item"><label>Cutoff</label><input type="range" id="fxCutoff" min="60" max="20000" value="12000"><div class="fx-value" data-fx-value="fxCutoff"></div></div>
+                <div class="fx-item"><label>Res</label><input type="range" id="fxResonance" min="0.1" max="20" step="0.1" value="0.7"><div class="fx-value" data-fx-value="fxResonance"></div></div>
+                <div class="fx-item"><label>F Env</label><input type="range" id="fxFilterEnv" min="0" max="2" step="0.01" value="0"><div class="fx-value" data-fx-value="fxFilterEnv"></div></div>
+            </div>
+            <div class="fx-group" data-fx-group="chorus">
+                <div class="fx-toggle-cell">
+                    <button id="fxChorusToggle" class="menu-btn fx-toggle toggle-on">CHORUS ON/OFF</button>
+                </div>
+                <div class="fx-item"><label>Ch Rate</label><input type="range" id="fxChorusRate" min="0" max="5" step="0.01" value="0.25"><div class="fx-value" data-fx-value="fxChorusRate"></div></div>
+                <div class="fx-item"><label>Ch Depth</label><input type="range" id="fxChorusDepth" min="0" max="20" step="0.1" value="8"><div class="fx-value" data-fx-value="fxChorusDepth"></div></div>
+            </div>
+            <div class="fx-group" data-fx-group="delay">
+                <div class="fx-toggle-cell">
+                    <button id="fxDelayToggle" class="menu-btn fx-toggle toggle-on">DELAY ON/OFF</button>
+                </div>
+                <div class="fx-item"><label>D Time</label><input type="range" id="fxDelayTime" min="1" max="2000" value="300"><div class="fx-value" data-fx-value="fxDelayTime"></div></div>
+                <div class="fx-item"><label>D Fbk</label><input type="range" id="fxDelayFeedback" min="0" max="0.9" step="0.01" value="0.35"><div class="fx-value" data-fx-value="fxDelayFeedback"></div></div>
+                <div class="fx-item"><label>D Dry</label><input type="range" id="fxDelayDry" min="0" max="1" step="0.01" value="1"><div class="fx-value" data-fx-value="fxDelayDry"></div></div>
+                <div class="fx-item"><label>D Wet</label><input type="range" id="fxDelayWet" min="0" max="1" step="0.01" value="0.2"><div class="fx-value" data-fx-value="fxDelayWet"></div></div>
+                <div class="fx-item"><label>D Rev</label><input type="range" id="fxDelayReverse" min="0" max="1" step="0.01" value="0"><div class="fx-value" data-fx-value="fxDelayReverse"></div></div>
+            </div>
+            <div class="fx-group" data-fx-group="reverb">
+                <div class="fx-toggle-cell">
+                    <button id="fxReverbToggle" class="menu-btn fx-toggle toggle-on">REVERB ON/OFF</button>
+                </div>
+                <div class="fx-item"><label>Rev Decay</label><input type="range" id="fxReverbDecay" min="0.2" max="10" step="0.1" value="2.5"><div class="fx-value" data-fx-value="fxReverbDecay"></div></div>
+                <div class="fx-item"><label>Rev Dry</label><input type="range" id="fxReverbDry" min="0" max="1" step="0.01" value="1"><div class="fx-value" data-fx-value="fxReverbDry"></div></div>
+                <div class="fx-item"><label>Rev Wet</label><input type="range" id="fxReverbWet" min="0" max="1" step="0.01" value="0.2"><div class="fx-value" data-fx-value="fxReverbWet"></div></div>
+                <div class="fx-item"><label>FX Mix</label><input type="range" id="fxMix" min="0" max="1" step="0.01" value="0.3"><div class="fx-value" data-fx-value="fxMix"></div></div>
+            </div>
+            <div class="fx-group" data-fx-group="tube">
+                <div class="fx-toggle-cell">
+                    <button id="fxTubeToggle" class="menu-btn fx-toggle toggle-off">TUBE ON/OFF</button>
+                </div>
+                <div class="fx-item"><label>Tube Amt</label><input type="range" id="fxTubeDrive" min="0" max="1" step="0.01" value="0.2"><div class="fx-value" data-fx-value="fxTubeDrive"></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recording Editor Modal -->
+<div id="recEditorModal" class="rec-editor-modal">
+    <div class="rec-editor-content">
+        <div class="rec-editor-header">
+            <h3>Recording Editor</h3>
+            <button id="recEditorClose" class="rec-editor-close" title="Close">Ã—</button>
+        </div>
+        <div class="rec-editor-waveform">
+            <canvas id="recWaveformCanvas"></canvas>
+            <div id="recSelection" class="rec-selection"></div>
+            <div id="recPlayhead" class="rec-playhead"></div>
+        </div>
+        <div class="rec-editor-info">
+            <span id="recDuration">Duration: 00:00</span>
+            <span id="recSelectionInfo">Selection: Full</span>
+        </div>
+        <div class="rec-editor-controls">
+            <button id="recPlayBtn" class="menu-btn btn-accent" title="Play"><span class="btn-icon">â–¶</span></button>
+            <button id="recStopPlayBtn" class="menu-btn" title="Stop"><span class="btn-icon">â– </span></button>
+            <button id="recClearSelBtn" class="menu-btn" title="Select All">Select All</button>
+            <div class="rec-editor-name">
+                <label>Filename:</label>
+                <input type="text" id="recFileName" placeholder="recording">
+                <span>.wav</span>
+            </div>
+            <button id="recSaveBtn" class="menu-btn btn-ok" title="Save WAV">ðŸ’¾ Save</button>
+            <button id="recDiscardBtn" class="menu-btn btn-danger" title="Discard">ðŸ—‘ Discard</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/fflate@0.8.2/umd/index.js"></script>
+<script src="script.js" defer></script>
+</body>
+</html>
+
+

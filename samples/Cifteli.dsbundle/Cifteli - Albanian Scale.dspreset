@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<DecentSampler tuningSclFile="Samples/Albanian Cifteli.scl" tuningKbmFile="Samples/Albanian Cifteli.kbm" minVersion="1.8.3">
+  <groups attack="0.0" decay="3.525062561035156" sustain="0.0" release="0.3" ampVelTrack="0.4">
+    <group name="Cifteli" seqMode="round_robin" >
+      <sample path="Samples/CIFT_59_0_63_1.wav"   rootNote="59" loNote="48" hiNote="59" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_59_0_63_2.wav"   rootNote="59" loNote="48" hiNote="59" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_59_0_63_3.wav"   rootNote="59" loNote="48" hiNote="59" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_59_0_63_4.wav"   rootNote="59" loNote="48" hiNote="59" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_59_64_127_1.wav" rootNote="59" loNote="48" hiNote="59" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_59_64_127_2.wav" rootNote="59" loNote="48" hiNote="59" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_59_64_127_3.wav" rootNote="59" loNote="48" hiNote="59" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_59_64_127_4.wav" rootNote="59" loNote="48" hiNote="59" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_64_0_63_1.wav"   rootNote="64" loNote="60" hiNote="64" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_64_64_127_1.wav" rootNote="64" loNote="60" hiNote="64" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_64_64_127_2.wav" rootNote="64" loNote="60" hiNote="64" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_64_64_127_3.wav" rootNote="64" loNote="60" hiNote="64" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_64_64_127_1.wav" rootNote="64" loNote="60" hiNote="64" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_64_64_127_2.wav" rootNote="64" loNote="60" hiNote="64" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_64_64_127_3.wav" rootNote="64" loNote="60" hiNote="64" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_64_64_127_4.wav" rootNote="64" loNote="60" hiNote="64" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_66_0_63_1.wav"   rootNote="66" loNote="65" hiNote="66" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_66_0_63_2.wav"   rootNote="66" loNote="65" hiNote="66" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_66_0_63_3.wav"   rootNote="66" loNote="65" hiNote="66" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_66_64_127_1.wav" rootNote="66" loNote="65" hiNote="66" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_66_64_127_1.wav" rootNote="66" loNote="65" hiNote="66" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_66_64_127_2.wav" rootNote="66" loNote="65" hiNote="66" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_66_64_127_3.wav" rootNote="66" loNote="65" hiNote="66" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_66_64_127_4.wav" rootNote="66" loNote="65" hiNote="66" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_67_0_63_1.wav"   rootNote="67" loNote="67" hiNote="67" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_67_0_63_2.wav"   rootNote="67" loNote="67" hiNote="67" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_67_0_63_3.wav"   rootNote="67" loNote="67" hiNote="67" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_67_0_63_4.wav"   rootNote="67" loNote="67" hiNote="67" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_67_64_127_1.wav" rootNote="67" loNote="67" hiNote="67" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_67_64_127_2.wav" rootNote="67" loNote="67" hiNote="67" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_67_64_127_3.wav" rootNote="67" loNote="67" hiNote="67" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_67_64_127_4.wav" rootNote="67" loNote="67" hiNote="67" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_69_0_63_1.wav"   rootNote="69" loNote="68" hiNote="69" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_69_0_63_2.wav"   rootNote="69" loNote="68" hiNote="69" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_69_0_63_3.wav"   rootNote="69" loNote="68" hiNote="69" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_69_0_63_4.wav"   rootNote="69" loNote="68" hiNote="69" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_69_64_127_1.wav" rootNote="69" loNote="68" hiNote="69" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_69_64_127_2.wav" rootNote="69" loNote="68" hiNote="69" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_69_64_127_3.wav" rootNote="69" loNote="68" hiNote="69" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_69_64_127_4.wav" rootNote="69" loNote="68" hiNote="69" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_71_0_63_1.wav"   rootNote="71" loNote="70" hiNote="71" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_71_0_63_2.wav"   rootNote="71" loNote="70" hiNote="71" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_71_0_63_3.wav"   rootNote="71" loNote="70" hiNote="71" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_71_64_127_1.wav" rootNote="71" loNote="70" hiNote="71" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_71_64_127_1.wav" rootNote="71" loNote="70" hiNote="71" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_71_64_127_2.wav" rootNote="71" loNote="70" hiNote="71" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_71_64_127_3.wav" rootNote="71" loNote="70" hiNote="71" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_71_64_127_4.wav" rootNote="71" loNote="70" hiNote="71" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_72_0_63_1.wav"   rootNote="72" loNote="72" hiNote="72" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_72_0_63_2.wav"   rootNote="72" loNote="72" hiNote="72" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_72_0_63_3.wav"   rootNote="72" loNote="72" hiNote="72" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_72_64_127_1.wav" rootNote="72" loNote="72" hiNote="72" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_72_64_127_1.wav" rootNote="72" loNote="72" hiNote="72" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_72_64_127_2.wav" rootNote="72" loNote="72" hiNote="72" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_72_64_127_3.wav" rootNote="72" loNote="72" hiNote="72" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_72_64_127_4.wav" rootNote="72" loNote="72" hiNote="72" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_74_0_63_1.wav"   rootNote="74" loNote="73" hiNote="74" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_74_0_63_2.wav"   rootNote="74" loNote="73" hiNote="74" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_74_0_63_3.wav"   rootNote="74" loNote="73" hiNote="74" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_74_0_63_4.wav"   rootNote="74" loNote="73" hiNote="74" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_74_64_127_1.wav" rootNote="74" loNote="73" hiNote="74" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_74_64_127_2.wav" rootNote="74" loNote="73" hiNote="74" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_74_64_127_3.wav" rootNote="74" loNote="73" hiNote="74" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_74_64_127_4.wav" rootNote="74" loNote="73" hiNote="74" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_76_0_63_1.wav"   rootNote="76" loNote="75" hiNote="76" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_76_0_63_2.wav"   rootNote="76" loNote="75" hiNote="76" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_76_0_63_3.wav"   rootNote="76" loNote="75" hiNote="76" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_76_64_127_1.wav" rootNote="76" loNote="75" hiNote="76" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_76_64_127_1.wav" rootNote="76" loNote="75" hiNote="76" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_76_64_127_2.wav" rootNote="76" loNote="75" hiNote="76" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_76_64_127_3.wav" rootNote="76" loNote="75" hiNote="76" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_76_64_127_4.wav" rootNote="76" loNote="75" hiNote="76" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_78_0_63_1.wav"   rootNote="78" loNote="77" hiNote="78" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_78_0_63_2.wav"   rootNote="78" loNote="77" hiNote="78" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_78_0_63_3.wav"   rootNote="78" loNote="77" hiNote="78" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_78_0_63_4.wav"   rootNote="78" loNote="77" hiNote="78" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_78_64_127_1.wav" rootNote="78" loNote="77" hiNote="78" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_78_64_127_2.wav" rootNote="78" loNote="77" hiNote="78" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_78_64_127_3.wav" rootNote="78" loNote="77" hiNote="78" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_78_64_127_4.wav" rootNote="78" loNote="77" hiNote="78" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_79_0_63_1.wav"   rootNote="79" loNote="79" hiNote="79" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_79_0_63_2.wav"   rootNote="79" loNote="79" hiNote="79" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_79_0_63_3.wav"   rootNote="79" loNote="79" hiNote="79" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_79_0_63_4.wav"   rootNote="79" loNote="79" hiNote="79" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_79_64_127_1.wav" rootNote="79" loNote="79" hiNote="79" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_79_64_127_2.wav" rootNote="79" loNote="79" hiNote="79" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_79_64_127_3.wav" rootNote="79" loNote="79" hiNote="79" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_79_64_127_4.wav" rootNote="79" loNote="79" hiNote="79" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_81_0_63_1.wav"   rootNote="81" loNote="80" hiNote="81" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_81_0_63_2.wav"   rootNote="81" loNote="80" hiNote="81" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_81_0_63_3.wav"   rootNote="81" loNote="80" hiNote="81" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_81_0_63_4.wav"   rootNote="81" loNote="80" hiNote="81" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_81_64_127_1.wav" rootNote="81" loNote="80" hiNote="81" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_81_64_127_2.wav" rootNote="81" loNote="80" hiNote="81" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_81_64_127_3.wav" rootNote="81" loNote="80" hiNote="81" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_81_64_127_4.wav" rootNote="81" loNote="80" hiNote="81" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_83_0_63_1.wav"   rootNote="83" loNote="82" hiNote="83" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_83_0_63_2.wav"   rootNote="83" loNote="82" hiNote="83" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_83_0_63_3.wav"   rootNote="83" loNote="82" hiNote="83" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_83_0_63_4.wav"   rootNote="83" loNote="82" hiNote="83" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_83_64_127_1.wav" rootNote="83" loNote="82" hiNote="83" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_83_64_127_2.wav" rootNote="83" loNote="82" hiNote="83" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_83_64_127_3.wav" rootNote="83" loNote="82" hiNote="83" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_83_64_127_4.wav" rootNote="83" loNote="82" hiNote="83" seqPosition="4" loVel="64" hiVel="127" />
+
+      <sample path="Samples/CIFT_85_0_63_1.wav"   rootNote="85" loNote="84" hiNote="96" seqPosition="1" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_85_0_63_2.wav"   rootNote="85" loNote="84" hiNote="96" seqPosition="2" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_85_0_63_3.wav"   rootNote="85" loNote="84" hiNote="96" seqPosition="3" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_85_0_63_4.wav"   rootNote="85" loNote="84" hiNote="96" seqPosition="4" loVel="0" hiVel="63" />
+      <sample path="Samples/CIFT_85_64_127_1.wav" rootNote="85" loNote="84" hiNote="96" seqPosition="1" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_85_64_127_2.wav" rootNote="85" loNote="84" hiNote="96" seqPosition="2" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_85_64_127_3.wav" rootNote="85" loNote="84" hiNote="96" seqPosition="3" loVel="64" hiVel="127" />
+      <sample path="Samples/CIFT_85_64_127_4.wav" rootNote="85" loNote="84" hiNote="96" seqPosition="4" loVel="64" hiVel="127" />
+      <effects/>
+    </group>
+  </groups>
+  <effects>
+    <effect type="lowpass" frequency="21989.00916994164"/>
+    <effect type="reverb" wetLevel="0.5"/>
+  </effects>
+  <midi>
+    <cc number="1">
+      <binding level="ui" type="control" parameter="VALUE" position="3" translation="linear" translationOutputMin="0" translationOutputMax="1"/>
+    </cc>
+  </midi>
+  <modulators/>
+  <tags/>
+  <ui width="812" height="375" coverArt="Samples/cover_art.jpg" bgImage="Samples/background.jpg">
+    <tab name="main">
+      <labeled-knob x="270" y="113" width="105" textSize="16" textColor="FF000000" trackForegroundColor="CC000000" trackBackgroundColor="66999999" label="Tone" type="float" minValue="0" maxValue="1" value="1.0">
+        <binding type="effect" level="instrument" position="0" parameter="FX_FILTER_FREQUENCY" translation="table" translationTable="0,33;0.3,150;0.4,450;0.5,1100;0.7,4100;0.9,11000;1.0001,22000"/>
+      </labeled-knob>
+      <labeled-knob x="370" y="113" width="105" textSize="16" textColor="FF000000" trackForegroundColor="CC000000" trackBackgroundColor="66999999" label="Reverb" minValue="0" maxValue="100" value="33.0">
+        <binding type="effect" level="instrument" position="1" parameter="FX_REVERB_WET_LEVEL" translation="linear" translationOutputMin="0" translationOutputMax="1"/>
+      </labeled-knob>
+      <labeled-knob x="470" y="113" width="105" textSize="16" textColor="FF000000" trackForegroundColor="CC000000" trackBackgroundColor="66999999" label="Release" minValue="0" maxValue="3" value="0.3">
+        <binding type="amp" level="instrument" position="0" parameter="ENV_RELEASE" />
+      </labeled-knob>
+    </tab>
+    <keyboard>
+      <color loNote="48" hiNote="58" color="FF996666" />
+      <color loNote="59" hiNote="85" color="FFAA3636" />
+      <color loNote="86" hiNote="96" color="FF996666" />
+    </keyboard>
+  </ui>
+</DecentSampler>
