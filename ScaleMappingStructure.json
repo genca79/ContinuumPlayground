@@ -1,0 +1,172 @@
+[
+  {
+    "name": "Hexanies (Combination Product Sets)",
+    "variations_included": ["1-3-5-7", "1-3-5-9", "1-3-5-11", "1-3-5-13", "1-3-7-9", "1-3-7-11", "1-3-7-13", "1-3-9-11", "1-3-9-13", "1-3-11-13"],
+    "microtonal_family": "Combination Product Sets (CPS)",
+    "characteristics": "6-note scales. Very pure harmony, but chord progressions only weakly imply a tonal center. 'Dreamy and flighty' sound. Lower numbers (1-3-5-7) sound more familiar; higher numbers (11/13) sound more alien.",
+    "history": "Studied extensively by Erv Wilson. Part of the Eikosany family structure.",
+    "performance_tips": "Mapped to keys C, D, E, G, A, B. Middle C (MIDI 60) is tuned to F# (369.99Hz). Use for static, pure harmonic textures."
+  },
+  {
+    "name": "Dekanies (Combination Product Sets)",
+    "variations_included": ["1-3-5-7-9", "1-3-5-7-11", "1-3-5-7-13", "1-3-5-9-11", "1-3-5-9-13", "1-3-5-11-13", "1-3-7-9-11", "1-3-9-11-13", "1-5-7-9-11", "1-7-9-11-13"],
+    "microtonal_family": "Combination Product Sets (CPS)",
+    "characteristics": "10-note scales. Similar pure harmony to Hexanies but with more melodic possibilities. The inclusion of the 11th and 13th harmonics creates unique 'xenharmonic' timbres.",
+    "history": "Developed from Erv Wilson's CPS theories.",
+    "performance_tips": "Mapped to keys C, D, D#, E, F, F#, G, A, A#, B. Middle C is tuned to F#."
+  },
+  {
+    "name": "Eikosany 1-3-5-7-9-11",
+    "microtonal_family": "Combination Product Sets (CPS)",
+    "characteristics": "20-note scale. A massive structure containing pure intervals including the undecimal comma (1/4 tone), Ptolemy's second, and harmonic sevenths. Offers vast harmonic territories.",
+    "history": "An advanced CPS structure studied by Erv Wilson and Kraig Grady.",
+    "performance_tips": "Laid out linearly; every 20 keys span an octave. Can be 'unwieldy' to play; suggested for advanced exploration of Just Intonation relationships."
+  },
+  {
+    "name": "ED3 Family (Equal Divisions of 3/1)",
+    "variations_included": ["8-ED3", "9-ED3", "10-ED3", "11-ED3", "12-ED3", "13-ED3 (Bohlen-Pierce)", "14-ED3", "15-ED3", "16-ED3", "17-ED3", "18-ED3", "19-ED3"],
+    "microtonal_family": "Non-Octave / Equal Temperament",
+    "characteristics": "These scales do not repeat at the octave (2/1) but at the perfect twelfth (3/1). 19-ED3 is a stretched version of 12-TET; 8-ED3 is a stretched 5-TET.",
+    "history": "Conceptually related to the Bohlen-Pierce scale (13-ED3).",
+    "performance_tips": "Since there are no octaves, chord inversions are impossible. Harmonies appear in unexpected places. Rely on ear rather than theory."
+  },
+  {
+    "name": "EDphi Family (Equal Divisions of Phi)",
+    "variations_included": ["4-EDphi", "5-EDphi", "6-EDphi", "7-EDphi", "8-EDphi", "9-EDphi", "10-EDphi", "11-EDphi", "12-EDphi"],
+    "microtonal_family": "Non-Octave / Golden Ratio",
+    "characteristics": "Divides the Golden Ratio (Phi) into equal parts. Phi is acoustically the most dissonant interval. Creates an 'ocean of chaos' without stable octaves.",
+    "history": "Experimental tunings based on mathematical constants found in nature.",
+    "performance_tips": "Expect high dissonance. Useful for chaotic, inharmonic, or textural soundscapes where conventional resolution is not desired."
+  },
+  {
+    "name": "CET Scales",
+    "variations_included": ["65 CET", "88 CET"],
+    "microtonal_family": "Non-Octave / Cent Equal Temperament",
+    "characteristics": "Scales that repeat at specific small intervals measured in cents, creating cyclical structures that do not align with the octave.",
+    "history": "Modern experimental tuning concepts.",
+    "performance_tips": "Similar to other non-octave scales: melodic contours will not repeat clearly across registers."
+  },
+  {
+    "name": "Meantone (and 19-TET)",
+    "microtonal_family": "Regular Temperament (Rank-2)",
+    "characteristics": "Includes historical well-temperaments and 19-TET. 19-TET offers a familiar diatonic feel but with more consonance in thirds and distinct sharps/flats.",
+    "history": "The dominant tuning system of Western music for hundreds of years before 12-TET. 19-TET is a natural extension.",
+    "performance_tips": "Good for extending common practice harmony. In 19-TET, C# and Db are distinct notes."
+  },
+  {
+    "name": "Mavila",
+    "microtonal_family": "Regular Temperament",
+    "characteristics": "Described as 'Meantone's anti-matter'. Inverts the major scale structure (TTSTTTs becomes ssTsssT). Major chords become minor, minor become major.",
+    "history": "A regular temperament that flips harmonic expectations.",
+    "performance_tips": "Try playing songs you know; they will sound 'inside-out' (happy songs become sad/minor)."
+  },
+  {
+    "name": "Blackwood",
+    "microtonal_family": "Regular Temperament",
+    "characteristics": "Formed by 2 interlocking chains of 5-TET. Allows major or minor triads from any root. No diminished chords exist in this scale.",
+    "history": "Named after Easley Blackwood.",
+    "performance_tips": "Allows for continuous modulation upwards without hitting dissonant 'wolf' intervals found in standard tuning."
+  },
+  {
+    "name": "Superpyth",
+    "microtonal_family": "Regular Temperament",
+    "characteristics": "Fifths are sharper than standard. Major thirds become very sharp (bright/jarring), minor thirds become very flat (gloomy).",
+    "history": "An extension of Pythagorean tuning principles.",
+    "performance_tips": "Use for high contrast between major (intense brightness) and minor (dark gloom)."
+  },
+  {
+    "name": "Pajara",
+    "microtonal_family": "Regular Temperament",
+    "characteristics": "10-note scales based on 22-TET tonality. Uses notes found in blues melodies to extend harmony. Chords sound familiar but connect in new ways.",
+    "history": "Based on a paper by Paul Erlich regarding 22-TET decatonic scales.",
+    "performance_tips": "Great for 'bluesy' or xenharmonic harmonic progressions that still retain a melodic logic."
+  },
+  {
+    "name": "Machine",
+    "microtonal_family": "Regular Temperament",
+    "characteristics": "6-note scale resembling a stretched major or whole-tone scale. Features the 7th (Barbershop) and 11th (semi-augmented 4th) harmonics.",
+    "history": "Modern regular temperament.",
+    "performance_tips": "Produces chords resembling 'dominant 9 #11' without the 3rd or 5th. Great for mechanical or futuristic textures."
+  },
+  {
+    "name": "Orwell",
+    "microtonal_family": "Regular Temperament",
+    "characteristics": "Features 7th and 11th harmonics plus 'subminor' thirds. Does not have recognizable major/minor thirds but offers pleasing melodic intervals.",
+    "history": "Named in reference to the 1984 dystopian aesthetic or complexity.",
+    "performance_tips": "Use for complex chords that are stable yet alien, lacking the standard major/minor emotional dichotomy."
+  },
+  {
+    "name": "Porcupine",
+    "microtonal_family": "Regular Temperament",
+    "characteristics": "Contains familiar chords mixed in a different order, extended to include the 11th harmonic.",
+    "history": "A popular temperament in the xenharmonic community.",
+    "performance_tips": "Stacking three minor thirds results in a minor seventh (unlike the major sixth in 12-TET), allowing for 'musical puns' and unexpected resolutions."
+  },
+  {
+    "name": "Lemba",
+    "microtonal_family": "Regular Temperament",
+    "characteristics": "Repeats at the tritone (half-octave) rather than the octave. Symmetrical scale with three types of thirds.",
+    "history": "Rank-2 temperament with tritone equivalence.",
+    "performance_tips": "Playing a full octave yields a symmetrical scale. Useful for symmetrical harmonic motion."
+  },
+  {
+    "name": "Indonesian Gamelan (Slendro & Pelog)",
+    "microtonal_family": "World / Indonesian",
+    "characteristics": "Slendro: 5-note scale with roughly equidistant intervals (mapped to black keys). Pelog: 7-note scale with unequal intervals (mapped to white keys).",
+    "history": "Averages of measured gamelans from Java (Surjodiningrat 1993, Kunst 1949).",
+    "performance_tips": "Authenticity is difficult as every Gamelan is tuned uniquely. Use for metallophone textures."
+  },
+  {
+    "name": "Arabic Maqam",
+    "variations_included": ["Rast/Penchgah", "Hijaz", "Saba", "Buselik"],
+    "microtonal_family": "World / Middle Eastern",
+    "characteristics": "Modal system involving quarter tones and neutral intervals. 'Rast' is a fundamental mode.",
+    "history": "Traditional system of melodic modes used in Arabic music.",
+    "performance_tips": "Maqam implies improvisation techniques, not just a scale. Pitch bending and ornamentation are essential."
+  },
+  {
+    "name": "Thai Ranat",
+    "microtonal_family": "World / Thai",
+    "characteristics": "Roughly 7-TET (7 equal tones per octave), but this version is a specific measurement from a 'Ceremonial and Court Music' record.",
+    "history": "Tuning of the Ranat (Thai xylophone).",
+    "performance_tips": "Mapped to white keys. Great for rapid, percussive, equidistantly-spaced melodies."
+  },
+  {
+    "name": "Bagpipes (Scotland, Bulgaria, Macedonia)",
+    "microtonal_family": "World / Folk",
+    "characteristics": "Scotland: Neutral intervals (between minor/major). Bulgaria: Pure major 3rd. Macedonia: Exotic intervals.",
+    "history": "Measured from traditional instruments (Anaphoria archive).",
+    "performance_tips": "Use drone notes. Scottish mapped to white keys; others have specific chromatic mappings."
+  },
+  {
+    "name": "North Indian Ragas",
+    "variations_included": ["Bageshri", "Bhairavi", "Kafi", "Todi", "Yaman"],
+    "microtonal_family": "World / Indian Classical",
+    "characteristics": "Just Intonation based scales. Distinct ascending (Aroha) and descending (Avaroha) lines.",
+    "history": "Ancient Indian classical tradition where tuning depends on the mood/time of day.",
+    "performance_tips": "Note that real Raga performance involves specific emphasis and ornamentation, not just the raw pitches. 'Shrutis' file contains the full 22-note gamut."
+  },
+  {
+    "name": "Ancient Greek Genera",
+    "variations_included": ["Archytas Diatonic", "Ptolemy Diatonic Hemiolion", "Ptolemy Diatonic Ditoniaion", "Didymus Chromatic", "Archytas Enharmonic"],
+    "microtonal_family": "World / Historical",
+    "characteristics": "Based on Tetrachords (4 strings). Categories: Diatonic (tones/semitone), Chromatic (minor 3rd + semitones), Enharmonic (Major 3rd + quartertones).",
+    "history": "Recorded by Ptolemy and others (4th century BC - 2nd century AD).",
+    "performance_tips": "Mapped to white keys, tonic on E. Intended for lyre-like plucking."
+  },
+  {
+    "name": "Zimbabwe Mbira",
+    "microtonal_family": "World / African",
+    "characteristics": "Measured from a specific instrument made by Josephat Mandaza (2002).",
+    "history": "Shona music tradition.",
+    "performance_tips": "Instrument uses metal strips (lamellophone). The scale covers multiple octaves with specific mapping to white keys."
+  },
+  {
+    "name": "High-Accuracy Regular Temperaments",
+    "variations_included": ["12-Adams", "zeus7tri", "oktone", "elfmadagascar9", "glummamarvwoo", "Parapyth12"],
+    "microtonal_family": "Regular Temperament (Advanced)",
+    "characteristics": "12-Adams: consonant but modulates sharply. zeus7tri: few perfect 4ths/5ths, 11th harmonic focus. elfmadagascar9: subminor 3rds. glummamarvwoo: tempered Glumma scale.",
+    "history": "Included based on feedback from microtonal musicians wanting accuracy over 'trippy' sounds.",
+    "performance_tips": "These are less about 'effect' and more about specific structural properties for composition."
+  }
+]

@@ -1,0 +1,296 @@
+; VAZ Plus/AnaMark softsynth tuning file
+; Xylophone Tuning from Chopi tribe, Southern Mozambique. Venancio Mbande's (Master Chopi Builder)
+;
+; VAZ Plus section
+[Tuning]
+note 0=9
+note 1=9
+note 2=181
+note 3=181
+note 4=341
+note 5=518
+note 6=518
+note 7=695
+note 8=695
+note 9=883
+note 10=883
+note 11=1042
+note 12=1186
+note 13=1186
+note 14=1348
+note 15=1348
+note 16=1515
+note 17=1697
+note 18=1697
+note 19=1864
+note 20=1864
+note 21=2052
+note 22=2052
+note 23=2223
+note 24=2390
+note 25=2390
+note 26=2562
+note 27=2562
+note 28=2721
+note 29=2899
+note 30=2899
+note 31=3076
+note 32=3076
+note 33=3264
+note 34=3264
+note 35=3423
+note 36=3567
+note 37=3567
+note 38=3729
+note 39=3729
+note 40=3896
+note 41=4078
+note 42=4078
+note 43=4245
+note 44=4245
+note 45=4433
+note 46=4433
+note 47=4604
+note 48=4770
+note 49=4770
+note 50=4943
+note 51=4943
+note 52=5102
+note 53=5279
+note 54=5279
+note 55=5457
+note 56=5457
+note 57=5645
+note 58=5645
+note 59=5804
+note 60=5947
+note 61=5947
+note 62=6109
+note 63=6109
+note 64=6277
+note 65=6459
+note 66=6459
+note 67=6626
+note 68=6626
+note 69=6814
+note 70=6814
+note 71=6984
+note 72=7151
+note 73=7151
+note 74=7324
+note 75=7324
+note 76=7483
+note 77=7660
+note 78=7660
+note 79=7838
+note 80=7838
+note 81=8026
+note 82=8026
+note 83=8184
+note 84=8328
+note 85=8328
+note 86=8490
+note 87=8490
+note 88=8658
+note 89=8840
+note 90=8840
+note 91=9007
+note 92=9007
+note 93=9194
+note 94=9194
+note 95=9365
+note 96=9532
+note 97=9532
+note 98=9704
+note 99=9704
+note 100=9864
+note 101=10041
+note 102=10041
+note 103=10218
+note 104=10218
+note 105=10406
+note 106=10406
+note 107=10565
+note 108=10709
+note 109=10709
+note 110=10871
+note 111=10871
+note 112=11038
+note 113=11220
+note 114=11220
+note 115=11388
+note 116=11388
+note 117=11575
+note 118=11575
+note 119=11746
+note 120=11913
+note 121=11913
+note 122=12085
+note 123=12085
+note 124=12245
+note 125=12422
+note 126=12422
+note 127=12599
+
+; AnaMark section
+[Scale Begin]
+Format= "AnaMark-TUN"
+FormatVersion= 200
+FormatSpecs= "http:\\\\www.mark-henning.de\\eternity\\tuningspecs.html"
+
+[Info]
+Name= "C:\Audio\Tunings\MTS Packs\World Scales Pack\tun\Chopi Xylophone.tun"
+ID= "ID_C:\Audio\Tunings\MTSPacks\WorldScalesPack\tun\ChopiXylophone.tun"
+Filename= "chopi xylophone.scl"
+Description= "Xylophone Tuning from Chopi tribe, Southern Mozambique. Venancio Mbande's (Master Chopi Builder)"
+Editor= "Scala"
+
+[Exact Tuning]
+note 0= 8.790823
+note 1= 8.790823
+note 2= 181.296866
+note 3= 181.296866
+note 4= 340.691128
+note 5= 517.861207
+note 6= 517.861207
+note 7= 695.134129
+note 8= 695.134129
+note 9= 883.251867
+note 10= 883.251867
+note 11= 1042.084131
+note 12= 1185.837547
+note 13= 1185.837547
+note 14= 1347.862666
+note 15= 1347.862666
+note 16= 1515.293450
+note 17= 1697.133151
+note 18= 1697.133151
+note 19= 1864.443539
+note 20= 1864.443539
+note 21= 2052.093837
+note 22= 2052.093837
+note 23= 2222.878485
+note 24= 2389.585177
+note 25= 2389.585177
+note 26= 2562.091220
+note 27= 2562.091220
+note 28= 2721.485482
+note 29= 2898.655561
+note 30= 2898.655561
+note 31= 3075.928483
+note 32= 3075.928483
+note 33= 3264.046221
+note 34= 3264.046221
+note 35= 3422.878485
+note 36= 3566.631901
+note 37= 3566.631901
+note 38= 3728.657020
+note 39= 3728.657020
+note 40= 3896.087804
+note 41= 4077.927505
+note 42= 4077.927505
+note 43= 4245.237893
+note 44= 4245.237893
+note 45= 4432.888191
+note 46= 4432.888191
+note 47= 4603.672839
+note 48= 4770.379531
+note 49= 4770.379531
+note 50= 4942.885574
+note 51= 4942.885574
+note 52= 5102.279836
+note 53= 5279.449915
+note 54= 5279.449915
+note 55= 5456.722837
+note 56= 5456.722837
+note 57= 5644.840575
+note 58= 5644.840575
+note 59= 5803.672839
+note 60= 5947.426255
+note 61= 5947.426255
+note 62= 6109.451374
+note 63= 6109.451374
+note 64= 6276.882158
+note 65= 6458.721859
+note 66= 6458.721859
+note 67= 6626.032247
+note 68= 6626.032247
+note 69= 6813.682545
+note 70= 6813.682545
+note 71= 6984.467193
+note 72= 7151.173885
+note 73= 7151.173885
+note 74= 7323.679928
+note 75= 7323.679928
+note 76= 7483.074190
+note 77= 7660.244269
+note 78= 7660.244269
+note 79= 7837.517191
+note 80= 7837.517191
+note 81= 8025.634929
+note 82= 8025.634929
+note 83= 8184.467193
+note 84= 8328.220609
+note 85= 8328.220609
+note 86= 8490.245728
+note 87= 8490.245728
+note 88= 8657.676512
+note 89= 8839.516213
+note 90= 8839.516213
+note 91= 9006.826601
+note 92= 9006.826601
+note 93= 9194.476899
+note 94= 9194.476899
+note 95= 9365.261547
+note 96= 9531.968239
+note 97= 9531.968239
+note 98= 9704.474282
+note 99= 9704.474282
+note 100= 9863.868544
+note 101= 10041.038623
+note 102= 10041.038623
+note 103= 10218.311545
+note 104= 10218.311545
+note 105= 10406.429283
+note 106= 10406.429283
+note 107= 10565.261547
+note 108= 10709.014963
+note 109= 10709.014963
+note 110= 10871.040082
+note 111= 10871.040082
+note 112= 11038.470866
+note 113= 11220.310567
+note 114= 11220.310567
+note 115= 11387.620955
+note 116= 11387.620955
+note 117= 11575.271253
+note 118= 11575.271253
+note 119= 11746.055901
+note 120= 11912.762593
+note 121= 11912.762593
+note 122= 12085.268636
+note 123= 12085.268636
+note 124= 12244.662898
+note 125= 12421.832977
+note 126= 12421.832977
+note 127= 12599.105899
+
+[Functional Tuning]
+note 1="#=0 * 929/846"
+note 2="#=0 * 1535/1269"
+note 3="#=0 * 1705/1269"
+note 4="#=0 * 626/423"
+note 5="#=0 * 2093/1269"
+note 6="#=0 * 770/423"
+note 7="#=0 * 5087/2538"
+note 8="#=0 * 2810/1269"
+note 9="#=0 * 1027/423"
+note 10="#=0 * 3413/1269"
+note 11="#=0 * 3781/1269"
+note 12="#=0 * 1405/423"
+note 13="#=0 * 1540/423"
+note 14="#>-14 * 5020/1269 ~999"
+
+; Set reference key to absolute frequency (not scale note but midi key)
+note 60="! 253.800000"
+[Scale End]

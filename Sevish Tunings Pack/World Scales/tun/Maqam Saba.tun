@@ -1,0 +1,294 @@
+; VAZ Plus/AnaMark softsynth tuning file
+; 12-tone Saba by Ozan Yarman http://www.ozanyarman.com
+;
+; VAZ Plus section
+[Tuning]
+note 0=0
+note 1=151
+note 2=182
+note 3=204
+note 4=289
+note 5=418
+note 6=435
+note 7=702
+note 8=787
+note 9=991
+note 10=1119
+note 11=1137
+note 12=1200
+note 13=1351
+note 14=1382
+note 15=1404
+note 16=1489
+note 17=1618
+note 18=1635
+note 19=1902
+note 20=1987
+note 21=2191
+note 22=2319
+note 23=2337
+note 24=2400
+note 25=2551
+note 26=2582
+note 27=2604
+note 28=2689
+note 29=2818
+note 30=2835
+note 31=3102
+note 32=3187
+note 33=3391
+note 34=3519
+note 35=3537
+note 36=3600
+note 37=3751
+note 38=3782
+note 39=3804
+note 40=3889
+note 41=4018
+note 42=4035
+note 43=4302
+note 44=4387
+note 45=4591
+note 46=4719
+note 47=4737
+note 48=4800
+note 49=4951
+note 50=4982
+note 51=5004
+note 52=5089
+note 53=5218
+note 54=5235
+note 55=5502
+note 56=5587
+note 57=5791
+note 58=5919
+note 59=5937
+note 60=6000
+note 61=6151
+note 62=6182
+note 63=6204
+note 64=6289
+note 65=6418
+note 66=6435
+note 67=6702
+note 68=6787
+note 69=6991
+note 70=7119
+note 71=7137
+note 72=7200
+note 73=7351
+note 74=7382
+note 75=7404
+note 76=7489
+note 77=7618
+note 78=7635
+note 79=7902
+note 80=7987
+note 81=8191
+note 82=8319
+note 83=8337
+note 84=8400
+note 85=8551
+note 86=8582
+note 87=8604
+note 88=8689
+note 89=8818
+note 90=8835
+note 91=9102
+note 92=9187
+note 93=9391
+note 94=9519
+note 95=9537
+note 96=9600
+note 97=9751
+note 98=9782
+note 99=9804
+note 100=9889
+note 101=10018
+note 102=10035
+note 103=10302
+note 104=10387
+note 105=10591
+note 106=10719
+note 107=10737
+note 108=10800
+note 109=10951
+note 110=10982
+note 111=11004
+note 112=11089
+note 113=11218
+note 114=11235
+note 115=11502
+note 116=11587
+note 117=11791
+note 118=11919
+note 119=11937
+note 120=12000
+note 121=12151
+note 122=12182
+note 123=12204
+note 124=12289
+note 125=12418
+note 126=12435
+note 127=12702
+
+; AnaMark section
+[Scale Begin]
+Format= "AnaMark-TUN"
+FormatVersion= 200
+FormatSpecs= "http:\\\\www.mark-henning.de\\eternity\\tuningspecs.html"
+
+[Info]
+Name= "12-saba y.tun"
+ID= "ID_12-sabay.tun"
+Filename= "12-saba y.scl"
+Description= "12-tone Saba by Ozan Yarman http://www.ozanyarman.com"
+Editor= "Scala"
+
+[Exact Tuning]
+note 0= 0.000000
+note 1= 150.637059
+note 2= 182.403712
+note 3= 203.910002
+note 4= 289.209719
+note 5= 417.507964
+note 6= 435.084095
+note 7= 701.955001
+note 8= 787.254719
+note 9= 991.164720
+note 10= 1119.462965
+note 11= 1137.039096
+note 12= 1200.000000
+note 13= 1350.637059
+note 14= 1382.403712
+note 15= 1403.910002
+note 16= 1489.209719
+note 17= 1617.507964
+note 18= 1635.084095
+note 19= 1901.955001
+note 20= 1987.254719
+note 21= 2191.164720
+note 22= 2319.462965
+note 23= 2337.039096
+note 24= 2400.000000
+note 25= 2550.637059
+note 26= 2582.403712
+note 27= 2603.910002
+note 28= 2689.209719
+note 29= 2817.507964
+note 30= 2835.084095
+note 31= 3101.955001
+note 32= 3187.254719
+note 33= 3391.164720
+note 34= 3519.462965
+note 35= 3537.039096
+note 36= 3600.000000
+note 37= 3750.637059
+note 38= 3782.403712
+note 39= 3803.910002
+note 40= 3889.209719
+note 41= 4017.507964
+note 42= 4035.084095
+note 43= 4301.955001
+note 44= 4387.254719
+note 45= 4591.164720
+note 46= 4719.462965
+note 47= 4737.039096
+note 48= 4800.000000
+note 49= 4950.637059
+note 50= 4982.403712
+note 51= 5003.910002
+note 52= 5089.209719
+note 53= 5217.507964
+note 54= 5235.084095
+note 55= 5501.955001
+note 56= 5587.254719
+note 57= 5791.164720
+note 58= 5919.462965
+note 59= 5937.039096
+note 60= 6000.000000
+note 61= 6150.637059
+note 62= 6182.403712
+note 63= 6203.910002
+note 64= 6289.209719
+note 65= 6417.507964
+note 66= 6435.084095
+note 67= 6701.955001
+note 68= 6787.254719
+note 69= 6991.164720
+note 70= 7119.462965
+note 71= 7137.039096
+note 72= 7200.000000
+note 73= 7350.637059
+note 74= 7382.403712
+note 75= 7403.910002
+note 76= 7489.209719
+note 77= 7617.507964
+note 78= 7635.084095
+note 79= 7901.955001
+note 80= 7987.254719
+note 81= 8191.164720
+note 82= 8319.462965
+note 83= 8337.039096
+note 84= 8400.000000
+note 85= 8550.637059
+note 86= 8582.403712
+note 87= 8603.910002
+note 88= 8689.209719
+note 89= 8817.507964
+note 90= 8835.084095
+note 91= 9101.955001
+note 92= 9187.254719
+note 93= 9391.164720
+note 94= 9519.462965
+note 95= 9537.039096
+note 96= 9600.000000
+note 97= 9750.637059
+note 98= 9782.403712
+note 99= 9803.910002
+note 100= 9889.209719
+note 101= 10017.507964
+note 102= 10035.084095
+note 103= 10301.955001
+note 104= 10387.254719
+note 105= 10591.164720
+note 106= 10719.462965
+note 107= 10737.039096
+note 108= 10800.000000
+note 109= 10950.637059
+note 110= 10982.403712
+note 111= 11003.910002
+note 112= 11089.209719
+note 113= 11217.507964
+note 114= 11235.084095
+note 115= 11501.955001
+note 116= 11587.254719
+note 117= 11791.164720
+note 118= 11919.462965
+note 119= 11937.039096
+note 120= 12000.000000
+note 121= 12150.637059
+note 122= 12182.403712
+note 123= 12203.910002
+note 124= 12289.209719
+note 125= 12417.507964
+note 126= 12435.084095
+note 127= 12701.955001
+
+[Functional Tuning]
+note 1="#=0 * 12/11"
+note 2="#=0 * 10/9"
+note 3="#=0 * 9/8"
+note 4="#=0 * 13/11"
+note 5="#=0 * 14/11"
+note 6="#=0 * 9/7"
+note 7="#=0 * 3/2"
+note 8="#=0 * 52/33"
+note 9="#=0 * 39/22"
+note 10="#=0 * 21/11"
+note 11="#=0 * 27/14"
+note 12="#>-12 * 2/1 ~999"
+
+; Set reference key to absolute frequency (not scale note but midi key)
+note 60="! 261.625565"
+[Scale End]

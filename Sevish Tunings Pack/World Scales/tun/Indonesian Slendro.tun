@@ -1,0 +1,294 @@
+; VAZ Plus/AnaMark softsynth tuning file
+; Average of 30 measured slendro gamelans, W. Surjodiningrat et al., 1993.
+;
+; VAZ Plus section
+[Tuning]
+note 0=-40
+note 1=-40
+note 2=191
+note 3=191
+note 4=434
+note 5=434
+note 6=434
+note 7=677
+note 8=677
+note 9=915
+note 10=915
+note 11=1168
+note 12=1168
+note 13=1168
+note 14=1399
+note 15=1399
+note 16=1642
+note 17=1642
+note 18=1642
+note 19=1885
+note 20=1885
+note 21=2123
+note 22=2123
+note 23=2376
+note 24=2376
+note 25=2376
+note 26=2607
+note 27=2607
+note 28=2850
+note 29=2850
+note 30=2850
+note 31=3093
+note 32=3093
+note 33=3331
+note 34=3331
+note 35=3584
+note 36=3584
+note 37=3584
+note 38=3815
+note 39=3815
+note 40=4058
+note 41=4058
+note 42=4058
+note 43=4301
+note 44=4301
+note 45=4539
+note 46=4539
+note 47=4792
+note 48=4792
+note 49=4792
+note 50=5023
+note 51=5023
+note 52=5266
+note 53=5266
+note 54=5266
+note 55=5509
+note 56=5509
+note 57=5747
+note 58=5747
+note 59=6000
+note 60=6000
+note 61=6000
+note 62=6231
+note 63=6231
+note 64=6474
+note 65=6474
+note 66=6474
+note 67=6717
+note 68=6717
+note 69=6955
+note 70=6955
+note 71=7208
+note 72=7208
+note 73=7208
+note 74=7439
+note 75=7439
+note 76=7682
+note 77=7682
+note 78=7682
+note 79=7925
+note 80=7925
+note 81=8163
+note 82=8163
+note 83=8416
+note 84=8416
+note 85=8416
+note 86=8647
+note 87=8647
+note 88=8890
+note 89=8890
+note 90=8890
+note 91=9133
+note 92=9133
+note 93=9371
+note 94=9371
+note 95=9624
+note 96=9624
+note 97=9624
+note 98=9855
+note 99=9855
+note 100=10098
+note 101=10098
+note 102=10098
+note 103=10341
+note 104=10341
+note 105=10579
+note 106=10579
+note 107=10832
+note 108=10832
+note 109=10832
+note 110=11063
+note 111=11063
+note 112=11306
+note 113=11306
+note 114=11306
+note 115=11549
+note 116=11549
+note 117=11787
+note 118=11787
+note 119=12040
+note 120=12040
+note 121=12040
+note 122=12271
+note 123=12271
+note 124=12514
+note 125=12514
+note 126=12514
+note 127=12757
+
+; AnaMark section
+[Scale Begin]
+Format= "AnaMark-TUN"
+FormatVersion= 200
+FormatSpecs= "http:\\\\www.mark-henning.de\\eternity\\tuningspecs.html"
+
+[Info]
+Name= "slendro_av.tun"
+ID= "ID_slendro_av.tun"
+Filename= "slendro_av.scl"
+Description= "Average of 30 measured slendro gamelans, W. Surjodiningrat et al., 1993."
+Editor= "Scala"
+
+[Exact Tuning]
+note 0=-40.000000
+note 1=-40.000000
+note 2= 191.000000
+note 3= 191.000000
+note 4= 434.000000
+note 5= 434.000000
+note 6= 434.000000
+note 7= 677.000000
+note 8= 677.000000
+note 9= 915.000000
+note 10= 915.000000
+note 11= 1168.000000
+note 12= 1168.000000
+note 13= 1168.000000
+note 14= 1399.000000
+note 15= 1399.000000
+note 16= 1642.000000
+note 17= 1642.000000
+note 18= 1642.000000
+note 19= 1885.000000
+note 20= 1885.000000
+note 21= 2123.000000
+note 22= 2123.000000
+note 23= 2376.000000
+note 24= 2376.000000
+note 25= 2376.000000
+note 26= 2607.000000
+note 27= 2607.000000
+note 28= 2850.000000
+note 29= 2850.000000
+note 30= 2850.000000
+note 31= 3093.000000
+note 32= 3093.000000
+note 33= 3331.000000
+note 34= 3331.000000
+note 35= 3584.000000
+note 36= 3584.000000
+note 37= 3584.000000
+note 38= 3815.000000
+note 39= 3815.000000
+note 40= 4058.000000
+note 41= 4058.000000
+note 42= 4058.000000
+note 43= 4301.000000
+note 44= 4301.000000
+note 45= 4539.000000
+note 46= 4539.000000
+note 47= 4792.000000
+note 48= 4792.000000
+note 49= 4792.000000
+note 50= 5023.000000
+note 51= 5023.000000
+note 52= 5266.000000
+note 53= 5266.000000
+note 54= 5266.000000
+note 55= 5509.000000
+note 56= 5509.000000
+note 57= 5747.000000
+note 58= 5747.000000
+note 59= 6000.000000
+note 60= 6000.000000
+note 61= 6000.000000
+note 62= 6231.000000
+note 63= 6231.000000
+note 64= 6474.000000
+note 65= 6474.000000
+note 66= 6474.000000
+note 67= 6717.000000
+note 68= 6717.000000
+note 69= 6955.000000
+note 70= 6955.000000
+note 71= 7208.000000
+note 72= 7208.000000
+note 73= 7208.000000
+note 74= 7439.000000
+note 75= 7439.000000
+note 76= 7682.000000
+note 77= 7682.000000
+note 78= 7682.000000
+note 79= 7925.000000
+note 80= 7925.000000
+note 81= 8163.000000
+note 82= 8163.000000
+note 83= 8416.000000
+note 84= 8416.000000
+note 85= 8416.000000
+note 86= 8647.000000
+note 87= 8647.000000
+note 88= 8890.000000
+note 89= 8890.000000
+note 90= 8890.000000
+note 91= 9133.000000
+note 92= 9133.000000
+note 93= 9371.000000
+note 94= 9371.000000
+note 95= 9624.000000
+note 96= 9624.000000
+note 97= 9624.000000
+note 98= 9855.000000
+note 99= 9855.000000
+note 100= 10098.000000
+note 101= 10098.000000
+note 102= 10098.000000
+note 103= 10341.000000
+note 104= 10341.000000
+note 105= 10579.000000
+note 106= 10579.000000
+note 107= 10832.000000
+note 108= 10832.000000
+note 109= 10832.000000
+note 110= 11063.000000
+note 111= 11063.000000
+note 112= 11306.000000
+note 113= 11306.000000
+note 114= 11306.000000
+note 115= 11549.000000
+note 116= 11549.000000
+note 117= 11787.000000
+note 118= 11787.000000
+note 119= 12040.000000
+note 120= 12040.000000
+note 121= 12040.000000
+note 122= 12271.000000
+note 123= 12271.000000
+note 124= 12514.000000
+note 125= 12514.000000
+note 126= 12514.000000
+note 127= 12757.000000
+
+[Functional Tuning]
+note 1="#=0 * 1/1"
+note 2="#=0 % 231.000000"
+note 3="#=0 % 231.000000"
+note 4="#=0 % 474.000000"
+note 5="#=0 % 474.000000"
+note 6="#=0 % 474.000000"
+note 7="#=0 % 717.000000"
+note 8="#=0 % 717.000000"
+note 9="#=0 % 955.000000"
+note 10="#=0 % 955.000000"
+note 11="#=0 % 1208.000000"
+note 12="#>-12 % 1208.000000 ~999"
+
+; Set reference key to absolute frequency (not scale note but midi key)
+note 60="! 261.625565"
+[Scale End]

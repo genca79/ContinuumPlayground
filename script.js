@@ -12,6 +12,7 @@ const els = {
     midiInSelect: document.getElementById('midiInSelect'),
     midiOutSelect: document.getElementById('midiOutSelect'),
     midiOutSelectB: document.getElementById('midiOutSelectB'),
+    midiOutBBox: document.getElementById('midiOutBBox'),
     dualMode: document.getElementById('dualMode'),
     rootNote: document.getElementById('rootNote'),
     rootNoteLabel: document.getElementById('rootNoteLabel'),
@@ -31,11 +32,48 @@ const els = {
     scaleCustomBox: document.getElementById('scaleCustomBox'),
     scaleNotesPreview: document.getElementById('scaleNotesPreview'),
     scaleZoneLabel: document.getElementById('scaleZoneLabel'),
+    scaleEditZoneA: document.getElementById('scaleEditZoneA'),
+    scaleEditZoneB: document.getElementById('scaleEditZoneB'),
+    scaleEditZoneLink: document.getElementById('scaleEditZoneLink'),
+    scaleSourceStatus: document.getElementById('scaleSourceStatus'),
+    scaleSaveCurrentCustom: document.getElementById('scaleSaveCurrentCustom'),
+    scaleImportBadge: document.getElementById('scaleImportBadge'),
+    scaleInfoPanel: document.getElementById('scaleInfoPanel'),
+    scaleInfoTitle: document.getElementById('scaleInfoTitle'),
+    scaleInfoBody: document.getElementById('scaleInfoBody'),
+    scaleBranchBadge: document.getElementById('scaleBranchBadge'),
+    polyMicroEnabled: document.getElementById('polyMicroEnabled'),
+    polyMicroCharacter: document.getElementById('polyMicroCharacter'),
+    polyMicroIntensity: document.getElementById('polyMicroIntensity'),
+    polyMicroIntensityVal: document.getElementById('polyMicroIntensityVal'),
+    polyMicroPresetSelect: document.getElementById('polyMicroPresetSelect'),
+    polyMicroPresetApply: document.getElementById('polyMicroPresetApply'),
+    polyMicroAutoSetup: document.getElementById('polyMicroAutoSetup'),
+    polyMicroStabilityBadge: document.getElementById('polyMicroStabilityBadge'),
+    polyMicroColorBadge: document.getElementById('polyMicroColorBadge'),
+    polyMicroArpBadge: document.getElementById('polyMicroArpBadge'),
+    polyMicroAdvancedToggle: document.getElementById('polyMicroAdvancedToggle'),
+    polyMicroAdvancedPanel: document.getElementById('polyMicroAdvancedPanel'),
+    polyMicroFixMsg: document.getElementById('polyMicroFixMsg'),
+    polyMicroAutoDesc: document.getElementById('polyMicroAutoDesc'),
+    polyMicroDualRow: document.getElementById('polyMicroDualRow'),
+    polyMicroApplyA: document.getElementById('polyMicroApplyA'),
+    polyMicroApplyB: document.getElementById('polyMicroApplyB'),
+    polyMicroCopyAToB: document.getElementById('polyMicroCopyAToB'),
+    polyMicroMasterMode: document.getElementById('polyMicroMasterMode'),
+    polyMicroAnchorPolicy: document.getElementById('polyMicroAnchorPolicy'),
+    polyMicroTolerance: document.getElementById('polyMicroTolerance'),
+    polyMicroBudget: document.getElementById('polyMicroBudget'),
+    polyMicroBranches: document.getElementById('polyMicroBranches'),
+    polyMicroDegreeMap: document.getElementById('polyMicroDegreeMap'),
+    polyMicroAnchorBadge: document.getElementById('polyMicroAnchorBadge'),
     customModeNotes: document.getElementById('customModeNotes'),
     customModeCents: document.getElementById('customModeCents'),
     chordMode: document.getElementById('chordMode'),
     chordInversion: document.getElementById('chordInversion'),
     chordSpread: document.getElementById('chordSpread'),
+    chordStep2: document.getElementById('chordStep2'),
+    chordStep3: document.getElementById('chordStep3'),
     pbRange: document.getElementById('pbRange'),
     midiThru: document.getElementById('midiThru'),
     midiInMicroMap: document.getElementById('midiInMicroMap'),
@@ -53,6 +91,39 @@ const els = {
     yDeadzone: document.getElementById('yDeadzone'),
     touchSensitivity: document.getElementById('touchSensitivity'),
     quantizeRelease: document.getElementById('quantizeRelease'),
+    autoPbPolicy: document.getElementById('autoPbPolicy'),
+    spiralEnabled: document.getElementById('spiralEnabled'),
+    spiralShimmer: document.getElementById('spiralShimmer'),
+    spiralDefect: document.getElementById('spiralDefect'),
+    spiralDefectVal: document.getElementById('spiralDefectVal'),
+    spiralAnchor: document.getElementById('spiralAnchor'),
+    spiralStatus: document.getElementById('spiralStatus'),
+    pgCircleViewToggle: document.getElementById('pgCircleViewToggle'),
+    pgCircleActions: document.getElementById('pgCircleActions'),
+    pgQuadranLeftTop: document.getElementById('pgQuadranLeftTop'),
+    pgQuadranRightTop: document.getElementById('pgQuadranRightTop'),
+    pgPolyPlannerTop: document.getElementById('pgPolyPlannerTop'),
+    pgCircleLabelModeTop: document.getElementById('pgCircleLabelModeTop'),
+    pgCircleQuadranScope: document.getElementById('pgCircleQuadranScope'),
+    pgCirclePolyToggleAdv: document.getElementById('pgCirclePolyToggleAdv'),
+    pgCircleQuadranMs: document.getElementById('pgCircleQuadranMs'),
+    pgCircleLabelModeAdv: document.getElementById('pgCircleLabelModeAdv'),
+    pgCircleStepOrderTop: document.getElementById('pgCircleStepOrderTop'),
+    pgCircleStepOrderAdv: document.getElementById('pgCircleStepOrderAdv'),
+    pgCircleStepApplyTop: document.getElementById('pgCircleStepApplyTop'),
+    pgCircleStepClearTop: document.getElementById('pgCircleStepClearTop'),
+    pgCircleStepStatusTop: document.getElementById('pgCircleStepStatusTop'),
+    pgCircleStepPreviewTop: document.getElementById('pgCircleStepPreviewTop'),
+    pgCircleScaleNameTop: document.getElementById('pgCircleScaleNameTop'),
+    pgCircleSaveScaleTop: document.getElementById('pgCircleSaveScaleTop'),
+    pgCircleScaleNameAdv: document.getElementById('pgCircleScaleNameAdv'),
+    pgCircleSaveScaleAdv: document.getElementById('pgCircleSaveScaleAdv'),
+    circleViewToggleAdv: document.getElementById('circleViewToggleAdv'),
+    circleQuadranLeft: document.getElementById('circleQuadranLeft'),
+    circleQuadranRight: document.getElementById('circleQuadranRight'),
+    circlePolyAnchor: document.getElementById('circlePolyAnchor'),
+    circlePolyBranchA: document.getElementById('circlePolyBranchA'),
+    circlePolyBranchB: document.getElementById('circlePolyBranchB'),
     customScaleName: document.getElementById('customScaleName'),
     customScaleSaved: document.getElementById('customScaleSaved'),
     customScaleSave: document.getElementById('customScaleSave'),
@@ -109,6 +180,12 @@ const els = {
     arpParamsToggle: document.getElementById('arpParamsToggle'),
     arpParamsPanel: document.getElementById('arpParamsPanel'),
     keepBtn: document.getElementById('keepBtn'),
+    performanceStateStrip: document.getElementById('performanceStateStrip'),
+    perfStateHold: document.getElementById('perfStateHold'),
+    perfStateKeep: document.getElementById('perfStateKeep'),
+    perfStateChord: document.getElementById('perfStateChord'),
+    perfStateArp: document.getElementById('perfStateArp'),
+    perfStateTarget: document.getElementById('perfStateTarget'),
     midiStatus: document.getElementById('midiStatus'),
     dualSplitLine: document.getElementById('dualSplitLine'),
     audioStart: document.getElementById('audioStart'),
@@ -554,7 +631,39 @@ const MICROTONAL_SCALES = {
     'Maqam Rast': { cents: [0, 204, 350, 498, 702, 904, 1050] },
     '19-TET': { cents: makeEqualTemperament(19) },
     '24-TET': { cents: makeEqualTemperament(24) },
-    '31-TET': { cents: makeEqualTemperament(31) }
+    '31-TET': { cents: makeEqualTemperament(31) },
+    'Heptatonic Moira (7 Note)': {
+        family: 'Levi McClain',
+        cents: [0, 193.548, 348.387, 541.935, 696.774, 890.323, 1045.161, 1200]
+    },
+    'Hexatonic Mothra (6 Note)': {
+        family: 'Levi McClain',
+        cents: [0, 232.258, 464.516, 696.774, 929.032, 1161.290, 1200]
+    },
+    'Double Lydian (14 Note Spiral)': {
+        family: 'Levi McClain',
+        description: 'Two-octave Lydian mode with "Falling Diesis" topology. Octave 1 ends at Step 30, Octave 2 ends at Step 62.',
+        // Spiral Topology: Octave 1 is short by 1 Diesis.
+        cents: [0, 193.548, 387.097, 580.645, 696.774, 890.323, 1083.871, 1161.290, // End Cycle 1 (Step 30)
+            1354.839, 1548.387, 1741.935, 1858.065, 2051.613, 2245.161, 2400.000 // End Cycle 2 (Step 62)
+        ]
+    },
+    'Double Phrygian (14 Note Spiral)': {
+        family: 'Levi McClain',
+        description: 'Two-octave Phrygian mode. Generates Sub-Minor chords via the Flat Octave.',
+        // Spiral Topology applied to Phrygian steps (0, 3, 8, 13, 18, 21, 26...)
+        cents: [0.000, 116.129, 309.677, 503.226, 696.774, 812.903, 1006.452,1161.290, 1277.419, 1470.968, 1664.516, 1858.065, 1974.194, 2167.742, 2400.000]
+    },
+    'Double Dorian (14 Note Spiral)': {
+        family: 'Levi McClain',
+        description: 'Two-octave Dorian mode. Transforms Minor triads into Sub-Minor chords when using the Flat Octave Third.',
+        // Spiral Topology applied to Dorian steps (0, 5, 8, 13, 18, 23, 26)
+        // Note: Uses Major 2nd (5 steps) and Major 6th (23 steps) compared to Phrygian.
+        cents: [0.0, 193.5, 309.7, 503.2, 696.8, 890.3, 1006.5, 1161.3, 1354.8, 1471.0, 1664.5, 1858.1, 2051.6, 2167.7, 2400.0]
+    }
+
+
+
 };
 const DEFAULT_CUSTOM_SCALES = {
     'Custom 1': { type: 'cents', cents: [0, 240, 480, 720, 960] }
@@ -948,10 +1057,20 @@ const state = {
             maxCount: 24
         }
     },
+    autoPbPolicy: true,
+    pbPolicyModeByZone: { A: null, B: null },
     presets: {},
     mpePresets: {},
     customScales: {},
     microScales: {},
+    scaleImportStatusByZone: {
+        A: 'No imported tuning',
+        B: 'No imported tuning'
+    },
+    scaleInfoByZone: {
+        A: null,
+        B: null
+    },
     fxUserPresets: {},
     scaleNotes: { notes: [], root: 0, scale: '' },
     scaleNotesByZone: {
@@ -962,8 +1081,22 @@ const state = {
         A: null,
         B: null
     },
+    polyMicroByZone: {
+        A: null,
+        B: null
+    },
+    polyMicroCacheByZone: {
+        A: { key: '', anchorGraph: null },
+        B: { key: '', anchorGraph: null }
+    },
+    polyMicroLastChordMetaByZone: {
+        A: [],
+        B: []
+    },
     scaleContextZone: null,
     activeEditZone: 'A',
+    scaleEditLink: false,
+    scaleLinkSyncGuard: false,
     lastEditZoneSwitchTs: 0,
     performanceConfigByZone: {
         A: null,
@@ -1148,6 +1281,34 @@ const state = {
             scene: 'Aether',
             macros: { a: 0, b: 0, c: 0, d: 0 },
             snapshot: null
+        },
+        spiral: {
+            enabled: false,
+            shimmer: false,
+            defectCents: 38.7,
+            anchorMode: 'left-edge',
+            mix: 0.22
+        },
+        spiralEngine: null
+    },
+    experimental: {
+        circleView: {
+            enabled: false,
+            divisions: 'auto',
+            labelMode: 'abc',
+            stepOrderInputByZone: { A: '', B: '' }
+        },
+        quadran: {
+            enabled: false,
+            stageMs: 220,
+            scope: 'both',
+            timers: []
+        },
+        polyPlanner: {
+            enabled: false,
+            branchA: [0, 4, 7],
+            branchB: [2, 5, 9],
+            anchor: 69
         }
     },
     // Audio Recorder state
@@ -1176,6 +1337,7 @@ const state = {
 };
 const FADE_TAIL_MS = 200;
 const FADE_EASE_POW = 2.2;
+const circleLayoutSequenceCache = new Map();
 let playgroundFadeTimer = null;
 const clearPlaygroundNow = () => {
     if (!window.Playground) return;
@@ -1214,7 +1376,10 @@ const MPE_PRESET_DESCRIPTIONS = {
     Glide: 'Free pitch glide with no snap or dead-center.',
     'Super Glide': 'Glide + free detune on Hold (no snap on release).',
     'Microtonal Precise': 'Microtonal optimized: PB Range 24, no center snap.',
-    'Microtonal Precise Plus': 'Microtonal ultra-precise: PB Range 12, no center snap.'
+    'Microtonal Precise Plus': 'Microtonal ultra-precise: PB Range 12, no center snap.',
+    'Micro Safe': 'Microtonal safe range: PB 24.',
+    'Micro Wide': 'Microtonal wide range: PB 48 (recommended).',
+    'External Strict': 'External synth compatibility: PB 12.'
 };
 const MATRIX_SCENES = {
     Aether: {
@@ -2498,6 +2663,7 @@ async function initAudioContext() {
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     if (!AudioCtx) return;
     state.audio.ctx = new AudioCtx();
+    state.audio.spiralEngine = new SpiralSynth(state.audio.ctx);
     state.audio.master = state.audio.ctx.createGain();
     state.audio.dryGain = state.audio.ctx.createGain();
     state.audio.melodyGain = state.audio.ctx.createGain();
@@ -2573,6 +2739,7 @@ async function initAudioContext() {
         MORPH_GRID_STEPS
     );
     state.audio.chorusLfo.start();
+    updateSpiralUiState();
 }
 
 async function resumeAudioContext() {
@@ -3528,6 +3695,780 @@ function updateSampleSlotsUI() {
 
 function midiToFreq(note) {
     return 440 * Math.pow(2, (note - 69) / 12);
+}
+
+function getSpiralDefectRatio(defectInCents) {
+    const cents = Math.max(0, Math.min(100, Number(defectInCents) || 0));
+    return Math.pow(2, -cents / 1200.0);
+}
+
+function getSpiralFrequency(baseFreq, octaveIndex, defectInCents) {
+    const defectRatio = getSpiralDefectRatio(defectInCents);
+    const standardOctave = Math.pow(2, Number(octaveIndex) || 0);
+    const spiralOffset = Math.pow(defectRatio, Number(octaveIndex) || 0);
+    return Number(baseFreq || 0) * standardOctave * spiralOffset;
+}
+
+function getMorphingInterval(centsValue, useFlatOctave, defectInCents = state.audio?.spiral?.defectCents) {
+    if (!useFlatOctave) return centsValue;
+    return Number(centsValue || 0) - (Number(defectInCents) || 0);
+}
+
+class SpiralSynth {
+    constructor(audioCtx) {
+        this.audioCtx = audioCtx;
+        this.defectCents = 38.7;
+        this.shimmer = false;
+    }
+
+    setDefect(cents) {
+        this.defectCents = Math.max(0, Math.min(100, Number(cents) || 0));
+    }
+
+    setShimmer(enabled) {
+        this.shimmer = !!enabled;
+    }
+
+    triggerVoice(freq, time, options = {}) {
+        if (!this.audioCtx || !Number.isFinite(freq) || freq <= 0) return null;
+        const out = options.output;
+        if (!out) return null;
+        const now = Number.isFinite(time) ? time : this.audioCtx.currentTime;
+        const gainAmt = Math.max(0, Math.min(1, Number(options.gain) || 0.2));
+        const panSpread = Math.max(0, Math.min(1, Number(options.panSpread) || 0.5));
+        const shimmer = options.shimmer != null ? !!options.shimmer : this.shimmer;
+        const mix = this.audioCtx.createGain();
+        mix.gain.value = gainAmt;
+        mix.connect(out);
+
+        const oscA = this.audioCtx.createOscillator();
+        oscA.type = options.type || 'sine';
+        const panA = this.audioCtx.createStereoPanner();
+        panA.pan.value = -panSpread;
+        oscA.connect(panA);
+        panA.connect(mix);
+
+        let oscB = null;
+        let panB = null;
+        if (shimmer) {
+            oscB = this.audioCtx.createOscillator();
+            oscB.type = options.type || 'sine';
+            panB = this.audioCtx.createStereoPanner();
+            panB.pan.value = panSpread;
+            oscB.connect(panB);
+            panB.connect(mix);
+        }
+
+        const defect = Number.isFinite(options.defectCents) ? options.defectCents : this.defectCents;
+        this.setVoiceFrequencies({ oscA, oscB }, freq, defect);
+        oscA.start(now);
+        if (oscB) oscB.start(now);
+        return { oscA, panA, oscB, panB, mix, defectCents: defect, baseFreq: freq, shimmer };
+    }
+
+    setVoiceFrequencies(voice, baseFreq, defectInCents = this.defectCents) {
+        if (!voice || !Number.isFinite(baseFreq) || baseFreq <= 0) return;
+        const defectRatio = getSpiralDefectRatio(defectInCents);
+        if (voice.oscA) voice.oscA.frequency.setValueAtTime(baseFreq, this.audioCtx.currentTime);
+        if (voice.oscB) {
+            const flatOct = baseFreq * 2.0 * defectRatio;
+            voice.oscB.frequency.setValueAtTime(flatOct, this.audioCtx.currentTime);
+        }
+    }
+}
+
+function isSpiralAllowedForZone(zoneId = null) {
+    const def = getScaleDefinition(zoneId);
+    const periodCents = getScalePeriodCentsForDef(def);
+    return isOctaveCompatiblePeriodCents(periodCents);
+}
+
+function shouldUseSpiralForZone(zoneId = null) {
+    return !!state.audio?.spiral?.enabled && isSpiralAllowedForZone(zoneId);
+}
+
+function updateSpiralUiState(zoneId = null) {
+    const z = getScaleZoneId(zoneId);
+    const allowed = isSpiralAllowedForZone(z);
+    const enabled = !!state.audio.spiral.enabled && allowed;
+    if (els.spiralEnabled) {
+        els.spiralEnabled.checked = !!state.audio.spiral.enabled;
+        els.spiralEnabled.disabled = !allowed;
+    }
+    if (els.spiralShimmer) {
+        els.spiralShimmer.checked = !!state.audio.spiral.shimmer;
+        els.spiralShimmer.disabled = !allowed || !state.audio.spiral.enabled;
+    }
+    if (els.spiralDefect) {
+        els.spiralDefect.value = String(Number(state.audio.spiral.defectCents || 38.7));
+        els.spiralDefect.disabled = !allowed || !state.audio.spiral.enabled;
+    }
+    if (els.spiralDefectVal) els.spiralDefectVal.textContent = `${Number(state.audio.spiral.defectCents || 0).toFixed(1)}c`;
+    if (els.spiralAnchor) {
+        els.spiralAnchor.value = state.audio.spiral.anchorMode || 'fixed';
+        els.spiralAnchor.disabled = !allowed || !state.audio.spiral.enabled;
+    }
+    if (els.spiralStatus) {
+        if (!allowed) els.spiralStatus.textContent = 'UNAVAILABLE (NON-OCTAVE)';
+        else if (enabled && state.audio.spiral.shimmer) els.spiralStatus.textContent = 'ON + SHIMMER';
+        else if (enabled) els.spiralStatus.textContent = 'ON';
+        else els.spiralStatus.textContent = 'OFF';
+    }
+}
+
+
+function isCircleDiesisViewActive(zoneId = null) {
+    if (isDualModeEnabled()) return false;
+    return !!state.experimental?.circleView?.enabled;
+}
+
+function getPointerPitchMappingMode(zoneId = null) {
+    return isCircleDiesisViewActive(zoneId) ? 'circle' : 'keyboard';
+}
+
+function getCircleGuideDivisions(zoneId = null) {
+    const mode = state.experimental?.circleView?.divisions || 'auto';
+    if (mode !== 'auto') {
+        const parsed = parseInt(mode, 10);
+        if (Number.isFinite(parsed) && parsed > 0) return parsed;
+    }
+    const z = getScaleZoneId(zoneId || 'A');
+    const grid = getGridDegrees(z);
+    return Math.max(1, getCircleStepOrderForGrid(z, grid).length || grid.stepsPerOct || 12);
+}
+
+function normalizeCircleStepOrderStorage() {
+    if (!state.experimental) state.experimental = {};
+    if (!state.experimental.circleView) state.experimental.circleView = { enabled: false, divisions: 'auto', labelMode: 'abc' };
+    const cv = state.experimental.circleView;
+    if (!cv.stepOrderInputByZone || typeof cv.stepOrderInputByZone !== 'object') {
+        cv.stepOrderInputByZone = { A: '', B: '' };
+    } else {
+        cv.stepOrderInputByZone.A = String(cv.stepOrderInputByZone.A || '');
+        cv.stepOrderInputByZone.B = String(cv.stepOrderInputByZone.B || '');
+    }
+}
+
+function getCircleStepOrderInputForZone(zoneId = null) {
+    normalizeCircleStepOrderStorage();
+    const z = getScaleZoneId(zoneId || 'A');
+    return String(state.experimental.circleView.stepOrderInputByZone[z] || '');
+}
+
+function setCircleStepOrderInputForZone(zoneId, value) {
+    normalizeCircleStepOrderStorage();
+    const z = getScaleZoneId(zoneId || 'A');
+    state.experimental.circleView.stepOrderInputByZone[z] = String(value || '');
+}
+
+function getSavedCircleOrderMetaForZone(zoneId = null) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const cfg = ensureScaleConfigForZone(z);
+    if ((cfg.scaleMode || '') !== 'custom') return null;
+    const name = String(cfg.customScaleName || '').trim();
+    if (!name) return null;
+    const entry = state.customScales?.[name];
+    if (!entry) return null;
+    const order = Array.isArray(entry.quadranOrder) ? entry.quadranOrder.slice(0) : [];
+    const labels = Array.isArray(entry.quadranLabels) ? entry.quadranLabels.slice(0) : [];
+    return { order, labels };
+}
+
+function getCircleStepLookupMap(zoneId, grid, numOct, baseMIDI) {
+    const lookup = new Map();
+    const labels = new Map();
+    const maxSteps = Math.max(1, grid.stepsPerOct || 12);
+    for (let step = 0; step < maxSteps; step += 1) {
+        const note = getGridNoteAt(step, grid.degrees, baseMIDI, grid.periodSemitones);
+        const info = getMicrotonalNoteLabelInfo(note, false) || {};
+        const add = (token) => {
+            const t = String(token || '').trim().toLowerCase();
+            if (!t || lookup.has(t)) return;
+            lookup.set(t, step);
+        };
+        add(String(step));
+        add(info.base);
+        add(info.label);
+        add((midiToNoteName(Math.round(note)) || '').replace(/\d+$/, ''));
+        labels.set(step, { note, info });
+    }
+    return { lookup, labels };
+}
+
+function parseCircleStepOrderInput(zoneId, grid) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const raw = getCircleStepOrderInputForZone(z);
+    const maxSteps = Math.max(1, grid.stepsPerOct || 12);
+    const fallback = Array.from({ length: maxSteps }, (_, i) => i);
+    const src = String(raw || '').trim();
+    if (!src) return fallback;
+    let lookup = null;
+    const out = [];
+    src.split(/[,\n;\|]+/).forEach((tok) => {
+        const token = String(tok || '').trim();
+        if (!token) return;
+        let idx = null;
+        const n = parseInt(token, 10);
+        if (Number.isFinite(n) && String(n) === token) {
+            if (n >= 0 && n < maxSteps) idx = n;
+            else if (n === maxSteps) idx = maxSteps - 1; // compat: 31 -> 30 in 31-TET
+        } else {
+            if (!lookup) {
+                const numOct = getVisibleOctavesForZone(z);
+                const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+                lookup = getCircleStepLookupMap(z, grid, numOct, baseMIDI).lookup;
+            }
+            const key = token.toLowerCase() === 'root' ? '0' : token.toLowerCase();
+            if (lookup && lookup.has(key)) idx = lookup.get(key);
+        }
+        if (!Number.isFinite(idx)) return;
+        if (idx < 0 || idx >= maxSteps) return;
+        out.push(idx);
+    });
+    return out.length ? out : fallback;
+}
+
+function parseCircleStepOrderDiagnostics(zoneId, grid) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const raw = getCircleStepOrderInputForZone(z);
+    const maxSteps = Math.max(1, grid.stepsPerOct || 12);
+    const src = String(raw || '').trim();
+    const fallback = Array.from({ length: maxSteps }, (_, i) => i);
+    if (!src) {
+        return { order: fallback, invalidTokens: [], totalTokens: 0 };
+    }
+    const out = [];
+    const invalid = [];
+    let lookup = null;
+    const tokens = src.split(/[,\n;\|]+/).map((tok) => String(tok || '').trim()).filter(Boolean);
+    tokens.forEach((token) => {
+        let idx = null;
+        const n = parseInt(token, 10);
+        if (Number.isFinite(n) && String(n) === token) {
+            if (n >= 0 && n < maxSteps) idx = n;
+            else if (n === maxSteps) idx = maxSteps - 1;
+        } else {
+            if (!lookup) {
+                const numOct = getVisibleOctavesForZone(z);
+                const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+                lookup = getCircleStepLookupMap(z, grid, numOct, baseMIDI).lookup;
+            }
+            const key = token.toLowerCase() === 'root' ? '0' : token.toLowerCase();
+            if (lookup && lookup.has(key)) idx = lookup.get(key);
+        }
+        if (!Number.isFinite(idx) || idx < 0 || idx >= maxSteps) {
+            invalid.push(token);
+            return;
+        }
+        out.push(idx);
+    });
+    return {
+        order: out.length ? out : fallback,
+        invalidTokens: invalid,
+        totalTokens: tokens.length
+    };
+}
+
+function getCircleStepOrderForGrid(zoneId, grid = null) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const useGrid = grid || getGridDegrees(z);
+    const maxSteps = Math.max(1, useGrid.stepsPerOct || 12);
+    const rawInput = getCircleStepOrderInputForZone(z).trim();
+    const saved = getSavedCircleOrderMetaForZone(z);
+    const savedOrder = (saved?.order || []).filter((n) => Number.isFinite(n) && n >= 0 && n < maxSteps);
+    if (savedOrder.length) {
+        const cfg = ensureScaleConfigForZone(z);
+        const isCustom = (cfg.scaleMode || '') === 'custom';
+        const rawNorm = normalizeCircleTokenText(rawInput);
+        const savedOrderNorm = normalizeCircleTokenText(formatCircleOrderInputTokens(saved.order));
+        const savedLabelNorm = normalizeCircleTokenText(formatCircleLabelInputTokens(saved.labels));
+        if (!rawNorm || (isCustom && (rawNorm === savedOrderNorm || (savedLabelNorm && rawNorm === savedLabelNorm)))) {
+            return savedOrder;
+        }
+    }
+    const parsed = parseCircleStepOrderInput(z, useGrid);
+    if (!Array.isArray(parsed) || !parsed.length) {
+        return Array.from({ length: maxSteps }, (_, i) => i);
+    }
+    return parsed.filter((n) => Number.isFinite(n) && n >= 0 && n < maxSteps);
+}
+
+function getCircleStepLabelsForGrid(zoneId, grid = null, order = null) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const useGrid = grid || getGridDegrees(z);
+    const useOrder = Array.isArray(order) && order.length ? order : getCircleStepOrderForGrid(z, useGrid);
+    const fallback = useOrder.map((n) => String(n));
+    const saved = getSavedCircleOrderMetaForZone(z);
+    if (!saved || !Array.isArray(saved.order) || !Array.isArray(saved.labels)) return fallback;
+    if (saved.order.length !== useOrder.length || saved.labels.length !== useOrder.length) return fallback;
+    for (let i = 0; i < useOrder.length; i += 1) {
+        if (saved.order[i] !== useOrder[i]) return fallback;
+    }
+    return saved.labels.map((v, i) => {
+        const s = String(v ?? '').trim();
+        return s || fallback[i];
+    });
+}
+
+function formatCircleOrderInputTokens(order = []) {
+    return (Array.isArray(order) ? order : [])
+        .filter((n) => Number.isFinite(n) && n >= 0)
+        .map((n) => String(n))
+        .join(', ');
+}
+
+function formatCircleLabelInputTokens(labels = []) {
+    return (Array.isArray(labels) ? labels : [])
+        .map((v) => String(v ?? '').trim())
+        .filter((v) => v.length > 0)
+        .join(', ');
+}
+
+function getCircleEditorInputTokensFromEntry(entry) {
+    if (!entry || typeof entry !== 'object') return '';
+    const labels = formatCircleLabelInputTokens(entry.quadranLabels);
+    if (labels) return labels;
+    return formatCircleOrderInputTokens(entry.quadranOrder);
+}
+
+function normalizeCircleTokenText(value) {
+    return String(value || '')
+        .split(/[,\n;\|]+/)
+        .map((v) => String(v || '').trim())
+        .filter((v) => v.length > 0)
+        .join(',');
+}
+
+function getCircleTotalNotes(zoneId, grid, numOct) {
+    const order = getCircleStepOrderForGrid(zoneId, grid);
+    return Math.max(1, Math.max(1, numOct) * Math.max(1, order.length));
+}
+
+function getCircleSlotDefinitions(zoneId, grid = null, order = null) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const useGrid = grid || getGridDegrees(z);
+    const useOrder = Array.isArray(order) && order.length ? order : getCircleStepOrderForGrid(z, useGrid);
+    const maxSteps = Math.max(1, useGrid.stepsPerOct || 12);
+    let prevDeg = null;
+    let carry = 0;
+    return useOrder.map((rawStep, idx) => {
+        const stepInGrid = (Number.isFinite(rawStep) && rawStep >= 0 && rawStep < maxSteps)
+            ? Math.floor(rawStep)
+            : 0;
+        const degRaw = Number(useGrid.degrees?.[stepInGrid]);
+        const degree = Number.isFinite(degRaw) ? degRaw : 0;
+        if (idx > 0 && Number.isFinite(prevDeg) && degree < (prevDeg - 1e-6)) {
+            carry += 1;
+        }
+        prevDeg = degree;
+        return { stepInGrid, degree, octaveCarry: carry };
+    });
+}
+
+function getCircleLayoutSequence(zoneId, grid, baseMIDI, numOct, order = null) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const useOrder = Array.isArray(order) && order.length ? order : getCircleStepOrderForGrid(z, grid);
+    const steps = Math.max(1, useOrder.length);
+    const total = Math.max(1, Math.max(1, numOct) * steps);
+    const period = Number.isFinite(grid?.periodSemitones) && grid.periodSemitones > 0 ? grid.periodSemitones : 12;
+    const slotDefs = getCircleSlotDefinitions(z, grid, useOrder);
+    const key = [
+        z,
+        Math.round((Number(baseMIDI) || 0) * 1000),
+        Math.max(1, numOct),
+        Math.round(period * 1000),
+        (grid?.degrees || []).join(','),
+        useOrder.join(',')
+    ].join('|');
+    const cached = circleLayoutSequenceCache.get(key);
+    if (cached && Array.isArray(cached.seq) && cached.seq.length === total) return cached.seq;
+
+    const seq = [];
+    let carry = 0;
+    let prevNote = null;
+    for (let i = 0; i < total; i += 1) {
+        const ring = Math.floor(i / steps);
+        const slot = i % steps;
+        const slotDef = slotDefs[slot] || { stepInGrid: (useOrder[slot] ?? slot), degree: 0, octaveCarry: 0 };
+        let note = baseMIDI + (carry * period) + slotDef.degree;
+        while (prevNote != null && note < (prevNote - 1e-6)) {
+            carry += 1;
+            note = baseMIDI + (carry * period) + slotDef.degree;
+        }
+        seq.push({
+            note,
+            innerNote: note - (ring * period),
+            ring,
+            slot,
+            stepInGrid: slotDef.stepInGrid,
+            octaveCarry: carry
+        });
+        prevNote = note;
+    }
+
+    circleLayoutSequenceCache.set(key, { seq });
+    if (circleLayoutSequenceCache.size > 32) {
+        const first = circleLayoutSequenceCache.keys().next();
+        if (!first.done) circleLayoutSequenceCache.delete(first.value);
+    }
+    return seq;
+}
+
+function getCircleLayoutNoteAt(layoutIndex, zoneId, grid, baseMIDI, numOct) {
+    const order = getCircleStepOrderForGrid(zoneId, grid);
+    const steps = Math.max(1, order.length);
+    const total = Math.max(1, Math.max(1, numOct) * steps);
+    const clamped = Math.max(0, Math.min(total - 1, Math.floor(layoutIndex)));
+    const seq = getCircleLayoutSequence(zoneId, grid, baseMIDI, numOct, order);
+    const entry = seq[clamped] || seq[0] || { note: baseMIDI, innerNote: baseMIDI, ring: 0, slot: 0, stepInGrid: (order[0] ?? 0), octaveCarry: 0 };
+    return { ...entry, steps, total, order };
+}
+
+function buildCircleCustomScaleData(zoneId = null) {
+    const z = getScaleZoneId(zoneId || getActiveEditZoneId());
+    const grid = getGridDegrees(z);
+    const order = getCircleStepOrderForGrid(z, grid);
+    if (!order.length) return { cents: [], quadranOrder: [], quadranLabels: [] };
+
+    const rawDegrees = [];
+    order.forEach((stepIdx) => {
+        const deg = Number(grid.degrees?.[stepIdx]);
+        if (Number.isFinite(deg)) rawDegrees.push(deg);
+    });
+    if (!rawDegrees.length) return { cents: [], quadranOrder: [], quadranLabels: [] };
+
+    const normalizedDegrees = normalizeDegreesForPeriod(rawDegrees, grid.periodSemitones || 12);
+    if (!normalizedDegrees.length) return { cents: [], quadranOrder: [], quadranLabels: [] };
+
+    const cents = normalizedDegrees.map((d) => Math.round(d * 1000) / 10);
+    const quadranOrder = rawDegrees
+        .map((deg) => normalizedDegrees.findIndex((v) => Math.abs(v - deg) <= 1e-6))
+        .filter((idx) => idx >= 0);
+    const quadranLabels = order.map((n) => String(n));
+    return { cents, quadranOrder, quadranLabels };
+}
+
+function getQuadranCycleForZone(zoneId = null) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const cfg = ensureScaleConfigForZone(z);
+    const isCustom = (cfg.scaleMode || '') === 'custom';
+    const customName = (cfg.customScaleName || '').trim();
+    const customEntry = isCustom && customName ? state.customScales?.[customName] : null;
+    const fromSaved = Array.isArray(customEntry?.quadranOrder) ? customEntry.quadranOrder : null;
+    const fromEditor = getCircleStepOrderInputForZone(z).trim()
+        ? getCircleStepOrderForGrid(z, getGridDegrees(z))
+        : null;
+    const baseOrder = fromSaved && fromSaved.length ? fromSaved : fromEditor;
+    if (!baseOrder || !baseOrder.length) return [];
+    const grid = getGridDegrees(z);
+    const numOct = Math.max(1, getVisibleOctavesForZone(z));
+    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+    const stepsPerOct = Math.max(1, grid.stepsPerOct);
+    const order = baseOrder.filter((n) => Number.isFinite(n) && n >= 0 && n < stepsPerOct);
+    if (!order.length) return [];
+    const seq = getCircleLayoutSequence(z, grid, baseMIDI, numOct, order);
+    return seq.map((entry) => entry.note).filter(Number.isFinite);
+}
+
+function getCircleGeometry() {
+    const width = Math.max(1, state.canvasRect.width);
+    const height = Math.max(1, state.canvasRect.height);
+    const cxLocal = width * 0.5;
+    const cyLocal = height * 0.53;
+    const maxR = Math.min(width, height) * 0.43;
+    const minR = Math.max(24, maxR * 0.18);
+    return {
+        width,
+        height,
+        cxLocal,
+        cyLocal,
+        cxClient: state.canvasRect.left + cxLocal,
+        cyClient: state.canvasRect.top + cyLocal,
+        minR,
+        maxR
+    };
+}
+
+function getCirclePointerMetrics(clientX, clientY, zoneId, totalNotes, stepsPerOct) {
+    if (!isCircleDiesisViewActive(zoneId)) return null;
+    const geo = getCircleGeometry();
+    const dx = clientX - geo.cxClient;
+    const dy = clientY - geo.cyClient;
+    const dist = Math.hypot(dx, dy);
+    let angle = Math.atan2(dy, dx) + (Math.PI / 2);
+    while (angle < 0) angle += Math.PI * 2;
+    while (angle >= Math.PI * 2) angle -= Math.PI * 2;
+
+    const steps = Math.max(1, stepsPerOct);
+    const stepInRingRaw = (angle / (Math.PI * 2)) * steps;
+    const stepInRing = Math.max(0, Math.min(steps - 1, Math.floor(stepInRingRaw)));
+
+    const rings = Math.max(1, Math.round(Math.max(1, totalNotes) / steps));
+    const ringW = Math.max(1, (geo.maxR - geo.minR) / rings);
+    let ring = Math.floor((dist - geo.minR) / ringW);
+    ring = Math.max(0, Math.min(rings - 1, ring));
+    const r0 = geo.minR + (ring * ringW);
+    const ringNorm = Math.max(0, Math.min(1, (dist - r0) / Math.max(1e-6, ringW)));
+    const outerStart = Math.max(1, Math.ceil(rings * 0.5));
+    const ringSide = ring >= outerStart ? 'outer' : 'inner';
+
+    return { ...geo, dx, dy, dist, angle, steps, rings, ringW, ring, stepInRing, ringNorm, ringSide };
+}
+
+function getCircleStepExactForPointer(clientX, clientY, zoneId, totalNotes, stepsPerOct) {
+    const linear = ((clientX - state.canvasRect.left) / Math.max(1, state.canvasRect.width)) * totalNotes;
+    const metrics = getCirclePointerMetrics(clientX, clientY, zoneId, totalNotes, stepsPerOct);
+    if (!metrics) return linear;
+    // Snap to wedge center for reliable touch precision and stable visuals.
+    return (metrics.ring * metrics.steps) + metrics.stepInRing + 0.5;
+}
+
+function getCircleVisualPointForStep(stepIndex, stepsPerOct, ring, numOct) {
+    const geo = getCircleGeometry();
+    const ringW = Math.max(1, (geo.maxR - geo.minR) / Math.max(1, numOct));
+    const r = geo.minR + (ring * ringW) + (ringW * 0.5);
+    const a = -Math.PI / 2 + (((stepIndex + 0.5) / Math.max(1, stepsPerOct)) * Math.PI * 2);
+    return { x: geo.cxLocal + Math.cos(a) * r, y: geo.cyLocal + Math.sin(a) * r, radius: Math.max(6, ringW * 0.28) };
+}
+
+function getCircleVisualPointForNote(noteFloat, zoneId = 'A') {
+    if (!isCircleDiesisViewActive(zoneId) || !Number.isFinite(noteFloat)) return null;
+    const z = getScaleZoneId(zoneId);
+    const grid = getGridDegrees(z);
+    const numOct = getVisibleOctavesForZone(z);
+    const total = getCircleTotalNotes(z, grid, numOct);
+    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+    const steps = Math.max(1, getCircleStepOrderForGrid(z, grid).length);
+    let bestIdx = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < total; i++) {
+        const n = getCircleLayoutNoteAt(i, z, grid, baseMIDI, numOct).note;
+        const d = Math.abs(n - noteFloat);
+        if (d < bestDist) {
+            bestDist = d;
+            bestIdx = i;
+        }
+    }
+    const stepInRing = bestIdx % steps;
+    const ring = Math.floor(bestIdx / steps);
+    return getCircleVisualPointForStep(stepInRing, steps, ring, numOct);
+}
+
+function drawAnnularSlice(g, cx, cy, r0, r1, a0, a1, fill, stroke = null, lineW = 1) {
+    g.beginPath();
+    g.arc(cx, cy, r1, a0, a1);
+    g.arc(cx, cy, r0, a1, a0, true);
+    g.closePath();
+    g.fillStyle = fill;
+    g.fill();
+    if (stroke) {
+        g.strokeStyle = stroke;
+        g.lineWidth = lineW;
+        g.stroke();
+    }
+}
+
+function drawCircleChordTemplate(g, cx, cy, radius, stepsPerOct, mode) {
+    if (stepsPerOct !== 31) return;
+    const templates = {
+        superMajorTriad: [0, 11, 18],
+        triad: [0, 10, 18],
+        neutralTriad: [0, 9, 18],
+        subMinorTriad: [0, 7, 18]
+    };
+    const pts = templates[mode];
+    if (!pts) return;
+    g.save();
+    g.globalAlpha = 0.28;
+    g.strokeStyle = '#00f2ff';
+    g.lineWidth = 2;
+    g.beginPath();
+    pts.forEach((idx, i) => {
+        const a = -Math.PI / 2 + ((idx / stepsPerOct) * Math.PI * 2);
+        const x = cx + (Math.cos(a) * radius);
+        const y = cy + (Math.sin(a) * radius);
+        if (i === 0) g.moveTo(x, y);
+        else g.lineTo(x, y);
+    });
+    g.closePath();
+    g.stroke();
+    g.restore();
+}
+
+function parsePitchClassList(raw, fallback) {
+    const base = Array.isArray(fallback) ? fallback : [];
+    const src = String(raw || '').trim();
+    if (!src) return base.slice(0);
+    const set = new Set();
+    src.split(',').forEach(tok => {
+        const n = parseInt(tok.trim(), 10);
+        if (!Number.isFinite(n)) return;
+        const pc = ((n % 12) + 12) % 12;
+        set.add(pc);
+    });
+    if (!set.size) return base.slice(0);
+    return Array.from(set).sort((a, b) => a - b);
+}
+
+function getPolyPlannerMappingForMidi(note, zoneId = 'A') {
+    const planner = state.experimental?.polyPlanner;
+    if (!planner?.enabled) return { enabled: false, branch: null, useScale: false, noteFloat: note };
+    const pc = ((note % 12) + 12) % 12;
+    const inA = Array.isArray(planner.branchA) && planner.branchA.includes(pc);
+    const inB = Array.isArray(planner.branchB) && planner.branchB.includes(pc);
+    const branch = inA ? 'A' : (inB ? 'B' : null);
+    if (branch !== 'B') return { enabled: true, branch, useScale: false, noteFloat: note };
+    const anchor = Math.max(0, Math.min(127, parseInt(planner.anchor, 10) || 69));
+    const noteFloat = mapMidiNoteToScaleFromMidiIndex(note, anchor, zoneId);
+    return { enabled: true, branch, useScale: true, noteFloat };
+}
+
+function getScaleShiftedNoteFloat(noteFloat, zoneId, stepOffset) {
+    const quadranCycle = getQuadranCycleForZone(zoneId);
+    if (quadranCycle.length >= 2 && Number.isFinite(noteFloat)) {
+        let idx = 0;
+        let bestDist = Infinity;
+        for (let i = 0; i < quadranCycle.length; i += 1) {
+            const d = Math.abs(quadranCycle[i] - noteFloat);
+            if (d < bestDist) {
+                bestDist = d;
+                idx = i;
+            }
+        }
+        const len = quadranCycle.length;
+        let next = (idx + (stepOffset || 0)) % len;
+        if (next < 0) next += len;
+        return quadranCycle[next];
+    }
+    const zoneScale = getScaleNotesState(zoneId || 'A');
+    const notes = zoneScale?.notes || [];
+    if (!notes.length || !Number.isFinite(noteFloat)) return noteFloat;
+    const idx = getClosestScaleIndex(notes, noteFloat);
+    if (idx < 0) return noteFloat;
+    const nextIdx = Math.max(0, Math.min(notes.length - 1, idx + stepOffset));
+    return Number.isFinite(notes[nextIdx]) ? notes[nextIdx] : noteFloat;
+}
+
+
+function getCircleRingSideForNote(noteFloat, zoneId = 'A') {
+    if (!isCircleDiesisViewActive(zoneId) || !Number.isFinite(noteFloat)) return null;
+    const z = getScaleZoneId(zoneId);
+    const grid = getGridDegrees(z);
+    const numOct = getVisibleOctavesForZone(z);
+    const steps = Math.max(1, getCircleStepOrderForGrid(z, grid).length);
+    const total = Math.max(1, numOct * steps);
+    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+    let bestIdx = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < total; i++) {
+        const n = getCircleLayoutNoteAt(i, z, grid, baseMIDI, numOct).note;
+        const d = Math.abs(n - noteFloat);
+        if (d < bestDist) {
+            bestDist = d;
+            bestIdx = i;
+        }
+    }
+    const ring = Math.floor(bestIdx / steps);
+    const outerStart = Math.max(1, Math.ceil(numOct * 0.5));
+    return ring >= outerStart ? 'outer' : 'inner';
+}
+
+function isQuadranTargetAllowed(noteFloat, zoneId = 'A', memory = null) {
+    const scope = String(state.experimental?.quadran?.scope || 'both');
+    if (scope === 'both') return true;
+    const side = (memory && typeof memory.circleRingSide === 'string' && memory.circleRingSide)
+        ? memory.circleRingSide
+        : getCircleRingSideForNote(noteFloat, zoneId);
+    if (!side) return true;
+    return side === scope;
+}
+
+function syncCirclePointerToNote(memory, noteFloat, zoneId = 'A') {
+    if (!memory || !Number.isFinite(noteFloat) || !isCircleDiesisViewActive(zoneId)) return;
+    const pt = getCircleVisualPointForNote(noteFloat, zoneId);
+    if (!pt) return;
+    memory.x = pt.x;
+    memory.y = pt.y;
+    const side = getCircleRingSideForNote(noteFloat, zoneId);
+    if (side) memory.circleRingSide = side;
+}
+
+function retuneHeldVoiceToNoteFloat(heldVoice, nextNoteFloat) {
+    if (!heldVoice || !heldVoice.chan || !Number.isFinite(nextNoteFloat)) return;
+    const zoneId = heldVoice.zone || 'A';
+    const out = getZoneOutput(zoneId);
+    if (!out) return;
+    const m = heldVoice.lastM || { pbValue: 8192, slide: 0, press: 90 };
+    const oldNote = heldVoice.note;
+    const nextVoice = makeVoiceFromNote(nextNoteFloat, zoneId);
+    const pb = getVoicePb(m, nextVoice);
+    sendMidi([0x80 + heldVoice.chan - 1, oldNote, 0], out);
+    sendMidi([0xB0 + heldVoice.chan - 1, 74, m.slide || 0], out);
+    sendMidi([0xE0 + heldVoice.chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], out);
+    sendMidi([0xD0 + heldVoice.chan - 1, m.press ?? 90], out);
+    sendMidi([0x90 + heldVoice.chan - 1, nextVoice.note, Math.max(1, Math.min(127, Math.round(m.press || 90)))], out);
+    heldVoice.note = nextVoice.note;
+    heldVoice.basePb = nextVoice.basePb;
+}
+
+function applyQuadranStage(stageIndex, direction = -1) {
+    const stepDir = direction >= 0 ? 1 : -1;
+    const groups = new Map();
+    state.heldVoices.forEach(v => {
+        const groupId = v.group || v.chan || 0;
+        if (!groups.has(groupId)) groups.set(groupId, []);
+        groups.get(groupId).push(v);
+    });
+    groups.forEach(list => {
+        const sorted = list
+            .slice(0)
+            .filter(v => isQuadranTargetAllowed(getVoiceNoteFloat(v), v.zone || 'A', v.lastM))
+            .sort((a, b) => getVoiceNoteFloat(a) - getVoiceNoteFloat(b));
+        if (!sorted.length) return;
+        const chordLike = sorted.length > 1;
+        if (chordLike && stageIndex > 0) return;
+        const targets = chordLike ? sorted : [sorted[stageIndex]].filter(Boolean);
+        targets.forEach((target, idx) => {
+            const next = getScaleShiftedNoteFloat(getVoiceNoteFloat(target), target.zone || 'A', stepDir);
+            retuneHeldVoiceToNoteFloat(target, next);
+            syncCirclePointerToNote(target.lastM, next, target.zone || 'A');
+            if (stageIndex === 0 && idx === 0) target.rootNote = next;
+        });
+    });
+
+    state.arpHoldTouches.forEach(t => {
+        const list = Array.isArray(t?.noteObjs)
+            ? t.noteObjs
+                .slice(0)
+                .filter((a) => isQuadranTargetAllowed((a.noteFloat ?? a.note), (a.zone || t.zone || 'A'), a.lastM || t.lastM))
+                .sort((a, b) => (a.noteFloat ?? a.note) - (b.noteFloat ?? b.note))
+            : [];
+        if (!list.length) return;
+        const chordLike = list.length > 1;
+        if (chordLike && stageIndex > 0) return;
+        const targets = chordLike ? list : [list[stageIndex]].filter(Boolean);
+        targets.forEach((target) => {
+            const zoneId = target.zone || t.zone || 'A';
+            const next = getScaleShiftedNoteFloat(target.noteFloat ?? target.note, zoneId, stepDir);
+            const voice = makeVoiceFromNote(next, zoneId);
+            target.noteFloat = next;
+            target.note = voice.note;
+            target.basePb = voice.basePb;
+            syncCirclePointerToNote(target.lastM || t.lastM, next, zoneId);
+        });
+    });
+    requestDraw();
+}
+
+function triggerQuadranSequence(direction = -1) {
+    const cfg = state.experimental?.quadran;
+    if (!cfg) return;
+    (cfg.timers || []).forEach(id => clearTimeout(id));
+    cfg.timers = [];
+    const stageMs = Math.max(80, Math.min(2000, parseInt(cfg.stageMs, 10) || 220));
+    applyQuadranStage(0, direction);
+    cfg.timers.push(setTimeout(() => applyQuadranStage(1, direction), stageMs));
+    cfg.timers.push(setTimeout(() => applyQuadranStage(2, direction), stageMs * 2));
 }
 
 function midiToNoteName(midi) {
@@ -5225,9 +6166,9 @@ function updateMidiStatusBase() {
     if (hasMidiOut) {
         els.midiStatus.innerText = 'MIDI OUT READY';
     } else if (state.midi.access) {
-        els.midiStatus.innerText = 'NESSUN MIDI OUT';
+        els.midiStatus.innerText = 'NO MIDI OUT';
     } else {
-        els.midiStatus.innerText = 'MIDI NON DISPONIBILE';
+        els.midiStatus.innerText = 'MIDI NOT AVAILABLE';
     }
 }
 
@@ -5294,6 +6235,8 @@ function stopVoiceInternal(key) {
         if (voice.source) voice.source.stop(now + 0.05);
         if (voice.oscA) voice.oscA.stop(now + 0.05);
         if (voice.oscB) voice.oscB.stop(now + 0.05);
+        if (voice.spiralOscA) voice.spiralOscA.stop(now + 0.05);
+        if (voice.spiralOscB) voice.spiralOscB.stop(now + 0.05);
     } catch (err) {
         // Ignore audio stop errors for already-stopped nodes.
     }
@@ -5317,6 +6260,8 @@ function releaseVoiceInternal(key, minRelease = 0) {
             if (voice.ringGain) voice.ringGain.gain.setTargetAtTime(0, now, 0.05);
             if (voice.oscA) voice.oscA.stop(now + 0.12);
             if (voice.oscB) voice.oscB.stop(now + 0.12);
+            if (voice.spiralOscA) voice.spiralOscA.stop(now + 0.12);
+            if (voice.spiralOscB) voice.spiralOscB.stop(now + 0.12);
         } catch (err) {}
     }
     const release = Math.max(MIN_ENV_RELEASE, Number.isFinite(voice.fxRelease) ? voice.fxRelease : getEffectiveRelease(), minRelease);
@@ -5344,6 +6289,8 @@ function releaseVoiceInternal(key, minRelease = 0) {
         if (!voice.synthStopped) {
             if (voice.oscA) voice.oscA.stop(now + release + 0.05);
             if (voice.oscB) voice.oscB.stop(now + release + 0.05);
+            if (voice.spiralOscA) voice.spiralOscA.stop(now + release + 0.05);
+            if (voice.spiralOscB) voice.spiralOscB.stop(now + release + 0.05);
         }
     } catch (err) {
         // Ignore audio stop errors for already-stopped nodes.
@@ -5556,6 +6503,19 @@ async function noteOnInternal(note, velocity, chan, tempAttackOverride = null, o
         ringGain.gain.value = 1;
         ringGain.connect(filter);
     }
+    let spiralVoice = null;
+    if (wtEnabled && shouldUseSpiralForZone(zoneId) && state.audio.spiralEngine) {
+        state.audio.spiralEngine.setDefect(state.audio.spiral.defectCents);
+        state.audio.spiralEngine.setShimmer(state.audio.spiral.shimmer);
+        spiralVoice = state.audio.spiralEngine.triggerVoice(midiToFreq(note + pbSemis), now, {
+            output: filter,
+            gain: state.audio.spiral.mix,
+            shimmer: state.audio.spiral.shimmer,
+            defectCents: state.audio.spiral.defectCents,
+            type: 'sine',
+            panSpread: 0.5
+        });
+    }
     filter.connect(gain);
     const melodyGainNode = state.audio.melodyGain;
     if (isMelodyVoice && melodyGainNode) {
@@ -5588,6 +6548,9 @@ async function noteOnInternal(note, velocity, chan, tempAttackOverride = null, o
         wtGainB,
         oscA,
         oscB,
+        spiralOscA: spiralVoice?.oscA || null,
+        spiralOscB: spiralVoice?.oscB || null,
+        spiralMix: spiralVoice?.mix || null,
         modSourceGain,
         modFilterLP,
         modFilterHP,
@@ -5673,6 +6636,13 @@ function updateChannelPitch(chan) {
         }
         if (v.oscB) {
             v.oscB.frequency.setTargetAtTime(midiToFreq(v.note + pbSemis), state.audio.ctx.currentTime, 0.01);
+        }
+        if (v.spiralOscA || v.spiralOscB) {
+            const defect = Number(state.audio?.spiral?.defectCents) || 0;
+            const defectRatio = getSpiralDefectRatio(defect);
+            const baseFreq = midiToFreq(v.note + pbSemis);
+            if (v.spiralOscA) v.spiralOscA.frequency.setTargetAtTime(baseFreq, state.audio.ctx.currentTime, 0.01);
+            if (v.spiralOscB) v.spiralOscB.frequency.setTargetAtTime(baseFreq * 2.0 * defectRatio, state.audio.ctx.currentTime, 0.01);
         }
     });
 }
@@ -6316,6 +7286,20 @@ const SCALES = {
     hirajoshi: [0, 2, 3, 7, 8], bhairav: [0, 1, 4, 5, 7, 8, 11], arabic: [0, 1, 4, 5, 7, 8, 11],
     wholeTone: [0, 2, 4, 6, 8, 10], diminished: [0, 2, 3, 5, 6, 8, 9, 11]
 };
+const OCTAVE_PERIOD_CENTS = 1200;
+const OCTAVE_PERIOD_TOLERANCE_CENTS = 1.0;
+const DIESIS_CENTS = 38.7;
+const CHORD_SMART_TARGETS = {
+    fifth: 702,
+    major3: 400,
+    neutral3: 350,
+    superMajor3: 450,
+    subMinor3: 260
+};
+const SPECIAL_CHORD_STEP_PROFILES = {
+    // 31-TET: explicit degree choices for stable neutral/supermajor/subminor behavior.
+    31: { fifth: 18, major3: 10, neutral3: 9, superMajor3: 11, subMinor3: 7, shimmerOct: 30 }
+};
 const CHORDS = {
     off: [0],
     power: [0, 7],
@@ -6496,6 +7480,8 @@ function getPresetState() {
         chordMode: els.chordMode.value,
         chordInversion: els.chordInversion.value,
         chordSpread: els.chordSpread.value,
+        chordStep2: String(parseInt(els.chordStep2?.value, 10) || 4),
+        chordStep3: String(parseInt(els.chordStep3?.value, 10) || 7),
         roundRate: els.roundRate.value,
         holdDetune: !!els.holdDetune?.checked,
         deadCenter: els.deadCenter.checked,
@@ -6511,6 +7497,7 @@ function getPresetState() {
         yDeadzone: els.yDeadzone.value,
         touchSensitivity: els.touchSensitivity ? els.touchSensitivity.value : 75,
         quantizeRelease: els.quantizeRelease.checked,
+        autoPbPolicy: !!state.autoPbPolicy,
         holdNotes: els.holdNotes.checked,
         pbRange: els.pbRange.value,
         pbRangeA: String(getPbRangeForZone('A')),
@@ -6541,6 +7528,10 @@ function getPresetState() {
         scaleByZone: {
             A: { ...(ensureScaleConfigForZone('A') || {}) },
             B: { ...(ensureScaleConfigForZone('B') || {}) }
+        },
+        polyMicroByZone: {
+            A: { ...(ensurePolyMicroConfigForZone('A') || {}) },
+            B: { ...(ensurePolyMicroConfigForZone('B') || {}) }
         },
         performanceByZone: {
             A: { ...(ensurePerformanceConfigForZone('A') || {}) },
@@ -6595,7 +7586,11 @@ function getPresetState() {
         fadeSeconds: (els.fadeSeconds || els.fadeTime) ? (els.fadeSeconds || els.fadeTime).value : '5',
         // FX settings
         fx: { ...state.audio.fx },
-        fxEnabled: state.audio.fxEnabled
+        fxEnabled: state.audio.fxEnabled,
+        spiralEnabled: !!state.audio.spiral.enabled,
+        spiralShimmer: !!state.audio.spiral.shimmer,
+        spiralDefect: Number.isFinite(state.audio.spiral.defectCents) ? state.audio.spiral.defectCents : 38.7,
+        spiralAnchor: state.audio.spiral.anchorMode || 'fixed'
     };
 }
 
@@ -6639,6 +7634,8 @@ function applyPresetState(presetState, options = {}) {
     els.chordMode.dispatchEvent(new Event('change'));
     els.chordInversion.value = presetState.chordInversion;
     els.chordSpread.value = presetState.chordSpread;
+    if (els.chordStep2 && presetState.chordStep2 != null) els.chordStep2.value = presetState.chordStep2;
+    if (els.chordStep3 && presetState.chordStep3 != null) els.chordStep3.value = presetState.chordStep3;
     els.roundRate.value = presetState.roundRate;
     if (els.holdDetune) els.holdDetune.checked = !!presetState.holdDetune;
     els.deadCenter.checked = presetState.deadCenter;
@@ -6683,6 +7680,10 @@ function applyPresetState(presetState, options = {}) {
         }
     }
     if (els.pbRange && presetState.pbRange != null) els.pbRange.value = presetState.pbRange;
+    if (presetState.autoPbPolicy != null) {
+        state.autoPbPolicy = !!presetState.autoPbPolicy;
+        if (els.autoPbPolicy) els.autoPbPolicy.checked = state.autoPbPolicy;
+    }
     if (els.midiThru) els.midiThru.checked = presetState.midiThru;
     if (els.midiInMicroMap) els.midiInMicroMap.checked = presetState.midiInMicroMap ?? els.midiInMicroMap.checked;
     if (els.midiInMicroBase && presetState.midiInMicroBase != null) els.midiInMicroBase.value = presetState.midiInMicroBase;
@@ -6714,6 +7715,12 @@ function applyPresetState(presetState, options = {}) {
         state.scaleConfigByZone.A = zoneA;
         state.scaleConfigByZone.B = zoneB;
     }
+    if (presetState.polyMicroByZone && (presetState.polyMicroByZone.A || presetState.polyMicroByZone.B)) {
+        const curA = ensurePolyMicroConfigForZone('A');
+        const curB = ensurePolyMicroConfigForZone('B');
+        state.polyMicroByZone.A = normalizePolyMicroConfig({ ...curA, ...(presetState.polyMicroByZone.A || {}) });
+        state.polyMicroByZone.B = normalizePolyMicroConfig({ ...curB, ...(presetState.polyMicroByZone.B || presetState.polyMicroByZone.A || {}) });
+    }
     const pbA = Math.max(1, Math.min(96, parseInt(presetState.pbRangeA ?? presetState.pbRange, 10) || 48));
     const pbB = Math.max(1, Math.min(96, parseInt(presetState.pbRangeB ?? presetState.pbRange, 10) || pbA));
     ensureScaleConfigForZone('A').pbRange = String(pbA);
@@ -6723,6 +7730,7 @@ function applyPresetState(presetState, options = {}) {
     setPitchBendRange(getPbRangeForZone('A'), 'A');
     setPitchBendRange(getPbRangeForZone('B'), 'B');
     applyScaleConfigToUi(getActiveEditZoneId());
+    applyPolyMicroConfigToUi(getActiveEditZoneId());
     if (!presetState.holdNotes) releaseHeldNotes();
     updateScaleNotes('A');
     updateScaleNotes('B');
@@ -6732,6 +7740,8 @@ function applyPresetState(presetState, options = {}) {
         chordMode: presetState.chordMode || 'off',
         chordInversion: String(parseInt(presetState.chordInversion, 10) || 0),
         chordSpread: String(parseInt(presetState.chordSpread, 10) || 0),
+        chordStep2: String(parseInt(presetState.chordStep2, 10) || 4),
+        chordStep3: String(parseInt(presetState.chordStep3, 10) || 7),
         arpEnabled: !!presetState.arpEnabled,
         arpRate: presetState.arpRate ?? '1/16',
         arpGate: presetState.arpGate ?? '55',
@@ -6784,6 +7794,15 @@ function applyPresetState(presetState, options = {}) {
     updateLegacyRuntimePointers(getActiveEditZoneId());
     applyPerformanceConfigToUi(getActiveEditZoneId());
     updateScaleModeUI();
+    if (presetState.spiralEnabled !== undefined) state.audio.spiral.enabled = !!presetState.spiralEnabled;
+    if (presetState.spiralShimmer !== undefined) state.audio.spiral.shimmer = !!presetState.spiralShimmer;
+    if (presetState.spiralDefect !== undefined) state.audio.spiral.defectCents = Math.max(0, Math.min(100, Number(presetState.spiralDefect) || 38.7));
+    if (presetState.spiralAnchor !== undefined) state.audio.spiral.anchorMode = (presetState.spiralAnchor === 'left-edge') ? 'left-edge' : 'fixed';
+    if (state.audio.spiralEngine) {
+        state.audio.spiralEngine.setDefect(state.audio.spiral.defectCents);
+        state.audio.spiralEngine.setShimmer(state.audio.spiral.shimmer);
+    }
+    updateSpiralUiState(getScaleZoneId());
     // Internal Synth settings
     if (presetState.audioEnabled !== undefined) {
         setAudioEnabled(presetState.audioEnabled);
@@ -7046,7 +8065,7 @@ function applyPresetState(presetState, options = {}) {
         els.melodyAutoSnapScale.checked = !!presetState.melodyAutoSnapScale;
     }
     // Update range slider progress bars
-    [els.chordSpread, els.roundRate, els.deadCenterForce, els.smoothAmt, els.grabReturnMs, els.yDeadzone, els.touchSensitivity, els.arpGate, els.arpProbability, els.arpEuclid, els.arpShift, els.arpSwing].forEach(input => {
+    [els.chordSpread, els.roundRate, els.deadCenterForce, els.smoothAmt, els.grabReturnMs, els.yDeadzone, els.touchSensitivity, els.arpGate, els.arpProbability, els.arpEuclid, els.arpShift, els.arpSwing, els.spiralDefect].forEach(input => {
         if (input) updateRangeProgress(input);
     });
 }
@@ -7098,15 +8117,46 @@ function parseCentsList(input) {
     const cents = parts
         .map(p => Number(p))
         .filter(n => Number.isFinite(n))
-        .map(n => Math.max(0, Math.min(1200, n)))
-        .filter(n => n < 1200);
+        .filter(n => n >= 0);
     const unique = Array.from(new Set(cents)).sort((a, b) => a - b);
     if (!unique.length || unique[0] !== 0) unique.unshift(0);
     return unique;
 }
 
+function getSevishManifestScales() {
+    const raw = (typeof window !== 'undefined' && window.SEVISH_SCALES_MANIFEST) ? window.SEVISH_SCALES_MANIFEST : null;
+    const list = Array.isArray(raw?.scales) ? raw.scales : [];
+    return list.filter(entry => entry && Array.isArray(entry.cents) && entry.cents.length);
+}
+
+function initializeSevishManifestScales() {
+    const manifestScales = getSevishManifestScales();
+    state.sevishManifestScales = {};
+    state.sevishManifestIndex = {};
+    manifestScales.forEach(entry => {
+        const family = String(entry.family || 'Other').trim();
+        const name = String(entry.name || '').trim();
+        if (!name) return;
+        const key = 'Sevish / ' + family + ' / ' + name;
+        state.sevishManifestScales[key] = {
+            cents: entry.cents.slice(0),
+            family,
+            source: entry.source || '',
+            description: entry.description || ''
+        };
+        state.sevishManifestIndex[key] = {
+            family,
+            name,
+            source: entry.source || ''
+        };
+    });
+}
 function getMicrotonalScaleMap() {
-    return { ...MICROTONAL_SCALES, ...(state.microScales || {}) };
+    return {
+        ...MICROTONAL_SCALES,
+        ...(state.sevishManifestScales || {}),
+        ...(state.microScales || {})
+    };
 }
 
 function parseSclText(text) {
@@ -7151,8 +8201,7 @@ function parseSclText(text) {
     });
     if (!cents.length) return null;
     const normalized = cents
-        .map(v => Math.max(0, Math.min(1200, v)))
-        .filter(n => Number.isFinite(n))
+        .filter(n => Number.isFinite(n) && n >= 0)
         .sort((a, b) => a - b);
     if (!normalized.length) return null;
     if (normalized[0] !== 0) normalized.unshift(0);
@@ -7171,6 +8220,8 @@ function registerMicrotonalScale(name, cents) {
     updateScaleModeUI();
     enforceScaleModePbPolicy();
     scheduleScaleUpdate();
+    setScaleImportStatus(getScaleZoneId(), 'SCL saved as ' + cleanName);
+    void refreshScaleInfoForZone(getScaleZoneId(), { preferName: cleanName });
     return true;
 }
 
@@ -7267,6 +8318,10 @@ function applyMpePresetState(mpePresetState) {
     els.yDeadzone.value = mpePresetState.yDeadzone ?? els.yDeadzone.value;
     if (els.touchSensitivity) els.touchSensitivity.value = mpePresetState.touchSensitivity ?? 75;
     els.quantizeRelease.checked = mpePresetState.quantizeRelease ?? els.quantizeRelease.checked;
+    if (mpePresetState.autoPbPolicy != null) {
+        state.autoPbPolicy = !!mpePresetState.autoPbPolicy;
+        if (els.autoPbPolicy) els.autoPbPolicy.checked = state.autoPbPolicy;
+    }
     syncScaleConfigFromUi(zoneId);
     setPitchBendRange(getPbRangeForZone(zoneId), zoneId);
     // Update range slider progress bars
@@ -7355,17 +8410,25 @@ function applyNamedMpePreset(name, options = {}) {
 function enforceScaleModePbPolicy() {
     const zoneId = getScaleZoneId();
     const mode = getScaleMode(zoneId);
-    if (mode === 'microtonal') {
-        if (els.pbRange) els.pbRange.value = '24';
-        syncScaleConfigFromUi(zoneId);
-        setPitchBendRange(24, zoneId);
-        return;
-    }
-    const oldPb = getPbRangeForZone(zoneId);
-    if (oldPb === 48) return;
-    if (els.pbRange) els.pbRange.value = '48';
-    syncScaleConfigFromUi(zoneId);
-    setPitchBendRange(48, zoneId);
+    if (!state.pbPolicyModeByZone) state.pbPolicyModeByZone = { A: null, B: null };
+    const prevMode = state.pbPolicyModeByZone[zoneId] || null;
+    const isFirst = prevMode == null;
+    const modeChanged = prevMode !== mode;
+    state.pbPolicyModeByZone[zoneId] = mode;
+
+    if (!state.autoPbPolicy) return;
+    if (!isFirst && !modeChanged) return;
+
+    // Recommendation policy: microtonal default is wide PB range (48).
+    if (mode !== 'microtonal') return;
+
+    const targetPb = 48;
+    const currentPb = getPbRangeForZone(zoneId);
+    if (currentPb === targetPb) return;
+
+    ensureScaleConfigForZone(zoneId).pbRange = String(targetPb);
+    if (els.pbRange) els.pbRange.value = String(targetPb);
+    setPitchBendRange(targetPb, zoneId);
 }
 
 function updateArpControlsUI() {
@@ -7383,6 +8446,36 @@ function updateArpControlsUI() {
     if (els.arpRateSelect && els.arpRate) {
         els.arpRateSelect.value = els.arpRate.value;
     }
+    updatePerformanceStateStrip();
+}
+
+function updateCirclePatternEditorFeedback(zoneId = null) {
+    const statusEl = els.pgCircleStepStatusTop;
+    const previewEl = els.pgCircleStepPreviewTop;
+    if (!statusEl && !previewEl) return;
+    const z = getScaleZoneId(zoneId || getActiveEditZoneId());
+    const grid = getGridDegrees(z);
+    const diag = parseCircleStepOrderDiagnostics(z, grid);
+    const order = Array.isArray(diag.order) ? diag.order : [];
+    const preview = order.slice(0, 18).join(', ');
+    const previewSuffix = order.length > 18 ? ' ...' : '';
+    if (previewEl) {
+        previewEl.textContent = order.length
+            ? `Resolved order: ${preview}${previewSuffix}`
+            : 'Resolved order: (empty)';
+    }
+    if (statusEl) {
+        if (diag.invalidTokens.length) {
+            statusEl.textContent = `Unknown token skipped: ${diag.invalidTokens.join(', ')}`;
+            statusEl.classList.add('is-warn');
+        } else if (!diag.totalTokens) {
+            statusEl.textContent = 'Pattern empty: using full scale order.';
+            statusEl.classList.remove('is-warn');
+        } else {
+            statusEl.textContent = 'Pattern OK. Repeats are kept in the exact order.';
+            statusEl.classList.remove('is-warn');
+        }
+    }
 }
 
 function updateHoldButtonUI() {
@@ -7396,6 +8489,7 @@ function updateHoldButtonUI() {
         els.holdBtn.setAttribute('aria-label', label);
         els.holdBtn.title = label;
     }
+    updatePerformanceStateStrip();
 }
 
 
@@ -7433,6 +8527,7 @@ function updateKeepButtonUI() {
     els.keepBtn.setAttribute('aria-pressed', isOn ? 'true' : 'false');
     els.keepBtn.setAttribute('aria-label', label);
     els.keepBtn.title = label;
+    updatePerformanceStateStrip();
 }
 
 function disableKeep(zoneId = null) {
@@ -7466,15 +8561,290 @@ function loadCustomScaleByName(name) {
             els.customModeCents.checked = true;
             els.customScaleCents.value = formatCentsList(entry.cents || []);
         }
+        const z = getActiveEditZoneId();
+        const tokens = getCircleEditorInputTokensFromEntry(entry);
+        if (tokens) {
+            setCircleStepOrderInputForZone(z, tokens);
+            if (els.pgCircleStepOrderTop) els.pgCircleStepOrderTop.value = tokens;
+            if (els.pgCircleStepOrderAdv) els.pgCircleStepOrderAdv.value = tokens;
+        } else {
+            setCircleStepOrderInputForZone(z, '');
+            if (els.pgCircleStepOrderTop) els.pgCircleStepOrderTop.value = '';
+            if (els.pgCircleStepOrderAdv) els.pgCircleStepOrderAdv.value = '';
+        }
         updateScaleModeUI();
     }
 }
 
 function populateMicrotonalSelect() {
-    const names = Object.keys(getMicrotonalScaleMap()).sort();
-    fillSelectFromNames(els.microScaleSelect, names);
+    if (!els.microScaleSelect) return;
+    const prev = els.microScaleSelect.value;
+    clearChildren(els.microScaleSelect);
+
+    const all = getMicrotonalScaleMap();
+    const builtInNames = Object.keys(MICROTONAL_SCALES).sort((a,b)=>a.localeCompare(b));
+    const sevishKeys = Object.keys(state.sevishManifestScales || {}).sort((a,b)=>a.localeCompare(b));
+    const userNames = Object.keys(state.microScales || {}).filter(n => !state.sevishManifestScales?.[n]).sort((a,b)=>a.localeCompare(b));
+
+    const appendGroup = (label, names) => {
+        if (!names || !names.length) return;
+        const group = document.createElement('optgroup');
+        group.label = label;
+        names.forEach(name => {
+            const opt = document.createElement('option');
+            opt.value = name;
+            if (name.startsWith('Sevish / ')) {
+                const parts = name.split(' / ');
+                opt.textContent = parts.slice(2).join(' / ') || name;
+            } else {
+                opt.textContent = name;
+            }
+            group.appendChild(opt);
+        });
+        els.microScaleSelect.appendChild(group);
+    };
+
+    const builtInByFamily = new Map();
+    builtInNames.forEach(name => {
+        const fam = String(MICROTONAL_SCALES?.[name]?.family || 'General').trim() || 'General';
+        if (!builtInByFamily.has(fam)) builtInByFamily.set(fam, []);
+        builtInByFamily.get(fam).push(name);
+    });
+    appendGroup('Built-in / General', builtInByFamily.get('General') || []);
+    builtInByFamily.delete('General');
+    Array.from(builtInByFamily.keys()).sort((a,b)=>a.localeCompare(b)).forEach(family => {
+        appendGroup('Built-in / ' + family, builtInByFamily.get(family) || []);
+    });
+
+    const byFamily = new Map();
+    sevishKeys.forEach(key => {
+        const meta = state.sevishManifestIndex?.[key];
+        const family = meta?.family || 'Other';
+        if (!byFamily.has(family)) byFamily.set(family, []);
+        byFamily.get(family).push(key);
+    });
+    ['Eikosany', 'No Octaves', 'Regular Temperaments', 'World Scales'].forEach(family => {
+        appendGroup('Sevish / ' + family, byFamily.get(family) || []);
+        byFamily.delete(family);
+    });
+    Array.from(byFamily.keys()).sort((a,b)=>a.localeCompare(b)).forEach(family => {
+        appendGroup('Sevish / ' + family, byFamily.get(family));
+    });
+
+    appendGroup('User Imported', userNames);
+
+    const candidate = (prev && all[prev]) ? prev : (builtInNames[0] || sevishKeys[0] || userNames[0] || '');
+    if (candidate) els.microScaleSelect.value = candidate;
 }
 
+
+let scaleInfoDbPromise = null;
+let scaleInfoDbEntries = [];
+let scaleInfoDbDisabledReason = '';
+let scaleInfoDbWarned = false;
+
+function normalizeScaleInfoName(name) {
+    return String(name || '')
+        .toLowerCase()
+        .replace(/\.[^.]+$/, '')
+        .replace(/[_\-]+/g, ' ')
+        .replace(/[^a-z0-9\s]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function tokenizeScaleInfoName(name) {
+    return normalizeScaleInfoName(name)
+        .split(' ')
+        .filter(Boolean)
+        .filter(token => token !== 'scale' && token !== 'tuning' && token !== 'tun' && token !== 'scl');
+}
+
+function formatScaleInfoValue(value) {
+    if (Array.isArray(value)) return value.join(', ');
+    if (value && typeof value === 'object') {
+        const keys = Object.keys(value);
+        return keys.map(k => `${k}: ${formatScaleInfoValue(value[k])}`).join(' | ');
+    }
+    if (value === null || value === undefined || value === '') return 'n/a';
+    return String(value);
+}
+
+function escapeScaleInfoHtml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function ensureScaleInfoDatabaseLoaded() {
+    if (scaleInfoDbPromise) return scaleInfoDbPromise;
+    scaleInfoDbPromise = (async () => {
+        if (window?.location?.protocol === 'file:') {
+            scaleInfoDbDisabledReason = 'Scale info disabled on file://. Run the app via http://localhost.';
+            scaleInfoDbEntries = [];
+            return [];
+        }
+        try {
+            const response = await fetch('ScaleMappingStructure.json', { cache: 'no-store' });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            const entries = [];
+            Object.entries(data || {}).forEach(([key, raw]) => {
+                entries.push({
+                    key,
+                    normalized: normalizeScaleInfoName(key),
+                    tokens: tokenizeScaleInfoName(key),
+                    raw: raw || {}
+                });
+            });
+            scaleInfoDbEntries = entries;
+            scaleInfoDbDisabledReason = '';
+            return entries;
+        } catch (err) {
+            scaleInfoDbDisabledReason = 'Scale info database not available.';
+            if (!scaleInfoDbWarned) {
+                console.warn('Scale info database not available:', err);
+                scaleInfoDbWarned = true;
+            }
+            scaleInfoDbEntries = [];
+            return [];
+        }
+    })();
+    return scaleInfoDbPromise;
+}
+
+function scoreScaleInfoCandidate(entry, candidateName) {
+    const candidateNorm = normalizeScaleInfoName(candidateName);
+    if (!candidateNorm) return -1;
+    if (entry.normalized === candidateNorm) return 200;
+    if (entry.normalized.includes(candidateNorm) || candidateNorm.includes(entry.normalized)) return 120;
+    const candidateTokens = tokenizeScaleInfoName(candidateName);
+    if (!candidateTokens.length || !entry.tokens.length) return -1;
+    let shared = 0;
+    candidateTokens.forEach(token => {
+        if (entry.tokens.includes(token)) shared += 1;
+    });
+    if (!shared) return -1;
+    return shared * 10 - Math.abs(entry.tokens.length - candidateTokens.length);
+}
+
+function buildScaleInfoModel(entry) {
+    if (!entry || !entry.raw) return null;
+    const raw = entry.raw;
+    const rows = [
+        ['Family', raw.Family],
+        ['Reference', raw.Pitch_Data?.Reference],
+        ['Structure', raw.Pitch_Data?.Structure],
+        ['Notes / Octave', raw.Masking?.Notes_Per_Octave],
+        ['Active Keys', raw.Masking?.Active_Keys],
+        ['Behavior', raw.Mode_Behavior]
+    ].filter(([, value]) => value !== undefined && value !== null && value !== '');
+    return {
+        key: entry.key,
+        rows
+    };
+}
+
+function resolveScaleInfoForCandidates(candidates) {
+    if (!Array.isArray(candidates) || !candidates.length) return null;
+    let best = null;
+    let bestScore = -1;
+    candidates.forEach(name => {
+        const normalized = normalizeScaleInfoName(name);
+        if (!normalized) return;
+        scaleInfoDbEntries.forEach(entry => {
+            const score = scoreScaleInfoCandidate(entry, normalized);
+            if (score > bestScore) {
+                bestScore = score;
+                best = entry;
+            }
+        });
+    });
+    if (!best || bestScore < 5) return null;
+    return buildScaleInfoModel(best);
+}
+
+function getScaleInfoCandidatesForZone(zoneId = null) {
+    const z = getScaleZoneId(zoneId);
+    const cfg = ensureScaleConfigForZone(z);
+    const mode = cfg.scaleMode || 'diatonic';
+    const candidates = [];
+    if (mode === 'microtonal') {
+        if (cfg.microScaleName) candidates.push(cfg.microScaleName);
+        if (els.sclName?.value) candidates.push(els.sclName.value);
+    } else if (mode === 'custom') {
+        if (cfg.customScaleName) candidates.push(cfg.customScaleName);
+    } else {
+        if (cfg.scaleType) candidates.push(cfg.scaleType);
+    }
+    return candidates;
+}
+
+function renderScaleInfoPanel(zoneId, model) {
+    if (!els.scaleInfoPanel || !els.scaleInfoBody || !els.scaleInfoTitle) return;
+    if (!model || !Array.isArray(model.rows) || !model.rows.length) {
+        els.scaleInfoBody.innerHTML = '';
+        els.scaleInfoTitle.textContent = 'Scale Info';
+        els.scaleInfoPanel.classList.add('hidden');
+        return;
+    }
+    const z = getScaleZoneId(zoneId);
+    els.scaleInfoTitle.textContent = `${z}: ${model.key}`;
+    els.scaleInfoBody.innerHTML = model.rows.map(([label, value]) => (
+        `<div class="scale-info-label">${escapeScaleInfoHtml(label)}</div><div class="scale-info-value">${escapeScaleInfoHtml(formatScaleInfoValue(value))}</div>`
+    )).join('');
+    els.scaleInfoPanel.classList.remove('hidden');
+}
+
+async function refreshScaleInfoForZone(zoneId = null, options = {}) {
+    const z = getScaleZoneId(zoneId);
+    await ensureScaleInfoDatabaseLoaded();
+    const cfg = ensureScaleConfigForZone(z);
+    const mode = cfg.scaleMode || 'diatonic';
+    if (scaleInfoDbDisabledReason && mode !== 'diatonic') {
+        const fallbackModel = {
+            key: 'Scale Info',
+            rows: [['Status', scaleInfoDbDisabledReason]]
+        };
+        state.scaleInfoByZone[z] = fallbackModel;
+        if (z === getScaleZoneId()) renderScaleInfoPanel(z, fallbackModel);
+        return;
+    }
+    const candidates = [];
+    if (options.preferName) candidates.push(options.preferName);
+    getScaleInfoCandidatesForZone(z).forEach(name => candidates.push(name));
+    const model = resolveScaleInfoForCandidates(candidates);
+    state.scaleInfoByZone[z] = model;
+    if (z === getScaleZoneId()) renderScaleInfoPanel(z, model);
+}
+
+function setScaleImportStatus(zoneId, text) {
+    const z = getScaleZoneId(zoneId);
+    state.scaleImportStatusByZone[z] = text || 'No imported tuning';
+    updateScaleImportBadge();
+    updateChordBranchUI(getScaleZoneId());
+}
+
+function updateScaleImportBadge() {
+    if (!els.scaleImportBadge) return;
+    const z = getScaleZoneId();
+    const cfg = ensureScaleConfigForZone(z);
+    const mode = cfg.scaleMode || 'diatonic';
+    let text = state.scaleImportStatusByZone[z] || 'No imported tuning';
+    if (mode === 'diatonic') {
+        text = `Diatonic (${cfg.scaleType || 'chromatic'})`;
+    } else if (mode === 'custom') {
+        text = `Custom (${(cfg.customScaleName || 'unnamed').trim() || 'unnamed'})`;
+    } else if (mode === 'microtonal' && cfg.microScaleName) {
+        if (!text || text === 'No imported tuning') {
+            text = `Micro (${cfg.microScaleName})`;
+        }
+    }
+    els.scaleImportBadge.textContent = `${z}: ${text}`;
+}
 function refreshCustomScaleDatalist() {
     const names = Object.keys(state.customScales).sort();
     fillDatalistFromNames(els.customScaleNames, names);
@@ -7512,6 +8882,474 @@ function ensureScaleConfigForZone(zoneId) {
     return state.scaleConfigByZone[z];
 }
 
+function getDefaultPolyMicroConfig() {
+    return {
+        enabled: false,
+        uiCharacter: 'balanced',
+        uiIntensity: 50,
+        uiPreset: '',
+        uiAdvancedOpen: false,
+        masterMode: 'anchor',
+        anchorPolicy: 'soft',
+        dissonanceBudget: 35,
+        anchorToleranceCents: 8,
+        branches: [{ id: 'b0', edo: 12 }],
+        degreeBranchMap: {},
+        fieldShift: {
+            enabled: false,
+            fieldA: 0,
+            fieldB: 1,
+            offsetCents: 50,
+            crossingPolicy: 'allowed'
+        },
+        featureFlags: {
+            anchorOnly: false,
+            branchResolver: true,
+            lcmGrid: false,
+            fieldShift: false
+        }
+    };
+}
+
+function normalizePolyMicroConfig(raw) {
+    const src = raw && typeof raw === 'object' ? raw : {};
+    const out = { ...getDefaultPolyMicroConfig(), ...src };
+    out.enabled = !!out.enabled;
+    out.uiCharacter = ['stable', 'balanced', 'color'].includes(out.uiCharacter) ? out.uiCharacter : 'balanced';
+    out.uiIntensity = Math.max(0, Math.min(100, parseInt(out.uiIntensity, 10) || 50));
+    out.uiPreset = String(out.uiPreset || '');
+    out.uiAdvancedOpen = !!out.uiAdvancedOpen;
+    out.masterMode = ['anchor', 'branch', 'lcm'].includes(out.masterMode) ? out.masterMode : 'anchor';
+    out.anchorPolicy = ['soft', 'strict'].includes(out.anchorPolicy) ? out.anchorPolicy : 'soft';
+    out.dissonanceBudget = Math.max(0, Math.min(1200, Number(out.dissonanceBudget) || 35));
+    out.anchorToleranceCents = Math.max(0, Math.min(60, Number(out.anchorToleranceCents) || 8));
+    const branches = Array.isArray(out.branches) ? out.branches : [];
+    out.branches = branches
+        .map((b, idx) => ({ id: String(b?.id || `b${idx}`), edo: Math.max(2, Math.min(372, parseInt(b?.edo, 10) || 12)) }))
+        .filter((b, idx, arr) => arr.findIndex(x => x.id === b.id) === idx);
+    if (!out.branches.length) out.branches = [{ id: 'b0', edo: 12 }];
+    const map = out.degreeBranchMap && typeof out.degreeBranchMap === 'object' ? out.degreeBranchMap : {};
+    const nextMap = {};
+    Object.keys(map).forEach((k) => {
+        const degree = parseInt(k, 10);
+        if (!Number.isFinite(degree) || degree < 0) return;
+        const bid = String(map[k] || '');
+        if (!bid) return;
+        nextMap[String(degree)] = bid;
+    });
+    out.degreeBranchMap = nextMap;
+    const fs = out.fieldShift && typeof out.fieldShift === 'object' ? out.fieldShift : {};
+    out.fieldShift = {
+        enabled: !!fs.enabled,
+        fieldA: Number.isFinite(parseInt(fs.fieldA, 10)) ? parseInt(fs.fieldA, 10) : 0,
+        fieldB: Number.isFinite(parseInt(fs.fieldB, 10)) ? parseInt(fs.fieldB, 10) : 1,
+        offsetCents: Math.max(-200, Math.min(200, Number(fs.offsetCents) || 50)),
+        crossingPolicy: ['never', 'allowed', 'forced'].includes(fs.crossingPolicy) ? fs.crossingPolicy : 'allowed'
+    };
+    const ff = out.featureFlags && typeof out.featureFlags === 'object' ? out.featureFlags : {};
+    out.featureFlags = {
+        anchorOnly: !!ff.anchorOnly,
+        branchResolver: ff.branchResolver !== false,
+        lcmGrid: !!ff.lcmGrid,
+        fieldShift: !!ff.fieldShift
+    };
+    return out;
+}
+
+function ensurePolyMicroConfigForZone(zoneId = null) {
+    const z = getScaleZoneId(zoneId);
+    if (!state.polyMicroByZone[z]) state.polyMicroByZone[z] = getDefaultPolyMicroConfig();
+    state.polyMicroByZone[z] = normalizePolyMicroConfig(state.polyMicroByZone[z]);
+    return state.polyMicroByZone[z];
+}
+
+function parsePolyMicroBranchesInput(text) {
+    const tokens = String(text || '').split(/[,\s;|]+/).map(t => t.trim()).filter(Boolean);
+    const out = [];
+    tokens.forEach((t, idx) => {
+        const edo = parseInt(t, 10);
+        if (!Number.isFinite(edo) || edo < 2) return;
+        out.push({ id: `b${idx}`, edo: Math.max(2, Math.min(372, edo)) });
+    });
+    return out.length ? out : [{ id: 'b0', edo: 12 }];
+}
+
+function formatPolyMicroBranchesInput(branches) {
+    return (Array.isArray(branches) ? branches : [])
+        .map((b) => String(parseInt(b?.edo, 10) || 12))
+        .join(',');
+}
+
+function parsePolyMicroDegreeMapInput(text, branches) {
+    const map = {};
+    const ids = (Array.isArray(branches) ? branches : []).map(b => String(b.id));
+    String(text || '').split(/[,\n;|]+/).forEach((pair) => {
+        const p = String(pair || '').trim();
+        if (!p) return;
+        const parts = p.split(':');
+        if (parts.length < 2) return;
+        const degree = parseInt(parts[0].trim(), 10);
+        const branchIdx = parseInt(parts[1].trim(), 10);
+        if (!Number.isFinite(degree) || degree < 0) return;
+        if (!Number.isFinite(branchIdx) || branchIdx < 0 || branchIdx >= ids.length) return;
+        map[String(degree)] = ids[branchIdx];
+    });
+    return map;
+}
+
+function formatPolyMicroDegreeMapInput(cfg) {
+    const branches = Array.isArray(cfg?.branches) ? cfg.branches : [];
+    const ids = branches.map(b => String(b.id));
+    const map = cfg?.degreeBranchMap && typeof cfg.degreeBranchMap === 'object' ? cfg.degreeBranchMap : {};
+    return Object.keys(map)
+        .map((k) => parseInt(k, 10))
+        .filter((n) => Number.isFinite(n) && n >= 0)
+        .sort((a, b) => a - b)
+        .map((degree) => {
+            const bid = String(map[String(degree)] || '');
+            const idx = ids.indexOf(bid);
+            return idx >= 0 ? `${degree}:${idx}` : null;
+        })
+        .filter(Boolean)
+        .join(',');
+}
+
+function parsePolyMicroDegreeMapWithDiagnostics(text, branches) {
+    const map = {};
+    const invalidTokens = [];
+    const ids = (Array.isArray(branches) ? branches : []).map(b => String(b.id));
+    String(text || '').split(/[,\n;|]+/).forEach((pair) => {
+        const p = String(pair || '').trim();
+        if (!p) return;
+        const parts = p.split(':');
+        if (parts.length < 2) {
+            invalidTokens.push(p);
+            return;
+        }
+        const degree = parseInt(parts[0].trim(), 10);
+        const branchIdx = parseInt(parts[1].trim(), 10);
+        if (!Number.isFinite(degree) || degree < 0 || !Number.isFinite(branchIdx) || branchIdx < 0 || branchIdx >= ids.length) {
+            invalidTokens.push(p);
+            return;
+        }
+        map[String(degree)] = ids[branchIdx];
+    });
+    return { map, invalidTokens };
+}
+
+function buildPolyMicroDefaultDegreeMap(branches, style = 'balanced') {
+    const b = Array.isArray(branches) ? branches : [];
+    const out = {};
+    if (!b.length) return out;
+    const getId = (idx) => b[Math.max(0, Math.min(b.length - 1, idx))].id;
+    const patterns = {
+        stable: [0, 0, 0, 0, 0, 0],
+        balanced: [0, 1, 0, 1, 2, 1],
+        color: [0, 1, 2, 1, 0, 2],
+        rich: [0, 1, 0, 2, 1, 0],
+        moving: [0, 1, 2, 0, 1, 2],
+        experimental: [0, 2, 1, 2, 0, 1]
+    };
+    const pat = patterns[style] || patterns.balanced;
+    for (let i = 0; i < pat.length; i += 1) out[String(i)] = getId(pat[i]);
+    return out;
+}
+
+function inferScaleEdoFromDefinition(def) {
+    const name = String(def?.name || '');
+    const match = name.match(/(\d+)\s*[- ]?(tet|edo|ed3|ed2)/i);
+    if (match) {
+        const n = parseInt(match[1], 10);
+        if (Number.isFinite(n) && n > 1) return n;
+    }
+    const degLen = Array.isArray(def?.degrees) ? def.degrees.length : 12;
+    return Math.max(2, Math.min(372, degLen || 12));
+}
+
+function chooseAutoPolyBranches(def, character = 'balanced', preset = '') {
+    const base = inferScaleEdoFromDefinition(def);
+    let list = [base, 12, 31];
+    if (character === 'stable' || preset === 'clean') list = [base, 12, 19];
+    if (character === 'color') list = [base, 14, 31];
+    if (preset === 'moving') list = [base, 19, 31];
+    if (preset === 'experimental') list = [base, 22, 31];
+    const unique = [];
+    list.forEach((n) => {
+        const v = Math.max(2, Math.min(372, parseInt(n, 10) || 12));
+        if (!unique.includes(v)) unique.push(v);
+    });
+    return unique;
+}
+
+function applyCharacterIntensityToPolyConfig(cfg, character, intensity) {
+    const ch = ['stable', 'balanced', 'color'].includes(character) ? character : 'balanced';
+    const val = Math.max(0, Math.min(100, parseInt(intensity, 10) || 50));
+    cfg.uiCharacter = ch;
+    cfg.uiIntensity = val;
+    if (ch === 'stable') {
+        cfg.masterMode = 'anchor';
+        cfg.anchorPolicy = 'strict';
+        cfg.anchorToleranceCents = 12 + Math.round(val * 0.22);
+        cfg.dissonanceBudget = Math.max(4, 26 - Math.round(val * 0.2));
+    } else if (ch === 'color') {
+        cfg.masterMode = val >= 80 ? 'lcm' : 'branch';
+        cfg.anchorPolicy = 'soft';
+        cfg.anchorToleranceCents = 7 + Math.round(val * 0.08);
+        cfg.dissonanceBudget = 36 + Math.round(val * 0.5);
+    } else {
+        cfg.masterMode = 'anchor';
+        cfg.anchorPolicy = 'soft';
+        cfg.anchorToleranceCents = 9 + Math.round(val * 0.14);
+        cfg.dissonanceBudget = 18 + Math.round(val * 0.2);
+    }
+}
+
+function estimatePolySoundProfile(cfg) {
+    if (!cfg?.enabled) return { stability: 'Low', color: 'Low', arp: 'Smooth' };
+    let stability = 40 + (cfg.masterMode === 'anchor' ? 20 : 0) + (cfg.anchorPolicy === 'strict' ? 25 : 10);
+    stability += Math.max(0, 30 - (cfg.dissonanceBudget || 0));
+    let color = 25 + (cfg.masterMode === 'branch' ? 20 : 0) + (cfg.masterMode === 'lcm' ? 35 : 0);
+    color += Math.min(40, (cfg.dissonanceBudget || 0) * 0.6);
+    const arpScore = Math.round((color * 0.65) + ((cfg.uiIntensity || 50) * 0.35));
+    const lv = (n) => (n >= 75 ? 'High' : (n >= 45 ? 'Medium' : 'Low'));
+    const lc = (n) => (n >= 75 ? 'High' : (n >= 45 ? 'Medium' : 'Low'));
+    return { stability: lv(stability), color: lc(color), arp: arpScore >= 60 ? 'Marked' : 'Smooth' };
+}
+
+function setPolyMicroFixMessage(text = '') {
+    if (els.polyMicroFixMsg) els.polyMicroFixMsg.textContent = text || '';
+}
+
+function updatePolyMicroDualControls() {
+    if (!els.polyMicroDualRow) return;
+    els.polyMicroDualRow.classList.toggle('hidden', !isDualModeEnabled());
+}
+
+function updatePolyMicroAdvancedVisibility(zoneId = null) {
+    if (!els.polyMicroAdvancedPanel || !els.polyMicroAdvancedToggle) return;
+    const z = getScaleZoneId(zoneId);
+    const cfg = ensurePolyMicroConfigForZone(z);
+    const open = !!cfg.uiAdvancedOpen;
+    els.polyMicroAdvancedPanel.classList.toggle('hidden', !open);
+    els.polyMicroAdvancedToggle.textContent = open ? 'Advanced ON' : 'Advanced';
+    if (els.polyMicroAnchorBadge) els.polyMicroAnchorBadge.classList.toggle('hidden', !open);
+    if (els.polyMicroFixMsg) els.polyMicroFixMsg.classList.toggle('hidden', !open);
+}
+
+function autoSetupPolyMicroFromScale(zoneId = null, options = {}) {
+    const z = getScaleZoneId(zoneId);
+    const cfg = ensurePolyMicroConfigForZone(z);
+    const def = getScaleDefinition(z);
+    const character = options.character || cfg.uiCharacter || 'balanced';
+    const preset = options.preset || cfg.uiPreset || '';
+    const edos = chooseAutoPolyBranches(def, character, preset);
+    cfg.branches = parsePolyMicroBranchesInput(edos.join(','));
+    const style = preset === 'rich' ? 'rich' : (preset === 'moving' ? 'moving' : (preset === 'experimental' ? 'experimental' : character));
+    cfg.degreeBranchMap = buildPolyMicroDefaultDegreeMap(cfg.branches, style);
+    cfg.enabled = true;
+    state.polyMicroByZone[z] = normalizePolyMicroConfig(cfg);
+}
+
+function applyPolyMicroPreset(presetName, zoneId = null) {
+    const z = getScaleZoneId(zoneId);
+    const cfg = ensurePolyMicroConfigForZone(z);
+    const preset = String(presetName || '').trim();
+    if (!preset) return;
+    cfg.uiPreset = preset;
+    if (preset === 'clean') {
+        cfg.uiCharacter = 'stable'; cfg.uiIntensity = 85;
+    } else if (preset === 'rich') {
+        cfg.uiCharacter = 'balanced'; cfg.uiIntensity = 62;
+    } else if (preset === 'moving') {
+        cfg.uiCharacter = 'balanced'; cfg.uiIntensity = 78;
+    } else if (preset === 'experimental') {
+        cfg.uiCharacter = 'color'; cfg.uiIntensity = 88;
+    }
+    applyCharacterIntensityToPolyConfig(cfg, cfg.uiCharacter, cfg.uiIntensity);
+    autoSetupPolyMicroFromScale(z, { character: cfg.uiCharacter, preset });
+    state.polyMicroByZone[z] = normalizePolyMicroConfig(cfg);
+}
+
+function lcm2(a, b) {
+    const x = Math.abs(a);
+    const y = Math.abs(b);
+    if (!x || !y) return 0;
+    const gcd = (m, n) => (n ? gcd(n, m % n) : m);
+    return Math.abs((x * y) / gcd(x, y));
+}
+
+function buildLcmGrid(edoList, maxLcm = 372) {
+    const edos = (Array.isArray(edoList) ? edoList : [])
+        .map((n) => parseInt(n, 10))
+        .filter((n) => Number.isFinite(n) && n >= 2);
+    if (!edos.length) return { lcm: 12, edos: [12], mapper: {} };
+    let lcm = edos[0];
+    for (let i = 1; i < edos.length; i += 1) {
+        lcm = lcm2(lcm, edos[i]);
+        if (lcm > maxLcm) {
+            lcm = maxLcm;
+            break;
+        }
+    }
+    const mapper = {};
+    edos.forEach((edo) => {
+        const step = lcm / edo;
+        mapper[String(edo)] = Array.from({ length: edo }, (_, i) => i * step);
+    });
+    return { lcm, edos, mapper };
+}
+
+function buildEdoScaleDef(edo, root = 0, periodSemitones = 12) {
+    const safeEdo = Math.max(2, Math.min(372, parseInt(edo, 10) || 12));
+    const degrees = Array.from({ length: safeEdo }, (_, i) => (i * periodSemitones) / safeEdo);
+    return { root: parseInt(root, 10) || 0, mode: 'polyMicroEdo', name: `${safeEdo}-EDO`, degrees, periodSemitones };
+}
+
+function resolvePolyMicroBranchId(cfg, degreeIndex = 0) {
+    const degree = Math.max(0, parseInt(degreeIndex, 10) || 0);
+    const map = cfg?.degreeBranchMap || {};
+    const mapped = String(map[String(degree)] || '');
+    if (mapped && cfg.branches.some((b) => b.id === mapped)) return mapped;
+    return cfg.branches[0]?.id || 'b0';
+}
+
+function findAnchorPoints(branchA, branchB, toleranceCents = 8) {
+    const periodA = (Number(branchA?.periodSemitones) || 12) * 100;
+    const periodB = (Number(branchB?.periodSemitones) || 12) * 100;
+    const period = Math.max(1, Math.min(periodA, periodB));
+    const degA = (branchA?.degrees || []).map((d, i) => ({ idx: i, cents: ((d * 100) % period + period) % period }));
+    const degB = (branchB?.degrees || []).map((d, i) => ({ idx: i, cents: ((d * 100) % period + period) % period }));
+    const tol = Math.max(0, Number(toleranceCents) || 8);
+    const out = [];
+    degA.forEach((a) => {
+        degB.forEach((b) => {
+            const d = Math.abs(a.cents - b.cents);
+            const dist = Math.min(d, Math.abs(period - d));
+            if (dist <= tol) {
+                out.push({ aIdx: a.idx, bIdx: b.idx, cents: (a.cents + b.cents) * 0.5, distance: dist });
+            }
+        });
+    });
+    return out;
+}
+
+function buildPolyMicroAnchorGraph(cfg, zoneId = null) {
+    const z = getScaleZoneId(zoneId);
+    const root = parseInt(ensureScaleConfigForZone(z).rootNote, 10) || 0;
+    const branches = Array.isArray(cfg?.branches) ? cfg.branches : [];
+    const branchDefs = branches.map((b) => ({ id: b.id, def: buildEdoScaleDef(b.edo, root, 12) }));
+    const edges = [];
+    for (let i = 0; i < branchDefs.length; i += 1) {
+        for (let j = i + 1; j < branchDefs.length; j += 1) {
+            const a = branchDefs[i];
+            const b = branchDefs[j];
+            const anchors = findAnchorPoints(a.def, b.def, cfg.anchorToleranceCents);
+            edges.push({ a: a.id, b: b.id, anchors });
+        }
+    }
+    return { branches: branchDefs.map((x) => x.id), edges };
+}
+
+function getPolyMicroAnchorGraph(zoneId = null) {
+    const z = getScaleZoneId(zoneId);
+    const cfg = ensurePolyMicroConfigForZone(z);
+    const key = JSON.stringify({
+        enabled: cfg.enabled,
+        mode: cfg.masterMode,
+        tol: cfg.anchorToleranceCents,
+        branches: cfg.branches.map((b) => [b.id, b.edo])
+    });
+    const cache = state.polyMicroCacheByZone[z] || { key: '', anchorGraph: null };
+    if (cache.key === key && cache.anchorGraph) return cache.anchorGraph;
+    const graph = buildPolyMicroAnchorGraph(cfg, z);
+    state.polyMicroCacheByZone[z] = { key, anchorGraph: graph };
+    return graph;
+}
+
+function getPolyMicroAnchorCount(zoneId = null) {
+    const graph = getPolyMicroAnchorGraph(zoneId);
+    return (graph?.edges || []).reduce((acc, e) => acc + ((e.anchors && e.anchors.length) || 0), 0);
+}
+
+function getPolyMicroBranchDef(cfg, branchId, zoneId = null) {
+    const z = getScaleZoneId(zoneId);
+    const root = parseInt(ensureScaleConfigForZone(z).rootNote, 10) || 0;
+    const b = (cfg?.branches || []).find((x) => String(x.id) === String(branchId)) || (cfg?.branches || [])[0];
+    if (!b) return getScaleDefinition(z);
+    return buildEdoScaleDef(b.edo, root, 12);
+}
+
+function resolvePolyMicroNote(note, context = {}) {
+    const z = getScaleZoneId(context.zoneId || 'A');
+    const cfg = ensurePolyMicroConfigForZone(z);
+    if (!cfg.enabled || !cfg.featureFlags.branchResolver) {
+        return { note, branchId: null, tuningId: null, anchorLock: false };
+    }
+    const degreeIndex = Math.max(0, parseInt(context.degreeIndex, 10) || 0);
+    const branchId = resolvePolyMicroBranchId(cfg, degreeIndex);
+    const def = getPolyMicroBranchDef(cfg, branchId, z);
+    let mapped = mapMidiNoteToScaleWithDef(note, def);
+    let anchorLock = false;
+    if (cfg.masterMode === 'anchor' || cfg.anchorPolicy === 'strict') {
+        const base = mapMidiNoteToScaleWithDef(note, getScaleDefinition(z));
+        const distCents = Math.abs((mapped - base) * 100);
+        if (cfg.anchorPolicy === 'strict' && distCents > cfg.dissonanceBudget) {
+            mapped = base;
+            anchorLock = true;
+        } else if (distCents <= cfg.anchorToleranceCents) {
+            anchorLock = true;
+        }
+    }
+    if (cfg.featureFlags.fieldShift && cfg.fieldShift.enabled) {
+        const offset = (Number(cfg.fieldShift.offsetCents) || 0) / 100;
+        if (degreeIndex % 2 === 1) {
+            if (cfg.fieldShift.crossingPolicy === 'never' && offset !== 0) {
+                // keep mapped as-is
+            } else {
+                mapped += offset;
+            }
+        }
+    }
+    return {
+        note: mapped,
+        branchId,
+        tuningId: def?.name || branchId,
+        anchorLock
+    };
+}
+
+function updatePolyMicroBadge(zoneId = null) {
+    if (!els.polyMicroAnchorBadge) return;
+    const z = getScaleZoneId(zoneId);
+    const cfg = ensurePolyMicroConfigForZone(z);
+    const count = cfg.enabled ? getPolyMicroAnchorCount(z) : 0;
+    els.polyMicroAnchorBadge.textContent = `anchors found: ${count}`;
+    els.polyMicroAnchorBadge.classList.toggle('is-none', !cfg.enabled || count === 0);
+    els.polyMicroAnchorBadge.classList.toggle('is-scl', cfg.enabled && count > 0);
+    const profile = estimatePolySoundProfile(cfg);
+    if (els.polyMicroStabilityBadge) els.polyMicroStabilityBadge.textContent = `Stability: ${profile.stability}`;
+    if (els.polyMicroColorBadge) els.polyMicroColorBadge.textContent = `Color: ${profile.color}`;
+    if (els.polyMicroArpBadge) els.polyMicroArpBadge.textContent = `ARP Motion: ${profile.arp}`;
+    if (els.polyMicroAutoDesc) {
+        if (!cfg.enabled) {
+            els.polyMicroAutoDesc.textContent = 'Poly-Micro OFF: uses only the active scale, without merging tuning systems.';
+        } else {
+            const modeText = cfg.masterMode === 'anchor'
+                ? 'aligns notes toward shared anchor points'
+                : (cfg.masterMode === 'branch' ? 'distributes degrees across different branches' : 'uses an internal LCM master grid');
+            const policyText = cfg.anchorPolicy === 'strict' ? 'prioritizes tuning stability' : 'prioritizes color and freedom';
+            els.polyMicroAutoDesc.textContent =
+`Auto (${isDualModeEnabled() ? `zone ${z}` : 'single'}):
+- ${modeText}
+- ${policyText}
+- Expected result: Stability ${profile.stability}, Color ${profile.color}, ARP ${profile.arp}
+- Anchors found: ${count}${count === 0 ? ' (fallback to active branch)' : ''}`;
+        }
+    }
+    updatePolyMicroDualControls();
+    updatePolyMicroAdvancedVisibility(z);
+}
+
 function readScaleUiMode() {
     if (els.scaleModeMicro.checked) return 'microtonal';
     if (els.scaleModeCustom.checked) return 'custom';
@@ -7532,6 +9370,63 @@ function syncScaleConfigFromUi(zoneId = null) {
     cfg.pbRange = String(parseInt(els.pbRange?.value, 10) || 48);
     cfg.visibleOctaves = String(parseInt(els.visibleOctaves?.value, 10) || 1);
     cfg.currentOctave = Number.isFinite(state.currentOctave) ? state.currentOctave : (cfg.currentOctave || 0);
+    syncPolyMicroConfigFromUi(z);
+    if (isDualModeEnabled() && state.scaleEditLink && !state.scaleLinkSyncGuard) {
+        const other = z === 'A' ? 'B' : 'A';
+        state.scaleLinkSyncGuard = true;
+        state.scaleConfigByZone[other] = JSON.parse(JSON.stringify(state.scaleConfigByZone[z]));
+        if (state.polyMicroByZone?.[z]) {
+            state.polyMicroByZone[other] = JSON.parse(JSON.stringify(state.polyMicroByZone[z]));
+        }
+        state.scaleLinkSyncGuard = false;
+    }
+    updateScaleSourceStatus();
+    updatePerformanceStateStrip();
+}
+
+function buildSuggestedCustomScaleName(zoneId = null) {
+    const z = getScaleZoneId(zoneId || getActiveEditZoneId());
+    const def = getScaleDefinition(z);
+    const base = String(def?.name || 'Custom').replace(/\s+/g, ' ').trim() || 'Custom';
+    const zonePart = isDualModeEnabled() ? ` ${z}` : '';
+    return `${base}${zonePart}`.trim();
+}
+
+function saveCurrentScaleAsCustomScale(nameRaw = '') {
+    const z = getScaleZoneId(getActiveEditZoneId());
+    const def = getScaleDefinition(z);
+    const period = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const degrees = (Array.isArray(def?.degrees) ? def.degrees : [])
+        .filter((d) => Number.isFinite(d) && d >= 0 && d < period)
+        .sort((a, b) => a - b);
+    if (!degrees.length) return false;
+    let name = String(nameRaw || '').trim();
+    if (!name) {
+        const suggested = buildSuggestedCustomScaleName(z);
+        name = String(window.prompt('Custom scale name', suggested) || '').trim();
+    }
+    if (!name) return false;
+    const cents = degrees.map((d) => Math.round(d * 1000) / 10);
+    const circleData = buildCircleCustomScaleData(z);
+    state.customScales[name] = {
+        type: 'cents',
+        cents,
+        quadranOrder: Array.isArray(circleData?.quadranOrder) ? circleData.quadranOrder.slice(0) : undefined,
+        quadranLabels: Array.isArray(circleData?.quadranLabels) ? circleData.quadranLabels.slice(0) : undefined
+    };
+    saveCustomScales(state.customScales);
+    refreshCustomScaleDatalist();
+    if (els.customScaleName) els.customScaleName.value = name;
+    if (els.customScaleSaved) els.customScaleSaved.value = name;
+    if (els.customScaleCents) els.customScaleCents.value = formatCentsList(cents);
+    if (els.scaleModeCustom) els.scaleModeCustom.checked = true;
+    if (els.customModeCents) els.customModeCents.checked = true;
+    if (els.customModeNotes) els.customModeNotes.checked = false;
+    syncScaleConfigFromUi(z);
+    updateScaleModeUI();
+    updateScaleNotes(z);
+    scheduleScaleUpdate();
+    return true;
 }
 
 function applyScaleConfigToUi(zoneId = null) {
@@ -7543,6 +9438,13 @@ function applyScaleConfigToUi(zoneId = null) {
     if (els.customScaleName) els.customScaleName.value = cfg.customScaleName || '';
     if (els.customScaleNotes) els.customScaleNotes.value = cfg.customScaleNotes || '';
     if (els.customScaleCents) els.customScaleCents.value = cfg.customScaleCents || '';
+    if (els.autoPbPolicy) {
+        els.autoPbPolicy.checked = !!state.autoPbPolicy;
+        els.autoPbPolicy.onchange = () => {
+            state.autoPbPolicy = !!els.autoPbPolicy.checked;
+            if (state.autoPbPolicy) enforceScaleModePbPolicy();
+        };
+    }
     if (els.pbRange) {
         const pb = Math.max(1, Math.min(96, parseInt(cfg.pbRange, 10) || 48));
         els.pbRange.value = String(pb);
@@ -7551,6 +9453,7 @@ function applyScaleConfigToUi(zoneId = null) {
         const octaves = Math.max(1, Math.min(4, parseInt(cfg.visibleOctaves, 10) || 1));
         els.visibleOctaves.value = String(octaves);
     }
+    applyPolyMicroConfigToUi(z);
     if (els.customModeCents && els.customModeNotes) {
         els.customModeCents.checked = cfg.customMode === 'cents';
         els.customModeNotes.checked = !els.customModeCents.checked;
@@ -7580,6 +9483,8 @@ function ensurePerformanceConfigForZone(zoneId) {
         chordMode: els.chordMode?.value || 'off',
         chordInversion: String(parseInt(els.chordInversion?.value, 10) || 0),
         chordSpread: String(parseInt(els.chordSpread?.value, 10) || 0),
+        chordStep2: String(parseInt(els.chordStep2?.value, 10) || 4),
+        chordStep3: String(parseInt(els.chordStep3?.value, 10) || 7),
         arpEnabled: !!arp.enabled,
         arpRate: arp.rate || '1/16',
         arpGate: String(Math.round((Number(arp.gate) || 0.55) * 100)),
@@ -7609,6 +9514,8 @@ function syncPerformanceConfigFromUi(zoneId = null) {
     cfg.chordMode = els.chordMode?.value || cfg.chordMode || 'off';
     cfg.chordInversion = String(parseInt(els.chordInversion?.value, 10) || 0);
     cfg.chordSpread = String(parseInt(els.chordSpread?.value, 10) || 0);
+    cfg.chordStep2 = String(parseInt(els.chordStep2?.value, 10) || 4);
+    cfg.chordStep3 = String(parseInt(els.chordStep3?.value, 10) || 7);
     cfg.arpEnabled = !!arp.enabled;
     cfg.arpRate = arp.rate || cfg.arpRate || '1/16';
     cfg.arpGate = String(Math.round((Number(arp.gate) || 0.55) * 100));
@@ -7638,6 +9545,9 @@ function applyPerformanceConfigToUi(zoneId = null, options = {}) {
     if (els.chordMode) els.chordMode.value = cfg.chordMode || 'off';
     if (els.chordInversion) els.chordInversion.value = String(parseInt(cfg.chordInversion, 10) || 0);
     if (els.chordSpread) els.chordSpread.value = String(parseInt(cfg.chordSpread, 10) || 0);
+    if (els.chordStep2) els.chordStep2.value = String(parseInt(cfg.chordStep2, 10) || 4);
+    if (els.chordStep3) els.chordStep3.value = String(parseInt(cfg.chordStep3, 10) || 7);
+    updateChordBranchUI(z);
     if (els.arpEnabled) els.arpEnabled.checked = !!cfg.arpEnabled;
     if (els.arpRate) els.arpRate.value = cfg.arpRate || '1/16';
     if (els.arpGate) els.arpGate.value = cfg.arpGate || '55';
@@ -7683,8 +9593,84 @@ function setActiveEditZone(zoneId, options = {}) {
     applyPerformanceConfigToUi(next, { applyArpRuntime: false });
     updateScaleModeUI();
     updateScaleNotes(next);
+    let circleOrder = getCircleStepOrderInputForZone(next);
+    if (!String(circleOrder || '').trim()) {
+        const cfg = ensureScaleConfigForZone(next);
+        const customName = String(cfg.customScaleName || '').trim();
+        const entry = (cfg.scaleMode === 'custom' && customName) ? state.customScales?.[customName] : null;
+        const tokens = getCircleEditorInputTokensFromEntry(entry);
+        if (tokens) {
+            circleOrder = tokens;
+            setCircleStepOrderInputForZone(next, tokens);
+        }
+    }
+    if (els.pgCircleStepOrderTop) els.pgCircleStepOrderTop.value = circleOrder;
+    if (els.pgCircleStepOrderAdv) els.pgCircleStepOrderAdv.value = circleOrder;
+    updateCirclePatternEditorFeedback(next);
     requestDraw();
     return true;
+}
+
+function syncPolyMicroConfigFromUi(zoneId = null, options = {}) {
+    const z = getScaleZoneId(zoneId);
+    const cfg = ensurePolyMicroConfigForZone(z);
+    const applySimple = options.applySimple === true;
+    const showFix = options.showFix !== false;
+    if (els.polyMicroEnabled) cfg.enabled = !!els.polyMicroEnabled.checked;
+    if (els.polyMicroCharacter) cfg.uiCharacter = String(els.polyMicroCharacter.value || cfg.uiCharacter || 'balanced');
+    if (els.polyMicroIntensity) cfg.uiIntensity = Math.max(0, Math.min(100, parseInt(els.polyMicroIntensity.value, 10) || 50));
+    if (els.polyMicroPresetSelect) cfg.uiPreset = String(els.polyMicroPresetSelect.value || cfg.uiPreset || '');
+    cfg.uiAdvancedOpen = !els.polyMicroAdvancedPanel?.classList.contains('hidden');
+    if (els.polyMicroMasterMode) cfg.masterMode = String(els.polyMicroMasterMode.value || cfg.masterMode);
+    if (els.polyMicroAnchorPolicy) cfg.anchorPolicy = String(els.polyMicroAnchorPolicy.value || cfg.anchorPolicy);
+    if (els.polyMicroTolerance) cfg.anchorToleranceCents = Number(els.polyMicroTolerance.value || cfg.anchorToleranceCents);
+    if (els.polyMicroBudget) cfg.dissonanceBudget = Number(els.polyMicroBudget.value || cfg.dissonanceBudget);
+    if (els.polyMicroBranches) {
+        cfg.branches = parsePolyMicroBranchesInput(els.polyMicroBranches.value);
+    }
+    if (els.polyMicroDegreeMap) {
+        const diag = parsePolyMicroDegreeMapWithDiagnostics(els.polyMicroDegreeMap.value, cfg.branches);
+        cfg.degreeBranchMap = diag.map;
+        let fixed = diag.invalidTokens.length > 0;
+        if (!Object.keys(cfg.degreeBranchMap).length) {
+            cfg.degreeBranchMap = buildPolyMicroDefaultDegreeMap(cfg.branches, cfg.uiCharacter || 'balanced');
+            fixed = true;
+        }
+        ['0', '1', '2'].forEach((k) => {
+            if (!cfg.degreeBranchMap[k] && cfg.branches.length) {
+                cfg.degreeBranchMap[k] = cfg.branches[Math.min(parseInt(k, 10), cfg.branches.length - 1)].id;
+                fixed = true;
+            }
+        });
+        if (fixed && showFix) {
+            setPolyMicroFixMessage('Mapping auto-corrected');
+            els.polyMicroDegreeMap.value = formatPolyMicroDegreeMapInput({ branches: cfg.branches, degreeBranchMap: cfg.degreeBranchMap });
+        } else if (showFix) {
+            setPolyMicroFixMessage('');
+        }
+    }
+    if (applySimple) {
+        applyCharacterIntensityToPolyConfig(cfg, cfg.uiCharacter, cfg.uiIntensity);
+    }
+    state.polyMicroByZone[z] = normalizePolyMicroConfig(cfg);
+    updatePolyMicroBadge(z);
+}
+
+function applyPolyMicroConfigToUi(zoneId = null) {
+    const z = getScaleZoneId(zoneId);
+    const cfg = ensurePolyMicroConfigForZone(z);
+    if (els.polyMicroEnabled) els.polyMicroEnabled.checked = !!cfg.enabled;
+    if (els.polyMicroCharacter) els.polyMicroCharacter.value = cfg.uiCharacter || 'balanced';
+    if (els.polyMicroIntensity) els.polyMicroIntensity.value = String(cfg.uiIntensity ?? 50);
+    if (els.polyMicroIntensityVal) els.polyMicroIntensityVal.textContent = String(cfg.uiIntensity ?? 50);
+    if (els.polyMicroPresetSelect) els.polyMicroPresetSelect.value = cfg.uiPreset || '';
+    if (els.polyMicroMasterMode) els.polyMicroMasterMode.value = cfg.masterMode || 'anchor';
+    if (els.polyMicroAnchorPolicy) els.polyMicroAnchorPolicy.value = cfg.anchorPolicy || 'soft';
+    if (els.polyMicroTolerance) els.polyMicroTolerance.value = String(cfg.anchorToleranceCents ?? 8);
+    if (els.polyMicroBudget) els.polyMicroBudget.value = String(cfg.dissonanceBudget ?? 35);
+    if (els.polyMicroBranches) els.polyMicroBranches.value = formatPolyMicroBranchesInput(cfg.branches);
+    if (els.polyMicroDegreeMap) els.polyMicroDegreeMap.value = formatPolyMicroDegreeMapInput(cfg);
+    updatePolyMicroBadge(z);
 }
 
 function isHoldEnabled(zoneId = null) {
@@ -7705,11 +9691,81 @@ function hasAnyHoldEnabled() {
     return !!(ensurePerformanceConfigForZone('A').holdNotes || ensurePerformanceConfigForZone('B').holdNotes);
 }
 
+function getChordModeUiLabel(mode) {
+    const select = els.chordMode;
+    if (!select) return 'Off';
+    const opt = Array.from(select.options || []).find((o) => o.value === mode);
+    if (!opt) return String(mode || 'Off');
+    return String(opt.textContent || opt.label || mode || 'Off').trim();
+}
+
+function updatePerformanceStateStrip() {
+    if (!els.performanceStateStrip) return;
+    const z = getActiveEditZoneId();
+    const holdOn = isHoldEnabled(z);
+    const keepOn = isKeepEnabled(z);
+    const chordMode = els.chordMode?.value || 'off';
+    const arpOn = !!els.arpEnabled?.checked;
+    if (els.perfStateHold) els.perfStateHold.textContent = `Hold: ${holdOn ? 'On' : 'Off'}`;
+    if (els.perfStateKeep) els.perfStateKeep.textContent = `Keep: ${keepOn ? 'On' : 'Off'}`;
+    if (els.perfStateChord) els.perfStateChord.textContent = `Chord: ${chordMode === 'off' ? 'Off' : getChordModeUiLabel(chordMode)}`;
+    if (els.perfStateArp) els.perfStateArp.textContent = `Arp: ${arpOn ? 'On' : 'Off'}`;
+    if (els.perfStateTarget) {
+        const target = isDualModeEnabled() ? (state.scaleEditLink ? 'Link A+B' : z) : 'A';
+        els.perfStateTarget.textContent = `Edit: ${target}`;
+    }
+}
+
+function updateScaleTargetControls() {
+    const dual = isDualModeEnabled();
+    const active = getActiveEditZoneId();
+    const linked = !!state.scaleEditLink && dual;
+    if (els.scaleEditZoneA) {
+        els.scaleEditZoneA.disabled = !dual;
+        els.scaleEditZoneA.classList.toggle('is-active', dual && active === 'A' && !linked);
+    }
+    if (els.scaleEditZoneB) {
+        els.scaleEditZoneB.disabled = !dual;
+        els.scaleEditZoneB.classList.toggle('is-active', dual && active === 'B' && !linked);
+    }
+    if (els.scaleEditZoneLink) {
+        els.scaleEditZoneLink.disabled = !dual;
+        els.scaleEditZoneLink.classList.toggle('is-active', linked);
+    }
+}
+
+function updateScaleSourceStatus() {
+    if (!els.scaleSourceStatus) return;
+    const z = getScaleZoneId();
+    const cfg = ensureScaleConfigForZone(z);
+    const mode = cfg.scaleMode || 'diatonic';
+    let source = 'Diatonic';
+    let details = '';
+    if (mode === 'microtonal') {
+        source = 'Imported Microtonal';
+        details = String(cfg.microScaleName || cfg.scaleType || '').trim();
+    } else if (mode === 'custom') {
+        source = 'Custom Scale';
+        details = String(cfg.customScaleName || '').trim();
+    } else {
+        details = String(cfg.scaleType || 'chromatic').trim();
+    }
+    const zonePart = isDualModeEnabled() ? `Zone ${z}` : 'Single';
+    els.scaleSourceStatus.textContent = `Source: ${source}${details ? ` (${details})` : ''} | ${zonePart}`;
+}
+
 function updateScaleZoneBadge() {
     if (!els.scaleZoneLabel) return;
     const zone = isDualModeEnabled() ? getActiveEditZoneId() : 'A';
-    els.scaleZoneLabel.textContent = `Editing Zone: ${zone}`;
+    const linked = isDualModeEnabled() && !!state.scaleEditLink;
+    els.scaleZoneLabel.textContent = isDualModeEnabled()
+        ? (linked ? 'Editing Zones: A+B (Linked)' : `Editing Zone: ${zone}`)
+        : 'Editing Scale';
     els.scaleZoneLabel.style.opacity = isDualModeEnabled() ? '1' : '0.7';
+    updateScaleTargetControls();
+    updateScaleSourceStatus();
+    updatePerformanceStateStrip();
+    updatePolyMicroDualControls();
 }
 
 function withScaleZone(zoneId, fn) {
@@ -7780,6 +9836,42 @@ function updateScaleModeUI() {
         choice.classList.toggle('active', isActive);
     });
     updateScaleZoneBadge();
+    updateScaleImportBadge();
+    updateChordBranchUI(getScaleZoneId());
+    updateSpiralUiState(getScaleZoneId());
+    void refreshScaleInfoForZone(getScaleZoneId());
+}
+
+function updateChordBranchUI(zoneId = null) {
+    const z = getScaleZoneId(zoneId);
+    const def = getScaleDefinition(z);
+    const periodCents = getScalePeriodCentsForDef(def);
+    const branch = getChordBranchForDef(def);
+    if (els.scaleBranchBadge) {
+        const rounded = Math.round(periodCents);
+        const label = (branch === 'A')
+            ? ('Chord Branch: OCTAVE (' + rounded + 'c)')
+            : ('Chord Branch: NON-OCTAVE (' + rounded + 'c)');
+        els.scaleBranchBadge.textContent = label;
+        els.scaleBranchBadge.classList.toggle('is-octave', branch === 'A');
+        els.scaleBranchBadge.classList.toggle('is-nonoctave', branch !== 'A');
+    }
+    const allowedA = new Set(['off','auto','auto7','power','triad','minTriad','dimTriad','augTriad','sus2','sus4','add9','sixth','seventh','maj7','min7','halfDim7','dim7','dom9','maj9','min9','eleventh','thirteenth','neutralTriad','superMajorTriad','subMinorTriad','shimmer']);
+    const allowedB = new Set(['off','stepTriad','stepWide']);
+    if (els.chordMode) {
+        const allowed = branch === 'A' ? allowedA : allowedB;
+        Array.from(els.chordMode.options || []).forEach(opt => {
+            opt.disabled = !allowed.has(opt.value);
+        });
+        if (els.chordMode.value && !allowed.has(els.chordMode.value)) {
+            els.chordMode.value = (branch === 'A') ? 'triad' : 'stepTriad';
+            syncPerformanceConfigFromUi(z);
+        }
+    }
+    const nonOctave = branch !== 'A';
+    if (els.chordInversion) els.chordInversion.disabled = nonOctave;
+    if (els.chordStep2) els.chordStep2.disabled = !nonOctave;
+    if (els.chordStep3) els.chordStep3.disabled = !nonOctave;
 }
 
 function getScaleDefinition(zoneId = null) {
@@ -7791,35 +9883,91 @@ function getScaleDefinition(zoneId = null) {
         const name = cfg.microScaleName || '';
         const micro = getMicrotonalScaleMap()[name];
         if (micro && Array.isArray(micro.cents) && micro.cents.length) {
-            def = { root, name, mode, degrees: micro.cents.map(c => c / 100) };
+            const rawDegrees = micro.cents.map(c => c / 100);
+            const explicitPeriod = Number.isFinite(micro.periodCents) ? (micro.periodCents / 100) : null;
+            const periodSemitones = resolveScalePeriodSemitones(rawDegrees, explicitPeriod);
+            const degrees = normalizeDegreesForPeriod(rawDegrees, periodSemitones);
+            def = { root, name, mode, degrees, periodSemitones };
         } else {
-            def = { root, name: 'chromatic', mode, degrees: SCALES.chromatic.slice(0) };
+            def = { root, name: 'chromatic', mode, degrees: SCALES.chromatic.slice(0), periodSemitones: 12 };
         }
     } else if (mode === 'custom') {
         const name = (cfg.customScaleName || '').trim();
         const custom = state.customScales[name];
         const useNotes = cfg.customMode !== 'cents';
-        const degrees = useNotes
+        const rawDegrees = useNotes
             ? (custom && custom.type === 'notes' ? custom.degrees : parseNotesList(cfg.customScaleNotes || ''))
             : (custom && custom.type === 'cents' ? custom.cents.map(c => c / 100) : parseCentsList(cfg.customScaleCents || '').map(c => c / 100));
-        if (degrees.length) {
-            def = { root, name: name || 'custom', mode, degrees };
+        if (rawDegrees.length) {
+            const periodSemitones = useNotes ? 12 : resolveScalePeriodSemitones(rawDegrees, null);
+            const degrees = normalizeDegreesForPeriod(rawDegrees, periodSemitones);
+            def = { root, name: name || 'custom', mode, degrees, periodSemitones };
         } else {
-            def = { root, name: 'chromatic', mode, degrees: SCALES.chromatic.slice(0) };
+            def = { root, name: 'chromatic', mode, degrees: SCALES.chromatic.slice(0), periodSemitones: 12 };
         }
     } else {
         const scaleType = cfg.scaleType || 'chromatic';
-        def = { root, name: scaleType, mode, degrees: SCALES[scaleType].slice(0) };
+        def = { root, name: scaleType, mode, degrees: SCALES[scaleType].slice(0), periodSemitones: 12 };
     }
     return def;
+}
+
+function resolveScalePeriodSemitones(rawDegrees, explicitPeriodSemitones = null) {
+    const finite = (Array.isArray(rawDegrees) ? rawDegrees : [])
+        .filter(n => Number.isFinite(n) && n >= 0)
+        .sort((a, b) => a - b);
+    if (!finite.length) return 12;
+    if (Number.isFinite(explicitPeriodSemitones) && explicitPeriodSemitones > 0) {
+        return explicitPeriodSemitones;
+    }
+    const max = finite[finite.length - 1];
+    return max > 12.0001 ? max : 12;
+}
+
+function normalizeDegreesForPeriod(rawDegrees, periodSemitones) {
+    const EPS = 1e-4;
+    const period = Number.isFinite(periodSemitones) && periodSemitones > EPS ? periodSemitones : 12;
+    const finite = (Array.isArray(rawDegrees) ? rawDegrees : [])
+        .filter(n => Number.isFinite(n) && n >= 0)
+        .sort((a, b) => a - b);
+    const dedup = [];
+    finite.forEach(v => {
+        if (!dedup.length || Math.abs(dedup[dedup.length - 1] - v) > EPS) dedup.push(v);
+    });
+    const body = dedup.filter(v => Math.abs(v - period) > EPS);
+    if (!body.length || Math.abs(body[0]) > EPS) body.unshift(0);
+    return body;
+}
+
+function getScalePeriodSemitonesForZone(zoneId = null) {
+    const def = getScaleDefinition(zoneId);
+    return Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+}
+function getScalePeriodCentsForDef(def) {
+    const periodSemis = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    return periodSemis * 100;
+}
+
+function isOctaveCompatiblePeriodCents(periodCents) {
+    return Math.abs((Number(periodCents) || OCTAVE_PERIOD_CENTS) - OCTAVE_PERIOD_CENTS) < OCTAVE_PERIOD_TOLERANCE_CENTS;
+}
+
+function getChordBranchForDef(def) {
+    const periodCents = getScalePeriodCentsForDef(def);
+    return isOctaveCompatiblePeriodCents(periodCents) ? 'A' : 'B';
+}
+
+function getChordBranchForZone(zoneId = null) {
+    return getChordBranchForDef(getScaleDefinition(zoneId));
 }
 
 function buildScaleNotesFromDefinition(def) {
     const notes = [];
     const degrees = def.degrees || [];
+    const periodSemitones = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
     for (let oct = -1; oct <= 11; oct++) {
         degrees.forEach(d => {
-            const note = (oct * 12) + def.root + d;
+            const note = (oct * periodSemitones) + def.root + d;
             if (note >= 0 && note <= 127) notes.push(note);
         });
     }
@@ -7881,26 +10029,27 @@ function applyDetectedScale(notes, statusEl = null) {
 
 function getGridDegrees(zoneId = null) {
     const def = getScaleDefinition(zoneId);
-    const degrees = def.degrees.slice(0);
-    if (!degrees.some(d => Math.abs(d - 12) < 0.0001)) degrees.push(12);
-    return { root: def.root, degrees, stepsPerOct: degrees.length, baseDegrees: def.degrees };
+    const periodSemitones = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const degrees = normalizeDegreesForPeriod(def.degrees || [], periodSemitones);
+    return { root: def.root, degrees, stepsPerOct: degrees.length, baseDegrees: def.degrees, periodSemitones };
 }
 
-function getGridNoteAt(index, degrees, baseNote) {
+function getGridNoteAt(index, degrees, baseNote, periodSemitones = 12) {
     const stepsPerOct = degrees.length;
     const oct = Math.floor(index / stepsPerOct);
     const deg = degrees[index % stepsPerOct];
-    return baseNote + (oct * 12) + deg;
+    return baseNote + (oct * periodSemitones) + deg;
 }
 
 function getVisibleNoteRange(zoneId = null) {
     const z = getScaleZoneId(zoneId);
     const numOct = getVisibleOctavesForZone(z);
     const grid = getGridDegrees(z);
-    const totalSteps = numOct * grid.stepsPerOct;
-    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * 12) + grid.root;
-    const minNote = getGridNoteAt(0, grid.degrees, baseMIDI);
-    const maxNote = getGridNoteAt(Math.max(0, totalSteps - 1), grid.degrees, baseMIDI);
+    const visibleSteps = Math.max(1, getCircleStepOrderForGrid(z, grid).length);
+    const totalSteps = numOct * visibleSteps;
+    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+    const minNote = getCircleLayoutNoteAt(0, z, grid, baseMIDI, numOct).note;
+    const maxNote = getCircleLayoutNoteAt(Math.max(0, totalSteps - 1), z, grid, baseMIDI, numOct).note;
     return { minNote, maxNote };
 }
 
@@ -7935,24 +10084,25 @@ function autoFollowExternalNote(noteFloat) {
     const numOct = getVisibleOctavesForZone(zoneId);
     if (numOct <= 0) return;
     const grid = getGridDegrees(zoneId);
-    const totalSteps = numOct * grid.stepsPerOct;
+    const visibleSteps = Math.max(1, getCircleStepOrderForGrid(zoneId, grid).length);
+    const totalSteps = numOct * visibleSteps;
     if (totalSteps <= 0) return;
-    let baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * 12) + grid.root;
-    let minNote = getGridNoteAt(0, grid.degrees, baseMIDI);
-    let maxNote = getGridNoteAt(Math.max(0, totalSteps - 1), grid.degrees, baseMIDI);
-    const stepSize = 12 / Math.max(1, grid.stepsPerOct || 12);
+    let baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * grid.periodSemitones) + grid.root;
+    let minNote = getCircleLayoutNoteAt(0, zoneId, grid, baseMIDI, numOct).note;
+    let maxNote = getCircleLayoutNoteAt(Math.max(0, totalSteps - 1), zoneId, grid, baseMIDI, numOct).note;
+    const stepSize = grid.periodSemitones / Math.max(1, visibleSteps);
     const hysteresis = Math.max(0.25, stepSize * 0.5);
     if (noteFloat >= (minNote + hysteresis) && noteFloat <= (maxNote - hysteresis)) return;
     let nextOct = getCurrentOctaveForZone(zoneId);
     while (noteFloat < minNote && nextOct > -2) {
         nextOct -= 1;
-        minNote -= 12;
-        maxNote -= 12;
+        minNote -= grid.periodSemitones;
+        maxNote -= grid.periodSemitones;
     }
     while (noteFloat > maxNote && nextOct < 2) {
         nextOct += 1;
-        minNote += 12;
-        maxNote += 12;
+        minNote += grid.periodSemitones;
+        maxNote += grid.periodSemitones;
     }
     if (nextOct !== getCurrentOctaveForZone(zoneId)) {
         setCurrentOctave(nextOct, { retune: false, force: true, zoneId });
@@ -7967,20 +10117,22 @@ function setCurrentOctave(next, options = {}) {
     const prev = getCurrentOctaveForZone(zoneId);
     if (clamped === prev) return;
     const delta = clamped - prev;
+    const periodSemitones = getScalePeriodSemitonesForZone(zoneId);
+    const octaveShift = delta * periodSemitones;
     setCurrentOctaveForZone(zoneId, clamped);
     state.currentOctave = clamped;
     els.octVal.innerText = (state.currentOctave > 0 ? "+" : "") + state.currentOctave;
     if (options.retune && delta !== 0) {
-        retuneActiveNotes(delta * 12, zoneId);
+        retuneActiveNotes(octaveShift, zoneId);
     }
     if (!state.melody.latchEnabled && state.melody.imported && delta !== 0 && Array.isArray(state.melody.notes)) {
         state.melody.notes = state.melody.notes.map(n => {
             if (n == null) return null;
             if (Array.isArray(n)) {
-                const shifted = n.map(v => Math.max(0, Math.min(127, v + (delta * 12))));
+                const shifted = n.map(v => Math.max(0, Math.min(127, v + octaveShift)));
                 return packMelodyStepNotes(shifted);
             }
-            const next = n + (delta * 12);
+            const next = n + octaveShift;
             return Math.max(0, Math.min(127, next));
         });
         updateMelodyPreview();
@@ -8012,8 +10164,8 @@ function ensureVisibleForNotes(notes, options = {}) {
     if (notes.length === 1 && !allowSingle) return;
     const zoneId = getScaleZoneId(options.zoneId);
     const numOct = getVisibleOctavesForZone(zoneId);
-    const span = numOct * 12;
     const grid = getGridDegrees(zoneId);
+    const span = numOct * grid.periodSemitones;
     const baseOffset = 48 + grid.root;
     let minNote = Infinity;
     let maxNote = -Infinity;
@@ -8033,14 +10185,14 @@ function ensureVisibleForNotes(notes, options = {}) {
     } else {
         targetBase = ((minNote + maxNote) * 0.5) - (span * 0.5);
     }
-    let nextOct = Math.round((targetBase - baseOffset) / 12);
-    let base = baseOffset + (nextOct * 12);
+    let nextOct = Math.round((targetBase - baseOffset) / grid.periodSemitones);
+    let base = baseOffset + (nextOct * grid.periodSemitones);
     if (base > minNote) {
-        nextOct = Math.floor((minNote - baseOffset) / 12);
-        base = baseOffset + (nextOct * 12);
+        nextOct = Math.floor((minNote - baseOffset) / grid.periodSemitones);
+        base = baseOffset + (nextOct * grid.periodSemitones);
     }
     if (base + span < maxNote) {
-        nextOct = Math.ceil((maxNote - span - baseOffset) / 12);
+        nextOct = Math.ceil((maxNote - span - baseOffset) / grid.periodSemitones);
     }
     setCurrentOctave(nextOct, { retune: false, force: !!options.force, zoneId });
 }
@@ -8237,6 +10389,8 @@ function handleExternalMIDI(message) {
     const microMapEnabled = !!(els.midiInMicroMap && els.midiInMicroMap.checked);
     const microMapBaseRaw = parseInt(els.midiInMicroBase?.value, 10);
     let microMapBase = Number.isFinite(microMapBaseRaw) ? microMapBaseRaw : null;
+    const plannerMap = getPolyPlannerMappingForMidi(note, 'A');
+    const effectiveMicrotonalize = !!microtonalize || !!plannerMap.useScale;
     const mpeFromIn = els.midiInMpe && els.midiInMpe.checked;
     if (type === 0x90 && velocity > 0 && isLocalNoteOn(note)) {
         return;
@@ -8254,10 +10408,12 @@ function handleExternalMIDI(message) {
             microMapBase = note;
             if (els.midiInMicroBase) els.midiInMicroBase.value = String(note);
         }
-        if (microtonalize) {
-            const noteFloat = microMapEnabled
-                ? mapMidiNoteToScaleFromMidiIndex(note, microMapBase)
-                : mapMidiNoteToScale(note);
+        if (effectiveMicrotonalize) {
+            const noteFloat = plannerMap.useScale
+                ? plannerMap.noteFloat
+                : (microMapEnabled
+                    ? mapMidiNoteToScaleFromMidiIndex(note, microMapBase)
+                    : mapMidiNoteToScale(note));
             autoFollowExternalNote(noteFloat);
             ensureVisibleForNotes([noteFloat], { allowSingle: true });
             const voice = makeVoiceFromNote(noteFloat, 'A');
@@ -8266,7 +10422,7 @@ function handleExternalMIDI(message) {
                 els.midiStatus.innerText = 'MPE CHANNELS FULL';
             }
             if (chan && state.midi.output) {
-                const pb = clampPb(8192 + voice.basePb);
+                const pb = getVoicePb({ pbValue: 8192 }, { ...voice, zone: 'A' });
                 state.midi.output.send([0xB0 + chan - 1, 74, 0]);
                 state.midi.output.send([0xE0 + chan - 1, pb & 0x7F, (pb >> 7) & 0x7F]);
                 state.midi.output.send([0x90 + chan - 1, voice.note, velocity]);
@@ -8290,7 +10446,7 @@ function handleExternalMIDI(message) {
             state.physicalNotes.set(note, list);
         }
     } else if (type === 0x80 || (type === 0x90 && velocity === 0)) {
-        if (microtonalize) {
+        if (effectiveMicrotonalize) {
             const key = state.externalNoteMap.get(`${srcChan}:${note}`);
             if (key) {
                 const list = state.physicalNotes.get(key.keyNote);
@@ -8479,6 +10635,10 @@ function stealOldestHeldVoiceForChannel(zoneId, output = null) {
     const stolen = state.heldVoices.splice(pickIdx, 1)[0];
     const out = output || getZoneOutput(stolen.zone || zoneKey);
     if (out) sendMidi([0x80 + stolen.chan - 1, stolen.note, 0], out);
+    if (state.audio.enabled) {
+        const internalChan = getInternalAudioChannel(stolen.chan, stolen.zone || zoneKey);
+        stopVoiceInternal(`${internalChan}:${stolen.note}`);
+    }
     return stolen.chan;
 }
 
@@ -8486,9 +10646,8 @@ function allocateMpeChannelForPlay(zoneId, output = null, options = {}) {
     const chan = allocateMpeChannel(zoneId);
     if (chan) return chan;
 
-    // Match script G.js behavior for MIDI OUT: never steal held voices when hardware MIDI is active.
-    const hasHardwareOut = zoneHasHardwareMidiOut(zoneId);
-    const canStealHeld = !!(options && options.allowStealHeld) && !hasHardwareOut;
+    // Allow held-voice stealing also with hardware MIDI out when explicitly requested.
+    const canStealHeld = !!(options && options.allowStealHeld);
     if (canStealHeld) {
         const stolenChan = stealOldestHeldVoiceForChannel(zoneId, output);
         if (stolenChan) return stolenChan;
@@ -10663,6 +12822,9 @@ function updateDualModeUI() {
     const prevAudioZone = getActiveAudioZoneId();
     const prevEditZone = getActiveEditZoneId();
     document.body.classList.toggle('dual-active', enabled);
+    if (els.midiOutBBox) {
+        els.midiOutBBox.style.display = enabled ? '' : 'none';
+    }
     if (els.midiOutSelectB) {
         els.midiOutSelectB.disabled = !enabled;
     }
@@ -10718,6 +12880,8 @@ function updateDualModeUI() {
     }
     positionDualSplitLine();
     updateScaleZoneBadge();
+    updateScaleImportBadge();
+    void refreshScaleInfoForZone(getScaleZoneId());
 }
 
 function syncMelodyDurationsToNotes(len) {
@@ -10816,7 +12980,7 @@ function setMelodyLatch(enabled) {
         if (state.melody.latchPrevMpePerNote == null) {
             state.melody.latchPrevMpePerNote = !!state.melody.mpePerNote;
         }
-        const def = getScaleDefinition();
+        const def = getScaleDefinition(zoneId);
         const notes = buildScaleNotesFromDefinition(def);
         state.melody.latchScale = {
             def: { ...def, degrees: def.degrees.slice(0) },
@@ -11428,7 +13592,7 @@ function initEnhancedPianoRoll() {
             dragData.resizeStep = stepIdx;
             dragData.resizeStartDur = getMelodyNoteLength(stepIdx);
         } else if (e.shiftKey) {
-            // Modalità SELEZIONE (Marquee)
+            // Modalit? SELEZIONE (Marquee)
             dragData.mode = 'select';
             if (!e.shiftKey) state.melody.roll.selection.clear();
             // show selection rect and store start
@@ -11443,7 +13607,7 @@ function initEnhancedPianoRoll() {
                 selectionRect.style.display = 'block';
             }
         } else if (isOnNote) {
-            // Modalità SPOSTAMENTO (Move)
+            // Modalit? SPOSTAMENTO (Move)
             dragData.mode = 'move';
             if (!state.melody.roll.selection.has(stepIdx)) {
                 state.melody.roll.selection.clear();
@@ -11563,7 +13727,7 @@ function initEnhancedPianoRoll() {
                         const shifted = itemNotes.map(n => getNearestScaleNote(n + delta));
                         packed = packMelodyStepNotes(shifted);
                     }
-                    // Se la destinazione è diversa e libera, sposta la nota
+                    // Se la destinazione ? diversa e libera, sposta la nota
                     if (newStep !== item.idx && isMelodyStepEmpty(state.melody.notes[newStep])) {
                         state.melody.notes[item.idx] = null;
                         state.melody.notes[newStep] = packed;
@@ -11680,7 +13844,7 @@ function initEnhancedPianoRoll() {
             // Aggiorna la preview solo alla fine del movimento
             updateMelodyPreview();
         }
-        // Rigenerazione AI solo se l'utente ha abilitato auto-continue e la melodia è manuale/importata
+        // Rigenerazione AI solo se l'utente ha abilitato auto-continue e la melodia ? manuale/importata
         if (state.melody?.continue?.auto && state.melody.imported) {
             regenerateMelodyContinuation();
         }
@@ -12010,7 +14174,7 @@ function updateMelodyLiveNotes(rootNote, options = {}) {
 function applyMelodyEdit(stepIdx, rootNote, options = {}) {
     if (state.melody.latchEnabled) return;
 
-        // Se la melodia è vuota, inizializzala invece di uscire
+        // Se la melodia ? vuota, inizializzala invece di uscire
         if (!state.melody.notes.length) {
             state.melody.notes = new Array(state.melody.length || 16).fill(null);
         }
@@ -12543,7 +14707,7 @@ function arpNoteOn(noteObj, stepMs, stepIdx, offsetMs = 0, zoneId = null) {
     const fadeGain = getFadeGainForZone(z);
     const output = getZoneOutput(z);
     if (!output) return;
-    const chan = allocateMpeChannel(z);
+    const chan = allocateMpeChannelForPlay(z, output, { allowStealHeld: true });
     if (!chan) {
         els.midiStatus.innerText = 'MPE CHANNELS FULL';
         return;
@@ -12777,7 +14941,7 @@ function removeArpNotes(noteObjs) {
     if (!getArpState('A').notes.length && !getArpState('B').notes.length) state.arpHoldTouches = [];
 }
 
-function getMPEData(e, voice = null, forceSnap = false) {
+function getMPEData(e, voice = null, forceSnap = false, inputMode = null) {
     const zoneId = voice?.zone || getZoneForY(e.clientY);
     const numOct = getVisibleOctavesForZone(zoneId);
     let round = parseInt(els.roundRate.value, 10) / 100;
@@ -12788,14 +14952,24 @@ function getMPEData(e, voice = null, forceSnap = false) {
         deadCenter = false;
     }
     const grid = getGridDegrees(zoneId);
-    const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * 12) + grid.root;
-    const totalNotes = numOct * grid.stepsPerOct;
-    const stepExact = ((e.clientX - state.canvasRect.left) / state.canvasRect.width) * totalNotes;
+    const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * grid.periodSemitones) + grid.root;
+    const stepOrder = getCircleStepOrderForGrid(zoneId, grid);
+    const circleSteps = Math.max(1, stepOrder.length);
+    const totalNotes = Math.max(1, numOct * circleSteps);
+    const mode = (inputMode === 'circle' || inputMode === 'keyboard')
+        ? inputMode
+        : getPointerPitchMappingMode(zoneId);
+    const linearExact = ((e.clientX - state.canvasRect.left) / Math.max(1, state.canvasRect.width)) * totalNotes;
+    const stepExact = mode === 'circle'
+        ? getCircleStepExactForPointer(e.clientX, e.clientY, zoneId, totalNotes, circleSteps)
+        : linearExact;
     const centerExact = stepExact - 0.5;
     const stepIdx = Math.max(0, Math.min(totalNotes - 1, Math.floor(centerExact)));
     const stepFrac = centerExact - stepIdx;
-    const noteA = getGridNoteAt(stepIdx, grid.degrees, baseMIDI);
-    const noteB = getGridNoteAt(Math.min(stepIdx + 1, totalNotes - 1), grid.degrees, baseMIDI);
+    const mapA = getCircleLayoutNoteAt(stepIdx, zoneId, grid, baseMIDI, numOct);
+    const mapB = getCircleLayoutNoteAt(Math.min(stepIdx + 1, totalNotes - 1), zoneId, grid, baseMIDI, numOct);
+    const noteA = mapA.note;
+    const noteB = mapB.note;
     const currentExact = noteA + ((noteB - noteA) * stepFrac);
     
     let finalExact = currentExact;
@@ -12853,15 +15027,69 @@ function makeVoiceFromNote(noteFloat, zoneId = null) {
     return { note: midiNote, basePb };
 }
 
+function getSpiralReferenceMidi(zoneId, currentNoteFloat = null) {
+    const anchor = state.audio?.spiral?.anchorMode || 'fixed';
+    if (anchor === 'left-edge') {
+        const z = getScaleZoneId(zoneId);
+        const grid = getGridDegrees(z);
+        const periodSemis = Number.isFinite(grid?.periodSemitones) && grid.periodSemitones > 0 ? grid.periodSemitones : 12;
+        const root = Number.isFinite(grid?.root) ? grid.root : 0;
+        return 48 + (getCurrentOctaveForZone(z) * periodSemis) + root;
+    }
+    const def = getScaleDefinition(zoneId);
+    const rootPc = Number.isFinite(def?.root) ? def.root : 0;
+    return 60 + rootPc;
+}
+
+function getSpiralMidiPbOffset(m, voice) {
+    if (!voice) return 0;
+    const zoneId = getAudioZoneId(voice.zone || 'A');
+    if (!shouldUseSpiralForZone(zoneId)) return 0;
+    const pbRange = Math.max(1, getPbRangeForZone(zoneId));
+    const defectCents = Number(state.audio?.spiral?.defectCents) || 0;
+    if (!Number.isFinite(defectCents) || defectCents === 0) return 0;
+
+    const baseNoteFloat = getVoiceNoteFloat(voice);
+    const livePb = Number.isFinite(m?.pbValue) ? m.pbValue : 8192;
+    const liveDetuneSemis = (livePb - 8192) * (pbRange / 8192);
+    const currentNoteFloat = baseNoteFloat + liveDetuneSemis;
+    const refMidi = getSpiralReferenceMidi(zoneId, currentNoteFloat);
+    const octaveIndex = Math.floor((currentNoteFloat - refMidi) / 12);
+    const spiralSemis = -(defectCents / 100) * octaveIndex;
+    return Math.round(spiralSemis * (8192 / pbRange));
+}
+
 function getVoicePb(m, voice) {
     const base = voice.basePb || 0;
-    return clampPb(m.pbValue + base);
+    const spiralOffset = getSpiralMidiPbOffset(m, voice);
+    return clampPb(m.pbValue + base + spiralOffset);
 }
 
 function getVoiceNoteFloat(voice) {
     const pbRange = getPbRangeForZone(voice?.zone || null);
     const basePb = voice.basePb || 0;
     return (voice.note || 0) + (basePb * (pbRange / 8192));
+}
+
+function refreshSpiralPitchForActiveVoices() {
+    if (!state.audio?.voices) return;
+    const touched = new Set();
+    state.audio.voices.forEach(v => {
+        if (!v?.chan || touched.has(v.chan)) return;
+        touched.add(v.chan);
+        updateChannelPitch(v.chan);
+    });
+    state.activeTouches.forEach(touch => {
+        const m = touch?.lastM || { pbValue: 8192, slide: 0, press: 90 };
+        const voices = Array.isArray(touch?.voices) ? touch.voices : [];
+        voices.forEach(v => {
+            if (!v?.chan) return;
+            const out = getZoneOutput(v.zone || touch.zone || 'A');
+            if (!out) return;
+            const pb = getVoicePb(m, v);
+            sendMidi([0xE0 + v.chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], out);
+        });
+    });
 }
 
 function getNearestScaleNote(exact, zoneId = null) {
@@ -13782,23 +16010,30 @@ function snapHoldVoicesToScale(t) {
 
 function drawGridBaseToContext(gctx, width, height, grid, numOct, noteW, baseMIDI, zoneId = null) {
     const mode = getScaleMode(zoneId);
+    const z = getScaleZoneId(zoneId || 'A');
+    const stepOrder = getCircleStepOrderForGrid(z, grid);
+    const stepsPerOct = Math.max(1, stepOrder.length);
+    const totalSteps = numOct * stepsPerOct;
     
     gctx.clearRect(0, 0, width, height);
-    for (let i = 0; i < (numOct * grid.stepsPerOct); i++) {
-        const n = getGridNoteAt(i, grid.degrees, baseMIDI);
+    for (let i = 0; i < totalSteps; i++) {
+        const slot = i % stepsPerOct;
+        const stepInGrid = stepOrder[slot] ?? slot;
+        const n = getCircleLayoutNoteAt(i, z, grid, baseMIDI, numOct).note;
         const x = i * noteW;
-        const isOctStart = (i % grid.stepsPerOct === 0);
+        const isOctStart = (i % stepsPerOct === 0);
         const nRound = Math.round(n);
         const isRoot = (nRound % 12 === grid.root);
         const isMicro = (mode === 'microtonal' || mode === 'custom');
         gctx.fillStyle = isRoot ? 'rgba(255, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.15)';
         gctx.fillRect(x, 0, noteW, height);
-        const isOctLine = isOctStart || (isMicro && Math.abs((grid.degrees[i % grid.stepsPerOct] || 0) - 12) < 0.0001);
+        const period = grid.periodSemitones || 12;
+        const isOctLine = isOctStart || (isMicro && Math.abs((grid.degrees[stepInGrid] || 0) - period) < 0.0001);
         gctx.strokeStyle = isOctLine ? '#ff5555' : (isRoot ? '#ff0000' : '#666');
         gctx.lineWidth = isOctLine ? 3 : (isRoot ? 3 : 1);
         gctx.beginPath(); gctx.moveTo(x, 0); gctx.lineTo(x, height); gctx.stroke();
-        const degree = grid.degrees[i % grid.stepsPerOct];
-        if (!(degree === 12 && i < (numOct * grid.stepsPerOct - 1))) {
+        const degree = grid.degrees[stepInGrid];
+        if (!(Math.abs(degree - period) < 0.0001 && i < (totalSteps - 1))) {
             const fontSize = Math.max(13, Math.floor(noteW * 0.5));
             gctx.font = `bold ${fontSize}px ${CANVAS_FONT_FAMILY}`;
             gctx.fillStyle = isRoot ? '#ff4444' : '#ffffff';
@@ -13813,7 +16048,8 @@ function drawGridBaseToContext(gctx, width, height, grid, numOct, noteW, baseMID
             labelYs.forEach(noteY => {
                 drawNoteLabelWithAccidental(gctx, labelInfo, x + noteW/2, noteY, fontSize, gctx.fillStyle, '#000', 4, allowAccidental, Math.max(12, noteW - 6));
                 if (mode !== 'diatonic') {
-                    const cents = Math.round((degree % 12) * 100);
+                    const period = grid.periodSemitones || 12;
+                    const cents = Math.round(((degree % period) + period) % period * 100);
                     const centsFont = Math.max(6, Math.floor(fontSize * 0.4));
                     gctx.font = `bold ${centsFont}px ${CANVAS_FONT_FAMILY}`;
                     gctx.textAlign = 'center';
@@ -13833,19 +16069,22 @@ function updateGridCache(zoneId = null) {
     const z = getScaleZoneId(zoneId);
     const numOct = getVisibleOctavesForZone(z);
     const grid = getGridDegrees(z);
+    const stepOrder = getCircleStepOrderForGrid(z, grid);
+    const stepsPerOct = Math.max(1, stepOrder.length);
     const octave = getCurrentOctaveForZone(z);
-    const baseMIDI = 48 + (octave * 12) + grid.root;
-    const totalNotes = numOct * grid.stepsPerOct;
+    const baseMIDI = 48 + (octave * grid.periodSemitones) + grid.root;
+    const totalNotes = numOct * stepsPerOct;
     const width = Math.floor(state.canvasRect.width);
     const height = Math.floor(state.canvasRect.height);
     const noteW = width / totalNotes;
     const key = [
         z, width, height, numOct, octave, grid.root, grid.degrees.join(','),
+        stepOrder.join(','),
         getScaleMode(z), isDualModeEnabled() ? 'dual' : 'single'
     ].join('|');
     const cols = [];
     for (let i = 0; i < totalNotes; i++) {
-        const n = getGridNoteAt(i, grid.degrees, baseMIDI);
+        const n = getCircleLayoutNoteAt(i, z, grid, baseMIDI, numOct).note;
         cols.push({ note: n, x: (i * noteW) + (noteW / 2) });
     }
     const needBg = !state.gridCache || state.gridCache.key !== key;
@@ -13861,7 +16100,10 @@ function updateGridCache(zoneId = null) {
 }
 
 function getNearestNoteX(noteFloat, zoneId = null) {
-    if (!state.gridCache || (zoneId && state.gridCache.zoneId !== getScaleZoneId(zoneId))) {
+    const z = getScaleZoneId(zoneId);
+    const circlePt = getCircleVisualPointForNote(noteFloat, z);
+    if (circlePt) return circlePt.x;
+    if (!state.gridCache || (zoneId && state.gridCache.zoneId !== z)) {
         updateGridCache(zoneId);
     }
     if (!state.gridCache || !state.gridCache.cols.length) return null;
@@ -13880,17 +16122,78 @@ function getNearestNoteX(noteFloat, zoneId = null) {
 
 function getHeldVoiceX(voice) {
     const m = voice?.lastM;
-    if (!voice?.chordHold && els.holdDetune?.checked && m && Number.isFinite(m.x)) return m.x;
+    const zoneId = voice?.zone || 'A';
     const noteFloat = getVoiceNoteFloat(voice);
-    return getNearestNoteX(noteFloat, voice?.zone || 'A') ?? m?.x ?? 0;
+    const circlePt = getCircleVisualPointForNote(noteFloat, zoneId);
+    if (circlePt) return circlePt.x;
+    if (!voice?.chordHold && els.holdDetune?.checked && m && Number.isFinite(m.x)) return m.x;
+    return getNearestNoteX(noteFloat, zoneId) ?? m?.x ?? 0;
 }
 
 function getArpHoldNoteX(noteObj, m) {
-    if (els.holdDetune?.checked && m && Number.isFinite(m.x)) return m.x;
     const noteFloat = noteObj?.noteFloat ?? noteObj?.note;
-    return getNearestNoteX(noteFloat, noteObj?.zone || 'A') ?? m?.x ?? 0;
+    const zoneId = noteObj?.zone || 'A';
+    const circlePt = getCircleVisualPointForNote(noteFloat, zoneId);
+    if (circlePt) return circlePt.x;
+    if (els.holdDetune?.checked && m && Number.isFinite(m.x)) return m.x;
+    return getNearestNoteX(noteFloat, zoneId) ?? m?.x ?? 0;
 }
 
+const MICRO_DEBUG_STORAGE_KEY = 'genca_micro_debug_overlay_v1';
+const MICRO_DEBUG_URL_KEY = 'debugMicro';
+let microDebugEnabled = false;
+
+(function initMicroDebugFlag() {
+    try {
+        const qp = new URLSearchParams(window?.location?.search || '');
+        if (qp.has(MICRO_DEBUG_URL_KEY)) {
+            const v = String(qp.get(MICRO_DEBUG_URL_KEY) || '1').toLowerCase();
+            microDebugEnabled = !(v === '0' || v === 'false' || v === 'off');
+        } else {
+            microDebugEnabled = localStorage.getItem(MICRO_DEBUG_STORAGE_KEY) === '1';
+        }
+    } catch (_) {
+        microDebugEnabled = false;
+    }
+})();
+
+function setMicroDebugEnabled(enabled) {
+    microDebugEnabled = !!enabled;
+    try { localStorage.setItem(MICRO_DEBUG_STORAGE_KEY, microDebugEnabled ? '1' : '0'); } catch (_) {}
+    requestDraw();
+}
+
+document.addEventListener('keydown', (e) => {
+    if (!e.altKey) return;
+    if ((e.key || '').toLowerCase() !== 'd') return;
+    e.preventDefault();
+    setMicroDebugEnabled(!microDebugEnabled);
+    if (els?.midiStatus) {
+        els.midiStatus.innerText = microDebugEnabled ? 'MICRO DEBUG ON' : 'MICRO DEBUG OFF';
+    }
+});
+
+function drawMicroDebugLabel(x, y, text, color = '#66e0ff') {
+    if (!microDebugEnabled || !text) return;
+    const padX = 6;
+    const padY = 3;
+    ctx.save();
+    ctx.font = `bold 11px ${CANVAS_FONT_FAMILY}`;
+    const w = Math.ceil(ctx.measureText(text).width + (padX * 2));
+    const h = 18;
+    const lx = Math.round(x - (w / 2));
+    const ly = Math.round(y - h);
+    ctx.fillStyle = 'rgba(0,0,0,0.65)';
+    ctx.fillRect(lx, ly, w, h);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(lx + 0.5, ly + 0.5, w - 1, h - 1);
+    ctx.fillStyle = '#e7f7ff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, x, ly + (h / 2) + 0.5);
+    ctx.restore();
+}
 function drawNoteBubble(x, y, radius, color, label) {
     ctx.shadowBlur = 20;
     ctx.shadowColor = color;
@@ -13905,6 +16208,62 @@ function drawNoteBubble(x, y, radius, color, label) {
         ctx.textAlign = 'center';
         ctx.fillText(label, x, y - radius - 16);
     }
+}
+
+function getVisualBubbleRadius(m, base = 12, span = 22) {
+    if (Number.isFinite(m?.circleYNorm)) {
+        return base + (Math.max(0, Math.min(1, m.circleYNorm)) * span);
+    }
+    const press = Number.isFinite(m?.press) ? m.press : 90;
+    return base + ((Math.max(0, Math.min(127, press)) / 127) * span);
+}
+
+function getCircleTouchVisualPoint(m, fallbackX, fallbackY, zoneId) {
+    if (isCircleDiesisViewActive(zoneId) && Number.isFinite(m?.x) && Number.isFinite(m?.y)) {
+        const z = getScaleZoneId(zoneId || 'A');
+        const grid = getGridDegrees(z);
+        const numOct = getVisibleOctavesForZone(z);
+        const circleSteps = Math.max(1, getCircleStepOrderForGrid(z, grid).length);
+        const totalNotes = Math.max(1, numOct * circleSteps);
+        const metrics = getCirclePointerMetrics(m.x, m.y, z, totalNotes, circleSteps);
+        if (metrics) {
+            const ring = Number.isFinite(m?.circleRing)
+                ? Math.max(0, Math.min(metrics.rings - 1, Math.floor(m.circleRing)))
+                : metrics.ring;
+            const ringInset = Math.max(1, metrics.ringW * 0.12);
+            const r0 = metrics.minR + (ring * metrics.ringW) + ringInset;
+            const r1 = metrics.minR + ((ring + 1) * metrics.ringW) - ringInset;
+            const distClamped = Math.max(r0, Math.min(r1, metrics.dist));
+            const ux = metrics.dist > 1e-6 ? (metrics.dx / metrics.dist) : 0;
+            const uy = metrics.dist > 1e-6 ? (metrics.dy / metrics.dist) : -1;
+            return {
+                x: metrics.cxLocal + (ux * distClamped),
+                y: metrics.cyLocal + (uy * distClamped)
+            };
+        }
+    }
+    return { x: fallbackX, y: fallbackY };
+}
+
+function getRenderedBubblePointForNote({
+    noteFloat,
+    zoneId = 'A',
+    m = null,
+    fallbackX = 0,
+    fallbackY = 0,
+    radius = 10,
+    height = null,
+    followTouch = true
+} = {}) {
+    const circlePt = Number.isFinite(noteFloat) ? getCircleVisualPointForNote(noteFloat, zoneId) : null;
+    const baseX = circlePt ? circlePt.x : fallbackX;
+    const baseY = circlePt ? circlePt.y : fallbackY;
+    const rawPt = (followTouch && m)
+        ? getCircleTouchVisualPoint(m, baseX, baseY, zoneId)
+        : { x: baseX, y: baseY };
+    const h = Number.isFinite(height) ? height : (state.canvasRect?.height ?? canvas?.height ?? 0);
+    const y = (h > 0) ? getClampedVisualY(rawPt.y, radius, h) : rawPt.y;
+    return { x: rawPt.x, y, circlePt };
 }
 
 
@@ -13952,12 +16311,34 @@ function getCanvasBottomY(zoneId) {
 }
 
 function getYDataFromEvent(e, zoneId) {
-    const bounds = getZoneBounds(zoneId || getZoneForY(e.clientY));
+    const z = zoneId || getZoneForY(e.clientY);
+    const bounds = getZoneBounds(z);
     const top = bounds.top;
     const bottom = bounds.bottom;
     const yRange = Math.max(1, bottom - top);
     const yClamped = Math.max(top, Math.min(e.clientY, bottom));
-    const yNorm = Math.max(0, Math.min(1, 1 - ((yClamped - top) / yRange)));
+    let yNorm = Math.max(0, Math.min(1, 1 - ((yClamped - top) / yRange)));
+    let circleRing = null;
+    let circleRingSide = null;
+
+    // Circle View: map expressive Y to radial distance with distinct inner/outer ring curves.
+    if (isCircleDiesisViewActive(z)) {
+        const grid = getGridDegrees(z);
+        const numOct = getVisibleOctavesForZone(z);
+        const stepCount = Math.max(1, getCircleStepOrderForGrid(z, grid).length);
+        const totalNotes = Math.max(1, numOct * stepCount);
+        const metrics = getCirclePointerMetrics(e.clientX, e.clientY, z, totalNotes, stepCount);
+        if (metrics) {
+            circleRing = metrics.ring;
+            circleRingSide = metrics.ringSide;
+            const raw = metrics.ringNorm;
+            if (metrics.ringSide === 'outer') {
+                yNorm = Math.pow(raw, 1.35);
+            } else {
+                yNorm = Math.pow(raw, 0.78);
+            }
+        }
+    }
     const dz = parseInt(els.yDeadzone.value, 10) / 100;
     let slideNorm = yNorm;
     if (dz > 0) {
@@ -13970,7 +16351,7 @@ function getYDataFromEvent(e, zoneId) {
     let pressNorm = useYForVelocity ? slideNorm : Math.min(((e.width + e.height) / sens), 1.0);
     pressNorm = applyCurve(pressNorm);
     const press = Math.floor(pressNorm * 127);
-    return { slide, press, y: e.clientY, yNorm };
+    return { slide, press, y: e.clientY, yNorm, circleRing, circleRingSide, circleYNorm: yNorm };
 }
 
 function getHoldLastMForZone(t, zoneId) {
@@ -14308,61 +16689,179 @@ function fadeOutZone(zoneId = null) {
     }, intervalMs);
 }
 
-function mapMidiNoteToScale(note, zoneId = null) {
-    const def = getScaleDefinition(zoneId);
-    const degrees = def.degrees;
-    const rel = note - def.root;
-    const oct = Math.floor(rel / 12);
+function findNearestScaleCandidate(note, def) {
+    const degrees = Array.isArray(def?.degrees) ? def.degrees : [];
+    if (!degrees.length || !Number.isFinite(note)) return note;
+    const root = Number.isFinite(def?.root) ? def.root : 0;
+    const period = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const rel = note - root;
+    const targetOct = Math.floor(rel / period);
     let best = null;
     let bestDist = Infinity;
-    for (let o = oct - 1; o <= oct + 1; o++) {
-        const base = def.root + (o * 12);
-        degrees.forEach(d => {
+    let bestOctDist = Infinity;
+    const EPS = 1e-7;
+
+    for (let o = targetOct - 2; o <= targetOct + 2; o++) {
+        const base = root + (o * period);
+        const octDist = Math.abs(o - targetOct);
+        for (let i = 0; i < degrees.length; i++) {
+            const d = degrees[i];
             const cand = base + d;
             const dist = Math.abs(cand - note);
-            if (dist < bestDist) {
+            if (dist < bestDist - EPS) {
                 bestDist = dist;
+                bestOctDist = octDist;
                 best = cand;
+            } else if (Math.abs(dist - bestDist) <= EPS) {
+                if (octDist < bestOctDist) {
+                    bestOctDist = octDist;
+                    best = cand;
+                }
             }
-        });
+        }
     }
+
     return best == null ? note : best;
+}
+
+function mapMidiNoteToScale(note, zoneId = null) {
+    const def = getScaleDefinition(zoneId);
+    return findNearestScaleCandidate(note, def);
 }
 
 function mapMidiNoteToScaleFromMidiIndex(note, baseNote, zoneId = null) {
     const def = getScaleDefinition(zoneId);
-    const rawDegrees = def.degrees || [];
-    const degrees = rawDegrees.filter(d => Math.abs(d - 12) > 0.0001);
-    const useDegrees = degrees.length ? degrees : rawDegrees;
-    const stepsPerOct = useDegrees.length;
-    if (!stepsPerOct) return note;
+    const useDegrees = Array.isArray(def?.degrees) ? def.degrees : [];
+    const stepsPerPeriod = useDegrees.length;
+    if (!stepsPerPeriod) return note;
+    const period = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
     const base = (Number.isFinite(baseNote) && baseNote >= 0 && baseNote <= 127) ? baseNote : def.root;
     const stepIndex = Math.round(note - base);
-    const oct = Math.floor(stepIndex / stepsPerOct);
-    let idx = stepIndex % stepsPerOct;
-    if (idx < 0) idx += stepsPerOct;
+    const periodIndex = Math.floor(stepIndex / stepsPerPeriod);
+    let idx = stepIndex % stepsPerPeriod;
+    if (idx < 0) idx += stepsPerPeriod;
     const deg = useDegrees[idx];
-    return base + (oct * 12) + deg;
+    return base + (periodIndex * period) + deg;
 }
 
 function mapMidiNoteToScaleWithDef(note, def) {
-    const degrees = def.degrees || [];
-    const rel = note - def.root;
-    const oct = Math.floor(rel / 12);
-    let best = null;
+    return findNearestScaleCandidate(note, def);
+}
+
+function getClosestScaleIndex(scaleNotes, target) {
+    if (!scaleNotes || !scaleNotes.length || !Number.isFinite(target)) return -1;
+    let bestIdx = 0;
     let bestDist = Infinity;
-    for (let o = oct - 1; o <= oct + 1; o++) {
-        const base = def.root + (o * 12);
-        degrees.forEach(d => {
-            const cand = base + d;
-            const dist = Math.abs(cand - note);
-            if (dist < bestDist) {
-                bestDist = dist;
-                best = cand;
-            }
-        });
+    for (let i = 0; i < scaleNotes.length; i++) {
+        const n = scaleNotes[i];
+        if (!Number.isFinite(n)) continue;
+        const d = Math.abs(n - target);
+        if (d < bestDist) {
+            bestDist = d;
+            bestIdx = i;
+        }
     }
-    return best == null ? note : best;
+    return bestIdx;
+}
+
+function getScaleNoteByIndexOffset(scaleNotes, rootIdx, stepOffset) {
+    if (!Array.isArray(scaleNotes) || !scaleNotes.length) return null;
+    let idx = rootIdx + stepOffset;
+    if (idx < 0) idx = 0;
+    if (idx >= scaleNotes.length) idx = scaleNotes.length - 1;
+    const note = scaleNotes[idx];
+    return Number.isFinite(note) ? note : null;
+}
+
+function findClosestDegreeSemisByTargetCents(def, targetCents) {
+    const periodSemis = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const degrees = normalizeDegreesForPeriod(def?.degrees || [], periodSemis);
+    if (!degrees.length) return 0;
+    let best = degrees[0];
+    let bestDist = Infinity;
+    for (let i = 0; i < degrees.length; i++) {
+        const d = degrees[i];
+        const cents = d * 100;
+        const dist = Math.abs(cents - targetCents);
+        if (dist < bestDist) {
+            bestDist = dist;
+            best = d;
+        }
+    }
+    return best;
+}
+
+function getUniformScaleStepContext(def) {
+    const periodSemis = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const degrees = normalizeDegreesForPeriod(def?.degrees || [], periodSemis);
+    const stepsPerPeriod = degrees.length;
+    if (stepsPerPeriod < 2) return null;
+    const stepSemis = periodSemis / stepsPerPeriod;
+    if (!(stepSemis > 0)) return null;
+    const tolerance = Math.max(0.012, stepSemis * 0.03);
+    for (let i = 0; i < stepsPerPeriod; i += 1) {
+        const expected = i * stepSemis;
+        if (Math.abs((degrees[i] ?? 0) - expected) > tolerance) return null;
+    }
+    return { periodSemis, degrees, stepsPerPeriod, stepSemis };
+}
+
+function degreeSemisFromStepIndex(stepIndex, stepCtx) {
+    const n = Math.round(stepIndex);
+    const steps = stepCtx.stepsPerPeriod;
+    let periodShift = Math.floor(n / steps);
+    let idx = n % steps;
+    if (idx < 0) {
+        idx += steps;
+        periodShift -= 1;
+    }
+    return (periodShift * stepCtx.periodSemis) + (stepCtx.degrees[idx] ?? 0);
+}
+
+function nearestStepIndexForTargetCents(stepCtx, targetCents) {
+    const stepCents = stepCtx.stepSemis * 100;
+    if (!(stepCents > 0)) return 0;
+    const raw = targetCents / stepCents;
+    const lo = Math.floor(raw);
+    const hi = Math.ceil(raw);
+    const dLo = Math.abs(targetCents - (lo * stepCents));
+    const dHi = Math.abs((hi * stepCents) - targetCents);
+    return dLo <= dHi ? lo : hi;
+}
+
+function getSpecialChordDegreeOffsets(def) {
+    const stepCtx = getUniformScaleStepContext(def);
+    if (stepCtx) {
+        const profile = SPECIAL_CHORD_STEP_PROFILES[stepCtx.stepsPerPeriod];
+        const toSemis = (step) => degreeSemisFromStepIndex(step, stepCtx);
+        if (profile) {
+            return {
+                fifth: toSemis(profile.fifth),
+                major3: toSemis(profile.major3),
+                neutral3: toSemis(profile.neutral3),
+                superMajor3: toSemis(profile.superMajor3),
+                subMinor3: toSemis(profile.subMinor3),
+                shimmerOct: toSemis(profile.shimmerOct)
+            };
+        }
+        return {
+            fifth: toSemis(nearestStepIndexForTargetCents(stepCtx, CHORD_SMART_TARGETS.fifth)),
+            major3: toSemis(nearestStepIndexForTargetCents(stepCtx, CHORD_SMART_TARGETS.major3)),
+            neutral3: toSemis(nearestStepIndexForTargetCents(stepCtx, CHORD_SMART_TARGETS.neutral3)),
+            superMajor3: toSemis(nearestStepIndexForTargetCents(stepCtx, CHORD_SMART_TARGETS.superMajor3)),
+            subMinor3: toSemis(nearestStepIndexForTargetCents(stepCtx, CHORD_SMART_TARGETS.subMinor3)),
+            shimmerOct: toSemis(nearestStepIndexForTargetCents(stepCtx, (stepCtx.periodSemis * 100) - DIESIS_CENTS))
+        };
+    }
+    const periodSemis = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    return {
+        fifth: findClosestDegreeSemisByTargetCents(def, CHORD_SMART_TARGETS.fifth),
+        major3: findClosestDegreeSemisByTargetCents(def, CHORD_SMART_TARGETS.major3),
+        neutral3: findClosestDegreeSemisByTargetCents(def, CHORD_SMART_TARGETS.neutral3),
+        superMajor3: findClosestDegreeSemisByTargetCents(def, CHORD_SMART_TARGETS.superMajor3),
+        subMinor3: findClosestDegreeSemisByTargetCents(def, CHORD_SMART_TARGETS.subMinor3),
+        shimmerOct: periodSemis - (DIESIS_CENTS / 100)
+    };
 }
 
 function computeChordNotes(rootNote, zoneId = null) {
@@ -14370,30 +16869,105 @@ function computeChordNotes(rootNote, zoneId = null) {
     const perf = ensurePerformanceConfigForZone(z);
     const chordMode = perf.chordMode || (els.chordMode?.value || 'off');
     const zoneScale = state.scaleNotesByZone[z] || state.scaleNotes;
-    const rootIdx = zoneScale.notes.indexOf(rootNote);
+    const def = getScaleDefinition(z);
+    const branch = getChordBranchForDef(def);
+
+    let rootIdx = zoneScale.notes.indexOf(rootNote);
+    if (rootIdx < 0) rootIdx = getClosestScaleIndex(zoneScale.notes, rootNote);
+
     let chordNotes = [];
-    if (chordMode === 'auto' || chordMode === 'auto7') {
-        const diatonic = chordMode === 'auto7' ? [0, 2, 4, 6] : [0, 2, 4];
-        if (rootIdx >= 0) {
-            chordNotes = diatonic.map(step => zoneScale.notes[rootIdx + step]).filter(n => n !== undefined);
+
+    if (branch === 'A') {
+        if (chordMode === 'auto' || chordMode === 'auto7') {
+            const diatonic = chordMode === 'auto7' ? [0, 2, 4, 6] : [0, 2, 4];
+            if (rootIdx >= 0) {
+                chordNotes = diatonic
+                    .map(step => getScaleNoteByIndexOffset(zoneScale.notes, rootIdx, step))
+                    .filter(Number.isFinite);
+            }
+        } else if (chordMode === 'neutralTriad' || chordMode === 'superMajorTriad' || chordMode === 'subMinorTriad' || chordMode === 'shimmer') {
+            const offsets = getSpecialChordDegreeOffsets(def);
+            if (chordMode === 'neutralTriad') {
+                chordNotes = [rootNote, rootNote + offsets.neutral3, rootNote + offsets.fifth];
+            } else if (chordMode === 'superMajorTriad') {
+                chordNotes = [rootNote, rootNote + offsets.superMajor3, rootNote + offsets.fifth];
+            } else if (chordMode === 'subMinorTriad') {
+                chordNotes = [rootNote, rootNote + offsets.subMinor3, rootNote + offsets.fifth];
+            } else {
+                chordNotes = [rootNote, rootNote + offsets.major3, rootNote + offsets.neutral3, rootNote + offsets.shimmerOct];
+            }
+        } else {
+            const chordSteps = CHORDS[chordMode] || CHORDS.off;
+            chordNotes = chordSteps.map(step => rootNote + step);
+        }
+
+        if (chordNotes.length) {
+            const snapped = chordNotes.map(note => mapMidiNoteToScaleWithDef(note, def));
+            const seen = new Set();
+            chordNotes = snapped.filter(note => {
+                const key = Number.isFinite(note) ? note.toFixed(4) : String(note);
+                if (seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
         }
     } else {
-        const chordSteps = CHORDS[chordMode] || CHORDS.off;
-        chordNotes = chordSteps.map(step => rootNote + step);
-    }
-    if (chordNotes.length) {
-        const snapped = chordNotes.map(note => mapMidiNoteToScale(note, z));
+        const step2 = Math.max(1, parseInt(perf.chordStep2, 10) || 4);
+        const step3 = Math.max(step2 + 1, parseInt(perf.chordStep3, 10) || 7);
+        let offsets = [0, step2, step3];
+        if (chordMode === 'off') {
+            offsets = [0];
+        } else if (chordMode === 'stepWide') {
+            offsets = [0, step2 + 2, step3 + 4];
+        }
+        if (rootIdx >= 0) {
+            chordNotes = offsets
+                .map(off => getScaleNoteByIndexOffset(zoneScale.notes, rootIdx, off))
+                .filter(Number.isFinite);
+        }
         const seen = new Set();
-        chordNotes = snapped.filter(note => {
+        chordNotes = chordNotes.filter(note => {
             const key = Number.isFinite(note) ? note.toFixed(4) : String(note);
             if (seen.has(key)) return false;
             seen.add(key);
             return true;
         });
     }
-    const inversion = parseInt(perf.chordInversion, 10) || 0;
+
+    if (!chordNotes.length && Number.isFinite(rootNote)) chordNotes = [rootNote];
+
+    const polyMeta = [];
+    chordNotes = chordNotes.map((note, idx) => {
+        const resolved = resolvePolyMicroNote(note, {
+            zoneId: z,
+            rootNote,
+            degreeIndex: idx,
+            gesture: { kind: 'chord' }
+        });
+        polyMeta.push({
+            branchId: resolved.branchId,
+            tuningId: resolved.tuningId,
+            anchorLock: !!resolved.anchorLock
+        });
+        return resolved.note;
+    });
+
+    const inversion = (branch === 'A') ? (parseInt(perf.chordInversion, 10) || 0) : 0;
     const spread = parseInt(perf.chordSpread, 10) || 0;
-    return applyChordVoicing(chordNotes, inversion, spread);
+    const pairs = chordNotes.map((note, i) => ({ note, meta: polyMeta[i] || null }));
+    const inv = Math.min(inversion, Math.max(0, pairs.length - 1));
+    for (let i = 0; i < inv; i += 1) {
+        const x = pairs.shift();
+        if (x) {
+            x.note += 12;
+            pairs.push(x);
+        }
+    }
+    for (let i = 0; i < pairs.length; i += 1) {
+        pairs[i].note += i * spread;
+    }
+    state.polyMicroLastChordMetaByZone[z] = pairs.map((p) => p.meta || null);
+    return pairs.map((p) => p.note);
 }
 
 function refreshArpNotes(noteObjs, m, rootNote, zoneId) {
@@ -14464,7 +17038,7 @@ function keepArpHoldAsHeld() {
             if (!output) return;
             const noteFloat = n.noteFloat ?? n.note ?? 60;
             const voice = makeVoiceFromNote(noteFloat, zoneId);
-            const chan = allocateMpeChannel(zoneId);
+            const chan = allocateMpeChannelForPlay(zoneId, output, { allowStealHeld: true });
             if (!chan) return;
             const pb = getVoicePb(m, voice);
             sendMidi([0xB0 + chan - 1, 74, m.slide || 0], output);
@@ -14573,7 +17147,7 @@ function updateHeldChords() {
         const chordNotes = computeChordNotes(rootNote, zoneId);
         ensureVisibleForNotes(chordNotes, { zoneId });
         chordNotes.forEach(noteFloat => {
-            const chan = allocateMpeChannel(zoneId);
+            const chan = allocateMpeChannelForPlay(zoneId, output, { allowStealHeld: true });
             if (!chan) return;
             const voice = makeVoiceFromNote(noteFloat, zoneId);
             const pb = getVoicePb(m, voice);
@@ -14616,13 +17190,14 @@ canvas.addEventListener('pointerdown', e => {
     const uiRect = els.ui.getBoundingClientRect();
     const inUi = els.ui.contains(e.target);
     const zoneId = getZoneForY(e.clientY);
+    const pointerPitchMode = getPointerPitchMappingMode(zoneId);
     if (isDualModeEnabled() && getActiveEditZoneId() !== zoneId) {
         setActiveEditZone(zoneId);
         updateScaleZoneBadge();
     }
     const output = getZoneOutput(zoneId);
     if (!output || (els.ui.classList.contains('active') && e.clientY < (uiRect.height + 5)) || inUi) {
-        if (!output) els.midiStatus.innerText = 'NESSUN MIDI OUT';
+        if (!output) els.midiStatus.innerText = 'NO MIDI OUT';
         state.pointerIds.delete(e.pointerId);
         document.body.classList.remove('note-dragging');
         return;
@@ -14642,7 +17217,7 @@ canvas.addEventListener('pointerdown', e => {
 
         const numOct = getVisibleOctavesForZone(zoneId);
         const grid = getGridDegrees(zoneId);
-        const noteW = state.canvasRect.width / (numOct * grid.stepsPerOct);
+        const noteW = state.canvasRect.width / (numOct * Math.max(1, getCircleStepOrderForGrid(zoneId, grid).length));
         const touchX = e.clientX - state.canvasRect.left;
 
         for (const v of targets) {
@@ -14667,7 +17242,7 @@ canvas.addEventListener('pointerdown', e => {
         }
     }
 
-        const holdHit = findHeldVoiceAt(e.clientX, e.clientY);
+        const holdHit = findHeldVoiceAt(e.clientX, e.clientY) || findHeldVoiceAt(e.clientX, e.clientY, 12);
         if (holdHit) {
             const hv = state.heldVoices[holdHit.idx];
             const holdZone = hv?.zone || zoneId;
@@ -14689,7 +17264,8 @@ canvas.addEventListener('pointerdown', e => {
         // per evitare che la prima interazione su note slave produca un pitch sbagliato
         const voiceNoteFloat = getVoiceNoteFloat(hv);
         const tmpVoice = { initialExact: voiceNoteFloat, lastX: e.clientX, vibratoSpeed: 0 };
-        const m = getMPEData(getClampedPointerEvent(e, holdZone), tmpVoice);
+        const holdPitchMode = getPointerPitchMappingMode(holdZone);
+        const m = getMPEData(getClampedPointerEvent(e, holdZone), tmpVoice, false, holdPitchMode);
         grabbed.forEach(gv => {
             const pb = getVoicePb(m, gv);
             sendMidi([0xE0 + gv.chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], holdOutput);
@@ -14700,11 +17276,12 @@ canvas.addEventListener('pointerdown', e => {
             voices: grabbed.map(gv => ({ chan: gv.chan, note: gv.note, basePb: gv.basePb, group: gv.group, zone: gv.zone || holdZone })), 
             initialExact: voiceNoteFloat, lastX: e.clientX, isGrab: false, isHoldGrab: true, holdGroup: groupId,
             vibratoSpeed: 0, phase: hv.phase || 0, color: hv.color, lastM: m, rootNote: hv.rootNote, isChordHold: !!hv.chordHold,
-            zone: holdZone
+            zone: holdZone,
+            pitchInputMode: holdPitchMode
         });
         return;
     }
-    const arpNoteHit = findArpHoldNoteAt(e.clientX, e.clientY);
+    const arpNoteHit = findArpHoldNoteAt(e.clientX, e.clientY) || findArpHoldNoteAt(e.clientX, e.clientY, 12);
     if (arpNoteHit) {
         const hold = state.arpHoldTouches[arpNoteHit.holdIdx];
         const noteObj = hold.noteObjs[arpNoteHit.noteIdx];
@@ -14715,7 +17292,8 @@ canvas.addEventListener('pointerdown', e => {
         }
         const tmpVoice = { initialExact: noteObj.noteFloat ?? noteObj.note, lastX: e.clientX, vibratoSpeed: 0 };
         const dragZone = hold.zone || zoneId;
-        const m = getMPEData(getClampedPointerEvent(e, dragZone), tmpVoice);
+        const dragPitchMode = getPointerPitchMappingMode(dragZone);
+        const m = getMPEData(getClampedPointerEvent(e, dragZone), tmpVoice, false, dragPitchMode);
         state.activeTouches.set(e.pointerId, { 
             voices: [],
             initialExact: noteObj.noteFloat ?? noteObj.note,
@@ -14729,7 +17307,8 @@ canvas.addEventListener('pointerdown', e => {
             phase: hold.phase || 0,
             color: noteObj.color || hold.color || '#ffaa00',
             lastM: m,
-            zone: noteObj.zone || hold.zone || zoneId
+            zone: noteObj.zone || hold.zone || zoneId,
+            pitchInputMode: dragPitchMode
         });
         return;
     }
@@ -14738,7 +17317,8 @@ canvas.addEventListener('pointerdown', e => {
         const hold = state.arpHoldTouches[arpHoldHit.idx];
         const tmpVoice = { initialExact: hold.lastM?.exact ?? 0, lastX: e.clientX, vibratoSpeed: 0 };
         const dragZone = hold.zone || zoneId;
-        const m = getMPEData(getClampedPointerEvent(e, dragZone), tmpVoice);
+        const dragPitchMode = getPointerPitchMappingMode(dragZone);
+        const m = getMPEData(getClampedPointerEvent(e, dragZone), tmpVoice, false, dragPitchMode);
         state.activeTouches.set(e.pointerId, { 
             voices: [],
             initialExact: hold.lastM?.exact ?? 0,
@@ -14750,13 +17330,86 @@ canvas.addEventListener('pointerdown', e => {
             phase: hold.phase || 0,
             color: hold.color || '#ffaa00',
             lastM: m,
-            zone: hold.zone || zoneId
+            zone: hold.zone || zoneId,
+            pitchInputMode: dragPitchMode
         });
         return;
     }
 
+    const activeHit = findActiveTouchVoiceAt(e.clientX, e.clientY, e.pointerId) || findActiveTouchVoiceAt(e.clientX, e.clientY, e.pointerId, 12);
+    if (activeHit) {
+        const sourceTouch = activeHit.touch;
+        const sourceVoice = activeHit.voice;
+        const dragZone = activeHit.zoneId || sourceVoice.zone || sourceTouch.zone || zoneId;
+        const outputDrag = getZoneOutput(dragZone);
+        if (activeHit.type === 'arpNote') {
+            const tmpVoice = { initialExact: activeHit.noteFloat, lastX: e.clientX, vibratoSpeed: 0, zone: dragZone };
+            const dragPitchMode = sourceTouch.pitchInputMode || getPointerPitchMappingMode(dragZone);
+            const m = getMPEData(getClampedPointerEvent(e, dragZone), tmpVoice, false, dragPitchMode);
+            state.activeTouches.set(e.pointerId, {
+                voices: [],
+                initialExact: activeHit.noteFloat,
+                lastX: e.clientX,
+                isGrab: false,
+                isArpLiveGrab: true,
+                arpSourcePointerId: activeHit.pointerId,
+                arpNoteIndex: activeHit.voiceIndex,
+                arpNoteObj: sourceVoice,
+                vibratoSpeed: 0,
+                phase: sourceTouch.phase || 0,
+                color: sourceVoice.color || sourceTouch.color || '#ffaa00',
+                lastM: m,
+                zone: dragZone,
+                pitchInputMode: dragPitchMode
+            });
+            requestDraw();
+            return;
+        }
+        if (outputDrag) {
+            sourceTouch.voices.splice(activeHit.voiceIndex, 1);
+            if (!sourceTouch.voices.length && !sourceTouch.isArp) {
+                state.activeTouches.delete(activeHit.pointerId);
+            } else if (sourceTouch.voices.length) {
+                const head = sourceTouch.voices[0];
+                sourceTouch.initialExact = Number.isFinite(head?.noteFloat) ? head.noteFloat : getVoiceNoteFloat(head);
+                sourceTouch.isChordHold = sourceTouch.voices.length > 1;
+            }
+            const tmpVoice = { initialExact: activeHit.noteFloat, lastX: e.clientX, vibratoSpeed: 0, zone: dragZone };
+            const dragPitchMode = sourceTouch.pitchInputMode || getPointerPitchMappingMode(dragZone);
+            const m = getMPEData(getClampedPointerEvent(e, dragZone), tmpVoice, false, dragPitchMode);
+            const pb = getVoicePb(m, sourceVoice);
+            sendMidi([0xE0 + sourceVoice.chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], outputDrag);
+            sendMidi([0xB0 + sourceVoice.chan - 1, 74, m.slide], outputDrag);
+            sendMidi([0xD0 + sourceVoice.chan - 1, m.press], outputDrag);
+            state.activeTouches.set(e.pointerId, {
+                voices: [{ ...sourceVoice, zone: dragZone }],
+                initialExact: activeHit.noteFloat,
+                lastX: e.clientX,
+                isGrab: false,
+                isChordHold: false,
+                vibratoSpeed: 0,
+                phase: sourceTouch.phase || 0,
+                color: sourceVoice.color || sourceTouch.color || getZoneColor((sourceVoice.chan * 25 || 0), dragZone),
+                lastM: m,
+                smoothPb: null,
+                smoothSlide: null,
+                smoothPress: null,
+                zone: dragZone,
+                pitchInputMode: dragPitchMode
+            });
+            requestDraw();
+            return;
+        }
+    }
+
+    // Anti-fallthrough guard: when user aims a draggable bubble, do not spawn a new note.
+    const nearHeld = findHeldVoiceAt(e.clientX, e.clientY, 20);
+    const nearArpHold = findArpHoldNoteAt(e.clientX, e.clientY, 20);
+    const nearActive = findActiveTouchVoiceAt(e.clientX, e.clientY, e.pointerId, 20);
+    if (nearHeld || nearArpHold || nearActive) return;
+
     const touchState = { smoothPb: null, smoothSlide: null, smoothPress: null };
-    const baseM = applySmoothing(touchState, getMPEData(getClampedPointerEvent(e, zoneId)));
+    const baseM = applySmoothing(touchState, getMPEData(getClampedPointerEvent(e, zoneId), null, false, pointerPitchMode));
 
     // STANDALONE: Produzione suono diretta
     const zoneScale = getScaleNotesState(zoneId);
@@ -14764,24 +17417,37 @@ canvas.addEventListener('pointerdown', e => {
     const initialExact = Number.isFinite(rootNote) ? rootNote : baseM.exact;
     const touchColor = getZoneColor((e.pointerId * 47) % 360, zoneId);
 
-    // AUTO-GRAB: Se tocchi una nota gia' attiva fisicamente
-    if (state.physicalNotes.has(rootNote)) {
-        const list = state.physicalNotes.get(rootNote);
-        const pNote = list.find(d => !d.grabbed);
-        if (pNote) {
-            pNote.grabbed = true;
-        state.activeTouches.set(e.pointerId, { 
-            voices: [{ chan: pNote.chan, note: rootNote, zone: zoneId }], 
-            initialExact, lastX: e.clientX, isGrab: true,
-            vibratoSpeed: 0, phase: 0, color: '#00ff44', lastM: baseM,
-            zone: zoneId
+    // AUTO-GRAB: allow dragging external MIDI ghost notes (keyboard + circle view).
+    let pNote = findPhysicalNoteAt(e.clientX, e.clientY, zoneId, 6);
+    if (!pNote) {
+        const roundedRoot = Math.round(rootNote);
+        const byRoot = state.physicalNotes.get(roundedRoot);
+        if (byRoot && byRoot.length) {
+            pNote = byRoot.find(d => !!d && !d.grabbed && (d.zone || 'A') === zoneId) || null;
+        }
+    }
+    if (pNote) {
+        pNote.grabbed = true;
+        const noteFloat = getVoiceNoteFloat(pNote);
+        const grabM = { ...baseM, exact: noteFloat };
+        state.activeTouches.set(e.pointerId, {
+            voices: [{ chan: pNote.chan, note: pNote.note, basePb: pNote.basePb, zone: zoneId }],
+            initialExact: noteFloat,
+            lastX: e.clientX,
+            isGrab: true,
+            vibratoSpeed: 0,
+            phase: 0,
+            color: '#00ff44',
+            lastM: grabM,
+            zone: zoneId,
+            pitchInputMode: pointerPitchMode
         });
         return;
-    }
     }
 
     let voices = [];
     let chordNotes = computeChordNotes(rootNote, zoneId);
+    const chordMeta = Array.isArray(state.polyMicroLastChordMetaByZone?.[zoneId]) ? state.polyMicroLastChordMetaByZone[zoneId] : [];
     if (!chordNotes.length) return;
     ensureVisibleForNotes(chordNotes, { zoneId });
     const arpZone = getArpState(zoneId);
@@ -14793,6 +17459,14 @@ canvas.addEventListener('pointerdown', e => {
             color: nextArpColor(zoneId),
             zone: zoneId
         }));
+        noteObjs.forEach((n, idx) => {
+            const meta = chordMeta[idx] || null;
+            if (meta) {
+                n.branchId = meta.branchId || null;
+                n.tuningId = meta.tuningId || null;
+                n.anchorLock = !!meta.anchorLock;
+            }
+        });
         arpZone.notes.push(...noteObjs);
         if (arpZone.sync === 'internal' && !arpZone.timer && !state.fadeState.active) {
             restartInternalArp(zoneId);
@@ -14811,12 +17485,13 @@ canvas.addEventListener('pointerdown', e => {
             smoothPb: touchState.smoothPb,
             smoothSlide: touchState.smoothSlide,
             smoothPress: touchState.smoothPress,
-            zone: zoneId
+            zone: zoneId,
+            pitchInputMode: pointerPitchMode
         });
         return;
     }
     for (let i = 0; i < chordNotes.length; i++) {
-        const chan = allocateMpeChannel(zoneId);
+        const chan = allocateMpeChannelForPlay(zoneId, output, { allowStealHeld: true });
         if (chan) {
             const voice = makeVoiceFromNote(chordNotes[i], zoneId);
             const pb = getVoicePb(baseM, voice);
@@ -14830,7 +17505,16 @@ canvas.addEventListener('pointerdown', e => {
             sendMidi([0xD0 + chan - 1, rawPress], output);
             sendMidi([0x90 + chan - 1, voice.note, vel], output);
             markLocalNoteOn(voice.note);
-            voices.push({ chan, note: voice.note, basePb: voice.basePb, zone: zoneId });
+            const meta = chordMeta[i] || null;
+            voices.push({
+                chan,
+                note: voice.note,
+                basePb: voice.basePb,
+                zone: zoneId,
+                branchId: meta?.branchId || null,
+                tuningId: meta?.tuningId || null,
+                anchorLock: !!meta?.anchorLock
+            });
         } else {
             els.midiStatus.innerText = 'MPE CHANNELS FULL';
         }
@@ -14849,7 +17533,8 @@ canvas.addEventListener('pointerdown', e => {
         smoothPb: touchState.smoothPb,
         smoothSlide: touchState.smoothSlide,
         smoothPress: touchState.smoothPress,
-        zone: zoneId
+        zone: zoneId,
+        pitchInputMode: pointerPitchMode
     });
 });
 
@@ -14878,9 +17563,30 @@ canvas.addEventListener('pointermove', e => {
     t.lastX = e.clientX;
     const eClamped = getClampedPointerEvent(e, baseZone);
     t.lastM = t.lastM ? { ...t.lastM, x: eClamped.clientX, y: eClamped.clientY } : { x: eClamped.clientX, y: eClamped.clientY, press: 0, slide: 0, pbValue: 8192, exact: t.initialExact ?? 0 };
-    const m = applySmoothing(t, getMPEData(eClamped, t));
+    const lockedPitchMode = t.pitchInputMode || getPointerPitchMappingMode(baseZone);
+    const m = applySmoothing(t, getMPEData(eClamped, t, false, lockedPitchMode));
     if (!Number.isFinite(m.pbValue)) m.pbValue = 8192;
     t.lastM = m;
+    if (t.isArpLiveGrab) {
+        const noteObj = t.arpNoteObj;
+        const z = t.zone || noteObj?.zone || baseZone || 'A';
+        if (noteObj) {
+            const zoneScale = getScaleNotesState(z);
+            const rootNote = zoneScale.notes.reduce((prev, curr) => Math.abs(curr - m.exact) < Math.abs(prev - m.exact) ? curr : prev);
+            const voice = makeVoiceFromNote(rootNote, z);
+            noteObj.noteFloat = rootNote;
+            noteObj.note = voice.note;
+            noteObj.basePb = voice.basePb;
+            noteObj.lastM = m;
+            const src = state.activeTouches.get(t.arpSourcePointerId);
+            if (src?.isArp && Array.isArray(src.arpNotes)) {
+                src.lastM = m;
+                src.initialExact = rootNote;
+            }
+            t.initialExact = rootNote;
+        }
+        return;
+    }
     if (t.isArpHoldGrab) {
         const hold = state.arpHoldTouches[t.holdIdx];
         if (hold) {
@@ -14982,9 +17688,20 @@ canvas.addEventListener('pointerup', e => {
             finalizePointerUp();
             return;
         }
+        if (t.isArpLiveGrab) {
+            if (t.arpNoteObj) t.arpNoteObj.lastM = t.lastM;
+            state.activeTouches.delete(e.pointerId);
+            finalizePointerUp();
+            return;
+        }
         // FIX: Avoid double-quantization if Hold is active (snapHoldVoicesToScale handles it)
         if (!t.isGrab && !t.isArp && els.quantizeRelease.checked && !hold) {
-            const snapM = getMPEData(getClampedPointerEvent(e, t.zone || t.voices?.[0]?.zone || getZoneForY(e.clientY)), t, true);
+            const snapM = getMPEData(
+                getClampedPointerEvent(e, t.zone || t.voices?.[0]?.zone || getZoneForY(e.clientY)),
+                t,
+                true,
+                t.pitchInputMode || getPointerPitchMappingMode(t.zone || t.voices?.[0]?.zone || getZoneForY(e.clientY))
+            );
             t.lastM = snapM;
             t.voices.forEach(v => {
                 const pb = getVoicePb(snapM, v);
@@ -15198,6 +17915,7 @@ function setupChordKnob() {
         }
         wheel.classList.toggle('knob-on', isOn);
         wheel.classList.toggle('knob-off', !isOn);
+        updatePerformanceStateStrip();
     }
 
     select.addEventListener('change', () => {
@@ -15466,23 +18184,42 @@ function setupLoopKnob() {
     updateLoopKnobUI();
 }
 
-function findHeldVoiceAt(x, y) {
+function findHeldVoiceAt(x, y, extraPad = 0) {
+    const height = state.canvasRect?.height ?? canvas?.height ?? 0;
     for (let i = state.heldVoices.length - 1; i >= 0; i--) {
-        const m = state.heldVoices[i].lastM;
+        const heldVoice = state.heldVoices[i];
+        const m = heldVoice.lastM;
         if (!m) continue;
-        const radius = 12 + (m.press / 127) * 22;
-        const px = getHeldVoiceX(state.heldVoices[i]);
-        const py = m.y;
+        const radius = getVisualBubbleRadius(m, 12, 22);
+        const noteFloat = getVoiceNoteFloat(heldVoice);
+        const zoneId = heldVoice?.zone || 'A';
+        const fallbackX = getHeldVoiceX(heldVoice);
+        const fallbackY = m.y;
+        const followTouch = !isCircleDiesisViewActive(zoneId);
+        const pt = getRenderedBubblePointForNote({
+            noteFloat,
+            zoneId,
+            m,
+            fallbackX,
+            fallbackY,
+            radius,
+            height,
+            followTouch
+        });
+        const px = pt.x;
+        const py = pt.y;
         const dx = x - px;
         const dy = y - py;
-        if ((dx * dx + dy * dy) <= ((radius + 10) * (radius + 10))) {
+        const hitPad = (isCircleDiesisViewActive(zoneId) ? 14 : 10) + Math.max(0, extraPad);
+        if ((dx * dx + dy * dy) <= ((radius + hitPad) * (radius + hitPad))) {
             return { idx: i };
         }
     }
     return null;
 }
 
-function findArpHoldNoteAt(x, y) {
+function findArpHoldNoteAt(x, y, extraPad = 0) {
+    const height = state.canvasRect?.height ?? canvas?.height ?? 0;
     for (let i = state.arpHoldTouches.length - 1; i >= 0; i--) {
         const hold = state.arpHoldTouches[i];
         if (!hold || !hold.noteObjs) continue;
@@ -15490,12 +18227,28 @@ function findArpHoldNoteAt(x, y) {
             const noteObj = hold.noteObjs[n];
             const m = noteObj.lastM || hold.lastM;
             if (!m) continue;
-            const radius = 10 + (m.press / 127) * 18;
-            const px = getArpHoldNoteX(noteObj, m);
-            const py = m.y;
+            const radius = getVisualBubbleRadius(m, 10, 18);
+            const noteFloat = noteObj?.noteFloat ?? noteObj?.note;
+            const zoneId = noteObj?.zone || hold?.zone || 'A';
+            const fallbackX = getArpHoldNoteX(noteObj, m);
+            const fallbackY = m.y;
+            const followTouch = !isCircleDiesisViewActive(zoneId);
+            const pt = getRenderedBubblePointForNote({
+                noteFloat,
+                zoneId,
+                m,
+                fallbackX,
+                fallbackY,
+                radius,
+                height,
+                followTouch
+            });
+            const px = pt.x;
+            const py = pt.y;
             const dx = x - px;
             const dy = y - py;
-            if ((dx * dx + dy * dy) <= ((radius + 10) * (radius + 10))) {
+            const hitPad = (isCircleDiesisViewActive(zoneId) ? 14 : 10) + Math.max(0, extraPad);
+            if ((dx * dx + dy * dy) <= ((radius + hitPad) * (radius + hitPad))) {
                 return { holdIdx: i, noteIdx: n };
             }
         }
@@ -15507,7 +18260,7 @@ function findArpHoldAt(x, y) {
     for (let i = state.arpHoldTouches.length - 1; i >= 0; i--) {
         const m = state.arpHoldTouches[i].lastM;
         if (!m) continue;
-        const radius = 10 + (m.press / 127) * 18;
+        const radius = getVisualBubbleRadius(m, 10, 18);
         const dx = x - m.x;
         const dy = y - m.y;
         if ((dx * dx + dy * dy) <= ((radius + 10) * (radius + 10))) {
@@ -15517,10 +18270,115 @@ function findArpHoldAt(x, y) {
     return null;
 }
 
+function findActiveTouchVoiceAt(x, y, excludePointerId = null, extraPad = 0) {
+    let best = null;
+    let bestDist = Infinity;
+    state.activeTouches.forEach((t, pointerId) => {
+        if (pointerId === excludePointerId) return;
+        if (!t || t.isArpHoldGrab) return;
+        const baseM = t.lastM || { x: t.lastX, y: t.lastY, press: 90 };
+        const radius = getVisualBubbleRadius(baseM, 12, 22);
+        if (t.isArp && Array.isArray(t.arpNotes) && t.arpNotes.length) {
+            t.arpNotes.forEach((n, idx) => {
+                const zoneId = n?.zone || t.zone || 'A';
+                const noteFloat = Number.isFinite(n?.noteFloat) ? n.noteFloat : n?.note;
+                if (!Number.isFinite(noteFloat)) return;
+                const fallbackX = getNearestNoteX(noteFloat, zoneId) ?? baseM.x ?? 0;
+                const fallbackY = baseM.y ?? (state.canvasRect.height * 0.5);
+                const pt = getRenderedBubblePointForNote({
+                    noteFloat,
+                    zoneId,
+                    m: baseM,
+                    fallbackX,
+                    fallbackY,
+                    radius,
+                    height: state.canvasRect?.height ?? canvas?.height ?? 0,
+                    followTouch: false
+                });
+                const dx = x - pt.x;
+                const dy = y - pt.y;
+                const d2 = (dx * dx) + (dy * dy);
+                const hitR = radius + (isCircleDiesisViewActive(zoneId) ? 14 : 10) + Math.max(0, extraPad);
+                if (d2 <= (hitR * hitR) && d2 < bestDist) {
+                    bestDist = d2;
+                    best = { pointerId, voiceIndex: idx, voice: n, touch: t, zoneId, noteFloat, type: 'arpNote' };
+                }
+            });
+            return;
+        }
+        if (!Array.isArray(t.voices) || !t.voices.length) return;
+        t.voices.forEach((v, idx) => {
+            if (!v || !v.chan) return;
+            const zoneId = v.zone || t.zone || 'A';
+            const noteFloat = Number.isFinite(v.noteFloat) ? v.noteFloat : getVoiceNoteFloat(v);
+            const fallbackX = getNearestNoteX(noteFloat, zoneId) ?? baseM.x ?? 0;
+            const fallbackY = baseM.y ?? (state.canvasRect.height * 0.5);
+            const pt = getRenderedBubblePointForNote({
+                noteFloat,
+                zoneId,
+                m: baseM,
+                fallbackX,
+                fallbackY,
+                radius,
+                height: state.canvasRect?.height ?? canvas?.height ?? 0,
+                followTouch: false
+            });
+            const dx = x - pt.x;
+            const dy = y - pt.y;
+            const d2 = (dx * dx) + (dy * dy);
+            const hitR = radius + (isCircleDiesisViewActive(zoneId) ? 14 : 10) + Math.max(0, extraPad);
+            if (d2 <= (hitR * hitR) && d2 < bestDist) {
+                bestDist = d2;
+                best = { pointerId, voiceIndex: idx, voice: v, touch: t, zoneId, noteFloat, type: 'voice' };
+            }
+        });
+    });
+    return best;
+}
+
+function findPhysicalNoteAt(x, y, zoneId = 'A', extraPad = 0) {
+    const circleMode = isCircleDiesisViewActive(zoneId);
+    const bounds = getZoneBounds(zoneId);
+    const yTop = bounds.top - state.canvasRect.top;
+    const yHeight = Math.max(1, bounds.bottom - bounds.top);
+    const { fadeDrop } = getFadeStateForZone(zoneId);
+    const keyboardY = yTop + (yHeight * (0.5 + (0.5 * fadeDrop)));
+    let best = null;
+    let bestDist = Infinity;
+    state.physicalNotes.forEach((arr) => arr.forEach((d) => {
+        if (!d || d.grabbed) return;
+        const vZone = d.zone || 'A';
+        if (vZone !== zoneId) return;
+        const noteFloat = getVoiceNoteFloat(d);
+        let px = null;
+        let py = null;
+        if (circleMode) {
+            const pt = getCircleVisualPointForNote(noteFloat, zoneId);
+            if (!pt) return;
+            px = pt.x;
+            py = pt.y;
+        } else {
+            px = getNearestNoteX(noteFloat, zoneId);
+            py = keyboardY;
+        }
+        if (!Number.isFinite(px) || !Number.isFinite(py)) return;
+        const dx = x - px;
+        const dy = y - py;
+        const d2 = (dx * dx) + (dy * dy);
+        const hitR = 25 + (circleMode ? 14 : 10) + Math.max(0, extraPad);
+        if (d2 <= (hitR * hitR) && d2 < bestDist) {
+            bestDist = d2;
+            best = d;
+        }
+    }));
+    return best;
+}
+
 state.presets = loadPresets();
 state.mpePresets = loadMpePresets();
 state.customScales = loadCustomScales();
 state.microScales = loadUserMicroScales();
+initializeSevishManifestScales();
 state.fxUserPresets = loadUserFxPresets();
 state.melody.saves = loadMelodySaves();
 refreshMelodySaveSelect(state.melody.saves);
@@ -15993,6 +18851,40 @@ function bindUI() {
             setPitchBendRange(pb, zoneId);
         };
     }
+    if (els.spiralEnabled) {
+        els.spiralEnabled.onchange = () => {
+            const z = getScaleZoneId();
+            const allowed = isSpiralAllowedForZone(z);
+            state.audio.spiral.enabled = !!els.spiralEnabled.checked && allowed;
+            if (!allowed) state.audio.spiral.enabled = false;
+            updateSpiralUiState(z);
+            refreshSpiralPitchForActiveVoices();
+        };
+    }
+    if (els.spiralShimmer) {
+        els.spiralShimmer.onchange = () => {
+            state.audio.spiral.shimmer = !!els.spiralShimmer.checked;
+            if (state.audio.spiralEngine) state.audio.spiralEngine.setShimmer(state.audio.spiral.shimmer);
+            updateSpiralUiState(getScaleZoneId());
+        };
+    }
+    if (els.spiralDefect) {
+        const applySpiralDefect = () => {
+            state.audio.spiral.defectCents = Math.max(0, Math.min(100, parseFloat(els.spiralDefect.value) || 0));
+            if (state.audio.spiralEngine) state.audio.spiralEngine.setDefect(state.audio.spiral.defectCents);
+            if (els.spiralDefectVal) els.spiralDefectVal.textContent = `${state.audio.spiral.defectCents.toFixed(1)}c`;
+            refreshSpiralPitchForActiveVoices();
+        };
+        els.spiralDefect.oninput = applySpiralDefect;
+        els.spiralDefect.onchange = applySpiralDefect;
+    }
+    if (els.spiralAnchor) {
+        els.spiralAnchor.onchange = () => {
+            state.audio.spiral.anchorMode = (els.spiralAnchor.value === 'left-edge') ? 'left-edge' : 'fixed';
+            updateSpiralUiState(getScaleZoneId());
+            refreshSpiralPitchForActiveVoices();
+        };
+    }
     if (els.holdNotes) {
         els.holdNotes.onchange = e => {
             const zoneId = getActiveEditZoneId();
@@ -16034,6 +18926,20 @@ function bindUI() {
     }
     if (els.chordSpread) {
         els.chordSpread.onchange = () => {
+            syncPerformanceConfigFromUi();
+            updateHeldChords();
+            updateArpChords();
+        };
+    }
+    if (els.chordStep2) {
+        els.chordStep2.onchange = () => {
+            syncPerformanceConfigFromUi();
+            updateHeldChords();
+            updateArpChords();
+        };
+    }
+    if (els.chordStep3) {
+        els.chordStep3.onchange = () => {
             syncPerformanceConfigFromUi();
             updateHeldChords();
             updateArpChords();
@@ -16872,6 +19778,42 @@ function bindUI() {
             updateScaleZoneBadge();
         };
     }
+    if (els.scaleEditZoneA) {
+        els.scaleEditZoneA.onclick = () => {
+            if (!isDualModeEnabled()) return;
+            state.scaleEditLink = false;
+            setActiveEditZone('A');
+            updateScaleZoneBadge();
+        };
+    }
+    if (els.scaleEditZoneB) {
+        els.scaleEditZoneB.onclick = () => {
+            if (!isDualModeEnabled()) return;
+            state.scaleEditLink = false;
+            setActiveEditZone('B');
+            updateScaleZoneBadge();
+        };
+    }
+    if (els.scaleEditZoneLink) {
+        els.scaleEditZoneLink.onclick = () => {
+            if (!isDualModeEnabled()) return;
+            state.scaleEditLink = !state.scaleEditLink;
+            if (state.scaleEditLink) {
+                const z = getActiveEditZoneId();
+                const other = z === 'A' ? 'B' : 'A';
+                state.scaleConfigByZone[other] = JSON.parse(JSON.stringify(ensureScaleConfigForZone(z)));
+                state.polyMicroByZone[other] = JSON.parse(JSON.stringify(ensurePolyMicroConfigForZone(z)));
+                updateScaleNotes(other);
+            }
+            updateScaleZoneBadge();
+            scheduleScaleUpdate();
+        };
+    }
+    if (els.scaleSaveCurrentCustom) {
+        els.scaleSaveCurrentCustom.onclick = () => {
+            saveCurrentScaleAsCustomScale(els.customScaleName?.value || '');
+        };
+    }
 
     if (els.visibleOctaves) {
         els.visibleOctaves.onchange = () => {
@@ -16981,6 +19923,86 @@ function bindUI() {
             scheduleScaleUpdate();
         };
     });
+    const onPolySimple = () => {
+        const z = getActiveEditZoneId();
+        if (els.polyMicroIntensityVal && els.polyMicroIntensity) {
+            els.polyMicroIntensityVal.textContent = String(parseInt(els.polyMicroIntensity.value, 10) || 0);
+        }
+        syncPolyMicroConfigFromUi(z, { applySimple: true, showFix: false });
+        scheduleScaleUpdate();
+    };
+    const onPolyAdvanced = () => {
+        const z = getActiveEditZoneId();
+        syncPolyMicroConfigFromUi(z, { applySimple: false, showFix: true });
+        scheduleScaleUpdate();
+    };
+    [els.polyMicroEnabled, els.polyMicroCharacter, els.polyMicroIntensity].filter(Boolean).forEach(input => {
+        input.onchange = onPolySimple;
+        if (input.type === 'range') input.oninput = onPolySimple;
+    });
+    [
+        els.polyMicroMasterMode,
+        els.polyMicroAnchorPolicy,
+        els.polyMicroBranches,
+        els.polyMicroDegreeMap,
+        els.polyMicroTolerance,
+        els.polyMicroBudget
+    ].filter(Boolean).forEach(input => {
+        input.onchange = onPolyAdvanced;
+        if (input.tagName === 'INPUT' && (input.type === 'text' || input.type === 'number')) input.oninput = onPolyAdvanced;
+    });
+    if (els.polyMicroAdvancedToggle) {
+        els.polyMicroAdvancedToggle.onclick = () => {
+            const z = getActiveEditZoneId();
+            const cfg = ensurePolyMicroConfigForZone(z);
+            cfg.uiAdvancedOpen = !cfg.uiAdvancedOpen;
+            updatePolyMicroAdvancedVisibility(z);
+        };
+    }
+    if (els.polyMicroPresetApply) {
+        els.polyMicroPresetApply.onclick = () => {
+            const preset = els.polyMicroPresetSelect?.value || '';
+            if (!preset) return;
+            applyPolyMicroPreset(preset, getActiveEditZoneId());
+            applyPolyMicroConfigToUi(getActiveEditZoneId());
+            scheduleScaleUpdate();
+        };
+    }
+    if (els.polyMicroAutoSetup) {
+        els.polyMicroAutoSetup.onclick = () => {
+            const z = getActiveEditZoneId();
+            const cfg = ensurePolyMicroConfigForZone(z);
+            applyCharacterIntensityToPolyConfig(cfg, cfg.uiCharacter, cfg.uiIntensity);
+            autoSetupPolyMicroFromScale(z, { character: cfg.uiCharacter, preset: cfg.uiPreset });
+            applyPolyMicroConfigToUi(z);
+            setPolyMicroFixMessage('');
+            scheduleScaleUpdate();
+        };
+    }
+    if (els.polyMicroApplyA) {
+        els.polyMicroApplyA.onclick = () => {
+            state.polyMicroByZone.A = normalizePolyMicroConfig({ ...ensurePolyMicroConfigForZone(getActiveEditZoneId()) });
+            if (getActiveEditZoneId() === 'A') applyPolyMicroConfigToUi('A');
+            setPolyMicroFixMessage('Configuration applied to zone A');
+            scheduleScaleUpdate();
+        };
+    }
+    if (els.polyMicroApplyB) {
+        els.polyMicroApplyB.onclick = () => {
+            state.polyMicroByZone.B = normalizePolyMicroConfig({ ...ensurePolyMicroConfigForZone(getActiveEditZoneId()) });
+            if (getActiveEditZoneId() === 'B') applyPolyMicroConfigToUi('B');
+            setPolyMicroFixMessage('Configuration applied to zone B');
+            scheduleScaleUpdate();
+        };
+    }
+    if (els.polyMicroCopyAToB) {
+        els.polyMicroCopyAToB.onclick = () => {
+            state.polyMicroByZone.B = normalizePolyMicroConfig({ ...ensurePolyMicroConfigForZone('A') });
+            if (getActiveEditZoneId() === 'B') applyPolyMicroConfigToUi('B');
+            setPolyMicroFixMessage('Copied configuration from A to B');
+            scheduleScaleUpdate();
+        };
+    }
     if (els.audioStart) {
         els.audioStart.onclick = async () => {
             if (state.audio.enabled) {
@@ -17592,7 +20614,10 @@ function updateScaleNotes(zoneId = null) {
         updateMelodyFromUI(!state.melody.imported);
         if (state.melody.running) restartMelodyGenerator();
     }
-    if (z === getScaleZoneId()) updateScaleNotesPreview(def);
+    if (z === getScaleZoneId()) {
+        updateScaleNotesPreview(def);
+        void refreshScaleInfoForZone(z);
+    }
     requestDraw();
 }
 
@@ -17610,7 +20635,7 @@ function getScaleNotesState(zoneId = null) {
 
 function updateScaleNotesPreview(def) {
     if (!els.scaleNotesPreview) return;
-    const mode = getScaleMode();
+    const mode = def?.mode || getScaleMode();
     if (mode === 'diatonic') {
         els.scaleNotesPreview.classList.add('hidden');
         els.scaleNotesPreview.innerHTML = '';
@@ -17621,7 +20646,8 @@ function updateScaleNotesPreview(def) {
     const items = [];
     items.push('<span class="scale-notes-label">Notes</span>');
 
-    const displayDegrees = degrees.filter(d => Number.isFinite(d) && Math.abs(d - 12) >= 0.001);
+    const period = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const displayDegrees = degrees.filter(d => Number.isFinite(d) && Math.abs(d - period) >= 0.001);
     const noteFloats = displayDegrees.map(d => base + d);
 
     noteFloats.forEach((note) => {
@@ -17676,34 +20702,35 @@ function getFadeStateForZone(zoneId = 'A') {
 function getFadeGainForZone(zoneId = 'A') {
     return getFadeStateForZone(zoneId).fadeMul;
 }
-
-function getHighlightKeyForNote(note) {
+function getHighlightKeyForNote(note, zoneId = null) {
     if (!Number.isFinite(note)) return null;
-    const mode = getScaleMode();
-    if (mode === 'microtonal' || mode === 'custom') {
-        const def = getScaleDefinition();
-        const rawDegrees = def.degrees || [];
-        const degrees = rawDegrees.filter(d => Math.abs(d - 12) > 0.0001);
-        const useDegrees = degrees.length ? degrees : rawDegrees;
-        if (!useDegrees.length) return null;
-        const rel = note - def.root;
-        const oct = Math.floor(rel / 12);
-        let within = rel - (oct * 12);
-        if (within < 0) within += 12;
-        let bestIdx = 0;
-        let bestDist = Infinity;
-        for (let i = 0; i < useDegrees.length; i++) {
-            const d = useDegrees[i];
-            const dist = Math.abs(d - within);
-            if (dist < bestDist) {
-                bestDist = dist;
-                bestIdx = i;
-            }
+    const z = getScaleZoneId(zoneId);
+    const grid = getGridDegrees(z);
+    const stepOrder = getCircleStepOrderForGrid(z, grid);
+    const stepsPerOct = Math.max(1, stepOrder.length);
+    const numOct = getVisibleOctavesForZone(z);
+    const totalSteps = Math.max(0, numOct * stepsPerOct);
+    if (!stepsPerOct || !totalSteps) return null;
+
+    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+    let bestStep = 0;
+    let bestDist = Infinity;
+    const EPS = 1e-7;
+
+    for (let i = 0; i < totalSteps; i++) {
+        const cand = getCircleLayoutNoteAt(i, z, grid, baseMIDI, numOct).note;
+        const dist = Math.abs(cand - note);
+        if (dist < bestDist - EPS) {
+            bestDist = dist;
+            bestStep = i;
+        } else if (Math.abs(dist - bestDist) <= EPS && i < bestStep) {
+            bestStep = i;
         }
-        return `k:${oct}:${bestIdx}`;
     }
-    return `n:${Math.round(note)}`;
+
+    return `g:${bestStep}`;
 }
+
 
 function collectHighlightMaps(nowAudio = null) {
     const makeMaps = () => ({
@@ -17716,7 +20743,7 @@ function collectHighlightMaps(nowAudio = null) {
 
     const setHighlight = (zoneId, note, color, alpha = 1) => {
         if (!Number.isFinite(note)) return;
-        const key = getHighlightKeyForNote(note);
+        const key = getHighlightKeyForNote(note, zoneId);
         if (!key) return;
         const clamped = Math.max(0, Math.min(1, alpha));
         const z = getMaps(zoneId);
@@ -17728,21 +20755,26 @@ function collectHighlightMaps(nowAudio = null) {
 
     const setDim = (zoneId, note) => {
         const z = getMaps(zoneId);
-        const key = getHighlightKeyForNote(note);
+        const key = getHighlightKeyForNote(note, zoneId);
         if (!key) return;
         z.chordDimNotes.add(key);
     };
 
     // Helper to find note under finger visual position
-    const getVisualNote = (x, zoneId = 'A') => {
-         const width = state.canvasRect.width;
+    const getVisualNote = (x, y, zoneId = 'A') => {
+         const width = Math.max(1, state.canvasRect.width);
          const numOct = getVisibleOctavesForZone(zoneId);
          const grid = getGridDegrees(zoneId);
-         const totalSteps = numOct * grid.stepsPerOct;
-         const stepIndex = Math.floor((x / width) * totalSteps);
+         const stepOrder = getCircleStepOrderForGrid(zoneId, grid);
+         const circleSteps = Math.max(1, stepOrder.length);
+         const totalSteps = Math.max(1, numOct * circleSteps);
+         const clientX = state.canvasRect.left + x;
+         const clientY = state.canvasRect.top + (Number.isFinite(y) ? y : (state.canvasRect.height * 0.5));
+         const stepExact = getCircleStepExactForPointer(clientX, clientY, zoneId, totalSteps, circleSteps);
+         const stepIndex = Math.floor(stepExact);
          if (stepIndex < 0 || stepIndex >= totalSteps) return null;
-         const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * 12) + grid.root;
-         return getGridNoteAt(stepIndex, grid.degrees, baseMIDI);
+         const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * grid.periodSemitones) + grid.root;
+         return getCircleLayoutNoteAt(stepIndex, zoneId, grid, baseMIDI, numOct).note;
     };
 
     state.activeTouches.forEach(t => {
@@ -17757,22 +20789,20 @@ function collectHighlightMaps(nowAudio = null) {
             if (Number.isFinite(source)) setDim(zoneId, source);
             if (Number.isFinite(target)) setHighlight(zoneId, target, t.color, touchAlpha);
         }
-
-        // VISUAL TRACE: Always highlight the key currently under the finger
-        if (t.lastM?.x != null) {
-            const visualNote = getVisualNote(t.lastM.x, zoneId);
-            if (visualNote != null) {
-                setHighlight(zoneId, visualNote, t.color, touchAlpha);
+        // Visual trace only while dragging without active note voices.
+        const hasPlayableVoices = !!(t.voices && t.voices.length);
+        if (!hasPlayableVoices) {
+            if (t.lastM?.x != null) {
+                const visualNote = getVisualNote(t.lastM.x, t.lastM.y, zoneId);
+                if (visualNote != null) setHighlight(zoneId, visualNote, t.color, touchAlpha);
+            } else if (t.x != null) {
+                const visualNote = getVisualNote(t.x, t.y, zoneId);
+                if (visualNote != null) setHighlight(zoneId, visualNote, t.color, touchAlpha);
             }
-        } else if (t.x != null) {
-             const visualNote = getVisualNote(t.x, zoneId);
-             if (visualNote != null) {
-                setHighlight(zoneId, visualNote, t.color, touchAlpha);
-             }
         }
 
         if (t.isArp && t.arpNotes) {
-            t.arpNotes.forEach(n => setHighlight(zoneId, n.note, t.color, touchAlpha));
+            t.arpNotes.forEach(n => setHighlight(zoneId, (n.noteFloat ?? n.note), t.color, touchAlpha));
         } else {
             t.voices.forEach(v => {
                 const noteFloat = getVoiceNoteFloat(v);
@@ -17793,12 +20823,12 @@ function collectHighlightMaps(nowAudio = null) {
     getAllArpStates().forEach(arp => {
         arp.notes.forEach(n => {
             const zoneId = n.zone || 'A';
-            setHighlight(zoneId, n.note, n.color, 1);
+            setHighlight(zoneId, (n.noteFloat ?? n.note), n.color, 1);
         });
         arp.active.forEach(entry => {
             const zoneId = entry.zone || 'A';
             const z = getMaps(zoneId);
-            const key = getHighlightKeyForNote(entry.note);
+            const key = getHighlightKeyForNote(entry.noteFloat ?? entry.note, zoneId);
             if (key) z.arpActiveNotes.set(key, entry.color);
         });
     });
@@ -17806,9 +20836,9 @@ function collectHighlightMaps(nowAudio = null) {
     return maps;
 }
 
-function drawOctaveRangeLabel(ctx, baseMIDI, numOct, yTop) {
+function drawOctaveRangeLabel(ctx, baseMIDI, numOct, yTop, periodSemitones = 12) {
     const start = baseMIDI;
-    const end = baseMIDI + (numOct * 12);
+    const end = baseMIDI + (numOct * periodSemitones);
     const label = `${midiToNoteName(start)}-${midiToNoteName(end)}`;
     ctx.save();
     ctx.globalAlpha = 0.7;
@@ -17820,17 +20850,23 @@ function drawOctaveRangeLabel(ctx, baseMIDI, numOct, yTop) {
     ctx.restore();
 }
 
-function drawGridCells(width, height, grid, numOct, noteW, baseMIDI, fadeMul, fadeDrop, time, maps, zoneBounds = null) {
+function drawGridCells(width, height, grid, numOct, noteW, baseMIDI, fadeMul, fadeDrop, time, maps, zoneBounds = null, zoneId = null) {
     const { chordHighlightNotes, chordDimNotes, arpActiveNotes } = maps;
+    const z = getScaleZoneId(zoneId || 'A');
+    const stepOrder = getCircleStepOrderForGrid(z, grid);
+    const stepsPerOct = Math.max(1, stepOrder.length);
+    const totalSteps = numOct * stepsPerOct;
     const yTop = zoneBounds ? (zoneBounds.top - state.canvasRect.top) : 0;
     const yHeight = zoneBounds ? (zoneBounds.bottom - zoneBounds.top) : height;
-    const isMicro = (getScaleMode() === 'microtonal' || getScaleMode() === 'custom');
+    const isMicro = (getScaleMode(zoneId) === 'microtonal' || getScaleMode(zoneId) === 'custom');
     const physicalMicro = isMicro ? new Map() : null;
     if (physicalMicro) {
         state.physicalNotes.forEach(arr => arr.forEach(v => {
             if (!v) return;
+            const vZone = v.zone || 'A';
+            if (zoneId && vZone !== zoneId) return;
             const noteFloat = getVoiceNoteFloat(v);
-            const key = getHighlightKeyForNote(noteFloat);
+            const key = getHighlightKeyForNote(noteFloat, zoneId);
             if (!key) return;
             const existing = physicalMicro.get(key);
             if (!existing || (!existing.grabbed && v.grabbed)) {
@@ -17845,11 +20881,11 @@ function drawGridCells(width, height, grid, numOct, noteW, baseMIDI, fadeMul, fa
     ctx.clip();
 
     if (state.gridCache?.bgCanvas) ctx.drawImage(state.gridCache.bgCanvas, 0, 0);
-    drawOctaveRangeLabel(ctx, baseMIDI, numOct, yTop);
-    for (let i = 0; i < (numOct * grid.stepsPerOct); i++) {
-        const n = getGridNoteAt(i, grid.degrees, baseMIDI);
+    drawOctaveRangeLabel(ctx, baseMIDI, numOct, yTop, grid.periodSemitones || 12);
+    for (let i = 0; i < totalSteps; i++) {
+        const n = getCircleLayoutNoteAt(i, z, grid, baseMIDI, numOct).note;
         const x = i * noteW;
-        const nKey = getHighlightKeyForNote(n);
+        const nKey = getHighlightKeyForNote(n, zoneId);
         if (nKey && chordDimNotes.has(nKey)) {
             ctx.globalAlpha = 0.5;
             ctx.fillStyle = '#000';
@@ -17883,8 +20919,9 @@ function drawGridCells(width, height, grid, numOct, noteW, baseMIDI, fadeMul, fa
             }
         } else {
             const pList = state.physicalNotes.get(nRound);
-            pData = pList ? pList.find(d => !d.grabbed) : null;
-            pGrab = !pData && pList ? pList.find(d => d.grabbed) : null;
+            const zList = pList ? pList.filter(d => (d?.zone || 'A') === (zoneId || 'A')) : null;
+            pData = zList ? zList.find(d => !d.grabbed) : null;
+            pGrab = !pData && zList ? zList.find(d => d.grabbed) : null;
         }
         if (pData || pGrab) {
             const rad = 20 + Math.sin(time/200)*5;
@@ -18078,11 +21115,24 @@ function drawHeldVoices(_fadeMul, _fadeDrop, height, nowAudio = null) {
             v.bowFlash -= 0.03; // Slower fade for smoother effect
         }
 
-        const radius = (12 + (m.press / 127) * 22) + (flash * 10);
+        const radius = getVisualBubbleRadius(m, 12, 22) + (flash * 10);
         v.phase = (v.phase || 0) + 0.2;
-        const x = getHeldVoiceX(v);
-        let y = m.y + ((height - m.y) * fadeDrop);
-        y = getClampedVisualY(y, radius, height);
+        const noteFloat = getVoiceNoteFloat(v);
+        const fallbackX = getHeldVoiceX(v);
+        const fallbackY = m.y + ((height - m.y) * fadeDrop);
+        const followTouch = !isCircleDiesisViewActive(zoneId);
+        const pt = getRenderedBubblePointForNote({
+            noteFloat,
+            zoneId,
+            m,
+            fallbackX,
+            fallbackY,
+            radius,
+            height,
+            followTouch
+        });
+        const x = pt.x;
+        const y = pt.y;
         const visualAlpha = flash > 0 ? Math.max(voiceAlpha, 0.2 + flash * 0.8) : voiceAlpha;
         const finalAlpha = fadeMul * visualAlpha;
         
@@ -18113,11 +21163,24 @@ function drawArpHoldTouches(_fadeMul, _fadeDrop, height) {
         list.forEach((n, idx) => {
             const m = n.lastM || t.lastM;
             if (!m) return;
-            const radius = 10 + (m.press / 127) * 18;
+            const radius = getVisualBubbleRadius(m, 10, 18);
             t.phase = (t.phase || 0) + 0.2;
-            const x = getArpHoldNoteX(n, m);
-            let y = m.y + ((height - m.y) * fadeDrop);
-            y = getClampedVisualY(y, radius, height);
+            const noteFloat = n?.noteFloat ?? n?.note;
+            const fallbackX = getArpHoldNoteX(n, m);
+            const fallbackY = m.y + ((height - m.y) * fadeDrop);
+            const followTouch = !isCircleDiesisViewActive(zoneId);
+            const pt = getRenderedBubblePointForNote({
+                noteFloat,
+                zoneId,
+                m,
+                fallbackX,
+                fallbackY,
+                radius,
+                height,
+                followTouch
+            });
+            const x = pt.x;
+            const y = pt.y;
             const glow = n.color || t.color || '#ffaa00';
             ctx.globalAlpha = fadeMul;
             drawNoteBubble(x, y, radius, glow, idx === 0 ? "ARP HOLD" : null);
@@ -18129,6 +21192,7 @@ function drawArpHoldTouches(_fadeMul, _fadeDrop, height) {
 function drawActiveTouches(_fadeMul, _fadeDrop, height, nowAudio = null) {
     state.activeTouches.forEach(t => {
         const zoneId = t.zone || t.voices?.[0]?.zone || 'A';
+        const circleActive = isCircleDiesisViewActive(zoneId);
         const { fadeMul, fadeDrop } = getFadeStateForZone(zoneId);
         const visual = getVisualModeFlags(getZoneAudioMode(zoneId));
         const mode = visual.layer ? 'layer' : (visual.sampler ? 'sampler' : 'wt');
@@ -18138,35 +21202,82 @@ function drawActiveTouches(_fadeMul, _fadeDrop, height, nowAudio = null) {
         }
         if (touchAlpha <= 0.001) return;
         if (!t.lastM) return;
-        const radius = 12 + (t.lastM.press / 127) * 22;
+        const radius = getVisualBubbleRadius(t.lastM, 12, 22);
         t.phase += 0.2 + (t.vibratoSpeed * 0.06);
-        let y = t.lastM.y + ((height - t.lastM.y) * fadeDrop);
+        const dragDelta = (Number.isFinite(t.lastM?.exact) && Number.isFinite(t.initialExact))
+            ? (t.lastM.exact - t.initialExact)
+            : 0;
+        const leadNote = t.isArp
+            ? (t.arpNotes?.[0]?.noteFloat ?? t.arpNotes?.[0]?.note)
+            : (Number.isFinite(t.lastM?.exact)
+                ? t.lastM.exact
+                : (t.voices?.[0] ? getVoiceNoteFloat(t.voices[0]) : null));
+        const circlePtMain = Number.isFinite(leadNote) ? getCircleVisualPointForNote(leadNote, zoneId) : null;
+        const fallbackX = circlePtMain ? circlePtMain.x : t.lastM.x;
+        const fallbackY = circlePtMain ? circlePtMain.y : (t.lastM.y + ((height - t.lastM.y) * fadeDrop));
+        const touchPtMain = getCircleTouchVisualPoint(t.lastM, fallbackX, fallbackY, zoneId);
+        const baseX = touchPtMain.x;
+        let y = touchPtMain.y;
         y = getClampedVisualY(y, radius, height);
         ctx.globalAlpha = fadeMul * touchAlpha;
         if (visual.sampler || visual.layer) {
-            drawPulseDisc(t.lastM.x, y, radius, t.color, t.lastM.press);
-            drawGrainyRing(t.lastM.x, y, radius, t.color, t.phase);
+            drawPulseDisc(baseX, y, radius, t.color, t.lastM.press);
+            drawGrainyRing(baseX, y, radius, t.color, t.phase);
         }
         if (visual.wt || visual.layer) {
-            drawWaveformLine(t.lastM.x, y, radius, t.color, t.phase, t.vibratoSpeed);
+            drawWaveformLine(baseX, y, radius, t.color, t.phase, t.vibratoSpeed);
         }
         const label = t.label
             ? t.label
             : (t.isGrab
                 ? "GRAB"
                 : (t.isArpHoldGrab ? "ARP HOLD" : (t.isArp ? "ARP" : `CH${t.voices[0].chan}`)));
-        drawNoteBubble(t.lastM.x, y, radius, t.color, label);
+        drawNoteBubble(baseX, y, radius, t.color, label);
+        if (microDebugEnabled) {
+            const dbgNote = Number.isFinite(leadNote) ? leadNote : null;
+            if (Number.isFinite(dbgNote)) {
+                const key = getHighlightKeyForNote(dbgNote, zoneId) || '--';
+                drawMicroDebugLabel(baseX, y - radius - 20, `${dbgNote.toFixed(3)} -> ${key}`, t.color);
+            }
+        }
         if (t.isArp && t.arpNotes) {
             t.arpNotes.forEach(n => {
                 const noteFloat = n.noteFloat ?? n.note;
-                const nx = getNearestNoteX(noteFloat, zoneId) ?? t.lastM.x;
-                drawNoteBubble(nx, y, Math.max(8, radius * 0.7), n.color || t.color, null);
+                const circlePt = getCircleVisualPointForNote(noteFloat, zoneId);
+                const fallbackNX = circlePt ? circlePt.x : (getNearestNoteX(noteFloat, zoneId) ?? t.lastM.x);
+                const fallbackNY = circlePt ? circlePt.y : y;
+                const pt = getRenderedBubblePointForNote({
+                    noteFloat,
+                    zoneId,
+                    m: n.lastM || t.lastM,
+                    fallbackX: fallbackNX,
+                    fallbackY: fallbackNY,
+                    radius: Math.max(8, radius * 0.7),
+                    height,
+                    followTouch: true
+                });
+                drawNoteBubble(pt.x, pt.y, Math.max(8, radius * 0.7), n.color || t.color, null);
             });
         } else if (t.voices && t.voices.length > 1) {
             t.voices.forEach(v => {
-                const noteFloat = Number.isFinite(v.noteFloat) ? v.noteFloat : getVoiceNoteFloat(v);
-                const nx = getNearestNoteX(noteFloat, zoneId) ?? t.lastM.x;
-                drawNoteBubble(nx, y, Math.max(8, radius * 0.7), v.color || t.color, null);
+                const voiceBase = Number.isFinite(v.noteFloat) ? v.noteFloat : getVoiceNoteFloat(v);
+                const noteFloat = (circleActive && Number.isFinite(dragDelta))
+                    ? (voiceBase + dragDelta)
+                    : voiceBase;
+                const circlePt = getCircleVisualPointForNote(noteFloat, zoneId);
+                const fallbackNX = circlePt ? circlePt.x : (getNearestNoteX(noteFloat, zoneId) ?? t.lastM.x);
+                const fallbackNY = circlePt ? circlePt.y : y;
+                const pt = getRenderedBubblePointForNote({
+                    noteFloat,
+                    zoneId,
+                    m: t.lastM,
+                    fallbackX: fallbackNX,
+                    fallbackY: fallbackNY,
+                    radius: Math.max(8, radius * 0.7),
+                    height,
+                    followTouch: true
+                });
+                drawNoteBubble(pt.x, pt.y, Math.max(8, radius * 0.7), v.color || t.color, null);
             });
         }
         ctx.globalAlpha = 1;
@@ -18265,6 +21376,131 @@ function drawEditZoneHotCorners() {
     });
 }
 
+
+function drawCircleGridView(width, height, grid, numOct, baseMIDI, maps, zoneId = 'A') {
+    const yTop = 0;
+    const yHeight = height;
+    const stepOrder = getCircleStepOrderForGrid(zoneId, grid);
+    const stepLabels = getCircleStepLabelsForGrid(zoneId, grid, stepOrder);
+    const circleSteps = Math.max(1, stepOrder.length);
+    const totalNotes = Math.max(1, numOct * circleSteps);
+    const cx = width * 0.5;
+    const cy = height * 0.53;
+    const maxR = Math.min(width, height) * 0.43;
+    const minR = Math.max(24, maxR * 0.18);
+    const ringW = (maxR - minR) / Math.max(1, numOct);
+    const guideDiv = Math.max(1, getCircleGuideDivisions(zoneId));
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, yTop, width, yHeight);
+    ctx.clip();
+
+    const baseFill = 'rgba(255,255,255,0.09)';
+    const rootFill = 'rgba(255,0,0,0.30)';
+    for (let i = 0; i < totalNotes; i++) {
+        const ring = Math.floor(i / circleSteps);
+        const idx = i % circleSteps;
+        const map = getCircleLayoutNoteAt(i, zoneId, grid, baseMIDI, numOct);
+        const note = map.note;
+        const nKey = getHighlightKeyForNote(note, zoneId);
+        const r0 = minR + (ring * ringW);
+        const r1 = r0 + Math.max(2, ringW - 2);
+        const a0 = -Math.PI / 2 + (idx / circleSteps) * Math.PI * 2;
+        const a1 = -Math.PI / 2 + ((idx + 1) / circleSteps) * Math.PI * 2;
+        const isRoot = Math.round(note) % 12 === grid.root;
+        let fill = isRoot ? rootFill : baseFill;
+        if (nKey && maps.chordDimNotes.has(nKey)) fill = 'rgba(0,0,0,0.42)';
+        if (nKey && maps.chordHighlightNotes.has(nKey)) {
+            const hl = maps.chordHighlightNotes.get(nKey);
+            const alpha = Number.isFinite(hl?.alpha) ? Math.max(0.08, Math.min(0.6, hl.alpha * 0.35)) : 0.28;
+            const color = hl?.color || '#ffaa00';
+            fill = color.replace('hsl', 'hsla').replace(')', `, ${alpha})`);
+        }
+        if (nKey && maps.arpActiveNotes.has(nKey)) {
+            const c = maps.arpActiveNotes.get(nKey) || '#00ff77';
+            fill = c.replace('hsl', 'hsla').replace(')', ', 0.45)');
+        }
+        drawAnnularSlice(ctx, cx, cy, r0, r1, a0, a1, fill, 'rgba(255,255,255,0.12)', 1);
+    }
+
+    ctx.strokeStyle = 'rgba(255,255,255,0.16)';
+    ctx.lineWidth = 1;
+    for (let g = 0; g < guideDiv; g++) {
+        const a = -Math.PI / 2 + (g / guideDiv) * Math.PI * 2;
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(a) * minR, cy + Math.sin(a) * minR);
+        ctx.lineTo(cx + Math.cos(a) * maxR, cy + Math.sin(a) * maxR);
+        ctx.stroke();
+    }
+
+    if (circleSteps <= 64) {
+        const labelMode = String(state.experimental?.circleView?.labelMode || 'abc').toLowerCase();
+        for (let ring = 0; ring < Math.max(1, numOct); ring++) {
+            const labelRadius = minR + (ring * ringW) + (ringW * 0.5);
+            const arcLen = (labelRadius * Math.PI * 2) / Math.max(1, circleSteps);
+            const maxByArc = Math.max(6, Math.floor(arcLen * 0.55));
+            const maxByRing = Math.max(6, Math.floor(ringW * 0.48));
+            const fontSize = Math.max(7, Math.min(20, Math.min(maxByArc, maxByRing)));
+            const showEvery = Math.max(1, Math.ceil(10 / Math.max(1, fontSize)));
+            for (let i = 0; i < circleSteps; i++) {
+                if (i % showEvery !== 0) continue;
+                const map = getCircleLayoutNoteAt((ring * circleSteps) + i, zoneId, grid, baseMIDI, numOct);
+                const stepInGrid = map.stepInGrid;
+                const note = map.note;
+                const info = getMicrotonalNoteLabelInfo(note, false);
+                const a = -Math.PI / 2 + ((i + 0.5) / circleSteps) * Math.PI * 2;
+                const lx = cx + Math.cos(a) * labelRadius;
+                const ly = cy + Math.sin(a) * labelRadius;
+                const textLabel = labelMode === '123'
+                    ? String(stepLabels[i] ?? stepInGrid)
+                    : (info.base || midiToNoteName(Math.round(note)).replace(/\d+$/, ''));
+                ctx.font = `bold ${fontSize}px ${CANVAS_FONT_FAMILY}`;
+                ctx.fillStyle = '#f2f5f7';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(textLabel, lx, ly);
+            }
+        }
+    }
+
+    if (circleSteps === Math.max(1, grid.stepsPerOct || 12)) {
+        drawCircleChordTemplate(ctx, cx, cy, minR + (ringW * 0.5), grid.stepsPerOct, els.chordMode?.value || 'off');
+    }
+
+    // External MIDI ghost notes in Circle View (same green/orange language as keyboard view).
+    const pulseT = performance.now() / 200;
+    state.physicalNotes.forEach(arr => arr.forEach(v => {
+        if (!v) return;
+        const vZone = v.zone || 'A';
+        if (vZone !== zoneId) return;
+        const noteFloat = getVoiceNoteFloat(v);
+        const pt = getCircleVisualPointForNote(noteFloat, zoneId);
+        if (!pt) return;
+        const rad = 20 + Math.sin(pulseT) * 5;
+        ctx.globalAlpha = 1;
+        ctx.beginPath();
+        ctx.strokeStyle = v.grabbed ? '#ffaa00' : '#00ff44';
+        ctx.lineWidth = 3;
+        ctx.arc(pt.x, pt.y, rad, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillStyle = v.grabbed ? 'rgba(255,170,0,0.2)' : 'rgba(0,255,70,0.2)';
+        ctx.fill();
+    }));
+    ctx.globalAlpha = 1;
+
+    ctx.globalAlpha = 0.75;
+    ctx.fillStyle = '#cfd2d6';
+    ctx.font = 'bold 11px Segoe UI, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    const title = circleSteps === Math.max(1, grid.stepsPerOct || 12)
+        ? `Circle of Diesis (${grid.stepsPerOct} steps)`
+        : `Circle of Diesis (${circleSteps}/${grid.stepsPerOct} steps)`;
+    ctx.fillText(title, 8, 8);
+    ctx.restore();
+}
+
 function draw() {
     state.drawRaf = null;
     const width = Math.floor(state.canvasRect.width);
@@ -18274,29 +21510,47 @@ function draw() {
     ctx.fillStyle = '#000'; ctx.fillRect(0, 0, width, height);
     const time = Date.now();
     const maps = collectHighlightMaps(nowAudio);
+    if (microDebugEnabled) {
+        ctx.save();
+        ctx.fillStyle = 'rgba(10, 10, 10, 0.7)';
+        ctx.fillRect(8, 8, 220, 22);
+        ctx.strokeStyle = '#66e0ff';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(8.5, 8.5, 219, 21);
+        ctx.fillStyle = '#dff7ff';
+        ctx.font = `bold 11px ${CANVAS_FONT_FAMILY}`;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('MICRO DEBUG ON (Alt+D)', 14, 19);
+        ctx.restore();
+    }
     if (isDualModeEnabled()) {
         const gridA = getGridDegrees('A');
         const gridB = getGridDegrees('B');
         const numOctA = getVisibleOctavesForZone('A');
         const numOctB = getVisibleOctavesForZone('B');
-        const noteWA = width / (numOctA * gridA.stepsPerOct);
-        const noteWB = width / (numOctB * gridB.stepsPerOct);
-        const baseMIDIA = 48 + (getCurrentOctaveForZone('A') * 12) + gridA.root;
-        const baseMIDIB = 48 + (getCurrentOctaveForZone('B') * 12) + gridB.root;
+        const noteWA = width / (numOctA * Math.max(1, getCircleStepOrderForGrid('A', gridA).length));
+        const noteWB = width / (numOctB * Math.max(1, getCircleStepOrderForGrid('B', gridB).length));
+        const baseMIDIA = 48 + (getCurrentOctaveForZone('A') * gridA.periodSemitones) + gridA.root;
+        const baseMIDIB = 48 + (getCurrentOctaveForZone('B') * gridB.periodSemitones) + gridB.root;
         const fadeA = getFadeStateForZone('A');
         const fadeB = getFadeStateForZone('B');
         updateGridCache('A');
-        drawGridCells(width, height, gridA, numOctA, noteWA, baseMIDIA, fadeA.fadeMul, fadeA.fadeDrop, time, maps.A, getZoneBounds('A'));
+        drawGridCells(width, height, gridA, numOctA, noteWA, baseMIDIA, fadeA.fadeMul, fadeA.fadeDrop, time, maps.A, getZoneBounds('A'), 'A');
         updateGridCache('B');
-        drawGridCells(width, height, gridB, numOctB, noteWB, baseMIDIB, fadeB.fadeMul, fadeB.fadeDrop, time, maps.B, getZoneBounds('B'));
+        drawGridCells(width, height, gridB, numOctB, noteWB, baseMIDIB, fadeB.fadeMul, fadeB.fadeDrop, time, maps.B, getZoneBounds('B'), 'B');
     } else {
         const grid = getGridDegrees('A');
         const numOct = getVisibleOctavesForZone('A');
-        const noteW = width / (numOct * grid.stepsPerOct);
-        const baseMIDI = 48 + (getCurrentOctaveForZone('A') * 12) + grid.root;
+        const noteW = width / (numOct * Math.max(1, getCircleStepOrderForGrid('A', grid).length));
+        const baseMIDI = 48 + (getCurrentOctaveForZone('A') * grid.periodSemitones) + grid.root;
         const fadeA = getFadeStateForZone('A');
         updateGridCache('A');
-        drawGridCells(width, height, grid, numOct, noteW, baseMIDI, fadeA.fadeMul, fadeA.fadeDrop, time, maps.A, null);
+        if (isCircleDiesisViewActive('A')) {
+            drawCircleGridView(width, height, grid, numOct, baseMIDI, maps.A, 'A');
+        } else {
+            drawGridCells(width, height, grid, numOct, noteW, baseMIDI, fadeA.fadeMul, fadeA.fadeDrop, time, maps.A, null, 'A');
+        }
     }
     drawEditZoneHotCorners();
     drawHeldVoices(1, 0, height, nowAudio);
@@ -18305,13 +21559,16 @@ function draw() {
     if (isDualModeEnabled()) {
         const numOctA = getVisibleOctavesForZone('A');
         const numOctB = getVisibleOctavesForZone('B');
-        const noteWA = width / (numOctA * getGridDegrees('A').stepsPerOct);
-        const noteWB = width / (numOctB * getGridDegrees('B').stepsPerOct);
+        const gridA = getGridDegrees('A');
+        const gridB = getGridDegrees('B');
+        const noteWA = width / (numOctA * Math.max(1, getCircleStepOrderForGrid('A', gridA).length));
+        const noteWB = width / (numOctB * Math.max(1, getCircleStepOrderForGrid('B', gridB).length));
         drawBowFadersForZone('A', height, noteWA);
         drawBowFadersForZone('B', height, noteWB);
     } else {
         const numOct = getVisibleOctavesForZone('A');
-        const noteW = width / (numOct * getGridDegrees('A').stepsPerOct);
+        const grid = getGridDegrees('A');
+        const noteW = width / (numOct * Math.max(1, getCircleStepOrderForGrid('A', grid).length));
         drawBowFadersForZone('A', height, noteW);
     }
     if (shouldAnimate()) requestDraw();
@@ -18353,6 +21610,7 @@ els.ui.addEventListener('transitionend', refreshLayout);
 els.performance.addEventListener('transitionend', refreshLayout);
 if (els.dualMode) {
     els.dualMode.addEventListener('change', () => {
+        if (!isDualModeEnabled()) state.scaleEditLink = false;
         updateDualModeUI();
         requestDraw();
     });
@@ -18604,6 +21862,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const pgLoopBtn = document.getElementById('pgLoopRecord');
     const pgLoopClearBtn = document.getElementById('pgLoopClear');
     const btnAdvancedToggle = document.getElementById('pgAdvancedToggle');
+    const pgCircleToggleTop = els.pgCircleViewToggle;
+    const pgCircleActionsTop = els.pgCircleActions;
+    const pgQuadranLeftTop = els.pgQuadranLeftTop;
+    const pgQuadranRightTop = els.pgQuadranRightTop;
+    const pgPolyPlannerTop = els.pgPolyPlannerTop;
+    const pgCircleLabelModeTop = els.pgCircleLabelModeTop;
+    const pgCircleQuadranScope = els.pgCircleQuadranScope;
+    const pgCirclePolyToggleAdv = els.pgCirclePolyToggleAdv;
+    const pgCircleQuadranMs = els.pgCircleQuadranMs;
+    const pgCircleLabelModeAdv = els.pgCircleLabelModeAdv;
+    const pgCircleStepOrderTop = els.pgCircleStepOrderTop;
+    const pgCircleStepOrderAdv = els.pgCircleStepOrderAdv;
+    const pgCircleStepApplyTop = els.pgCircleStepApplyTop;
+    const pgCircleStepClearTop = els.pgCircleStepClearTop;
+    const pgCircleScaleNameTop = els.pgCircleScaleNameTop;
+    const pgCircleSaveScaleTop = els.pgCircleSaveScaleTop;
+    const pgCircleScaleNameAdv = els.pgCircleScaleNameAdv;
+    const pgCircleSaveScaleAdv = els.pgCircleSaveScaleAdv;
+    const circleViewToggleAdv = els.circleViewToggleAdv;
+    const circleQuadranLeft = els.circleQuadranLeft;
+    const circleQuadranRight = els.circleQuadranRight;
+    const circlePolyAnchor = els.circlePolyAnchor;
+    const circlePolyBranchA = els.circlePolyBranchA;
+    const circlePolyBranchB = els.circlePolyBranchB;
     const advancedPanel = document.getElementById('pgAdvancedPanel');
     const pgSettingsTabs = document.getElementById('pgSettingsTabs');
     const pgTabButtons = pgSettingsTabs ? Array.from(pgSettingsTabs.querySelectorAll('.pg-tab-btn')) : [];
@@ -18616,6 +21898,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         pgTabContents.forEach((pane) => {
             const active = pane.dataset.pgTabContent === key;
+            pane.classList.toggle('active', active);
+        });
+    };
+    const pgAdvancedSubtabs = advancedPanel ? Array.from(advancedPanel.querySelectorAll('.pg-adv-tab-btn')) : [];
+    const pgAdvancedContents = advancedPanel ? Array.from(advancedPanel.querySelectorAll('.pg-adv-content')) : [];
+    const setPgAdvancedTab = (key) => {
+        if (!key) return;
+        pgAdvancedSubtabs.forEach((btn) => {
+            const active = btn.dataset.pgAdvTab === key;
+            btn.classList.toggle('active', active);
+        });
+        pgAdvancedContents.forEach((pane) => {
+            const active = pane.dataset.pgAdvContent === key;
             pane.classList.toggle('active', active);
         });
     };
@@ -18697,6 +21992,294 @@ document.addEventListener('DOMContentLoaded', () => {
             reset();
         });
     };
+
+    const refreshCircleTopUi = () => {
+        normalizeCircleStepOrderStorage();
+        const circleOn = !!state.experimental?.circleView?.enabled;
+        if (circleOn && !state.experimental?.quadran?.enabled) {
+            state.experimental.quadran.enabled = true;
+        }
+        if (pgCircleToggleTop) {
+            pgCircleToggleTop.classList.toggle('toggle-on', circleOn);
+            pgCircleToggleTop.classList.toggle('toggle-off', !circleOn);
+            const txt = pgCircleToggleTop.querySelector('.btn-text');
+            if (txt) txt.textContent = circleOn ? 'CIRCLE ON' : 'CIRCLE OFF';
+        }
+        if (circleViewToggleAdv) {
+            circleViewToggleAdv.classList.toggle('toggle-on', circleOn);
+            circleViewToggleAdv.classList.toggle('toggle-off', !circleOn);
+            circleViewToggleAdv.textContent = circleOn ? 'CIRCLE ON' : 'CIRCLE OFF';
+        }
+        if (pgCircleActionsTop) {
+            pgCircleActionsTop.classList.toggle('hidden', !circleOn);
+            pgCircleActionsTop.setAttribute('aria-hidden', circleOn ? 'false' : 'true');
+        }
+        const polyOn = !!state.experimental?.polyPlanner?.enabled;
+        if (pgPolyPlannerTop) {
+            pgPolyPlannerTop.classList.toggle('toggle-on', polyOn);
+            pgPolyPlannerTop.classList.toggle('toggle-off', !polyOn);
+            pgPolyPlannerTop.textContent = polyOn ? 'POLY ON' : 'POLY OFF';
+        }
+        if (pgCirclePolyToggleAdv) {
+            pgCirclePolyToggleAdv.classList.toggle('toggle-on', polyOn);
+            pgCirclePolyToggleAdv.classList.toggle('toggle-off', !polyOn);
+            pgCirclePolyToggleAdv.textContent = polyOn ? 'POLY ON' : 'POLY OFF';
+        }
+        const labelMode = String(state.experimental?.circleView?.labelMode || 'abc').toLowerCase();
+        const labelTxt = labelMode === '123' ? '-> Notes ABC' : '-> Steps 123';
+        if (pgCircleLabelModeTop) pgCircleLabelModeTop.textContent = labelTxt;
+        if (pgCircleLabelModeAdv) pgCircleLabelModeAdv.textContent = labelTxt;
+        const z = getActiveEditZoneId();
+        let orderInput = getCircleStepOrderInputForZone(z);
+        if (!String(orderInput || '').trim()) {
+            const cfg = ensureScaleConfigForZone(z);
+            const isCustom = (cfg.scaleMode || '') === 'custom';
+            const customName = String(cfg.customScaleName || '').trim();
+            const entry = isCustom && customName ? state.customScales?.[customName] : null;
+            const fromEntry = getCircleEditorInputTokensFromEntry(entry);
+            if (fromEntry) {
+                orderInput = fromEntry;
+                setCircleStepOrderInputForZone(z, fromEntry);
+            }
+        }
+        if (pgCircleStepOrderTop && pgCircleStepOrderTop.value !== orderInput) pgCircleStepOrderTop.value = orderInput;
+        if (pgCircleStepOrderAdv && pgCircleStepOrderAdv.value !== orderInput) pgCircleStepOrderAdv.value = orderInput;
+        updateCirclePatternEditorFeedback(z);
+        const scaleName = String(els.customScaleName?.value || pgCircleScaleNameTop?.value || pgCircleScaleNameAdv?.value || '');
+        if (pgCircleScaleNameTop && pgCircleScaleNameTop.value !== scaleName) pgCircleScaleNameTop.value = scaleName;
+        if (pgCircleScaleNameAdv && pgCircleScaleNameAdv.value !== scaleName) pgCircleScaleNameAdv.value = scaleName;
+        if (pgCircleQuadranScope) {
+            pgCircleQuadranScope.value = String(state.experimental?.quadran?.scope || 'both');
+        }
+        if (pgCircleQuadranMs) {
+            pgCircleQuadranMs.value = String(parseInt(state.experimental?.quadran?.stageMs, 10) || 220);
+        }
+        if (circlePolyAnchor) {
+            circlePolyAnchor.value = String(Math.max(0, Math.min(127, parseInt(state.experimental?.polyPlanner?.anchor, 10) || 69)));
+        }
+        if (circlePolyBranchA) {
+            circlePolyBranchA.value = (Array.isArray(state.experimental?.polyPlanner?.branchA) ? state.experimental.polyPlanner.branchA : [0,4,7]).join(',');
+        }
+        if (circlePolyBranchB) {
+            circlePolyBranchB.value = (Array.isArray(state.experimental?.polyPlanner?.branchB) ? state.experimental.polyPlanner.branchB : [2,5,9]).join(',');
+        }
+    };
+
+    const applyCircleStepOrderInput = (value) => {
+        const zone = getActiveEditZoneId();
+        const raw = String(value || '').trim();
+        setCircleStepOrderInputForZone(zone, raw);
+        if (pgCircleStepOrderTop && pgCircleStepOrderTop.value !== raw) pgCircleStepOrderTop.value = raw;
+        if (pgCircleStepOrderAdv && pgCircleStepOrderAdv.value !== raw) pgCircleStepOrderAdv.value = raw;
+        updateCirclePatternEditorFeedback(zone);
+        requestDraw();
+    };
+    const clearCircleStepOrderInput = () => {
+        applyCircleStepOrderInput('');
+    };
+    const saveCircleSelectionAsCustomScale = (nameRaw) => {
+        const name = String(nameRaw || '').trim();
+        if (!name) return;
+        const data = buildCircleCustomScaleData(getActiveEditZoneId());
+        if (!data.cents.length || data.cents.length < 2) return;
+        state.customScales[name] = {
+            type: 'cents',
+            cents: data.cents,
+            quadranOrder: data.quadranOrder.slice(0),
+            quadranLabels: Array.isArray(data.quadranLabels) ? data.quadranLabels.slice(0) : data.quadranOrder.map((n) => String(n))
+        };
+        saveCustomScales(state.customScales);
+        refreshCustomScaleDatalist();
+        if (els.scaleModeCustom) els.scaleModeCustom.checked = true;
+        if (els.customModeCents) els.customModeCents.checked = true;
+        if (els.customModeNotes) els.customModeNotes.checked = false;
+        if (els.customScaleName) els.customScaleName.value = name;
+        if (els.customScaleCents) els.customScaleCents.value = formatCentsList(data.cents);
+        if (els.customScaleSaved) els.customScaleSaved.value = name;
+        const z = getActiveEditZoneId();
+        const orderText = formatCircleLabelInputTokens(data.quadranLabels) || formatCircleOrderInputTokens(data.quadranOrder);
+        setCircleStepOrderInputForZone(z, orderText);
+        if (pgCircleStepOrderTop) pgCircleStepOrderTop.value = orderText;
+        if (pgCircleStepOrderAdv) pgCircleStepOrderAdv.value = orderText;
+        syncScaleConfigFromUi(getActiveEditZoneId());
+        updateScaleModeUI();
+        updateScaleNotes(getActiveEditZoneId());
+        if (pgCircleScaleNameTop) pgCircleScaleNameTop.value = name;
+        if (pgCircleScaleNameAdv) pgCircleScaleNameAdv.value = name;
+    };
+
+    if (pgCircleToggleTop) {
+        pgCircleToggleTop.addEventListener('click', () => {
+            const next = !state.experimental.circleView.enabled;
+            state.experimental.circleView.enabled = next;
+            if (next) {
+                // In Circle View, Quadran starts ON by default.
+                state.experimental.quadran.enabled = true;
+            }
+            refreshCircleTopUi();
+            requestDraw();
+        });
+    }
+    if (circleViewToggleAdv) {
+        circleViewToggleAdv.addEventListener('click', () => {
+            const next = !state.experimental.circleView.enabled;
+            state.experimental.circleView.enabled = next;
+            if (next) state.experimental.quadran.enabled = true;
+            refreshCircleTopUi();
+            requestDraw();
+        });
+    }
+    if (pgQuadranLeftTop) {
+        pgQuadranLeftTop.addEventListener('click', () => {
+            if (!state.experimental.circleView.enabled) return;
+            state.experimental.quadran.enabled = true;
+            triggerQuadranSequence(-1);
+            refreshCircleTopUi();
+        });
+    }
+    if (pgQuadranRightTop) {
+        pgQuadranRightTop.addEventListener('click', () => {
+            if (!state.experimental.circleView.enabled) return;
+            state.experimental.quadran.enabled = true;
+            triggerQuadranSequence(1);
+            refreshCircleTopUi();
+        });
+    }
+    if (pgPolyPlannerTop) {
+        pgPolyPlannerTop.addEventListener('click', () => {
+            if (!state.experimental.circleView.enabled) return;
+            state.experimental.polyPlanner.enabled = !state.experimental.polyPlanner.enabled;
+            refreshCircleTopUi();
+            requestDraw();
+        });
+    }
+    if (pgCirclePolyToggleAdv) {
+        pgCirclePolyToggleAdv.addEventListener('click', () => {
+            state.experimental.polyPlanner.enabled = !state.experimental.polyPlanner.enabled;
+            refreshCircleTopUi();
+            requestDraw();
+        });
+    }
+    if (pgCircleQuadranScope) {
+        pgCircleQuadranScope.addEventListener('change', () => {
+            const v = String(pgCircleQuadranScope.value || 'both');
+            state.experimental.quadran.scope = ['both', 'inner', 'outer'].includes(v) ? v : 'both';
+            refreshCircleTopUi();
+            requestDraw();
+        });
+    }
+    if (pgCircleQuadranMs) {
+        pgCircleQuadranMs.addEventListener('change', () => {
+            const v = Math.max(80, Math.min(2000, parseInt(pgCircleQuadranMs.value, 10) || 220));
+            state.experimental.quadran.stageMs = v;
+            pgCircleQuadranMs.value = String(v);
+        });
+    }
+    if (pgCircleLabelModeTop) {
+        pgCircleLabelModeTop.addEventListener('click', () => {
+            const next = String(state.experimental?.circleView?.labelMode || 'abc').toLowerCase() === 'abc' ? '123' : 'abc';
+            state.experimental.circleView.labelMode = next;
+            refreshCircleTopUi();
+            requestDraw();
+        });
+    }
+    if (pgCircleLabelModeAdv) {
+        pgCircleLabelModeAdv.addEventListener('click', () => {
+            const next = String(state.experimental?.circleView?.labelMode || 'abc').toLowerCase() === 'abc' ? '123' : 'abc';
+            state.experimental.circleView.labelMode = next;
+            refreshCircleTopUi();
+            requestDraw();
+        });
+    }
+    if (pgCircleStepOrderTop) {
+        pgCircleStepOrderTop.addEventListener('input', () => applyCircleStepOrderInput(pgCircleStepOrderTop.value));
+        pgCircleStepOrderTop.addEventListener('change', () => applyCircleStepOrderInput(pgCircleStepOrderTop.value));
+        pgCircleStepOrderTop.addEventListener('blur', () => applyCircleStepOrderInput(pgCircleStepOrderTop.value));
+        pgCircleStepOrderTop.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Enter') {
+                ev.preventDefault();
+                applyCircleStepOrderInput(pgCircleStepOrderTop.value);
+            }
+        });
+    }
+    if (pgCircleStepOrderAdv) {
+        pgCircleStepOrderAdv.addEventListener('input', () => applyCircleStepOrderInput(pgCircleStepOrderAdv.value));
+        pgCircleStepOrderAdv.addEventListener('change', () => applyCircleStepOrderInput(pgCircleStepOrderAdv.value));
+        pgCircleStepOrderAdv.addEventListener('blur', () => applyCircleStepOrderInput(pgCircleStepOrderAdv.value));
+        pgCircleStepOrderAdv.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Enter') {
+                ev.preventDefault();
+                applyCircleStepOrderInput(pgCircleStepOrderAdv.value);
+            }
+        });
+    }
+    if (pgCircleStepApplyTop) {
+        pgCircleStepApplyTop.addEventListener('click', () => {
+            applyCircleStepOrderInput(pgCircleStepOrderTop?.value || '');
+        });
+    }
+    if (pgCircleStepClearTop) {
+        pgCircleStepClearTop.addEventListener('click', () => {
+            clearCircleStepOrderInput();
+        });
+    }
+    if (pgCircleSaveScaleTop) {
+        pgCircleSaveScaleTop.addEventListener('click', () => {
+            saveCircleSelectionAsCustomScale(pgCircleScaleNameTop?.value || pgCircleScaleNameAdv?.value || '');
+        });
+    }
+    if (pgCircleSaveScaleAdv) {
+        pgCircleSaveScaleAdv.addEventListener('click', () => {
+            saveCircleSelectionAsCustomScale(pgCircleScaleNameAdv?.value || pgCircleScaleNameTop?.value || '');
+        });
+    }
+    if (pgCircleScaleNameTop && pgCircleScaleNameAdv) {
+        pgCircleScaleNameTop.addEventListener('input', () => {
+            pgCircleScaleNameAdv.value = pgCircleScaleNameTop.value;
+        });
+        pgCircleScaleNameAdv.addEventListener('input', () => {
+            pgCircleScaleNameTop.value = pgCircleScaleNameAdv.value;
+        });
+    }
+    if (circleQuadranLeft) {
+        circleQuadranLeft.addEventListener('click', () => {
+            state.experimental.quadran.enabled = true;
+            triggerQuadranSequence(-1);
+            refreshCircleTopUi();
+        });
+    }
+    if (circleQuadranRight) {
+        circleQuadranRight.addEventListener('click', () => {
+            state.experimental.quadran.enabled = true;
+            triggerQuadranSequence(1);
+            refreshCircleTopUi();
+        });
+    }
+    const applyPolyPlannerFields = () => {
+        const planner = state.experimental.polyPlanner || (state.experimental.polyPlanner = { enabled:false, branchA:[0,4,7], branchB:[2,5,9], anchor:69 });
+        if (circlePolyAnchor) planner.anchor = Math.max(0, Math.min(127, parseInt(circlePolyAnchor.value, 10) || 69));
+        if (circlePolyBranchA) planner.branchA = parsePitchClassList(circlePolyBranchA.value, planner.branchA || [0,4,7]);
+        if (circlePolyBranchB) planner.branchB = parsePitchClassList(circlePolyBranchB.value, planner.branchB || [2,5,9]);
+        refreshCircleTopUi();
+    };
+    if (circlePolyAnchor) {
+        circlePolyAnchor.addEventListener('change', applyPolyPlannerFields);
+    }
+    if (circlePolyBranchA) {
+        circlePolyBranchA.addEventListener('change', applyPolyPlannerFields);
+        circlePolyBranchA.addEventListener('blur', applyPolyPlannerFields);
+    }
+    if (circlePolyBranchB) {
+        circlePolyBranchB.addEventListener('change', applyPolyPlannerFields);
+        circlePolyBranchB.addEventListener('blur', applyPolyPlannerFields);
+    }
+    pgAdvancedSubtabs.forEach((btn) => {
+        btn.addEventListener('click', () => setPgAdvancedTab(btn.dataset.pgAdvTab || 'engine'));
+    });
+
+    refreshCircleTopUi();
+    setPgAdvancedTab('engine');
+
     let pgLoopState = {
         armed: false,
         recording: false,
@@ -19957,4 +23540,31 @@ document.addEventListener('DOMContentLoaded', () => {
         applyPlaygroundAudioFollow();
     }, 220);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

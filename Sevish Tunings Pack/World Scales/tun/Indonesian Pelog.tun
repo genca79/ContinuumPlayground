@@ -1,0 +1,294 @@
+; VAZ Plus/AnaMark softsynth tuning file
+; "Normalised Pelog", Kunst, 1949. Average of 39 Javanese gamelans
+;
+; VAZ Plus section
+[Tuning]
+note 0=-75
+note 1=45
+note 2=45
+note 3=195
+note 4=195
+note 5=465
+note 6=465
+note 7=595
+note 8=595
+note 9=710
+note 10=875
+note 11=875
+note 12=1140
+note 13=1260
+note 14=1260
+note 15=1410
+note 16=1410
+note 17=1680
+note 18=1680
+note 19=1810
+note 20=1810
+note 21=1925
+note 22=2090
+note 23=2090
+note 24=2355
+note 25=2475
+note 26=2475
+note 27=2625
+note 28=2625
+note 29=2895
+note 30=2895
+note 31=3025
+note 32=3025
+note 33=3140
+note 34=3305
+note 35=3305
+note 36=3570
+note 37=3690
+note 38=3690
+note 39=3840
+note 40=3840
+note 41=4110
+note 42=4110
+note 43=4240
+note 44=4240
+note 45=4355
+note 46=4520
+note 47=4520
+note 48=4785
+note 49=4905
+note 50=4905
+note 51=5055
+note 52=5055
+note 53=5325
+note 54=5325
+note 55=5455
+note 56=5455
+note 57=5570
+note 58=5735
+note 59=5735
+note 60=6000
+note 61=6120
+note 62=6120
+note 63=6270
+note 64=6270
+note 65=6540
+note 66=6540
+note 67=6670
+note 68=6670
+note 69=6785
+note 70=6950
+note 71=6950
+note 72=7215
+note 73=7335
+note 74=7335
+note 75=7485
+note 76=7485
+note 77=7755
+note 78=7755
+note 79=7885
+note 80=7885
+note 81=8000
+note 82=8165
+note 83=8165
+note 84=8430
+note 85=8550
+note 86=8550
+note 87=8700
+note 88=8700
+note 89=8970
+note 90=8970
+note 91=9100
+note 92=9100
+note 93=9215
+note 94=9380
+note 95=9380
+note 96=9645
+note 97=9765
+note 98=9765
+note 99=9915
+note 100=9915
+note 101=10185
+note 102=10185
+note 103=10315
+note 104=10315
+note 105=10430
+note 106=10595
+note 107=10595
+note 108=10860
+note 109=10980
+note 110=10980
+note 111=11130
+note 112=11130
+note 113=11400
+note 114=11400
+note 115=11530
+note 116=11530
+note 117=11645
+note 118=11810
+note 119=11810
+note 120=12075
+note 121=12195
+note 122=12195
+note 123=12345
+note 124=12345
+note 125=12615
+note 126=12615
+note 127=12745
+
+; AnaMark section
+[Scale Begin]
+Format= "AnaMark-TUN"
+FormatVersion= 200
+FormatSpecs= "http:\\\\www.mark-henning.de\\eternity\\tuningspecs.html"
+
+[Info]
+Name= "pelog_av.tun"
+ID= "ID_pelog_av.tun"
+Filename= "pelog_av.scl"
+Description= ""Normalised Pelog", Kunst, 1949. Average of 39 Javanese gamelans"
+Editor= "Scala"
+
+[Exact Tuning]
+note 0=-75.000000
+note 1= 45.000000
+note 2= 45.000000
+note 3= 195.000000
+note 4= 195.000000
+note 5= 465.000000
+note 6= 465.000000
+note 7= 595.000000
+note 8= 595.000000
+note 9= 710.000000
+note 10= 875.000000
+note 11= 875.000000
+note 12= 1140.000000
+note 13= 1260.000000
+note 14= 1260.000000
+note 15= 1410.000000
+note 16= 1410.000000
+note 17= 1680.000000
+note 18= 1680.000000
+note 19= 1810.000000
+note 20= 1810.000000
+note 21= 1925.000000
+note 22= 2090.000000
+note 23= 2090.000000
+note 24= 2355.000000
+note 25= 2475.000000
+note 26= 2475.000000
+note 27= 2625.000000
+note 28= 2625.000000
+note 29= 2895.000000
+note 30= 2895.000000
+note 31= 3025.000000
+note 32= 3025.000000
+note 33= 3140.000000
+note 34= 3305.000000
+note 35= 3305.000000
+note 36= 3570.000000
+note 37= 3690.000000
+note 38= 3690.000000
+note 39= 3840.000000
+note 40= 3840.000000
+note 41= 4110.000000
+note 42= 4110.000000
+note 43= 4240.000000
+note 44= 4240.000000
+note 45= 4355.000000
+note 46= 4520.000000
+note 47= 4520.000000
+note 48= 4785.000000
+note 49= 4905.000000
+note 50= 4905.000000
+note 51= 5055.000000
+note 52= 5055.000000
+note 53= 5325.000000
+note 54= 5325.000000
+note 55= 5455.000000
+note 56= 5455.000000
+note 57= 5570.000000
+note 58= 5735.000000
+note 59= 5735.000000
+note 60= 6000.000000
+note 61= 6120.000000
+note 62= 6120.000000
+note 63= 6270.000000
+note 64= 6270.000000
+note 65= 6540.000000
+note 66= 6540.000000
+note 67= 6670.000000
+note 68= 6670.000000
+note 69= 6785.000000
+note 70= 6950.000000
+note 71= 6950.000000
+note 72= 7215.000000
+note 73= 7335.000000
+note 74= 7335.000000
+note 75= 7485.000000
+note 76= 7485.000000
+note 77= 7755.000000
+note 78= 7755.000000
+note 79= 7885.000000
+note 80= 7885.000000
+note 81= 8000.000000
+note 82= 8165.000000
+note 83= 8165.000000
+note 84= 8430.000000
+note 85= 8550.000000
+note 86= 8550.000000
+note 87= 8700.000000
+note 88= 8700.000000
+note 89= 8970.000000
+note 90= 8970.000000
+note 91= 9100.000000
+note 92= 9100.000000
+note 93= 9215.000000
+note 94= 9380.000000
+note 95= 9380.000000
+note 96= 9645.000000
+note 97= 9765.000000
+note 98= 9765.000000
+note 99= 9915.000000
+note 100= 9915.000000
+note 101= 10185.000000
+note 102= 10185.000000
+note 103= 10315.000000
+note 104= 10315.000000
+note 105= 10430.000000
+note 106= 10595.000000
+note 107= 10595.000000
+note 108= 10860.000000
+note 109= 10980.000000
+note 110= 10980.000000
+note 111= 11130.000000
+note 112= 11130.000000
+note 113= 11400.000000
+note 114= 11400.000000
+note 115= 11530.000000
+note 116= 11530.000000
+note 117= 11645.000000
+note 118= 11810.000000
+note 119= 11810.000000
+note 120= 12075.000000
+note 121= 12195.000000
+note 122= 12195.000000
+note 123= 12345.000000
+note 124= 12345.000000
+note 125= 12615.000000
+note 126= 12615.000000
+note 127= 12745.000000
+
+[Functional Tuning]
+note 1="#=0 % 120.000000"
+note 2="#=0 % 120.000000"
+note 3="#=0 % 270.000000"
+note 4="#=0 % 270.000000"
+note 5="#=0 % 540.000000"
+note 6="#=0 % 540.000000"
+note 7="#=0 % 670.000000"
+note 8="#=0 % 670.000000"
+note 9="#=0 % 785.000000"
+note 10="#=0 % 950.000000"
+note 11="#=0 % 950.000000"
+note 12="#>-12 % 1215.000000 ~999"
+
+; Set reference key to absolute frequency (not scale note but midi key)
+note 60="! 261.625565"
+[Scale End]

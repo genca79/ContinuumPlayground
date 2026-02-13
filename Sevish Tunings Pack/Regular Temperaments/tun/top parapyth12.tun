@@ -1,0 +1,294 @@
+; VAZ Plus/AnaMark softsynth tuning file
+;  A triple Fokker block of the 2.3.7.11.13 temperament called "parapyth" (TOP tuning)
+;
+; VAZ Plus section
+[Tuning]
+note 0=2
+note 1=61
+note 2=209
+note 3=268
+note 4=416
+note 5=475
+note 6=557
+note 7=706
+note 8=764
+note 9=913
+note 10=971
+note 11=1120
+note 12=1202
+note 13=1260
+note 14=1409
+note 15=1467
+note 16=1616
+note 17=1674
+note 18=1756
+note 19=1905
+note 20=1963
+note 21=2112
+note 22=2170
+note 23=2319
+note 24=2401
+note 25=2460
+note 26=2608
+note 27=2667
+note 28=2815
+note 29=2874
+note 30=2956
+note 31=3105
+note 32=3163
+note 33=3312
+note 34=3370
+note 35=3519
+note 36=3601
+note 37=3659
+note 38=3808
+note 39=3866
+note 40=4015
+note 41=4073
+note 42=4155
+note 43=4304
+note 44=4362
+note 45=4511
+note 46=4569
+note 47=4718
+note 48=4800
+note 49=4859
+note 50=5007
+note 51=5066
+note 52=5214
+note 53=5273
+note 54=5355
+note 55=5504
+note 56=5562
+note 57=5711
+note 58=5769
+note 59=5918
+note 60=6000
+note 61=6058
+note 62=6207
+note 63=6265
+note 64=6414
+note 65=6472
+note 66=6555
+note 67=6703
+note 68=6761
+note 69=6910
+note 70=6968
+note 71=7117
+note 72=7200
+note 73=7258
+note 74=7406
+note 75=7465
+note 76=7613
+note 77=7672
+note 78=7754
+note 79=7903
+note 80=7961
+note 81=8110
+note 82=8168
+note 83=8317
+note 84=8399
+note 85=8457
+note 86=8606
+note 87=8664
+note 88=8813
+note 89=8871
+note 90=8954
+note 91=9102
+note 92=9160
+note 93=9309
+note 94=9367
+note 95=9516
+note 96=9599
+note 97=9657
+note 98=9805
+note 99=9864
+note 100=10012
+note 101=10071
+note 102=10153
+note 103=10302
+note 104=10360
+note 105=10509
+note 106=10567
+note 107=10716
+note 108=10798
+note 109=10856
+note 110=11005
+note 111=11063
+note 112=11212
+note 113=11270
+note 114=11353
+note 115=11501
+note 116=11559
+note 117=11708
+note 118=11766
+note 119=11915
+note 120=11998
+note 121=12056
+note 122=12204
+note 123=12263
+note 124=12411
+note 125=12470
+note 126=12552
+note 127=12701
+
+; AnaMark section
+[Scale Begin]
+Format= "AnaMark-TUN"
+FormatVersion= 200
+FormatSpecs= "http:\\\\www.mark-henning.de\\eternity\\tuningspecs.html"
+
+[Info]
+Name= "top parapyth12.tun"
+ID= "ID_topparapyth12.tun"
+Filename= "top parapyth12.scl"
+Description= " A triple Fokker block of the 2.3.7.11.13 temperament called "parapyth" (TOP tuning)"
+Editor= "Scala"
+
+[Exact Tuning]
+note 0= 2.470600
+note 1= 60.706640
+note 2= 209.429260
+note 3= 267.665310
+note 4= 416.387930
+note 5= 474.623970
+note 6= 556.980250
+note 7= 705.702870
+note 8= 763.938920
+note 9= 912.661540
+note 10= 970.897580
+note 11= 1119.620200
+note 12= 1201.976480
+note 13= 1260.212520
+note 14= 1408.935140
+note 15= 1467.171190
+note 16= 1615.893810
+note 17= 1674.129850
+note 18= 1756.486130
+note 19= 1905.208750
+note 20= 1963.444800
+note 21= 2112.167420
+note 22= 2170.403460
+note 23= 2319.126080
+note 24= 2401.482360
+note 25= 2459.718400
+note 26= 2608.441020
+note 27= 2666.677070
+note 28= 2815.399690
+note 29= 2873.635730
+note 30= 2955.992010
+note 31= 3104.714630
+note 32= 3162.950680
+note 33= 3311.673300
+note 34= 3369.909340
+note 35= 3518.631960
+note 36= 3600.988240
+note 37= 3659.224280
+note 38= 3807.946900
+note 39= 3866.182950
+note 40= 4014.905570
+note 41= 4073.141610
+note 42= 4155.497890
+note 43= 4304.220510
+note 44= 4362.456560
+note 45= 4511.179180
+note 46= 4569.415220
+note 47= 4718.137840
+note 48= 4800.494120
+note 49= 4858.730160
+note 50= 5007.452780
+note 51= 5065.688830
+note 52= 5214.411450
+note 53= 5272.647490
+note 54= 5355.003770
+note 55= 5503.726390
+note 56= 5561.962440
+note 57= 5710.685060
+note 58= 5768.921100
+note 59= 5917.643720
+note 60= 6000.000000
+note 61= 6058.236040
+note 62= 6206.958660
+note 63= 6265.194710
+note 64= 6413.917330
+note 65= 6472.153370
+note 66= 6554.509650
+note 67= 6703.232270
+note 68= 6761.468320
+note 69= 6910.190940
+note 70= 6968.426980
+note 71= 7117.149600
+note 72= 7199.505880
+note 73= 7257.741920
+note 74= 7406.464540
+note 75= 7464.700590
+note 76= 7613.423210
+note 77= 7671.659250
+note 78= 7754.015530
+note 79= 7902.738150
+note 80= 7960.974200
+note 81= 8109.696820
+note 82= 8167.932860
+note 83= 8316.655480
+note 84= 8399.011760
+note 85= 8457.247800
+note 86= 8605.970420
+note 87= 8664.206470
+note 88= 8812.929090
+note 89= 8871.165130
+note 90= 8953.521410
+note 91= 9102.244030
+note 92= 9160.480080
+note 93= 9309.202700
+note 94= 9367.438740
+note 95= 9516.161360
+note 96= 9598.517640
+note 97= 9656.753680
+note 98= 9805.476300
+note 99= 9863.712350
+note 100= 10012.434970
+note 101= 10070.671010
+note 102= 10153.027290
+note 103= 10301.749910
+note 104= 10359.985960
+note 105= 10508.708580
+note 106= 10566.944620
+note 107= 10715.667240
+note 108= 10798.023520
+note 109= 10856.259560
+note 110= 11004.982180
+note 111= 11063.218230
+note 112= 11211.940850
+note 113= 11270.176890
+note 114= 11352.533170
+note 115= 11501.255790
+note 116= 11559.491840
+note 117= 11708.214460
+note 118= 11766.450500
+note 119= 11915.173120
+note 120= 11997.529400
+note 121= 12055.765440
+note 122= 12204.488060
+note 123= 12262.724110
+note 124= 12411.446730
+note 125= 12469.682770
+note 126= 12552.039050
+note 127= 12700.761670
+
+[Functional Tuning]
+note 1="#=0 % 58.236040"
+note 2="#=0 % 206.958660"
+note 3="#=0 % 265.194710"
+note 4="#=0 % 413.917330"
+note 5="#=0 % 472.153370"
+note 6="#=0 % 554.509650"
+note 7="#=0 % 703.232270"
+note 8="#=0 % 761.468320"
+note 9="#=0 % 910.190940"
+note 10="#=0 % 968.426980"
+note 11="#=0 % 1117.149600"
+note 12="#>-12 % 1199.505880 ~999"
+
+; Set reference key to absolute frequency (not scale note but midi key)
+note 60="! 261.625565"
+[Scale End]

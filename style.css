@@ -1,4 +1,4 @@
-/* MELODY/LAYER perf-alt: attivo azzurro come i principali */
+﻿/* MELODY/LAYER perf-alt: attivo azzurro come i principali */
 #melodyPerfToggle.active, #melodyPerfToggle.toggle-on,
 #melodyLayerPerf.active, #melodyLayerPerf.toggle-on,
 #melodyLatchPerf.active, #melodyLatchPerf.toggle-on {
@@ -2386,6 +2386,137 @@ body.dual-active .dual-split-line {
     border-radius: 999px;
 }
 
+.scale-zone-targets {
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.scale-zone-targets-label {
+    font-size: 10px;
+    color: #9cb4ca;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.scale-zone-target-btn {
+    min-height: 26px;
+    padding: 0 10px;
+    font-size: 10px;
+}
+
+.scale-zone-target-btn.is-active {
+    border-color: #00f2ff;
+    box-shadow: 0 0 0 1px rgba(0, 242, 255, 0.3) inset;
+    color: #dfffff;
+}
+
+.scale-source-status {
+    margin-top: 2px;
+    font-size: 10px;
+    color: #d7e8ff;
+    border: 1px solid rgba(130, 170, 220, 0.28);
+    border-radius: 8px;
+    padding: 2px 8px;
+    background: rgba(21, 37, 58, 0.35);
+}
+
+.scale-source-actions {
+    margin-top: 2px;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.scale-import-badge {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0 8px 2px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: #d4deea;
+}
+
+.scale-import-badge.is-tun {
+    border-color: rgba(255, 212, 102, 0.55);
+    background: rgba(255, 204, 80, 0.18);
+    color: #ffe9b0;
+}
+
+.scale-import-badge.is-scl {
+    border-color: rgba(120, 206, 255, 0.5);
+    background: rgba(80, 170, 255, 0.16);
+    color: #d9f3ff;
+}
+
+.scale-import-badge.is-none {
+    border-color: rgba(180, 190, 205, 0.35);
+    background: rgba(120, 130, 150, 0.12);
+    color: #b9c3d1;
+}
+
+.scale-branch-badge {
+    display: inline-flex;
+    align-items: center;
+    margin: 2px 6px 4px 0;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25px;
+    border-radius: 999px;
+    border: 1px solid rgba(120, 180, 255, 0.35);
+    background: rgba(60, 120, 190, 0.12);
+    color: #d8ecff;
+}
+
+/* Scale tab: compact top section, reduce duplicated status chips */
+#tabScale .scale-zone-badge {
+    display: none;
+}
+
+#tabScale .scale-import-badge {
+    display: none;
+}
+
+#tabScale .scale-source-status,
+#tabScale .scale-branch-badge,
+#tabScale .scale-source-actions {
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+#tabScale .scale-source-status {
+    margin: 2px 6px 4px 0;
+}
+
+#tabScale .scale-source-actions {
+    margin: 2px 0 4px 0;
+}
+
+#tabScale #scaleSaveCurrentCustom {
+    min-height: 28px;
+    padding: 0 10px;
+    font-size: 11px;
+}
+
+.scale-branch-badge.is-octave {
+    border-color: rgba(120, 206, 255, 0.5);
+    background: rgba(80, 170, 255, 0.16);
+    color: #d9f3ff;
+}
+
+.scale-branch-badge.is-nonoctave {
+    border-color: rgba(255, 212, 102, 0.55);
+    background: rgba(255, 204, 80, 0.18);
+    color: #ffe9b0;
+}
 .scale-row-single .box {
     flex: 1 1 140px;
     min-width: 120px;
@@ -2553,6 +2684,136 @@ body.dual-active .dual-split-line {
 .custom-scale-help {
     font-size: 8px;
     color: #9aa;
+}
+
+.poly-micro-box {
+    min-width: 0;
+    flex: 1 1 auto;
+    padding: 6px 8px;
+}
+
+/* Force Poly-Micro to use full row width in Scale tab (not narrow card). */
+#tabScale .ui-group-inline .poly-micro-box {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: none;
+}
+
+.poly-micro-box .poly-micro-advanced.hidden {
+    display: none;
+}
+
+.poly-micro-row {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-top: 3px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+}
+
+.poly-micro-row input[type="text"] {
+    min-width: 120px;
+    flex: 0 1 170px;
+}
+
+.poly-micro-row label {
+    font-size: 8px;
+    color: #ccd7e6;
+    white-space: nowrap;
+}
+
+.poly-micro-row .menu-btn {
+    min-height: 24px;
+    padding: 0 8px;
+    font-size: 10px;
+    flex: 0 0 auto;
+}
+
+.poly-micro-row > * {
+    flex: 0 0 auto;
+}
+
+@media (max-width: 900px) {
+    .poly-micro-row {
+        flex-wrap: wrap;
+        overflow-x: visible;
+    }
+}
+
+#polyMicroCharacter,
+#polyMicroPresetSelect,
+#polyMicroMasterMode,
+#polyMicroAnchorPolicy {
+    width: auto;
+    min-width: 120px;
+    max-width: 170px;
+}
+
+#polyMicroBranches,
+#polyMicroDegreeMap {
+    min-width: 130px;
+    max-width: 200px;
+}
+
+#polyMicroTolerance,
+#polyMicroBudget {
+    width: 72px;
+    min-width: 72px;
+    max-width: 90px;
+}
+
+#polyMicroIntensity {
+    min-width: 110px;
+    max-width: 150px;
+}
+
+#polyMicroIntensityVal {
+    min-width: 20px;
+    text-align: right;
+    font-size: 9px;
+    color: #9ed8ff;
+}
+
+.poly-micro-mini-badge {
+    font-size: 10px;
+    color: #dff2ff;
+    border: 1px solid rgba(140, 190, 255, 0.24);
+    border-radius: 999px;
+    padding: 2px 8px;
+    background: rgba(0, 0, 0, 0.28);
+}
+
+.poly-micro-fix-msg {
+    font-size: 10px;
+    color: #9af2be;
+    min-height: 14px;
+}
+
+.poly-micro-advanced {
+    border: 1px dashed rgba(255,255,255,0.18);
+    border-radius: 6px;
+    padding: 5px;
+    background: rgba(0,0,0,0.18);
+}
+
+.poly-micro-advanced-warning {
+    font-size: 9px;
+    color: #ffd8a0;
+}
+
+.poly-micro-auto-desc {
+    margin-top: 4px;
+    padding: 6px 7px;
+    border-radius: 6px;
+    font-size: 9px;
+    line-height: 1.28;
+    color: #dbe9ff;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    white-space: pre-line;
 }
 
 .micro-scale-import {
@@ -2770,6 +3031,43 @@ body.dual-active .dual-split-line {
 }
 
 
+.scale-info-panel {
+    margin-top: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(86, 122, 170, 0.14);
+    border: 1px solid rgba(120, 180, 255, 0.28);
+}
+
+.scale-info-panel.hidden {
+    display: none;
+}
+
+.scale-info-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #d8ecff;
+    margin-bottom: 4px;
+}
+
+.scale-info-body {
+    display: grid;
+    grid-template-columns: minmax(90px, 130px) 1fr;
+    gap: 3px 8px;
+    font-size: 11px;
+    color: #d7e3ef;
+}
+
+.scale-info-label {
+    color: #9cb4ca;
+    font-weight: 600;
+}
+
+.scale-info-value {
+    color: #eef6ff;
+}
 .scale-notes-preview {
     display: flex;
     align-items: center;
@@ -2887,8 +3185,148 @@ body.dual-active .dual-split-line {
 #playgroundToggle {
     position: fixed;
     top: 12px;
+    right: 308px;
+    z-index: 150;
+}
+
+
+.pg-circle-dock {
+    position: fixed;
+    top: 12px;
     right: 170px;
     z-index: 150;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+}
+
+.pg-circle-toggle {
+    min-width: 128px;
+}
+
+.pg-circle-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pg-circle-steps-input {
+    min-width: 128px;
+    max-width: 220px;
+    min-height: 32px;
+    height: 32px;
+    padding: 0 8px;
+    background: var(--bg-input);
+    color: #fff;
+    border: 1px solid var(--btn-border);
+    border-radius: var(--radius);
+    font-size: 11px;
+}
+
+.pg-circle-steps-input::placeholder {
+    color: #9aa9b8;
+}
+
+.pg-circle-steps-tools {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+}
+
+.pg-circle-mini-btn {
+    min-height: 30px;
+    min-width: 0;
+    font-size: 10px;
+    padding: 0 8px;
+}
+
+.circle-save-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.circle-save-row input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.circle-editor-help {
+    margin-top: 4px;
+    font-size: 10px;
+    color: #9aa9b8;
+}
+
+.circle-editor-preview {
+    margin-top: 2px;
+    font-size: 10px;
+    color: #cde6ff;
+    border: 1px solid rgba(110, 160, 220, 0.2);
+    border-radius: 6px;
+    padding: 4px 6px;
+    background: rgba(10, 20, 32, 0.35);
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.circle-editor-help.is-warn {
+    color: #ffd8a0;
+}
+
+.circle-dup-control {
+    display: none !important;
+}
+
+.circle-advanced-note {
+    font-size: 10px;
+    color: #9aa9b8;
+    padding: 2px 4px;
+}
+
+.perf-state-strip {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5px 10px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    border: 1px solid rgba(120, 170, 220, 0.22);
+    background: rgba(10, 17, 28, 0.55);
+    font-size: 10px;
+    color: #dceeff;
+}
+
+.perf-state-pill {
+    border: 1px solid rgba(145, 190, 245, 0.24);
+    border-radius: 999px;
+    padding: 2px 8px;
+    background: rgba(0, 0, 0, 0.24);
+}
+
+.pg-quadran-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+}
+
+.pg-circle-actions.hidden {
+    display: none;
+}
+
+.pg-circle-action {
+    min-width: 128px;
+    justify-content: center;
+}
+
+.pg-quadran-arrow {
+    min-width: 0;
+    padding: 0 10px;
+    font-size: 18px;
+    line-height: 1;
 }
 
 .playground-hud-main {
@@ -3411,8 +3849,18 @@ body.dual-active .dual-split-line {
 
 @media (max-width: 640px) {
     #playgroundToggle {
-        right: 120px;
+        right: 216px;
         top: 10px;
+    }
+    .pg-circle-dock {
+        right: 112px;
+        top: 10px;
+        gap: 4px;
+    }
+    .pg-circle-toggle,
+    .pg-circle-action {
+        min-width: 96px;
+        font-size: 10px;
     }
     .playground-hud {
         top: 52px;
@@ -3565,6 +4013,40 @@ body.ui-open #playgroundControls {
     display: block;
 }
 
+
+.pg-adv-subtabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.pg-adv-tab-btn {
+    min-height: 30px;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.06);
+    color: #dbe4ee;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+}
+
+.pg-adv-tab-btn.active {
+    background: rgba(0, 242, 255, 0.18);
+    border-color: rgba(0, 242, 255, 0.45);
+    color: #eaffff;
+}
+
+.pg-adv-content {
+    display: none;
+}
+
+.pg-adv-content.active {
+    display: block;
+}
+
 /* When tabs are active, make panel stack sections */
 #pgAdvancedPanel {
     display: block;
@@ -3635,4 +4117,5 @@ body.ui-open #playgroundControls {
 #pgAdvancedPanel .hud-status {
     padding-top: 2px;
 }
+
 

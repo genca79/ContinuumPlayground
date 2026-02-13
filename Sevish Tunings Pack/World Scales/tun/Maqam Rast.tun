@@ -1,0 +1,294 @@
+; VAZ Plus/AnaMark softsynth tuning file
+; 11-tone Arabian and Turkish Rast/Penchgah by Ozan Yarman http://www.ozanyarman.com, mapped to 12 keys by Aaron Andrew Hunt
+;
+; VAZ Plus section
+[Tuning]
+note 0=0
+note 1=204
+note 2=204
+note 3=347
+note 4=386
+note 5=498
+note 6=583
+note 7=702
+note 8=906
+note 9=996
+note 10=1049
+note 11=1088
+note 12=1200
+note 13=1404
+note 14=1404
+note 15=1547
+note 16=1586
+note 17=1698
+note 18=1783
+note 19=1902
+note 20=2106
+note 21=2196
+note 22=2249
+note 23=2288
+note 24=2400
+note 25=2604
+note 26=2604
+note 27=2747
+note 28=2786
+note 29=2898
+note 30=2983
+note 31=3102
+note 32=3306
+note 33=3396
+note 34=3449
+note 35=3488
+note 36=3600
+note 37=3804
+note 38=3804
+note 39=3947
+note 40=3986
+note 41=4098
+note 42=4183
+note 43=4302
+note 44=4506
+note 45=4596
+note 46=4649
+note 47=4688
+note 48=4800
+note 49=5004
+note 50=5004
+note 51=5147
+note 52=5186
+note 53=5298
+note 54=5383
+note 55=5502
+note 56=5706
+note 57=5796
+note 58=5849
+note 59=5888
+note 60=6000
+note 61=6204
+note 62=6204
+note 63=6347
+note 64=6386
+note 65=6498
+note 66=6583
+note 67=6702
+note 68=6906
+note 69=6996
+note 70=7049
+note 71=7088
+note 72=7200
+note 73=7404
+note 74=7404
+note 75=7547
+note 76=7586
+note 77=7698
+note 78=7783
+note 79=7902
+note 80=8106
+note 81=8196
+note 82=8249
+note 83=8288
+note 84=8400
+note 85=8604
+note 86=8604
+note 87=8747
+note 88=8786
+note 89=8898
+note 90=8983
+note 91=9102
+note 92=9306
+note 93=9396
+note 94=9449
+note 95=9488
+note 96=9600
+note 97=9804
+note 98=9804
+note 99=9947
+note 100=9986
+note 101=10098
+note 102=10183
+note 103=10302
+note 104=10506
+note 105=10596
+note 106=10649
+note 107=10688
+note 108=10800
+note 109=11004
+note 110=11004
+note 111=11147
+note 112=11186
+note 113=11298
+note 114=11383
+note 115=11502
+note 116=11706
+note 117=11796
+note 118=11849
+note 119=11888
+note 120=12000
+note 121=12204
+note 122=12204
+note 123=12347
+note 124=12386
+note 125=12498
+note 126=12583
+note 127=12702
+
+; AnaMark section
+[Scale Begin]
+Format= "AnaMark-TUN"
+FormatVersion= 200
+FormatSpecs= "http:\\\\www.mark-henning.de\\eternity\\tuningspecs.html"
+
+[Info]
+Name= "11-rast y.tun"
+ID= "ID_11-rasty.tun"
+Filename= "11-rast y.scl"
+Description= "11-tone Arabian and Turkish Rast/Penchgah by Ozan Yarman http://www.ozanyarman.com, mapped to 12 keys by Aaron Andrew Hunt"
+Editor= "Scala"
+
+[Exact Tuning]
+note 0= 0.000000
+note 1= 203.910002
+note 2= 203.910002
+note 3= 347.407941
+note 4= 386.313714
+note 5= 498.044999
+note 6= 582.512193
+note 7= 701.955001
+note 8= 905.865003
+note 9= 996.089998
+note 10= 1049.362941
+note 11= 1088.268715
+note 12= 1200.000000
+note 13= 1403.910002
+note 14= 1403.910002
+note 15= 1547.407941
+note 16= 1586.313714
+note 17= 1698.044999
+note 18= 1782.512193
+note 19= 1901.955001
+note 20= 2105.865003
+note 21= 2196.089998
+note 22= 2249.362941
+note 23= 2288.268715
+note 24= 2400.000000
+note 25= 2603.910002
+note 26= 2603.910002
+note 27= 2747.407941
+note 28= 2786.313714
+note 29= 2898.044999
+note 30= 2982.512193
+note 31= 3101.955001
+note 32= 3305.865003
+note 33= 3396.089998
+note 34= 3449.362941
+note 35= 3488.268715
+note 36= 3600.000000
+note 37= 3803.910002
+note 38= 3803.910002
+note 39= 3947.407941
+note 40= 3986.313714
+note 41= 4098.044999
+note 42= 4182.512193
+note 43= 4301.955001
+note 44= 4505.865003
+note 45= 4596.089998
+note 46= 4649.362941
+note 47= 4688.268715
+note 48= 4800.000000
+note 49= 5003.910002
+note 50= 5003.910002
+note 51= 5147.407941
+note 52= 5186.313714
+note 53= 5298.044999
+note 54= 5382.512193
+note 55= 5501.955001
+note 56= 5705.865003
+note 57= 5796.089998
+note 58= 5849.362941
+note 59= 5888.268715
+note 60= 6000.000000
+note 61= 6203.910002
+note 62= 6203.910002
+note 63= 6347.407941
+note 64= 6386.313714
+note 65= 6498.044999
+note 66= 6582.512193
+note 67= 6701.955001
+note 68= 6905.865003
+note 69= 6996.089998
+note 70= 7049.362941
+note 71= 7088.268715
+note 72= 7200.000000
+note 73= 7403.910002
+note 74= 7403.910002
+note 75= 7547.407941
+note 76= 7586.313714
+note 77= 7698.044999
+note 78= 7782.512193
+note 79= 7901.955001
+note 80= 8105.865003
+note 81= 8196.089998
+note 82= 8249.362941
+note 83= 8288.268715
+note 84= 8400.000000
+note 85= 8603.910002
+note 86= 8603.910002
+note 87= 8747.407941
+note 88= 8786.313714
+note 89= 8898.044999
+note 90= 8982.512193
+note 91= 9101.955001
+note 92= 9305.865003
+note 93= 9396.089998
+note 94= 9449.362941
+note 95= 9488.268715
+note 96= 9600.000000
+note 97= 9803.910002
+note 98= 9803.910002
+note 99= 9947.407941
+note 100= 9986.313714
+note 101= 10098.044999
+note 102= 10182.512193
+note 103= 10301.955001
+note 104= 10505.865003
+note 105= 10596.089998
+note 106= 10649.362941
+note 107= 10688.268715
+note 108= 10800.000000
+note 109= 11003.910002
+note 110= 11003.910002
+note 111= 11147.407941
+note 112= 11186.313714
+note 113= 11298.044999
+note 114= 11382.512193
+note 115= 11501.955001
+note 116= 11705.865003
+note 117= 11796.089998
+note 118= 11849.362941
+note 119= 11888.268715
+note 120= 12000.000000
+note 121= 12203.910002
+note 122= 12203.910002
+note 123= 12347.407941
+note 124= 12386.313714
+note 125= 12498.044999
+note 126= 12582.512193
+note 127= 12701.955001
+
+[Functional Tuning]
+note 1="#=0 * 9/8"
+note 2="#=0 * 9/8"
+note 3="#=0 * 11/9"
+note 4="#=0 * 5/4"
+note 5="#=0 * 4/3"
+note 6="#=0 * 7/5"
+note 7="#=0 * 3/2"
+note 8="#=0 * 27/16"
+note 9="#=0 * 16/9"
+note 10="#=0 * 11/6"
+note 11="#=0 * 15/8"
+note 12="#>-12 * 2/1 ~999"
+
+; Set reference key to absolute frequency (not scale note but midi key)
+note 60="! 261.625565"
+[Scale End]

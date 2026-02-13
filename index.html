@@ -1,4 +1,4 @@
-﻿
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -42,7 +42,7 @@
         </svg>
     </span>
 </button>
-<a id="guideBtn" class="menu-btn btn-accent" href="Guide.html" target="_blank" rel="noopener" title="User Guide" data-legend="Open the user guide in a new tab." data-legend-group="top"><span class="btn-text">?</span></a>
+<a id="guideBtn" class="menu-btn btn-accent" href="Guide.html" target="_blank" rel="noopener" title="User Guide" data-legend="Open the user guide in a new tab." data-legend-group="top"><span class="btn-text">&#8592;</span></a>
 
 <!-- Audio Recorder Controls -->
 <div id="recControls" class="rec-controls-bar">
@@ -112,7 +112,7 @@
             </div>
             <div class="box"><label>MIDI In</label><select id="midiInSelect" data-param="midiInSelect"><option value="">Nessun Input</option></select></div>
             <div class="box"><label>MIDI Out A</label><select id="midiOutSelect" data-param="midiOutSelect"></select></div>
-            <div class="box"><label>MIDI Out B</label><select id="midiOutSelectB" data-param="midiOutSelectB"></select></div>
+            <div class="box" id="midiOutBBox"><label>MIDI Out B</label><select id="midiOutSelectB" data-param="midiOutSelectB"></select></div>
             <div class="box" style="max-width:70px;"><label>DUAL Keyboard</label><input type="checkbox" id="dualMode" data-param="dualMode"></div>
             <div class="box" style="max-width:60px;"><label>Thru</label><input type="checkbox" id="midiThru" data-param="midiThru"></div>
             <div class="box" style="max-width:90px;"><label>MPE Out</label><input type="checkbox" id="midiInMpe" data-param="midiInMpe" checked></div>
@@ -220,6 +220,18 @@
     <!-- === TAB CONTENT: SCALE === -->
     <div class="ui-tab-content" id="tabScale" data-tab-content="scale">
         <div class="scale-zone-badge" id="scaleZoneLabel" aria-live="polite">Editing Zone: A</div>
+        <div class="scale-zone-targets">
+            <span class="scale-zone-targets-label">Edit target</span>
+            <button id="scaleEditZoneA" class="menu-btn scale-zone-target-btn" type="button" title="Quick: edit Scale Zone A" aria-label="Edit Scale Zone A" data-legend="Quick: route scale edits to Zone A only." data-legend-group="scale">A</button>
+            <button id="scaleEditZoneB" class="menu-btn scale-zone-target-btn" type="button" title="Quick: edit Scale Zone B" aria-label="Edit Scale Zone B" data-legend="Quick: route scale edits to Zone B only." data-legend-group="scale">B</button>
+            <button id="scaleEditZoneLink" class="menu-btn scale-zone-target-btn" type="button" title="Quick: link A and B scale edits" aria-label="Link scale edits A and B" data-legend="Quick: mirror scale edits to both zones (A+B)." data-legend-group="scale">Link A+B</button>
+        </div>
+        <div class="scale-import-badge" id="scaleImportBadge" aria-live="polite">A: No imported tuning</div>
+        <div class="scale-source-status" id="scaleSourceStatus" aria-live="polite">Source: Diatonic</div>
+        <div class="scale-branch-badge" id="scaleBranchBadge" aria-live="polite">Chord Branch: OCTAVE (1200c)</div>
+        <div class="scale-source-actions">
+            <button id="scaleSaveCurrentCustom" class="menu-btn btn-ok" type="button" title="Quick: save current scale as a custom preset" aria-label="Save current scale as custom scale" data-legend="Quick: capture the active scale and store it in Custom Scales." data-legend-group="scale">Save Current as Custom Scale</button>
+        </div>
         <div class="ui-group-inline scale-row-single">
             <div class="hidden">
                 <input type="radio" name="scaleMode" value="diatonic" id="scaleModeDiatonic" checked>
@@ -266,10 +278,10 @@
                 <div class="micro-scale-import">
                     <div class="micro-scale-import-row">
                         <input type="text" id="sclName" placeholder="SCL name (optional)" class="custom-scale-input-wide">
-                        <input type="file" id="sclFile" accept=".scl">
+                        <input type="file" id="sclFile" accept=".scl,.tun">
                         <button id="sclImport" class="menu-btn btn-ok" aria-label="Import SCL"><span class="btn-text">IMPORT</span></button>
                     </div>
-                    <div class="custom-scale-help">Import Scala .scl microtonal scales.</div>
+                    <div class="custom-scale-help">Import Scala .scl and AnaMark .tun tuning maps.</div>
                 </div>
             </div>
             <div class="box scale-menu scale-custom-wide" id="scaleCustomBox" data-scale-choice="custom"><label>Custom Scale</label>
@@ -278,8 +290,8 @@
                         <label class="custom-scale-subtitle">New scale name</label>
                         <div class="custom-scale-name-row">
                             <input type="text" id="customScaleName" placeholder="Type name here" list="customScaleNames">
-                            <button id="customScaleSave" class="menu-btn btn-ok" aria-label="Save"><span class="btn-icon">ðŸ’¾</span></button>
-                            <button id="customScaleDel" class="menu-btn btn-danger" aria-label="Delete"><span class="btn-icon">ðŸ—‘</span></button>
+                            <button id="customScaleSave" class="menu-btn btn-ok" aria-label="Save"><span class="btn-icon">💾</span></button>
+                            <button id="customScaleDel" class="menu-btn btn-danger" aria-label="Delete"><span class="btn-icon">🗑</span></button>
                         </div>
                         <div class="custom-scale-help">Give your scale a name, then press Save.</div>
                     </div>
@@ -304,10 +316,81 @@
             </div>
         </div>
         <div class="scale-notes-preview hidden" id="scaleNotesPreview" aria-live="polite"></div>
+        <div class="scale-info-panel hidden" id="scaleInfoPanel" aria-live="polite">
+            <div class="scale-info-title" id="scaleInfoTitle">Scale Info</div>
+            <div class="scale-info-body" id="scaleInfoBody"></div>
+        </div>
 
         <div class="ui-group-inline">
             <div class="box" style="max-width:120px;"><label>Micro Map</label><input type="checkbox" id="midiInMicroMap" data-param="midiInMicroMap"></div>
             <div class="box" style="max-width:110px;"><label>Micro Base</label><input type="number" id="midiInMicroBase" min="0" max="127" step="1" value="48"></div>
+        </div>
+        <div class="ui-group-inline">
+            <div class="box poly-micro-box">
+                <label>Poly-Micro</label>
+                <div class="poly-micro-row">
+                    <label><input type="checkbox" id="polyMicroEnabled"> Enabled</label>
+                    <label>Character</label>
+                    <select id="polyMicroCharacter" title="Quick: choose the Poly-Micro musical character" aria-label="Poly-Micro character">
+                        <option value="stable">More in-tune/stable</option>
+                        <option value="balanced" selected>Balanced</option>
+                        <option value="color">More microtonal color</option>
+                    </select>
+                    <label>Intensity</label>
+                    <input id="polyMicroIntensity" type="range" min="0" max="100" step="1" value="50" title="Quick: set Poly-Micro intensity" aria-label="Poly-Micro intensity">
+                    <span id="polyMicroIntensityVal">50</span>
+                </div>
+                <div class="poly-micro-row">
+                    <label>Preset</label>
+                    <select id="polyMicroPresetSelect" title="Quick: select a Poly-Micro preset" aria-label="Poly-Micro preset">
+                        <option value="">(select)</option>
+                        <option value="clean">Clean Intonation</option>
+                        <option value="rich">Rich Chords</option>
+                        <option value="moving">Moving Arp</option>
+                        <option value="experimental">Experimental Tension</option>
+                    </select>
+                    <button id="polyMicroPresetApply" class="menu-btn btn-accent" type="button" title="Quick: apply the selected preset now" aria-label="Apply Poly-Micro preset">Apply Preset</button>
+                    <button id="polyMicroAutoSetup" class="menu-btn btn-ok" type="button" title="Quick: auto-configure Poly-Micro from the active scale" aria-label="Auto setup Poly-Micro from active scale">Auto Setup from Scale</button>
+                </div>
+                <div class="poly-micro-row">
+                    <span id="polyMicroStabilityBadge" class="poly-micro-mini-badge">Stability: Medium</span>
+                    <span id="polyMicroColorBadge" class="poly-micro-mini-badge">Color: Medium</span>
+                    <span id="polyMicroArpBadge" class="poly-micro-mini-badge">ARP Motion: Smooth</span>
+                </div>
+                <div class="poly-micro-row">
+                    <button id="polyMicroAdvancedToggle" class="menu-btn" type="button" title="Advanced: show technical Poly-Micro controls" aria-label="Toggle Poly-Micro advanced controls">Advanced</button>
+                    <span id="polyMicroFixMsg" class="poly-micro-fix-msg" aria-live="polite"></span>
+                    <span id="polyMicroAnchorBadge" class="scale-import-badge is-none">anchors found: 0</span>
+                </div>
+                <div id="polyMicroDualRow" class="poly-micro-row hidden">
+                    <button id="polyMicroApplyA" class="menu-btn" type="button" title="Quick (Dual): apply current Poly-Micro setup to Zone A" aria-label="Apply Poly-Micro setup to Zone A">Apply to A</button>
+                    <button id="polyMicroApplyB" class="menu-btn" type="button" title="Quick (Dual): apply current Poly-Micro setup to Zone B" aria-label="Apply Poly-Micro setup to Zone B">Apply to B</button>
+                    <button id="polyMicroCopyAToB" class="menu-btn" type="button" title="Quick (Dual): copy Zone A Poly-Micro setup to Zone B" aria-label="Copy Poly-Micro setup from A to B">Copy A->B</button>
+                </div>
+                <div id="polyMicroAdvancedPanel" class="poly-micro-advanced hidden">
+                    <div class="poly-micro-advanced-warning">Advanced edits may make the sound less stable.</div>
+                    <div class="poly-micro-row">
+                        <select id="polyMicroMasterMode">
+                            <option value="anchor">anchor</option>
+                            <option value="branch">branch</option>
+                            <option value="lcm">lcm</option>
+                        </select>
+                        <select id="polyMicroAnchorPolicy">
+                            <option value="soft">soft</option>
+                            <option value="strict">strict</option>
+                        </select>
+                    </div>
+                    <div class="poly-micro-row">
+                        <input id="polyMicroBranches" type="text" placeholder="EDO branches: 12,31,22">
+                        <input id="polyMicroDegreeMap" type="text" placeholder="degree->branch: 0:0,1:1,2:2">
+                    </div>
+                    <div class="poly-micro-row">
+                        <label>tol(c)</label><input id="polyMicroTolerance" type="number" min="0" max="60" step="0.1" value="8">
+                        <label>budget</label><input id="polyMicroBudget" type="number" min="0" max="1200" step="1" value="35">
+                    </div>
+                </div>
+                <div id="polyMicroAutoDesc" class="poly-micro-auto-desc" aria-live="polite"></div>
+            </div>
         </div>
     </div>
 
@@ -542,9 +625,9 @@
             <div class="box melody-page-box" style="min-width:210px;">
                 <label>Page</label>
                 <div class="melody-page-controls">
-                    <button id="melodyPagePrev" type="button" class="melody-page-btn">â€¹</button>
+                    <button id="melodyPagePrev" type="button" class="melody-page-btn">‹</button>
                     <span id="melodyPageLabel" class="melody-page-label">Page 1/1 (1-1)</span>
-                    <button id="melodyPageNext" type="button" class="melody-page-btn">â€º</button>
+                    <button id="melodyPageNext" type="button" class="melody-page-btn">›</button>
                     <button id="melodyPageGo" type="button" class="melody-page-btn">STOP</button>
                     <select id="melodyPageSize" class="melody-page-size">
                         <option value="32">32</option>
@@ -674,6 +757,14 @@
                         <input type="checkbox" id="melodyImportAllParts">
                         Import all parts
                     </label>
+                    <label>MIDI Track</label>
+                    <select id="melodyImportMidiTrack">
+                        <option value="all">All tracks</option>
+                    </select>
+                    <label>MIDI Channel</label>
+                    <select id="melodyImportMidiChannel">
+                        <option value="all">All channels</option>
+                    </select>
                 </div>
                 <div class="box" style="max-width:160px;">
                     <label>Export</label>
@@ -756,7 +847,7 @@
             <button class="ui-tab" data-subtab="chord">CHORD</button>
             <button class="ui-tab" data-subtab="mpe">MPE</button>
             <button class="ui-tab" data-subtab="matrix">MATRIX</button>
-           
+            <button class="ui-tab" data-subtab="circle">CIRCLE VIEW</button>
         </div>
 
         <!-- Sub-tab: ARP -->
@@ -855,6 +946,8 @@
                     <option value="0">Root</option><option value="1">1st</option><option value="2">2nd</option><option value="3">3rd</option>
                 </select></div>
                 <div class="box" style="max-width:120px;"><label>Spread</label><input type="range" id="chordSpread" min="0" max="12" value="0" data-param="chordSpread"></div>
+                <div class="box" style="max-width:110px;"><label>Step 2</label><input type="number" id="chordStep2" min="1" max="64" value="4" data-param="chordStep2"></div>
+                <div class="box" style="max-width:110px;"><label>Step 3</label><input type="number" id="chordStep3" min="1" max="64" value="7" data-param="chordStep3"></div>
             </div>
         </div>
 
@@ -865,8 +958,8 @@
                     <div style="display:flex; gap:2px;">
                         <select id="mpePresetSelect" style="min-width:90px;"></select>
                         <input type="text" id="mpePresetName" placeholder="Name" style="width:70px;">
-                        <button id="mpePresetSave" class="menu-btn btn-ok" aria-label="Save"><span class="btn-icon">ðŸ’¾</span></button>
-                        <button id="mpePresetDel" class="menu-btn btn-danger" aria-label="Delete"><span class="btn-icon">ðŸ—‘</span></button>
+                        <button id="mpePresetSave" class="menu-btn btn-ok" aria-label="Save"><span class="btn-icon">💾</span></button>
+                        <button id="mpePresetDel" class="menu-btn btn-danger" aria-label="Delete"><span class="btn-icon">🗑</span></button>
                     </div>
                     <div id="mpePresetDesc" style="font-size:8px; color:#888; margin-top:2px;">&nbsp;</div>
                 </div>
@@ -890,6 +983,12 @@
                 <div class="box mpe-box-slider" id="boxTouchSens"><label>Area Sens</label><input type="range" id="touchSensitivity" min="10" max="150" value="75" data-param="touchSensitivity"></div>
                 <div class="box mpe-box-slider"><label>Y Deadzone</label><input type="range" id="yDeadzone" min="0" max="30" value="5" data-param="yDeadzone"></div>
                 <div class="box mpe-box-check"><label>Q Release</label><input type="checkbox" id="quantizeRelease" data-param="quantizeRelease" checked></div>
+                <div class="box mpe-box-check"><label>Auto PB</label><input type="checkbox" id="autoPbPolicy" checked></div>
+                <div class="box mpe-box-check"><label>Spiral</label><input type="checkbox" id="spiralEnabled"></div>
+                <div class="box mpe-box-check"><label>Shimmer</label><input type="checkbox" id="spiralShimmer"></div>
+                <div class="box mpe-box-slider"><label>Spiral Defect (c)</label><input type="range" id="spiralDefect" min="0" max="100" step="0.1" value="38.7"><div class="param-effective" id="spiralDefectVal">38.7c</div></div>
+                <div class="box mpe-box-small"><label>Spiral Anchor</label><select id="spiralAnchor"><option value="fixed">Fixed</option><option value="left-edge" selected>Left Edge</option></select></div>
+                <div class="box mpe-box-small"><label>Spiral State</label><div id="spiralStatus" class="param-effective">OFF</div></div>
             </div>
         </div>
         <div class="ui-subtab-content" data-subtab-content="matrix">
@@ -911,6 +1010,33 @@
                     <label>AM Bias</label>
                     <input type="range" id="amBias" min="0" max="1" step="0.01" value="0.15">
                 </div>
+            </div>
+        </div>
+        <div class="ui-subtab-content" data-subtab-content="circle">
+            <div class="ui-group-inline">
+                <div class="box circle-dup-control" style="max-width:120px;"><label>Circle View</label><button id="circleViewToggleAdv" class="menu-btn toggle-off">CIRCLE OFF</button></div>
+                <div class="box circle-dup-control" style="max-width:140px;"><label>Rotate Pattern -</label><button id="circleQuadranLeft" class="menu-btn">&#8592;</button></div>
+                <div class="box circle-dup-control" style="max-width:140px;"><label>Rotate Pattern +</label><button id="circleQuadranRight" class="menu-btn">&#8594;</button></div>
+                <div class="box" style="max-width:150px;"><label>Rotate Target</label><select id="pgCircleQuadranScope"><option value="both">Both Rings</option><option value="outer">Outer Only</option><option value="inner">Inner Only</option></select></div>
+                <div class="box" style="max-width:150px;"><label>Rotation Speed (ms)</label><input id="pgCircleQuadranMs" type="number" min="80" max="2000" step="10" value="220"></div>
+                <div class="box circle-dup-control" style="max-width:160px;"><label>Circle Labels</label><button id="pgCircleLabelModeAdv" class="menu-btn">-> Steps 123</button></div>
+                <div class="box circle-dup-control" style="min-width:300px;">
+                    <label>Pattern Editor</label>
+                    <input id="pgCircleStepOrderAdv" type="text" placeholder="0, 5, 12, 30, 29, 27 or C,D#,F">
+                    <div class="circle-editor-help">Use comma-separated order. Root is step `0`.</div>
+                </div>
+                <div class="box circle-dup-control" style="min-width:260px;">
+                    <label>Save As Custom Scale</label>
+                    <div class="circle-save-row">
+                        <input id="pgCircleScaleNameAdv" type="text" placeholder="Name">
+                        <button id="pgCircleSaveScaleAdv" class="menu-btn btn-ok">Save Scale</button>
+                    </div>
+                </div>
+                <div class="box circle-dup-control" style="max-width:140px;"><label>Poly Planner</label><button id="pgCirclePolyToggleAdv" class="menu-btn toggle-off">POLY OFF</button></div>
+                <div class="box" style="max-width:120px;"><label>Poly Anchor</label><input id="circlePolyAnchor" type="number" min="0" max="127" step="1" value="69"></div>
+                <div class="box" style="min-width:220px;"><label>Poly Branch A (PC)</label><input id="circlePolyBranchA" type="text" value="0,4,7" placeholder="0,4,7"></div>
+                <div class="box" style="min-width:220px;"><label>Poly Branch B (PC)</label><input id="circlePolyBranchB" type="text" value="2,5,9" placeholder="2,5,9"></div>
+                <div class="circle-advanced-note">Circle controls are unified in the top dock. This tab only exposes advanced Circle tuning tools.</div>
             </div>
         </div>
         
@@ -1001,6 +1127,12 @@
                 <option value="min9">Min9</option>
                 <option value="eleventh">11th</option>
                 <option value="thirteenth">13th</option>
+                <option value="neutralTriad">Neutral Triad</option>
+                <option value="superMajorTriad">Super-Major Triad</option>
+                <option value="subMinorTriad">Sub-Minor Triad</option>
+                <option value="shimmer">Shimmer</option>
+                <option value="stepTriad">Compact Steps (No-Oct)</option>
+                <option value="stepWide">Open Steps (No-Oct)</option>
             </select>
         </div>
         <div class="perf-item">
@@ -1137,6 +1269,30 @@
     <button id="playgroundToggle" class="menu-btn">
         <span class="btn-text">PHYSICS MODE</span>
     </button>
+    <div id="pgCircleDock" class="pg-circle-dock">
+        <button id="pgCircleViewToggle" class="menu-btn pg-circle-toggle toggle-off" type="button" title="Circle View" aria-label="Circle View">
+            <span class="btn-text">CIRCLE OFF</span>
+        </button>
+        <div id="pgCircleActions" class="pg-circle-actions hidden" aria-hidden="true">
+            <div class="pg-quadran-row">
+                <button id="pgQuadranLeftTop" class="menu-btn pg-circle-action pg-quadran-arrow" type="button" title="Quick: rotate the pattern counter-clockwise" aria-label="Rotate pattern counter-clockwise" data-legend="Quick: rotate held pattern one step counter-clockwise." data-legend-group="circle">&#8592;</button>
+                <button id="pgQuadranRightTop" class="menu-btn pg-circle-action pg-quadran-arrow" type="button" title="Quick: rotate the pattern clockwise" aria-label="Rotate pattern clockwise" data-legend="Quick: rotate held pattern one step clockwise." data-legend-group="circle">&#8594;</button>
+            </div>
+            <button id="pgPolyPlannerTop" class="menu-btn pg-circle-action toggle-off" type="button" title="Advanced: enable Poly Planner mapping in Circle View" aria-label="Toggle Poly Planner in Circle View">POLY OFF</button>
+            <button id="pgCircleLabelModeTop" class="menu-btn pg-circle-action" type="button" title="Quick: switch Circle label display mode" aria-label="Switch Circle labels between notes and steps">-> Steps 123</button>
+            <input id="pgCircleStepOrderTop" class="pg-circle-steps-input" type="text" placeholder="Steps/Notes: 0,5,12,30" title="Quick: pattern editor (order + repeats)">
+            <div class="pg-circle-steps-tools">
+                <button id="pgCircleStepApplyTop" class="menu-btn pg-circle-mini-btn" type="button" title="Quick: apply current pattern order">Apply</button>
+                <button id="pgCircleStepClearTop" class="menu-btn pg-circle-mini-btn" type="button" title="Quick: reset pattern to full scale order">Clear</button>
+            </div>
+            <div id="pgCircleStepStatusTop" class="circle-editor-help" aria-live="polite"></div>
+            <div id="pgCircleStepPreviewTop" class="circle-editor-preview" aria-live="polite"></div>
+            <div class="circle-save-row">
+                <input id="pgCircleScaleNameTop" class="pg-circle-steps-input" type="text" placeholder="Scale name" title="Quick: name for saving this custom scale">
+                <button id="pgCircleSaveScaleTop" class="menu-btn pg-circle-mini-btn btn-ok" type="button" title="Quick: save current circle pattern as custom scale">Save Scale</button>
+            </div>
+        </div>
+    </div>
 
     <div id="playgroundControls" class="playground-hud">
         <div class="playground-top-group" id="pgMaterialsGroup">
@@ -1712,7 +1868,7 @@
     <div class="rec-editor-content">
         <div class="rec-editor-header">
             <h3>Recording Editor</h3>
-            <button id="recEditorClose" class="rec-editor-close" title="Close">Ã—</button>
+            <button id="recEditorClose" class="rec-editor-close" title="Close">×</button>
         </div>
         <div class="rec-editor-waveform">
             <canvas id="recWaveformCanvas"></canvas>
@@ -1724,23 +1880,29 @@
             <span id="recSelectionInfo">Selection: Full</span>
         </div>
         <div class="rec-editor-controls">
-            <button id="recPlayBtn" class="menu-btn btn-accent" title="Play"><span class="btn-icon">â–¶</span></button>
-            <button id="recStopPlayBtn" class="menu-btn" title="Stop"><span class="btn-icon">â– </span></button>
+            <button id="recPlayBtn" class="menu-btn btn-accent" title="Play"><span class="btn-icon">▶</span></button>
+            <button id="recStopPlayBtn" class="menu-btn" title="Stop"><span class="btn-icon">■</span></button>
             <button id="recClearSelBtn" class="menu-btn" title="Select All">Select All</button>
             <div class="rec-editor-name">
                 <label>Filename:</label>
                 <input type="text" id="recFileName" placeholder="recording">
                 <span>.wav</span>
             </div>
-            <button id="recSaveBtn" class="menu-btn btn-ok" title="Save WAV">ðŸ’¾ Save</button>
-            <button id="recDiscardBtn" class="menu-btn btn-danger" title="Discard">ðŸ—‘ Discard</button>
+            <button id="recSaveBtn" class="menu-btn btn-ok" title="Save WAV">💾 Save</button>
+            <button id="recDiscardBtn" class="menu-btn btn-danger" title="Discard">🗑 Discard</button>
         </div>
     </div>
 </div>
 
 <script src="https://unpkg.com/fflate@0.8.2/umd/index.js"></script>
+<script src="SevishScalesManifest.js"></script>
 <script src="script.js" defer></script>
 </body>
 </html>
+
+
+
+
+
 
 

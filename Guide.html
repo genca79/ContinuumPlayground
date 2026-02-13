@@ -195,8 +195,6 @@
     <div data-lang="en" class="active">
         <a href="#intro">Overview</a>
         <a href="#quickstart">Quick Start</a>
-        <a href="#ui">UI Structure</a>
-        <a href="#playground">Playground</a>
         <a href="#topbar">Top Bar & Icons</a>
         <a href="#workflow">Workflow</a>
         <a href="#performance">Performance</a>
@@ -204,9 +202,11 @@
         <a href="#midi">MIDI &amp; Synth</a>
         <a href="#sampler">Sampler</a>
         <a href="#scale">Scale &amp; Harmony</a>
+        <a href="#circle">Circle View</a>
         <a href="#melody">Melody</a>
         <a href="#advanced">Advanced</a>
         <a href="#recording">Recording</a>
+        <a href="#playground">Playground</a>
         <a href="#troubleshooting">Troubleshooting</a>
     </div>
     <div data-lang="it">
@@ -221,6 +221,7 @@
         <a href="#midi">MIDI &amp; Synth</a>
         <a href="#sampler">Sampler</a>
         <a href="#scale">Scale &amp; Armonia</a>
+        <a href="#circle">Circle View</a>
         <a href="#melody">Melody</a>
         <a href="#advanced">Advanced</a>
         <a href="#recording">Recording</a>
@@ -234,12 +235,13 @@
             <h2>Overview</h2>
             <p><strong>GENCA MPE Ultra Continuum</strong> is a browser-based performance instrument that combines a <strong>Wavetable Synth</strong>, a <strong>Multi‑Sampler</strong>, and a complete <strong>MPE control system</strong>. It can operate as an internal sound engine, a MIDI controller, or both.</p>
             <p>Play directly on the canvas with touch/mouse, or connect external MIDI devices. The app supports <strong>scale snapping</strong>, <strong>chords/arp</strong>, per‑note expression (press/timbre/pitch), melody import, and a full <strong>melody engine</strong> with Piano Roll + Sequencer.</p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Xu-06yUo0B0?si=icEBnL6FFZJaF61e" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        
+            <p><strong>What this section is for:</strong> understand the global architecture before touching parameters. If you know which block (sound, MIDI, scale, melody, performance) owns each behavior, setup and troubleshooting become much faster.</p>
         </section>
 
         <section id="quickstart">
             <h2>Quick Start</h2>
+            <p>This path is optimized for first sound in under one minute. Follow this order to avoid most browser and routing issues.</p>
+            <p>Think of this startup as three layers: first unlock the browser audio, then define MIDI routing, and only after that shape the sound. If this order is respected, most setup problems disappear.</p>
             <ol>
                 <li>Click once on the page to enable audio (required by browsers).</li>
                 <li>Open <strong>MIDI &amp; SYNTH</strong> and select <code>MIDI In</code>/<code>MIDI Out</code> if needed.</li>
@@ -252,43 +254,9 @@
             </div>
         </section>
 
-        <section id="ui">
-            <h2>UI Structure</h2>
-            <ul>
-                <li><strong>Top Bar:</strong> access to panels (MIDI/SYNTH, FX, SAMPLER, SCALE, MELODY, REC).</li>
-                <li><strong>Main Canvas:</strong> performance surface with MPE visual feedback.</li>
-                <li><strong>Performance Bar:</strong> live controls at the bottom.</li>
-                <li><strong>Melody Panel:</strong> generator, editor, import and continue tools.</li>
-            </ul>
-        </section>
-
-        <section id="playground">
-            <h2>Physical Playground</h2>
-            <ul>
-                <li><strong>Physics Mode:</strong> enables a second canvas with material-based bodies and collision-triggered notes.</li>
-                <li><strong>Materials:</strong> Bamboo/Stone/Rubber/Clay/Glass/Felt/Steel/Water change both physics behavior and envelope feel.</li>
-                <li><strong>Actions:</strong> Rain, Spawn, Clear and Wind quick switch for immediate performance gestures.</li>
-                <li><strong>Live Macros:</strong> Energy/Chaos/Gravity/Density/Wind + Stream for continuous scene control.</li>
-                <li><strong>Presets:</strong> Rain Pad, Glass Burst, Tube Drone, Chaos Perc for instant setups.</li>
-                <li><strong>Tubes Mode:</strong> drag templates into canvas and edit with SEL/PLC/PLY/CUT/DEL tools.</li>
-                <li><strong>Tube Advanced:</strong> material, surface, length, diameter, end mode, quantize and wind-play.</li>
-            </ul>
-        </section>
-
-        <section id="topbar">
-            <h2>Top Bar & Icons</h2>
-            <ul>
-                <li><strong>Guide (?)</strong>: open this manual in a new tab.</li>
-                <li><strong>Record (●)</strong>: start recording the internal audio.</li>
-                <li><strong>Stop (■)</strong>: stop and save the take.</li>
-                <li><strong>Tabs:</strong> MIDI &amp; SYNTH, SAMPLER, SCALE, MELODY, ADVANCED.</li>
-                <li><strong>FX</strong>: opens the effects panel.</li>
-                <li><strong>MIX</strong>: opens the overlay mixer.</li>
-            </ul>
-        </section>
-
         <section id="workflow">
             <h2>Workflow (Suggested)</h2>
+            <p>This sequence minimizes conflicts between harmony, engine, and generation modules. Set pitch context first, then sound source, then performance logic.</p>
             <ol>
                 <li>Set <strong>Scale</strong> and <strong>Chord</strong> context.</li>
                 <li>Choose sound: <strong>Synth</strong>, <strong>Sampler</strong> or Mix.</li>
@@ -302,6 +270,8 @@
         <section id="performance">
             <h2>Performance Bar</h2>
             <p>The bottom bar switches between <strong>General Performance</strong> and <strong>Melody Performance</strong>.</p>
+            <p><strong>Purpose:</strong> instant live intervention without opening deep panels. It is designed for on-the-fly correction, transitions, and phrase control.</p>
+            <p>During performance, this is your safety and expression layer: use <code>STOP</code>/<code>FADE</code> for control, <code>KEEP</code>/<code>HOLD</code> for texture, and ARP/Chord controls for instant harmonic movement.</p>
             <h3>General Performance</h3>
             <ul>
                 <li><strong>Transpose:</strong> octave up/down.</li>
@@ -325,6 +295,7 @@
 
         <section id="fx">
             <h2>FX Panel</h2>
+            <p>Use FX to move from dry articulation to space and motion. In live usage, prepare two contrasting presets (clean and wide) and switch per section.</p>
             <ul>
                 <li><strong>FX Toggle:</strong> open/close the effects panel.</li>
                 <li><strong>Filter:</strong> envelope + cutoff/res controls.</li>
@@ -337,6 +308,8 @@
 
         <section id="midi">
             <h2>MIDI &amp; Synth</h2>
+            <p>This is the routing and engine authority tab. If something sounds wrong, start here before editing any other area.</p>
+            <p>A good mental model is: input comes from <code>MIDI In</code>, internal sound is generated by <code>Internal Synth</code>, and external hardware receives data from MIDI Out ports. Keep this chain clear while configuring.</p>
             <ul>
                 <li><strong>Global Preset:</strong> save/load full app state.</li>
                 <li><strong>MIDI In/Out:</strong> select hardware/virtual ports.</li>
@@ -354,6 +327,8 @@
 
         <section id="sampler">
             <h2>Sampler</h2>
+            <p>The sampler section defines your source material and articulation behavior. Build reliable sets first, then mix with synth as needed.</p>
+            <p>For best results, normalize your sample collection logic before live use: coherent root notes, similar level staging, and clear slot naming reduce mistakes during fast editing.</p>
             <ul>
                 <li><strong>Factory/User Sets:</strong> load presets or create your own.</li>
                 <li><strong>New/Save/Delete:</strong> manage user sets.</li>
@@ -366,6 +341,8 @@
 
         <section id="scale">
             <h2>Scale &amp; Harmony</h2>
+            <p>All melodic/chord decisions depend on this section. Treat it as the musical contract used by keyboard, generator, ARP, and continuation tools.</p>
+            <p>In practice, set scale and root first, test with a simple phrase, then activate advanced harmony tools. This prevents confusion when generated notes appear to "move" unexpectedly.</p>
             <ul>
                 <li><strong>Scale Presets:</strong> select scale and root.</li>
                 <li><strong>Microtonal:</strong> manage cents and micro scales.</li>
@@ -377,9 +354,23 @@
             </ul>
         </section>
 
+        <section id="circle">
+            <h2>Circle View</h2>
+            <p>Circle View presents notes on a circular layout instead of the classic keyboard grid. It is useful when you want to think in intervals and rotational patterns instead of linear note order.</p>
+            <p>Use this mode to quickly visualize pitch relationships, rotate note patterns, and experiment with melodic movement through sectors.</p>
+            <ul>
+                <li><strong>When to use it:</strong> pattern exploration, cyclic motifs, and interval-focused improvisation.</li>
+                <li><strong>Drag behavior:</strong> notes can be dragged across sectors and radial direction, updating pitch and expression together.</li>
+                <li><strong>External MIDI feedback:</strong> incoming MIDI notes appear as green ghost notes and follow the same visual interaction logic.</li>
+                <li><strong>Workflow tip:</strong> find a pattern in Circle View, then move to Melody/Piano Roll for structural refinement.</li>
+            </ul>
+        </section>
+
         <section id="melody">
             <h2>Melody (Generator + Editor)</h2>
             <p>The Melody engine can generate, import, or continue phrases. It is controlled from MAIN and Performance.</p>
+            <p><strong>Role of this section:</strong> compose faster by combining algorithmic generation with manual correction. Generate first, then refine in Piano Roll/Sequence.</p>
+            <p>Recommended loop: generate a rough phrase, edit structure in Piano Roll, apply Humanize, and only then use Continue/Import tools for expansion. This gives more musical continuity.</p>
             <h3>Generator (MAIN)</h3>
             <ul>
                 <li><strong>Generate:</strong> rebuild melody with current parameters.</li>
@@ -429,6 +420,8 @@
 
         <section id="advanced">
             <h2>Advanced (ARP / CHORD / MPE / MATRIX)</h2>
+            <p>Advanced parameters are for expression depth and rhythmic/harmonic behavior shaping. Use them after base routing and scale are stable.</p>
+            <p>Do not turn everything on together at first. Enable one advanced block at a time, listen to the impact, and store a preset when the behavior is stable.</p>
             <h3>ARP</h3>
             <ul>
                 <li><strong>Preset:</strong> quick arpeggio styles.</li>
@@ -463,6 +456,8 @@
 
         <section id="recording">
             <h2>Recording</h2>
+            <p>Recording captures the current mix exactly as played. Use the editor to trim starts/ends and export clean takes for DAW or sharing.</p>
+            <p>Before recording, play 10-15 seconds of a test take and verify levels and noise floor. This small check prevents unusable long takes.</p>
             <ol>
                 <li>Press <strong>Record</strong>.</li>
                 <li>Press <strong>Stop</strong> to save.</li>
@@ -478,8 +473,25 @@
             </ul>
         </section>
 
+        <section id="playground">
+            <h2>Physical Playground</h2>
+            <p>Playground is meant for gestural and physics-driven performance. Instead of manually playing every note, you design movement behaviors that generate musical events.</p>
+            <p>If you are new to this mode, start with a preset scene and change only one macro at a time. This makes it easier to understand how visual motion translates into rhythm and articulation.</p>
+            <ul>
+                <li><strong>Physics Mode:</strong> enables a second canvas with material-based bodies and collision-triggered notes.</li>
+                <li><strong>Materials:</strong> Bamboo/Stone/Rubber/Clay/Glass/Felt/Steel/Water change both physics behavior and envelope feel.</li>
+                <li><strong>Actions:</strong> Rain, Spawn, Clear and Wind quick switch for immediate performance gestures.</li>
+                <li><strong>Live Macros:</strong> Energy/Chaos/Gravity/Density/Wind + Stream for continuous scene control.</li>
+                <li><strong>Presets:</strong> Rain Pad, Glass Burst, Tube Drone, Chaos Perc for instant setups.</li>
+                <li><strong>Tubes Mode:</strong> drag templates into canvas and edit with SEL/PLC/PLY/CUT/DEL tools.</li>
+                <li><strong>Tube Advanced:</strong> material, surface, length, diameter, end mode, quantize and wind-play.</li>
+            </ul>
+        </section>
+
         <section id="troubleshooting">
             <h2>Troubleshooting</h2>
+            <p>Check issues in this order: browser audio unlock, routing selection, engine state, then module-specific settings.</p>
+            <p>When something fails, change one parameter at a time and re-test. Fast multiple changes make it hard to identify the real cause.</p>
             <ul>
                 <li><strong>No sound:</strong> click page and toggle Internal Synth.</li>
                 <li><strong>MIDI not visible:</strong> refresh after connecting device.</li>
@@ -494,14 +506,13 @@
             <h2>Panoramica</h2>
             <p><strong>GENCA MPE Ultra Continuum</strong> è una web app per performance musicale che integra: <strong>Wavetable Synth</strong>, <strong>Multi‑Sampler</strong> e un sistema completo di <strong>MPE (per‑note expression)</strong>. Può funzionare come generatore audio interno, come controller MIDI o come entrambi.</p>
             <p>Suoni direttamente sul canvas con mouse/touch, oppure da MIDI esterno. La app offre <strong>snap di scala</strong>, <strong>chord/arp</strong>, controllo di <strong>pressione/timbro/pitch</strong>, import di melodie e un <strong>melody engine</strong> con editor Piano Roll + Sequencer.</p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Xu-06yUo0B0?si=icEBnL6FFZJaF61e" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        
-        
-        
+            <p><strong>A cosa serve questa sezione:</strong> capire l'architettura generale prima di toccare i parametri. Se sai quale blocco governa ogni comportamento, setup e debug diventano molto piu rapidi.</p>
         </section>
 
         <section id="quickstart">
             <h2>Avvio rapido</h2>
+            <p>Questo percorso e ottimizzato per ottenere audio in meno di un minuto. L'ordine evita la maggior parte dei problemi tipici di browser e routing.</p>
+            <p>Considera l'avvio come tre strati: prima sblocchi l'audio browser, poi imposti il routing MIDI, e solo dopo modelli il suono. Seguendo questo ordine, i problemi iniziali si riducono molto.</p>
             <ol>
                 <li>Clicca una volta sulla pagina per abilitare l’audio (obbligatorio nei browser).</li>
                 <li>Apri <strong>MIDI &amp; SYNTH</strong> e scegli <code>MIDI In</code>/<code>MIDI Out</code> se usi hardware.</li>
@@ -516,6 +527,8 @@
 
         <section id="ui">
             <h2>Struttura UI</h2>
+            <p>Questa mappa ti dice dove modificare routing, suono, regole musicali e controllo live. Riduce i cambi di tab durante la performance.</p>
+            <p>Nell'uso quotidiano lavori quasi sempre su due aree: un tab di configurazione e la performance bar in basso. Il resto serve soprattutto per preparazione e richiamo setup.</p>
             <ul>
                 <li><strong>Top Bar:</strong> accesso ai pannelli (MIDI/SYNTH, FX, SAMPLER, SCALE, MELODY, REC).</li>
                 <li><strong>Canvas principale:</strong> superficie di gioco; supporta gesture e MPE visuale.</li>
@@ -526,6 +539,8 @@
 
         <section id="playground">
             <h2>Physical Playground</h2>
+            <p>Il Playground e pensato per performance gestuale basata su fisica. Invece di suonare ogni nota manualmente, progetti movimenti che generano eventi musicali.</p>
+            <p>Se sei all'inizio, parti da una scena preset e modifica una sola macro per volta. Cosi capisci meglio come il movimento visivo diventa ritmo e articolazione sonora.</p>
             <ul>
                 <li><strong>Physics Mode:</strong> attiva un canvas secondario con corpi fisici e note triggerate da collisioni.</li>
                 <li><strong>Materiali:</strong> Bamboo/Stone/Rubber/Clay/Glass/Felt/Steel/Water modificano fisica e risposta audio.</li>
@@ -539,6 +554,7 @@
 
         <section id="topbar">
             <h2>Top Bar & Icone</h2>
+            <p>La top bar e il centro comandi per azioni frequenti: apertura moduli, registrazione, e accesso rapido agli overlay di utilita.</p>
             <ul>
                 <li><strong>Guida (?)</strong>: apre questo manuale in nuova scheda.</li>
                 <li><strong>Record (●)</strong>: avvia la registrazione audio interna.</li>
@@ -551,6 +567,7 @@
 
         <section id="workflow">
             <h2>Flusso operativo (consigliato)</h2>
+            <p>Questa sequenza riduce conflitti tra armonia, motore sonoro e moduli di generazione. Prima il contesto tonale, poi il suono, poi la logica esecutiva.</p>
             <ol>
                 <li>Imposta <strong>Scale</strong> e contesto armonico.</li>
                 <li>Scegli il suono: <strong>Synth</strong>, <strong>Sampler</strong> o Mix.</li>
@@ -564,6 +581,8 @@
         <section id="performance">
             <h2>Performance</h2>
             <p>La barra in basso passa tra <strong>Performance generale</strong> e <strong>Performance Melody</strong>.</p>
+            <p><strong>Scopo:</strong> intervento immediato in live senza aprire pannelli profondi. E progettata per correzioni al volo, transizioni e controllo frase.</p>
+            <p>In live questa e la tua zona di sicurezza e espressivita: usa <code>STOP</code>/<code>FADE</code> per controllo, <code>KEEP</code>/<code>HOLD</code> per texture, ARP/Chord per movimento armonico immediato.</p>
             <h3>Performance generale</h3>
             <ul>
                 <li><strong>Transpose:</strong> ottava su/giù.</li>
@@ -587,6 +606,7 @@
 
         <section id="fx">
             <h2>Pannello FX</h2>
+            <p>Usa FX per passare da un suono asciutto a uno spaziale e in movimento. In live conviene preparare due preset: uno pulito e uno ampio.</p>
             <ul>
                 <li><strong>FX Toggle:</strong> apre/chiude il pannello effetti.</li>
                 <li><strong>Filter:</strong> inviluppo + cutoff/res.</li>
@@ -599,6 +619,8 @@
 
         <section id="midi">
             <h2>MIDI &amp; Synth</h2>
+            <p>Questo tab e l'autorita su routing e motore. Se qualcosa suona male o non suona, controlla prima qui.</p>
+            <p>Un modello utile e questo: l'input arriva da <code>MIDI In</code>, il suono interno nasce da <code>Internal Synth</code>, e l'hardware esterno riceve dai MIDI Out. Tieni chiara questa catena mentre configuri.</p>
             <ul>
                 <li><strong>Preset globale:</strong> salva/carica lo stato completo.</li>
                 <li><strong>MIDI In/Out:</strong> seleziona porte hardware/virtuali.</li>
@@ -616,6 +638,8 @@
 
         <section id="sampler">
             <h2>Sampler</h2>
+            <p>La sezione sampler definisce materiale sorgente e comportamento articolazioni. Prima crea set stabili, poi rifinisci il mix con il synth.</p>
+            <p>Per risultati affidabili, prepara i sample con logica coerente: root note corrette, livelli comparabili e nomi slot chiari. Questo evita errori durante editing veloce.</p>
             <ul>
                 <li><strong>Factory/User Sets:</strong> carica set predefiniti o personali.</li>
                 <li><strong>New/Save/Delete:</strong> gestione set utente.</li>
@@ -628,6 +652,8 @@
 
         <section id="scale">
             <h2>Scale &amp; Armonia</h2>
+            <p>Tutte le decisioni melodiche e armoniche dipendono da questa sezione. Trattala come contratto musicale usato da tastiera, generatore, ARP e continuation.</p>
+            <p>In pratica imposta prima scala e tonica, prova una frase semplice, poi attiva strumenti armonici avanzati. Cosi eviti confusione quando le note generate sembrano spostarsi.</p>
             <ul>
                 <li><strong>Scale Presets:</strong> seleziona la scala e la tonica.</li>
                 <li><strong>Microtonal:</strong> gestisci cents e scale microtonali.</li>
@@ -639,9 +665,23 @@
             </ul>
         </section>
 
+        <section id="circle">
+            <h2>Circle View</h2>
+            <p>La Circle View mostra le note su una disposizione circolare invece della griglia tastiera classica. E utile quando vuoi ragionare per intervalli e rotazioni, non solo per ordine lineare.</p>
+            <p>Usa questa modalita per visualizzare meglio le relazioni tra altezze, ruotare pattern e sperimentare movimenti melodici tra spicchi.</p>
+            <ul>
+                <li><strong>Quando usarla:</strong> esplorazione di pattern, motivi ciclici e improvvisazione centrata sugli intervalli.</li>
+                <li><strong>Comportamento drag:</strong> le note possono essere trascinate tra spicchi e direzione radiale, aggiornando insieme altezza ed espressione.</li>
+                <li><strong>Feedback MIDI esterno:</strong> le note MIDI in ingresso appaiono come ghost verdi e seguono la stessa logica visiva.</li>
+                <li><strong>Tip workflow:</strong> trova un pattern in Circle View, poi passa a Melody/Piano Roll per rifinire la struttura.</li>
+            </ul>
+        </section>
+
         <section id="melody">
             <h2>Melody (Generator + Editor)</h2>
             <p>Il motore Melody può <strong>generare</strong>, <strong>importare</strong> o <strong>continuare</strong> frasi. È controllabile da MAIN e Performance.</p>
+            <p><strong>Ruolo di questa sezione:</strong> comporre piu velocemente unendo generazione algoritmica e correzione manuale. Prima genera, poi rifinisci in Piano Roll/Sequence.</p>
+            <p>Ciclo consigliato: genera una bozza, correggi struttura nel Piano Roll, applica Humanize e solo dopo usa Continue/Import per espandere. Il risultato resta piu coerente musicalmente.</p>
             <h3>Generator (MAIN)</h3>
             <ul>
                 <li><strong>Generate:</strong> rigenera la melodia con i parametri correnti.</li>
@@ -691,6 +731,8 @@
 
         <section id="advanced">
             <h2>Advanced (ARP / CHORD / MPE / MATRIX)</h2>
+            <p>I parametri avanzati servono per profondita espressiva e shaping ritmico/armonico. Usali dopo aver stabilizzato routing base e scala.</p>
+            <p>Evita di attivare tutto insieme all'inizio. Accendi un blocco avanzato per volta, ascolta l'impatto, poi salva preset quando il comportamento e stabile.</p>
             <h3>ARP</h3>
             <ul>
                 <li><strong>Preset:</strong> stili rapidi di arpeggio.</li>
@@ -725,6 +767,8 @@
 
         <section id="recording">
             <h2>Recording</h2>
+            <p>La registrazione cattura il mix corrente esattamente come viene eseguito. L'editor serve a rifilare inizio/fine ed esportare take pulite per DAW o condivisione.</p>
+            <p>Prima di una take lunga, registra 10-15 secondi di test per controllare livelli e rumore di fondo. Questo controllo rapido evita registrazioni inutilizzabili.</p>
             <ol>
                 <li>Premi <strong>Record</strong>.</li>
                 <li>Premi <strong>Stop</strong> per salvare.</li>
@@ -742,6 +786,8 @@
 
         <section id="troubleshooting">
             <h2>Problemi comuni</h2>
+            <p>Controlla i problemi in quest'ordine: unlock audio browser, selezione routing, stato motore, poi parametri specifici del modulo.</p>
+            <p>Quando c'e un problema, modifica un solo parametro alla volta e prova subito. Cambiare molte cose insieme rende difficile capire la causa reale.</p>
             <ul>
                 <li><strong>Non sento audio:</strong> clicca la pagina e riattiva Internal Synth.</li>
                 <li><strong>MIDI non visibile:</strong> ricarica dopo il collegamento.</li>

@@ -1,0 +1,294 @@
+; VAZ Plus/AnaMark softsynth tuning file
+; Indian Raga Todi on white keys.
+;
+; VAZ Plus section
+[Tuning]
+note 0=0
+note 1=90
+note 2=90
+note 3=294
+note 4=294
+note 5=590
+note 6=590
+note 7=702
+note 8=792
+note 9=792
+note 10=1088
+note 11=1088
+note 12=1200
+note 13=1290
+note 14=1290
+note 15=1494
+note 16=1494
+note 17=1790
+note 18=1790
+note 19=1902
+note 20=1992
+note 21=1992
+note 22=2288
+note 23=2288
+note 24=2400
+note 25=2490
+note 26=2490
+note 27=2694
+note 28=2694
+note 29=2990
+note 30=2990
+note 31=3102
+note 32=3192
+note 33=3192
+note 34=3488
+note 35=3488
+note 36=3600
+note 37=3690
+note 38=3690
+note 39=3894
+note 40=3894
+note 41=4190
+note 42=4190
+note 43=4302
+note 44=4392
+note 45=4392
+note 46=4688
+note 47=4688
+note 48=4800
+note 49=4890
+note 50=4890
+note 51=5094
+note 52=5094
+note 53=5390
+note 54=5390
+note 55=5502
+note 56=5592
+note 57=5592
+note 58=5888
+note 59=5888
+note 60=6000
+note 61=6090
+note 62=6090
+note 63=6294
+note 64=6294
+note 65=6590
+note 66=6590
+note 67=6702
+note 68=6792
+note 69=6792
+note 70=7088
+note 71=7088
+note 72=7200
+note 73=7290
+note 74=7290
+note 75=7494
+note 76=7494
+note 77=7790
+note 78=7790
+note 79=7902
+note 80=7992
+note 81=7992
+note 82=8288
+note 83=8288
+note 84=8400
+note 85=8490
+note 86=8490
+note 87=8694
+note 88=8694
+note 89=8990
+note 90=8990
+note 91=9102
+note 92=9192
+note 93=9192
+note 94=9488
+note 95=9488
+note 96=9600
+note 97=9690
+note 98=9690
+note 99=9894
+note 100=9894
+note 101=10190
+note 102=10190
+note 103=10302
+note 104=10392
+note 105=10392
+note 106=10688
+note 107=10688
+note 108=10800
+note 109=10890
+note 110=10890
+note 111=11094
+note 112=11094
+note 113=11390
+note 114=11390
+note 115=11502
+note 116=11592
+note 117=11592
+note 118=11888
+note 119=11888
+note 120=12000
+note 121=12090
+note 122=12090
+note 123=12294
+note 124=12294
+note 125=12590
+note 126=12590
+note 127=12702
+
+; AnaMark section
+[Scale Begin]
+Format= "AnaMark-TUN"
+FormatVersion= 200
+FormatSpecs= "http:\\\\www.mark-henning.de\\eternity\\tuningspecs.html"
+
+[Info]
+Name= "C:\Audio\Tunings\MTS Packs\World Scales Pack\tun\Indian Raga Todi.tun"
+ID= "ID_C:\Audio\Tunings\MTSPacks\WorldScalesPack\tun\IndianRagaTodi.tun"
+Filename= "indian raga todi.scl"
+Description= "Indian Raga Todi on white keys."
+Editor= "Scala"
+
+[Exact Tuning]
+note 0= 0.000000
+note 1= 90.224996
+note 2= 90.224996
+note 3= 294.134997
+note 4= 294.134997
+note 5= 590.223716
+note 6= 590.223716
+note 7= 701.955001
+note 8= 792.179997
+note 9= 792.179997
+note 10= 1088.268715
+note 11= 1088.268715
+note 12= 1200.000000
+note 13= 1290.224996
+note 14= 1290.224996
+note 15= 1494.134997
+note 16= 1494.134997
+note 17= 1790.223716
+note 18= 1790.223716
+note 19= 1901.955001
+note 20= 1992.179997
+note 21= 1992.179997
+note 22= 2288.268715
+note 23= 2288.268715
+note 24= 2400.000000
+note 25= 2490.224996
+note 26= 2490.224996
+note 27= 2694.134997
+note 28= 2694.134997
+note 29= 2990.223716
+note 30= 2990.223716
+note 31= 3101.955001
+note 32= 3192.179997
+note 33= 3192.179997
+note 34= 3488.268715
+note 35= 3488.268715
+note 36= 3600.000000
+note 37= 3690.224996
+note 38= 3690.224996
+note 39= 3894.134997
+note 40= 3894.134997
+note 41= 4190.223716
+note 42= 4190.223716
+note 43= 4301.955001
+note 44= 4392.179997
+note 45= 4392.179997
+note 46= 4688.268715
+note 47= 4688.268715
+note 48= 4800.000000
+note 49= 4890.224996
+note 50= 4890.224996
+note 51= 5094.134997
+note 52= 5094.134997
+note 53= 5390.223716
+note 54= 5390.223716
+note 55= 5501.955001
+note 56= 5592.179997
+note 57= 5592.179997
+note 58= 5888.268715
+note 59= 5888.268715
+note 60= 6000.000000
+note 61= 6090.224996
+note 62= 6090.224996
+note 63= 6294.134997
+note 64= 6294.134997
+note 65= 6590.223716
+note 66= 6590.223716
+note 67= 6701.955001
+note 68= 6792.179997
+note 69= 6792.179997
+note 70= 7088.268715
+note 71= 7088.268715
+note 72= 7200.000000
+note 73= 7290.224996
+note 74= 7290.224996
+note 75= 7494.134997
+note 76= 7494.134997
+note 77= 7790.223716
+note 78= 7790.223716
+note 79= 7901.955001
+note 80= 7992.179997
+note 81= 7992.179997
+note 82= 8288.268715
+note 83= 8288.268715
+note 84= 8400.000000
+note 85= 8490.224996
+note 86= 8490.224996
+note 87= 8694.134997
+note 88= 8694.134997
+note 89= 8990.223716
+note 90= 8990.223716
+note 91= 9101.955001
+note 92= 9192.179997
+note 93= 9192.179997
+note 94= 9488.268715
+note 95= 9488.268715
+note 96= 9600.000000
+note 97= 9690.224996
+note 98= 9690.224996
+note 99= 9894.134997
+note 100= 9894.134997
+note 101= 10190.223716
+note 102= 10190.223716
+note 103= 10301.955001
+note 104= 10392.179997
+note 105= 10392.179997
+note 106= 10688.268715
+note 107= 10688.268715
+note 108= 10800.000000
+note 109= 10890.224996
+note 110= 10890.224996
+note 111= 11094.134997
+note 112= 11094.134997
+note 113= 11390.223716
+note 114= 11390.223716
+note 115= 11501.955001
+note 116= 11592.179997
+note 117= 11592.179997
+note 118= 11888.268715
+note 119= 11888.268715
+note 120= 12000.000000
+note 121= 12090.224996
+note 122= 12090.224996
+note 123= 12294.134997
+note 124= 12294.134997
+note 125= 12590.223716
+note 126= 12590.223716
+note 127= 12701.955001
+
+[Functional Tuning]
+note 1="#=0 * 256/243"
+note 2="#=0 * 256/243"
+note 3="#=0 * 32/27"
+note 4="#=0 * 32/27"
+note 5="#=0 * 45/32"
+note 6="#=0 * 45/32"
+note 7="#=0 * 3/2"
+note 8="#=0 * 128/81"
+note 9="#=0 * 128/81"
+note 10="#=0 * 15/8"
+note 11="#=0 * 15/8"
+note 12="#>-12 * 2/1 ~999"
+
+; Set reference key to absolute frequency (not scale note but midi key)
+note 60="! 261.625565"
+[Scale End]

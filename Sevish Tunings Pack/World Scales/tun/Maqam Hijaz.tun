@@ -1,0 +1,294 @@
+; VAZ Plus/AnaMark softsynth tuning file
+; 8-tone Hijaz by Ozan Yarman http://www.ozanyarman.com, mapped to 12 keys by Aaron Andrew Hunt
+;
+; VAZ Plus section
+[Tuning]
+note 0=0
+note 1=112
+note 2=112
+note 3=379
+note 4=379
+note 5=498
+note 6=498
+note 7=702
+note 8=792
+note 9=884
+note 10=996
+note 11=996
+note 12=1200
+note 13=1312
+note 14=1312
+note 15=1579
+note 16=1579
+note 17=1698
+note 18=1698
+note 19=1902
+note 20=1992
+note 21=2084
+note 22=2196
+note 23=2196
+note 24=2400
+note 25=2512
+note 26=2512
+note 27=2779
+note 28=2779
+note 29=2898
+note 30=2898
+note 31=3102
+note 32=3192
+note 33=3284
+note 34=3396
+note 35=3396
+note 36=3600
+note 37=3712
+note 38=3712
+note 39=3979
+note 40=3979
+note 41=4098
+note 42=4098
+note 43=4302
+note 44=4392
+note 45=4484
+note 46=4596
+note 47=4596
+note 48=4800
+note 49=4912
+note 50=4912
+note 51=5179
+note 52=5179
+note 53=5298
+note 54=5298
+note 55=5502
+note 56=5592
+note 57=5684
+note 58=5796
+note 59=5796
+note 60=6000
+note 61=6112
+note 62=6112
+note 63=6379
+note 64=6379
+note 65=6498
+note 66=6498
+note 67=6702
+note 68=6792
+note 69=6884
+note 70=6996
+note 71=6996
+note 72=7200
+note 73=7312
+note 74=7312
+note 75=7579
+note 76=7579
+note 77=7698
+note 78=7698
+note 79=7902
+note 80=7992
+note 81=8084
+note 82=8196
+note 83=8196
+note 84=8400
+note 85=8512
+note 86=8512
+note 87=8779
+note 88=8779
+note 89=8898
+note 90=8898
+note 91=9102
+note 92=9192
+note 93=9284
+note 94=9396
+note 95=9396
+note 96=9600
+note 97=9712
+note 98=9712
+note 99=9979
+note 100=9979
+note 101=10098
+note 102=10098
+note 103=10302
+note 104=10392
+note 105=10484
+note 106=10596
+note 107=10596
+note 108=10800
+note 109=10912
+note 110=10912
+note 111=11179
+note 112=11179
+note 113=11298
+note 114=11298
+note 115=11502
+note 116=11592
+note 117=11684
+note 118=11796
+note 119=11796
+note 120=12000
+note 121=12112
+note 122=12112
+note 123=12379
+note 124=12379
+note 125=12498
+note 126=12498
+note 127=12702
+
+; AnaMark section
+[Scale Begin]
+Format= "AnaMark-TUN"
+FormatVersion= 200
+FormatSpecs= "http:\\\\www.mark-henning.de\\eternity\\tuningspecs.html"
+
+[Info]
+Name= "8-hijaz y.tun"
+ID= "ID_8-hijazy.tun"
+Filename= "8-hijaz y.scl"
+Description= "8-tone Hijaz by Ozan Yarman http://www.ozanyarman.com, mapped to 12 keys by Aaron Andrew Hunt"
+Editor= "Scala"
+
+[Exact Tuning]
+note 0= 0.000000
+note 1= 111.731285
+note 2= 111.731285
+note 3= 378.602191
+note 4= 378.602191
+note 5= 498.044999
+note 6= 498.044999
+note 7= 701.955001
+note 8= 792.179997
+note 9= 884.358713
+note 10= 996.089998
+note 11= 996.089998
+note 12= 1200.000000
+note 13= 1311.731285
+note 14= 1311.731285
+note 15= 1578.602191
+note 16= 1578.602191
+note 17= 1698.044999
+note 18= 1698.044999
+note 19= 1901.955001
+note 20= 1992.179997
+note 21= 2084.358713
+note 22= 2196.089998
+note 23= 2196.089998
+note 24= 2400.000000
+note 25= 2511.731285
+note 26= 2511.731285
+note 27= 2778.602191
+note 28= 2778.602191
+note 29= 2898.044999
+note 30= 2898.044999
+note 31= 3101.955001
+note 32= 3192.179997
+note 33= 3284.358713
+note 34= 3396.089998
+note 35= 3396.089998
+note 36= 3600.000000
+note 37= 3711.731285
+note 38= 3711.731285
+note 39= 3978.602191
+note 40= 3978.602191
+note 41= 4098.044999
+note 42= 4098.044999
+note 43= 4301.955001
+note 44= 4392.179997
+note 45= 4484.358713
+note 46= 4596.089998
+note 47= 4596.089998
+note 48= 4800.000000
+note 49= 4911.731285
+note 50= 4911.731285
+note 51= 5178.602191
+note 52= 5178.602191
+note 53= 5298.044999
+note 54= 5298.044999
+note 55= 5501.955001
+note 56= 5592.179997
+note 57= 5684.358713
+note 58= 5796.089998
+note 59= 5796.089998
+note 60= 6000.000000
+note 61= 6111.731285
+note 62= 6111.731285
+note 63= 6378.602191
+note 64= 6378.602191
+note 65= 6498.044999
+note 66= 6498.044999
+note 67= 6701.955001
+note 68= 6792.179997
+note 69= 6884.358713
+note 70= 6996.089998
+note 71= 6996.089998
+note 72= 7200.000000
+note 73= 7311.731285
+note 74= 7311.731285
+note 75= 7578.602191
+note 76= 7578.602191
+note 77= 7698.044999
+note 78= 7698.044999
+note 79= 7901.955001
+note 80= 7992.179997
+note 81= 8084.358713
+note 82= 8196.089998
+note 83= 8196.089998
+note 84= 8400.000000
+note 85= 8511.731285
+note 86= 8511.731285
+note 87= 8778.602191
+note 88= 8778.602191
+note 89= 8898.044999
+note 90= 8898.044999
+note 91= 9101.955001
+note 92= 9192.179997
+note 93= 9284.358713
+note 94= 9396.089998
+note 95= 9396.089998
+note 96= 9600.000000
+note 97= 9711.731285
+note 98= 9711.731285
+note 99= 9978.602191
+note 100= 9978.602191
+note 101= 10098.044999
+note 102= 10098.044999
+note 103= 10301.955001
+note 104= 10392.179997
+note 105= 10484.358713
+note 106= 10596.089998
+note 107= 10596.089998
+note 108= 10800.000000
+note 109= 10911.731285
+note 110= 10911.731285
+note 111= 11178.602191
+note 112= 11178.602191
+note 113= 11298.044999
+note 114= 11298.044999
+note 115= 11501.955001
+note 116= 11592.179997
+note 117= 11684.358713
+note 118= 11796.089998
+note 119= 11796.089998
+note 120= 12000.000000
+note 121= 12111.731285
+note 122= 12111.731285
+note 123= 12378.602191
+note 124= 12378.602191
+note 125= 12498.044999
+note 126= 12498.044999
+note 127= 12701.955001
+
+[Functional Tuning]
+note 1="#=0 * 16/15"
+note 2="#=0 * 16/15"
+note 3="#=0 * 56/45"
+note 4="#=0 * 56/45"
+note 5="#=0 * 4/3"
+note 6="#=0 * 4/3"
+note 7="#=0 * 3/2"
+note 8="#=0 * 128/81"
+note 9="#=0 * 5/3"
+note 10="#=0 * 16/9"
+note 11="#=0 * 16/9"
+note 12="#>-12 * 2/1 ~999"
+
+; Set reference key to absolute frequency (not scale note but midi key)
+note 60="! 261.625565"
+[Scale End]
