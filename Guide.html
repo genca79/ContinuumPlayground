@@ -348,7 +348,10 @@
                 <li><strong>Microtonal:</strong> manage cents and micro scales.</li>
                 <li><strong>Custom:</strong> notes list or cents list.</li>
                 <li><strong>Save/Load:</strong> store custom scales.</li>
+                <li><strong>Micro Map + Micro Base:</strong> map incoming MIDI notes to the active microtonal scale.</li>
                 <li><strong>Microtonalize Input:</strong> apply micro scale to incoming notes.</li>
+                <li><strong>Spiral block (in Scale):</strong> Spiral ON/OFF, Shimmer ON/OFF, Spiral Defect, Spiral Anchor, Spiral State.</li>
+                <li><strong>Auto PB policy:</strong> always ON by design (no user toggle), to keep pitch mapping coherent in microtonal workflows.</li>
                 <li><strong>Chord Modes:</strong> triads, 7ths, sus, etc.</li>
                 <li><strong>Arp + Chord:</strong> combine with KEEP/HOLD.</li>
             </ul>
@@ -439,7 +442,7 @@
             <h3>MPE</h3>
             <ul>
                 <li><strong>MPE Preset:</strong> save/load MPE configurations.</li>
-                <li><strong>PB Range:</strong> pitch bend range.</li>
+                <li><strong>PB Range:</strong> configured in <code>Scale</code> (kept there with other pitch-mapping controls).</li>
                 <li><strong>Snap/Dead Center:</strong> stabilize center pitch.</li>
                 <li><strong>Curve / Smooth:</strong> gesture shaping.</li>
                 <li><strong>Link Y:</strong> map Y to press or velocity.</li>
@@ -523,46 +526,6 @@
             <div class="pro-tip">
                 <strong>Tip:</strong> Se non senti audio, riclicca la pagina e disattiva/riattiva <code>Internal Synth</code>.
             </div>
-        </section>
-
-        <section id="ui">
-            <h2>Struttura UI</h2>
-            <p>Questa mappa ti dice dove modificare routing, suono, regole musicali e controllo live. Riduce i cambi di tab durante la performance.</p>
-            <p>Nell'uso quotidiano lavori quasi sempre su due aree: un tab di configurazione e la performance bar in basso. Il resto serve soprattutto per preparazione e richiamo setup.</p>
-            <ul>
-                <li><strong>Top Bar:</strong> accesso ai pannelli (MIDI/SYNTH, FX, SAMPLER, SCALE, MELODY, REC).</li>
-                <li><strong>Canvas principale:</strong> superficie di gioco; supporta gesture e MPE visuale.</li>
-                <li><strong>Performance Bar:</strong> controlli rapidi live.</li>
-                <li><strong>Pannello Melody:</strong> generazione, editor, import e continuazioni.</li>
-            </ul>
-        </section>
-
-        <section id="playground">
-            <h2>Physical Playground</h2>
-            <p>Il Playground e pensato per performance gestuale basata su fisica. Invece di suonare ogni nota manualmente, progetti movimenti che generano eventi musicali.</p>
-            <p>Se sei all'inizio, parti da una scena preset e modifica una sola macro per volta. Cosi capisci meglio come il movimento visivo diventa ritmo e articolazione sonora.</p>
-            <ul>
-                <li><strong>Physics Mode:</strong> attiva un canvas secondario con corpi fisici e note triggerate da collisioni.</li>
-                <li><strong>Materiali:</strong> Bamboo/Stone/Rubber/Clay/Glass/Felt/Steel/Water modificano fisica e risposta audio.</li>
-                <li><strong>Azioni:</strong> Rain, Spawn, Clear e switch rapido del vento per gesture immediate.</li>
-                <li><strong>Live Macros:</strong> Energy/Chaos/Gravity/Density/Wind + Stream per controllo continuo della scena.</li>
-                <li><strong>Preset:</strong> Rain Pad, Glass Burst, Tube Drone, Chaos Perc per setup istantanei.</li>
-                <li><strong>Modalità Tubes:</strong> trascina template nel canvas e usa gli strumenti SEL/PLC/PLY/CUT/DEL.</li>
-                <li><strong>Tube Advanced:</strong> materiale, superficie, lunghezza, diametro, end mode, quantize e wind-play.</li>
-            </ul>
-        </section>
-
-        <section id="topbar">
-            <h2>Top Bar & Icone</h2>
-            <p>La top bar e il centro comandi per azioni frequenti: apertura moduli, registrazione, e accesso rapido agli overlay di utilita.</p>
-            <ul>
-                <li><strong>Guida (?)</strong>: apre questo manuale in nuova scheda.</li>
-                <li><strong>Record (●)</strong>: avvia la registrazione audio interna.</li>
-                <li><strong>Stop (■)</strong>: ferma e salva la take.</li>
-                <li><strong>Tab:</strong> MIDI &amp; SYNTH, SAMPLER, SCALE, MELODY, ADVANCED.</li>
-                <li><strong>FX</strong>: apre il pannello effetti.</li>
-                <li><strong>MIX</strong>: apre il mixer overlay.</li>
-            </ul>
         </section>
 
         <section id="workflow">
@@ -659,7 +622,10 @@
                 <li><strong>Microtonal:</strong> gestisci cents e scale microtonali.</li>
                 <li><strong>Custom:</strong> scale a lista di note o cents.</li>
                 <li><strong>Save/Load:</strong> salva e richiama scale personalizzate.</li>
+                <li><strong>Micro Map + Micro Base:</strong> mappano le note MIDI in ingresso sulla scala microtonale attiva.</li>
                 <li><strong>Microtonalize Input:</strong> applica la micro‑scala alle note in ingresso.</li>
+                <li><strong>Blocco Spiral (in Scale):</strong> Spiral ON/OFF, Shimmer ON/OFF, Spiral Defect, Spiral Anchor, Spiral State.</li>
+                <li><strong>Policy Auto PB:</strong> sempre ON per progetto (senza toggle utente), per mantenere coerente la mappatura d'intonazione.</li>
                 <li><strong>Chord Modes:</strong> triadi, settima, sus, ecc.</li>
                 <li><strong>Arp + Chord:</strong> combinabili con KEEP/HOLD.</li>
             </ul>
@@ -750,7 +716,7 @@
             <h3>MPE</h3>
             <ul>
                 <li><strong>MPE Preset:</strong> salva/carica configurazioni.</li>
-                <li><strong>PB Range:</strong> range del pitch bend.</li>
+                <li><strong>PB Range:</strong> configurato in <code>Scale</code> (insieme agli altri controlli di mappatura dell'intonazione).</li>
                 <li><strong>Snap/Dead Center:</strong> stabilizza il centro.</li>
                 <li><strong>Curve / Smooth:</strong> risposta del gesto.</li>
                 <li><strong>Link Y:</strong> mappa Y su press/velocity.</li>
@@ -781,6 +747,21 @@
                 <li><strong>Select All:</strong> seleziona tutto.</li>
                 <li><strong>Filename:</strong> nome file di export.</li>
                 <li><strong>Save WAV / Discard:</strong> salva o elimina.</li>
+            </ul>
+        </section>
+
+        <section id="playground">
+            <h2>Physical Playground</h2>
+            <p>Il Playground e pensato per performance gestuale basata su fisica. Invece di suonare ogni nota manualmente, progetti movimenti che generano eventi musicali.</p>
+            <p>Se sei all'inizio, parti da una scena preset e modifica una sola macro per volta. Cosi capisci meglio come il movimento visivo diventa ritmo e articolazione sonora.</p>
+            <ul>
+                <li><strong>Physics Mode:</strong> attiva un canvas secondario con corpi fisici e note triggerate da collisioni.</li>
+                <li><strong>Materiali:</strong> Bamboo/Stone/Rubber/Clay/Glass/Felt/Steel/Water modificano fisica e risposta audio.</li>
+                <li><strong>Azioni:</strong> Rain, Spawn, Clear e switch rapido del vento per gesture immediate.</li>
+                <li><strong>Live Macros:</strong> Energy/Chaos/Gravity/Density/Wind + Stream per controllo continuo della scena.</li>
+                <li><strong>Preset:</strong> Rain Pad, Glass Burst, Tube Drone, Chaos Perc per setup istantanei.</li>
+                <li><strong>Modalità Tubes:</strong> trascina template nel canvas e usa gli strumenti SEL/PLC/PLY/CUT/DEL.</li>
+                <li><strong>Tube Advanced:</strong> materiale, superficie, lunghezza, diametro, end mode, quantize e wind-play.</li>
             </ul>
         </section>
 

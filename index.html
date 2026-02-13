@@ -100,29 +100,47 @@
 
     <!-- === TAB CONTENT: MIDI === -->
     <div class="ui-tab-content active" id="tabMidi" data-tab-content="midi">
-        <div class="ui-group-inline">
-            <div class="box preset-box"><label>Global Preset</label>
-                <div class="preset-controls">
-                    <select id="presetSelect" style="min-width:90px;" data-param="presetSelect"></select>
-                    <input type="text" id="presetName" placeholder="Name" style="width:70px;">
-                    <button id="presetSave" class="menu-btn btn-ok" aria-label="Save"><span class="btn-text">SAVE</span></button>
-                    <button id="presetDel" class="menu-btn btn-danger" aria-label="Delete"><span class="btn-text">DEL</span></button>
-                </div>
-                <div id="presetDesc" style="font-size:8px; color:#888; margin-top:2px;">&nbsp;</div>
+        <div class="ui-tabs-row ui-subtabs" id="midiSubTabs">
+            <button class="ui-tab active" data-subtab="midi-control">MIDI CONTROL</button>
+            <button class="ui-tab" data-subtab="midi-engine">INTERNAL SYNTH &amp; SAMPLER</button>
+            <button class="ui-tab" data-subtab="midi-preset">GLOBAL PRESET</button>
+        </div>
+
+        <div class="ui-subtab-content active" data-subtab-content="midi-control">
+            <div class="ui-group-inline">
+                <div class="box"><label>MIDI In</label><select id="midiInSelect" data-param="midiInSelect"><option value="">Nessun Input</option></select></div>
+                <div class="box"><label>MIDI Out A</label><select id="midiOutSelect" data-param="midiOutSelect"></select></div>
+                <div class="box" id="midiOutBBox"><label>MIDI Out B</label><select id="midiOutSelectB" data-param="midiOutSelectB"></select></div>
+                <div class="box" style="max-width:70px;"><label>DUAL Keyboard</label><input type="checkbox" id="dualMode" data-param="dualMode"></div>
+                <div class="box" style="max-width:60px;"><label>Thru</label><input type="checkbox" id="midiThru" data-param="midiThru"></div>
+                <div class="box" style="max-width:90px;"><label>MPE Out</label><input type="checkbox" id="midiInMpe" data-param="midiInMpe" checked></div>
             </div>
-            <div class="box"><label>MIDI In</label><select id="midiInSelect" data-param="midiInSelect"><option value="">Nessun Input</option></select></div>
-            <div class="box"><label>MIDI Out A</label><select id="midiOutSelect" data-param="midiOutSelect"></select></div>
-            <div class="box" id="midiOutBBox"><label>MIDI Out B</label><select id="midiOutSelectB" data-param="midiOutSelectB"></select></div>
-            <div class="box" style="max-width:70px;"><label>DUAL Keyboard</label><input type="checkbox" id="dualMode" data-param="dualMode"></div>
-            <div class="box" style="max-width:60px;"><label>Thru</label><input type="checkbox" id="midiThru" data-param="midiThru"></div>
-            <div class="box" style="max-width:90px;"><label>MPE Out</label><input type="checkbox" id="midiInMpe" data-param="midiInMpe" checked></div>
-            <div class="box"><label>Synth</label><button id="audioStart" class="menu-btn btn-ok audio-toggle"><span class="btn-text">INTERNAL SYNTH</span></button></div>
-            <div class="box" style="max-width:80px;"><label>KEYBOARD</label><select id="audioZoneSelect"><option value="A">A</option><option value="B">B</option></select></div>
-            <div class="box"><label>Mode</label><select id="wtMode"></select></div>
-            <div class="box" id="sampleSetMiniBox"><label>Sampler Set</label><select id="sampleSetSelectMini"></select></div>
-            <div class="box" id="wtMixBox"><label>Mix</label><input type="range" id="wtMix" min="0" max="1" step="0.01" value="0.35"></div>
-            <div class="box" id="wtSelectBox"><label>SYNTH wave</label><select id="wtSelect"></select></div>
-            <div class="box" id="sampleArticulationMiniBox" style="display:flex;"><label>Articulation</label><select id="sampleArticulationSelectMini"></select></div>
+        </div>
+
+        <div class="ui-subtab-content" data-subtab-content="midi-engine">
+            <div class="ui-group-inline">
+                <div class="box"><label>Synth</label><button id="audioStart" class="menu-btn btn-ok audio-toggle"><span class="btn-text">INTERNAL SYNTH</span></button></div>
+                <div class="box" style="max-width:80px;"><label>KEYBOARD</label><select id="audioZoneSelect"><option value="A">A</option><option value="B">B</option></select></div>
+                <div class="box"><label>Mode</label><select id="wtMode"></select></div>
+                <div class="box" id="sampleSetMiniBox"><label>Sampler Set</label><select id="sampleSetSelectMini"></select></div>
+                <div class="box" id="wtMixBox"><label>Mix</label><input type="range" id="wtMix" min="0" max="1" step="0.01" value="0.35"></div>
+                <div class="box" id="wtSelectBox"><label>SYNTH wave</label><select id="wtSelect"></select></div>
+                <div class="box" id="sampleArticulationMiniBox" style="display:flex;"><label>Articulation</label><select id="sampleArticulationSelectMini"></select></div>
+            </div>
+        </div>
+
+        <div class="ui-subtab-content" data-subtab-content="midi-preset">
+            <div class="ui-group-inline">
+                <div class="box preset-box"><label>Global Preset</label>
+                    <div class="preset-controls">
+                        <select id="presetSelect" style="min-width:90px;" data-param="presetSelect"></select>
+                        <input type="text" id="presetName" placeholder="Name" style="width:70px;">
+                        <button id="presetSave" class="menu-btn btn-ok" aria-label="Save"><span class="btn-text">SAVE</span></button>
+                        <button id="presetDel" class="menu-btn btn-danger" aria-label="Delete"><span class="btn-text">DEL</span></button>
+                    </div>
+                    <div id="presetDesc" style="font-size:8px; color:#888; margin-top:2px;">&nbsp;</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -324,6 +342,11 @@
         <div class="ui-group-inline">
             <div class="box" style="max-width:120px;"><label>Micro Map</label><input type="checkbox" id="midiInMicroMap" data-param="midiInMicroMap"></div>
             <div class="box" style="max-width:110px;"><label>Micro Base</label><input type="number" id="midiInMicroBase" min="0" max="127" step="1" value="48"></div>
+            <div class="box" style="max-width:120px;"><label>Spiral</label><input type="checkbox" id="spiralEnabled"></div>
+            <div class="box" style="max-width:120px;"><label>Shimmer</label><input type="checkbox" id="spiralShimmer"></div>
+            <div class="box" style="max-width:150px;"><label>Spiral Defect (c)</label><input type="range" id="spiralDefect" min="0" max="100" step="0.1" value="38.7"><div class="param-effective" id="spiralDefectVal">38.7c</div></div>
+            <div class="box" style="max-width:130px;"><label>Spiral Anchor</label><select id="spiralAnchor"><option value="fixed">Fixed</option><option value="left-edge" selected>Left Edge</option></select></div>
+            <div class="box" style="max-width:130px;"><label>Spiral State</label><div id="spiralStatus" class="param-effective">OFF</div></div>
         </div>
         <div class="ui-group-inline">
             <div class="box poly-micro-box">
@@ -983,12 +1006,6 @@
                 <div class="box mpe-box-slider" id="boxTouchSens"><label>Area Sens</label><input type="range" id="touchSensitivity" min="10" max="150" value="75" data-param="touchSensitivity"></div>
                 <div class="box mpe-box-slider"><label>Y Deadzone</label><input type="range" id="yDeadzone" min="0" max="30" value="5" data-param="yDeadzone"></div>
                 <div class="box mpe-box-check"><label>Q Release</label><input type="checkbox" id="quantizeRelease" data-param="quantizeRelease" checked></div>
-                <div class="box mpe-box-check"><label>Auto PB</label><input type="checkbox" id="autoPbPolicy" checked></div>
-                <div class="box mpe-box-check"><label>Spiral</label><input type="checkbox" id="spiralEnabled"></div>
-                <div class="box mpe-box-check"><label>Shimmer</label><input type="checkbox" id="spiralShimmer"></div>
-                <div class="box mpe-box-slider"><label>Spiral Defect (c)</label><input type="range" id="spiralDefect" min="0" max="100" step="0.1" value="38.7"><div class="param-effective" id="spiralDefectVal">38.7c</div></div>
-                <div class="box mpe-box-small"><label>Spiral Anchor</label><select id="spiralAnchor"><option value="fixed">Fixed</option><option value="left-edge" selected>Left Edge</option></select></div>
-                <div class="box mpe-box-small"><label>Spiral State</label><div id="spiralStatus" class="param-effective">OFF</div></div>
             </div>
         </div>
         <div class="ui-subtab-content" data-subtab-content="matrix">

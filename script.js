@@ -582,6 +582,21 @@ if (setToggleBtn) {
             if (target === 'melody-main') resizeMelodyRollCanvas();
         });
     });
+
+    // Sub-tabs inside MIDI & SYNTH
+    const midiSubTabs = document.querySelectorAll('#midiSubTabs .ui-tab');
+    const midiSubContents = document.querySelectorAll('#tabMidi .ui-subtab-content');
+
+    midiSubTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.dataset.subtab;
+            midiSubTabs.forEach(t => t.classList.remove('active'));
+            midiSubContents.forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            const content = document.querySelector(`#tabMidi [data-subtab-content="${target}"]`);
+            if (content) content.classList.add('active');
+        });
+    });
 })();
 
 function triggerBow(voiceObj, attackTime = 0.05) {
@@ -7680,10 +7695,7 @@ function applyPresetState(presetState, options = {}) {
         }
     }
     if (els.pbRange && presetState.pbRange != null) els.pbRange.value = presetState.pbRange;
-    if (presetState.autoPbPolicy != null) {
-        state.autoPbPolicy = !!presetState.autoPbPolicy;
-        if (els.autoPbPolicy) els.autoPbPolicy.checked = state.autoPbPolicy;
-    }
+    state.autoPbPolicy = true;
     if (els.midiThru) els.midiThru.checked = presetState.midiThru;
     if (els.midiInMicroMap) els.midiInMicroMap.checked = presetState.midiInMicroMap ?? els.midiInMicroMap.checked;
     if (els.midiInMicroBase && presetState.midiInMicroBase != null) els.midiInMicroBase.value = presetState.midiInMicroBase;
@@ -8318,10 +8330,7 @@ function applyMpePresetState(mpePresetState) {
     els.yDeadzone.value = mpePresetState.yDeadzone ?? els.yDeadzone.value;
     if (els.touchSensitivity) els.touchSensitivity.value = mpePresetState.touchSensitivity ?? 75;
     els.quantizeRelease.checked = mpePresetState.quantizeRelease ?? els.quantizeRelease.checked;
-    if (mpePresetState.autoPbPolicy != null) {
-        state.autoPbPolicy = !!mpePresetState.autoPbPolicy;
-        if (els.autoPbPolicy) els.autoPbPolicy.checked = state.autoPbPolicy;
-    }
+    state.autoPbPolicy = true;
     syncScaleConfigFromUi(zoneId);
     setPitchBendRange(getPbRangeForZone(zoneId), zoneId);
     // Update range slider progress bars
@@ -9438,13 +9447,7 @@ function applyScaleConfigToUi(zoneId = null) {
     if (els.customScaleName) els.customScaleName.value = cfg.customScaleName || '';
     if (els.customScaleNotes) els.customScaleNotes.value = cfg.customScaleNotes || '';
     if (els.customScaleCents) els.customScaleCents.value = cfg.customScaleCents || '';
-    if (els.autoPbPolicy) {
-        els.autoPbPolicy.checked = !!state.autoPbPolicy;
-        els.autoPbPolicy.onchange = () => {
-            state.autoPbPolicy = !!els.autoPbPolicy.checked;
-            if (state.autoPbPolicy) enforceScaleModePbPolicy();
-        };
-    }
+    state.autoPbPolicy = true;
     if (els.pbRange) {
         const pb = Math.max(1, Math.min(96, parseInt(cfg.pbRange, 10) || 48));
         els.pbRange.value = String(pb);
