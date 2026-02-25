@@ -1073,6 +1073,14 @@ const Playground = (function() {
         return { zone, notes, root, currentOctave };
     }
 
+    function resolveLivePlayZone(fallbackZone = 'A') {
+        const st = window.state || {};
+        const fb = fallbackZone === 'B' ? 'B' : 'A';
+        const dualOn = !!st.dualMode;
+        if (dualOn && st.activeEditZone) return st.activeEditZone === 'B' ? 'B' : 'A';
+        return fb;
+    }
+
     function getScaleNotesSafe() {
         const notes = window.state?.scaleNotes?.notes;
         if (Array.isArray(notes) && notes.length) return notes.slice();
@@ -1147,9 +1155,23 @@ const Playground = (function() {
         return DEGREE_COLORS[idx % DEGREE_COLORS.length];
     }
 
+    function getReferenceScaleLaneCount(preferredZone = 'A') {
+        const ctx = resolveScaleContext(preferredZone);
+        const scale = getScaleNotesInOctave(ctx);
+        const len = Array.isArray(scale) ? scale.length : 0;
+        return clamp(len || 7, 1, 48);
+    }
+
+    function getEffectivePitchLanes(preferredZone = 'A') {
+        const manual = clamp(parseInt(config?.advanced?.pitchLanes, 10) || 0, 0, 48);
+        if (manual > 0) return manual;
+        return getReferenceScaleLaneCount(preferredZone);
+    }
+
     function getPitchLaneIndex(body) {
-        const lanes = clamp(parseInt(config?.advanced?.pitchLanes, 10) || 0, 0, 48);
-        if (!lanes || !body?.position) return null;
+        if (!body?.position) return null;
+        const zone = body?.plugin?.audio?.zone === 'B' ? 'B' : 'A';
+        const lanes = getEffectivePitchLanes(zone);
         const xNorm = clamp(body.position.x / canvas.width, 0, 1);
         const laneFromLeft = Math.floor(xNorm * lanes);
         return clamp(laneFromLeft, 0, lanes - 1);
@@ -1210,7 +1232,7 @@ const Playground = (function() {
 
     function resolveBodyTriggerNote(body) {
         const data = body?.plugin?.audio || {};
-        const zone = data.zone === 'B' ? 'B' : 'A';
+        const zone = resolveLivePlayZone(data.zone === 'B' ? 'B' : 'A');
         const ctx = resolveScaleContext(zone);
         const materialKey = materialKeyFromProfile(data.material || currentMaterial);
 
@@ -1458,7 +1480,7 @@ const Playground = (function() {
 
         const mat = getTubeMaterialProfile(tube.material);
         const surf = getTubeSurfaceProfile(tube.surface);
-        const zone = 'A';
+        const zone = resolveLivePlayZone('A');
         const noteFloat = tubeBaseNote(tube, zone);
         const note = clamp(Math.round(noteFloat), 0, 127);
         const lenNorm = clamp((tube.length - 80) / 400, 0, 1);
@@ -1695,16 +1717,29 @@ const Playground = (function() {
         const midiState = window.state.midi;
         const audioEnabled = !!window.state?.audio?.enabled;
         const forceHardware = options.forceHardware === true;
+        const zoneId = options.zoneId === 'B' ? 'B' : 'A';
         // Evita doppio trigger del synth interno: quando audio interno e' ON, bypassa il wrapper.
-        const outA = forceHardware
-            ? (midiState.hardwareOutput || null)
-            : (audioEnabled ? (midiState.hardwareOutput || null) : (midiState.output || midiState.hardwareOutput || null));
-        if (outA) {
+        const out = (() => {
+            if (forceHardware) {
+                return zoneId === 'B'
+                    ? (midiState.hardwareOutputB || midiState.hardwareOutput || null)
+                    : (midiState.hardwareOutput || null);
+            }
+            if (audioEnabled) {
+                return zoneId === 'B'
+                    ? (midiState.hardwareOutputB || midiState.hardwareOutput || null)
+                    : (midiState.hardwareOutput || null);
+            }
+            return zoneId === 'B'
+                ? (midiState.outputB || midiState.output || midiState.hardwareOutputB || midiState.hardwareOutput || null)
+                : (midiState.output || midiState.hardwareOutput || null);
+        })();
+        if (out) {
             try {
                 const type = status & 0xF0;
                 // Program Change (0xC0) e Channel Pressure (0xD0) hanno 1 solo data byte.
-                if (type === 0xC0 || type === 0xD0) outA.send([status, data1]);
-                else outA.send([status, data1, data2 ?? 0]);
+                if (type === 0xC0 || type === 0xD0) out.send([status, data1]);
+                else out.send([status, data1, data2 ?? 0]);
                 return true;
             } catch (_) {
                 return false;
@@ -1745,21 +1780,27 @@ const Playground = (function() {
             lastNoteOnByChan.set(chan, now);
         }
 
+        const zoneId = options.zoneId || resolveLivePlayZone('A');
         const internalActive = !!(window.state?.audio?.enabled && window.noteOnInternal);
         if (internalActive) {
             const attack = Number.isFinite(options.attack) ? options.attack : (currentMaterial.audio.attack || 0.01);
-            const zoneId = options.zoneId || 'A';
             Promise.resolve(window.noteOnInternal(note, velocity, chan, attack, { zoneId })).catch(() => {});
         }
         const midiChan = clamp(chan - 1, 0, 15);
-        const midiSent = sendMidiMessage(0x90 + midiChan, note, velocity);
+        const midiSent = sendMidiMessage(0x90 + midiChan, note, velocity, { zoneId });
         return internalActive || midiSent;
     }
 
-    function sendNoteOff(note, chan) {
+    function sendNoteOff(note, chan, options = {}) {
         if (window.state?.audio?.enabled && window.noteOffInternal) window.noteOffInternal(note, chan);
         const midiChan = clamp(chan - 1, 0, 15);
-        sendMidiMessage(0x80 + midiChan, note, 0);
+        const zoneId = options.zoneId;
+        if (zoneId === 'A' || zoneId === 'B') {
+            sendMidiMessage(0x80 + midiChan, note, 0, { zoneId });
+        } else {
+            sendMidiMessage(0x80 + midiChan, note, 0, { zoneId: 'A' });
+            sendMidiMessage(0x80 + midiChan, note, 0, { zoneId: 'B' });
+        }
     }
 
     function pickChannel() {
@@ -2079,7 +2120,7 @@ const Playground = (function() {
         return clamp(parseInt(zoneCfg.pbRange, 10) || 48, 1, 96);
     }
 
-    function sendExpressiveMPE(chan, pb, timbre, press, force = false) {
+    function sendExpressiveMPE(chan, pb, timbre, press, force = false, sourceMeta = null) {
         const now = performance.now();
         const prev = mpeChannelState.get(chan) || { pb: 8192, timbre: 64, press: 0, ts: 0 };
         const dpb = Math.abs(pb - prev.pb);
@@ -2095,17 +2136,30 @@ const Playground = (function() {
         const pbClamped = clamp(Math.round(pb), 0, 16383);
         const timbreClamped = clamp(Math.round(timbre), 0, 127);
         const pressClamped = clamp(Math.round(press), 0, 127);
-        sendMidiMessage(0xE0 + midiChan, pbClamped & 0x7F, (pbClamped >> 7) & 0x7F);
-        sendMidiMessage(0xB0 + midiChan, 74, timbreClamped);
-        sendMidiMessage(0xD0 + midiChan, pressClamped);
+        const zoneId = sourceMeta?.zone === 'B' ? 'B' : resolveLivePlayZone('A');
+        sendMidiMessage(0xE0 + midiChan, pbClamped & 0x7F, (pbClamped >> 7) & 0x7F, { zoneId });
+        sendMidiMessage(0xB0 + midiChan, 74, timbreClamped, { zoneId });
+        sendMidiMessage(0xD0 + midiChan, pressClamped, { zoneId });
         updateInternalSynth(chan, 'pb', pbClamped);
         updateInternalSynth(chan, 'timbre', timbreClamped);
         updateInternalSynth(chan, 'press', pressClamped);
+        if (typeof window.onPlaygroundMPE === 'function') {
+            window.onPlaygroundMPE({
+                timeMs: now,
+                chan,
+                pb: pbClamped,
+                slide: timbreClamped,
+                press: pressClamped,
+                zone: sourceMeta?.zone === 'B' ? 'B' : 'A',
+                bodyId: Number.isFinite(sourceMeta?.bodyId) ? sourceMeta.bodyId : null,
+                note: Number.isFinite(sourceMeta?.note) ? sourceMeta.note : null
+            });
+        }
         mpeChannelState.set(chan, { pb: pbClamped, timbre: timbreClamped, press: pressClamped, ts: now });
     }
 
-    function sendGlideMPE(chan, pb, timbre, press) {
-        sendExpressiveMPE(chan, pb, timbre, press, false);
+    function sendGlideMPE(chan, pb, timbre, press, sourceMeta = null) {
+        sendExpressiveMPE(chan, pb, timbre, press, false, sourceMeta);
     }
 
     function startWaterGlide(body) {
@@ -2118,10 +2172,10 @@ const Playground = (function() {
 
         const note = clamp(Math.round(body.plugin.audio.note ?? 60), 0, 127);
         const chan = pickChannel();
-        const zone = body.plugin.audio.zone === 'B' ? 'B' : 'A';
+        const zone = resolveLivePlayZone(body.plugin.audio.zone === 'B' ? 'B' : 'A');
         const spawnY = Number.isFinite(body.plugin.audio.spawnY) ? body.plugin.audio.spawnY : body.position.y;
 
-        const ok = sendNoteOn(note, 52, chan);
+        const ok = sendNoteOn(note, 52, chan, { zoneId: zone });
         if (!ok) return;
         waterGlideVoices.set(body.id, {
             bodyId: body.id,
@@ -2154,7 +2208,7 @@ const Playground = (function() {
 
         const timbre = clamp(34 + (progress * 78), 0, 127);
         const press = clamp(30 + (progress * 42), 0, 127);
-        sendGlideMPE(glide.chan, pb, timbre, press);
+        sendGlideMPE(glide.chan, pb, timbre, press, { bodyId: glide.bodyId, zone: glide.zone, note: glide.note });
     }
 
     function enforceVoiceLimit() {
@@ -2186,7 +2240,7 @@ const Playground = (function() {
         return clamp(1 - yNorm, 0, 1);
     }
 
-    function triggerShatterBurst(baseNote, force = 2, dropNorm = 0, yExpress = 0.5) {
+    function triggerShatterBurst(baseNote, force = 2, dropNorm = 0, yExpress = 0.5, zone = 'A', snapshot = null) {
         const offsets = [0, 7, 12, 3, -5, 10];
         const yBoost = 0.7 + (yExpress * 0.9);
         const intensity = clamp(((force * 0.65) + (dropNorm * 2.4)) * yBoost, 0.5, 7);
@@ -2194,6 +2248,7 @@ const Playground = (function() {
         const yVel = Math.pow(clamp(yExpress, 0, 1), 0.85) * 127;
         const velBaseRaw = Math.round((78 + (force * 11) + (dropNorm * 26)) * 0.6 + yVel * 0.4);
         const velBase = clamp(velBaseRaw, 50, 127);
+        const z = zone === 'B' ? 'B' : 'A';
         for (let i = 0; i < count; i += 1) {
             const note = clamp(Math.round(baseNote + offsets[i % offsets.length]), 0, 127);
             const chan = pickChannel();
@@ -2201,7 +2256,23 @@ const Playground = (function() {
             const holdMs = 70 + (i * 18) + (dropNorm * 40) + Math.round(yExpress * 40);
             scheduleNoteOn(note, vel, chan, {
                 quantize: false,
+                zoneId: z,
                 onStart: () => {
+                    if (typeof window.onPlaygroundNote === 'function') {
+                        window.onPlaygroundNote({
+                            note,
+                            noteFloat: note,
+                            velocity: vel,
+                            durationMs: holdMs,
+                            timeMs: performance.now(),
+                            zone: z,
+                            chan,
+                            bodyId: null,
+                            materialKey: 'GLASS',
+                            materialAttack: MATERIALS.GLASS?.audio?.attack ?? 0.0015,
+                            snapshot: snapshot || null
+                        });
+                    }
                     setTimeout(() => sendNoteOff(note, chan), holdMs);
                 }
             });
@@ -2217,7 +2288,18 @@ const Playground = (function() {
         const baseNote = clamp(Math.round(body.plugin?.audio?.note ?? 72), 0, 127);
         const yExpress = getYExpressivityFromY(y);
 
-        triggerShatterBurst(baseNote, force, dropNorm, yExpress);
+        const zone = body.plugin?.audio?.zone === 'B' ? 'B' : 'A';
+        const snapshot = {
+            x,
+            y,
+            angle: body.angle || 0,
+            circleRadius: body.circleRadius || 0,
+            vertices: body.vertices ? body.vertices.map(v => ({ x: v.x, y: v.y })) : null,
+            color: MATERIALS.GLASS?.visual?.color || '#bde9ff',
+            shadow: MATERIALS.GLASS?.visual?.shadow || '#d9f6ff',
+            glow: MATERIALS.GLASS?.visual?.glow || 22
+        };
+        triggerShatterBurst(baseNote, force, dropNorm, yExpress, zone, snapshot);
         Composite.remove(engine.world, body);
 
         const shardCount = Math.max(5, Math.min(24, Math.round(4 + (force * 2.1) + (dropNorm * 9))));
@@ -2257,6 +2339,7 @@ const Playground = (function() {
         const y = clamp(body.position.y, 0, canvas.height - 6);
         const yExpress = getYExpressivityFromY(y);
         const dir = body.velocity?.x === 0 ? (Math.random() > 0.5 ? 1 : -1) : Math.sign(body.velocity.x);
+        const zone = body.plugin?.audio?.zone === 'B' ? 'B' : 'A';
         const baseNote = clamp(Math.round(body.plugin?.audio?.note ?? 60), 0, 127);
 
         // Piccolo accento d'impatto acquoso.
@@ -2270,6 +2353,7 @@ const Playground = (function() {
             const holdMs = 120 + (dropNorm * 70) + (s * 25) + Math.round(yExpress * 45);
             scheduleNoteOn(note, vel, ch, {
                 quantize: false,
+                zoneId: zone,
                 onStart: () => {
                     setTimeout(() => sendNoteOff(note, ch), holdMs);
                 }
@@ -2338,7 +2422,8 @@ const Playground = (function() {
         if (!isEnvironmentBody(other)) return false;
         if (body.plugin.audio.shape !== 'polygon') return false;
 
-        const lanesActive = clamp(parseInt(config?.advanced?.pitchLanes, 10) || 0, 0, 48) > 0;
+        const zone = body.plugin.audio.zone === 'B' ? 'B' : 'A';
+        const lanesActive = getEffectivePitchLanes(zone) > 0;
         if (lanesActive) return false;
 
         const av = body.angularVelocity || 0;
@@ -2352,7 +2437,6 @@ const Playground = (function() {
         const dir = Math.sign(av);
         if (!dir) return false;
 
-        const zone = body.plugin.audio.zone === 'B' ? 'B' : 'A';
         const ctx = resolveScaleContext(zone);
         const scale = getScaleNotesInOctave(ctx);
         const scaleLen = scale.length || getScaleNotesSafe().length || 1;
@@ -2474,7 +2558,7 @@ const Playground = (function() {
 
             const mat = getTubeMaterialProfile(tube.material);
             const surf = getTubeSurfaceProfile(tube.surface);
-            const zone = 'A';
+            const zone = resolveLivePlayZone('A');
             const noteFloat = tubeBaseNote(tube, zone);
             const note = clamp(Math.round(noteFloat), 0, 127);
             const yExpress = getTubeYExpressShaped(tube);
@@ -2790,13 +2874,21 @@ const Playground = (function() {
         }
 
         const onStart = () => {
+            const liveZone = resolveLivePlayZone(data.zone || 'A');
             if (typeof window.onPlaygroundNote === 'function') {
+                const materialAudio = data.material?.audio || currentMaterial?.audio || {};
                 window.onPlaygroundNote({
                     note: liveNote,
+                    noteFloat: Number.isFinite(liveNoteFloat) ? liveNoteFloat : liveNote,
                     velocity: vel,
                     durationMs: holdMs,
                     timeMs: performance.now(),
-                    zone: data.zone || 'A',
+                    zone: liveZone,
+                    chan,
+                    bodyId: body?.id ?? null,
+                    materialKey: materialKeyFromProfile(data.material || currentMaterial),
+                    materialName: data.material?.name || currentMaterial?.name || 'Unknown',
+                    materialAttack: Number.isFinite(Number(materialAudio.attack)) ? Number(materialAudio.attack) : null,
                     snapshot: (() => {
                         const mat = data.material?.visual || currentMaterial?.visual || { color: '#445', shadow: '#111', glow: 0 };
                         return {
@@ -2840,7 +2932,8 @@ const Playground = (function() {
             });
         };
 
-        if (!scheduleNoteOn(liveNote, vel, chan, { body, zoneId: data.zone || 'A', onStart, quantize: options.quantize })) return;
+        const liveZone = resolveLivePlayZone(data.zone || 'A');
+        if (!scheduleNoteOn(liveNote, vel, chan, { body, zoneId: liveZone, onStart, quantize: options.quantize })) return;
 
     }
 
@@ -2926,7 +3019,8 @@ const Playground = (function() {
         const midiChan = clamp(chan - 1, 0, 15);
 
         const xNorm = clamp(body.position.x / canvas.width, 0, 1);
-        const lanesActive = clamp(parseInt(config?.advanced?.pitchLanes, 10) || 0, 0, 48) > 0;
+        const zone = resolveLivePlayZone(body.plugin?.audio?.zone === 'B' ? 'B' : 'A');
+        const lanesActive = getEffectivePitchLanes(zone) > 0;
         let pbRaw = lanesActive ? 8192 : Math.floor(xNorm * 16383);
 
         const yNorm = clamp(body.position.y / canvas.height, 0, 1);
@@ -2961,7 +3055,6 @@ const Playground = (function() {
 
         const baseNote = clamp(Math.round(body.plugin?.audio?.note ?? 60), 0, 127);
         const noteFloat = Number.isFinite(Number(body.plugin?.audio?.noteFloat)) ? Number(body.plugin.audio.noteFloat) : baseNote;
-        const zone = body.plugin?.audio?.zone === 'B' ? 'B' : 'A';
         const st = window.state || {};
         const zoneCfg = (st.scaleConfigByZone && st.scaleConfigByZone[zone]) || {};
         const pbRange = clamp(parseInt(zoneCfg.pbRange, 10) || 48, 1, 96);
@@ -3010,7 +3103,11 @@ const Playground = (function() {
         const timbre = smoothed ? Math.round(smoothed.timbre) : timbreRaw;
         const press = smoothed ? Math.round(smoothed.press) : pressRaw;
 
-        sendExpressiveMPE(chan, pb, timbre, press, !!isInitial);
+        sendExpressiveMPE(chan, pb, timbre, press, !!isInitial, {
+            bodyId: body?.id,
+            zone,
+            note: baseNote
+        });
     }
 
     function morph(materialKey) {
@@ -3319,7 +3416,8 @@ const Playground = (function() {
 
     function drawPitchLanesOverlay() {
         if (isTubeMode()) return;
-        const lanes = clamp(parseInt(config?.advanced?.pitchLanes, 10) || 0, 0, 48);
+        const zone = resolveLivePlayZone('A');
+        const lanes = getEffectivePitchLanes(zone);
         if (!lanes) return;
         const w = canvas.width;
         const h = canvas.height;

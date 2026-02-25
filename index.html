@@ -338,7 +338,6 @@
             <div class="scale-info-title" id="scaleInfoTitle">Scale Info</div>
             <div class="scale-info-body" id="scaleInfoBody"></div>
         </div>
-
         <div class="ui-group-inline">
             <div class="box" style="max-width:120px;"><label>Micro Map</label><input type="checkbox" id="midiInMicroMap" data-param="midiInMicroMap"></div>
             <div class="box" style="max-width:110px;"><label>Micro Base</label><input type="number" id="midiInMicroBase" min="0" max="127" step="1" value="48"></div>
@@ -933,6 +932,86 @@
                 <div class="box" style="max-width:140px;"><label>Euclidean</label><input type="range" id="arpEuclid" min="0" max="16" value="0"><div class="param-effective" id="arpEuclidVal">0</div></div>
                 <div class="box" style="max-width:120px;"><label>Shift (ms)</label><input type="range" id="arpShift" min="-50" max="50" value="0"><div class="param-effective" id="arpShiftVal">0 ms</div></div>
                 <div class="box" style="max-width:120px;"><label>Swing</label><input type="range" id="arpSwing" min="0" max="100" value="0"><div class="param-effective" id="arpSwingVal">0%</div></div>
+                <div class="box" style="max-width:150px;">
+                    <label>Metric Trees</label>
+                    <button id="arpMetricEnabled" class="menu-btn toggle-off">METRIC OFF</button>
+                </div>
+                <div class="box" style="max-width:180px;">
+                    <label>Leaf Preset</label>
+                    <select id="arpMetricSeedPreset">
+                        <option value="Phototactic" selected>Phototactic (4,7)</option>
+                        <option value="RedOak">Red Oak (4,5)</option>
+                        <option value="Fern">Fern (8,11)</option>
+                        <option value="Vichulus">Vichulus (5,11)</option>
+                        <option value="ChaosIvy">Chaos Ivy (7,11,13)</option>
+                        <option value="Custom">Custom</option>
+                    </select>
+                </div>
+                <div class="box" style="min-width:220px;">
+                    <label>Seed Divisions</label>
+                    <input id="arpMetricSeed" type="text" value="4,7" placeholder="4,7 or 5,3,2">
+                    <div class="param-effective" id="arpMetricSeedStatus">Seed mode</div>
+                </div>
+                <div class="box" style="max-width:110px;">
+                    <label>Depth</label>
+                    <input id="arpMetricDepth" type="number" min="1" max="6" step="1" value="2">
+                </div>
+                <div class="box" style="max-width:140px;">
+                    <label>Wither</label>
+                    <input id="arpMetricWither" type="range" min="80" max="102" step="1" value="98">
+                    <div class="param-effective" id="arpMetricWitherVal">98%</div>
+                </div>
+                <div class="box" style="max-width:150px;">
+                    <label>Nesting</label>
+                    <select id="arpMetricNesting">
+                        <option value="single" selected>Single Layer</option>
+                        <option value="stacked">Trunk+Branch+Leaf</option>
+                    </select>
+                    <div class="param-effective" style="color:#ffb36a;">NEST + Humanize ARP can create very wild dynamics.</div>
+                </div>
+                <div class="box" style="max-width:170px;">
+                    <label>Humanize su ARP</label>
+                    <input type="checkbox" id="melodyHumanApplyArp">
+                    <div class="param-effective" id="melodyHumanApplyArpEff">Effective: Off</div>
+                </div>
+                <div class="box" style="max-width:150px;">
+                    <label>Metric Speed</label>
+                    <input id="arpMetricSpeed" type="range" min="25" max="300" step="5" value="100">
+                    <div class="param-effective" id="arpMetricSpeedVal">100%</div>
+                </div>
+                <div class="box" style="max-width:170px;">
+                    <label>Metric Cycle</label>
+                    <select id="arpMetricCycleMode">
+                        <option value="1bar" selected>1 bar</option>
+                        <option value="2bar">2 bars</option>
+                        <option value="custom">Custom bars</option>
+                    </select>
+                </div>
+                <div class="box" style="max-width:130px;">
+                    <label>Custom Bars</label>
+                    <input id="arpMetricCycleBars" type="number" min="0.25" max="8" step="0.25" value="1.00">
+                    <div class="param-effective" id="arpMetricCycleBarsVal">1.00 bars</div>
+                </div>
+                <div class="box" style="min-width:260px;">
+                    <label>Asymmetric Preset</label>
+                    <select id="arpMetricPhrasePreset">
+                        <option value="Custom" selected>Custom (manual)</option>
+                        <option value="Asym_36_16">Asym 36/16 [2+3] + [2+2+3]*2 + [2+3]*2 + [2+2+3]</option>
+                        <option value="Asym_5_7_Weave">Asym 5/7 Weave [2+3] + [2+2+3]</option>
+                        <option value="Asym_5_7_Chain">Asym 5/7 Chain [2+3] + [2+2+3] + [2+3] + [2+2+3]</option>
+                        <option value="Asym_Tresillo_Shift">Tresillo Shift [3+3+2] + [2+3]</option>
+                        <option value="Asym_Septuple_Split">Septuple Split [2+2+3]*2 + [3+2+2]</option>
+                    </select>
+                </div>
+                <div class="box" style="min-width:300px;">
+                    <label>ARP Preset Name</label>
+                    <div style="display:flex; gap:6px; align-items:center;">
+                        <input id="arpMetricPhraseName" type="text" placeholder="My ARP preset" style="flex:1;">
+                        <button id="arpMetricPhraseSave" class="menu-btn btn-ok" type="button">Save</button>
+                        <button id="arpMetricPhraseDelete" class="menu-btn btn-danger" type="button">Del</button>
+                    </div>
+                    <div class="param-effective" id="arpMetricPhraseStatus">Built-in ARP preset selected. Save to create/update a user preset.</div>
+                </div>
                 <div class="box" style="min-width:220px;">
                     <label>Step Pattern</label>
                     <div id="arpStepPattern" style="display:grid; grid-template-columns: repeat(8, 24px); gap:8px; padding-top:6px;">
@@ -953,11 +1032,6 @@
                         <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="14" checked></div>
                         <div class="arp-step-wrap"><span class="arp-step-badge" title="Tap to cycle ratchet (1-4)">1</span><input type="checkbox" class="arp-step" data-step="15" checked></div>
                     </div>
-                </div>
-                <div class="box" style="max-width:140px;">
-                    <label>Humanize su ARP</label>
-                    <input type="checkbox" id="melodyHumanApplyArp">
-                    <div class="param-effective" id="melodyHumanApplyArpEff">Effective: Off</div>
                 </div>
             </div>
         </div>
@@ -1031,28 +1105,28 @@
         </div>
         <div class="ui-subtab-content" data-subtab-content="circle">
             <div class="ui-group-inline">
-                <div class="box circle-dup-control" style="max-width:120px;"><label>Circle View</label><button id="circleViewToggleAdv" class="menu-btn toggle-off">CIRCLE OFF</button></div>
-                <div class="box circle-dup-control" style="max-width:140px;"><label>Rotate Pattern -</label><button id="circleQuadranLeft" class="menu-btn">&#8592;</button></div>
-                <div class="box circle-dup-control" style="max-width:140px;"><label>Rotate Pattern +</label><button id="circleQuadranRight" class="menu-btn">&#8594;</button></div>
+                <div class="box circle-dup-control" hidden style="max-width:120px;"><label>Circle View</label><button id="circleViewToggleAdv" class="menu-btn toggle-off">CIRCLE OFF</button></div>
+                <div class="box circle-dup-control" hidden style="max-width:140px;"><label>Rotate Pattern -</label><button id="circleQuadranLeft" class="menu-btn">&#8592;</button></div>
+                <div class="box circle-dup-control" hidden style="max-width:140px;"><label>Rotate Pattern +</label><button id="circleQuadranRight" class="menu-btn">&#8594;</button></div>
                 <div class="box" style="max-width:150px;"><label>Rotate Target</label><select id="pgCircleQuadranScope"><option value="both">Both Rings</option><option value="outer">Outer Only</option><option value="inner">Inner Only</option></select></div>
                 <div class="box" style="max-width:150px;"><label>Rotation Speed (ms)</label><input id="pgCircleQuadranMs" type="number" min="80" max="2000" step="10" value="220"></div>
-                <div class="box circle-dup-control" style="max-width:160px;"><label>Circle Labels</label><button id="pgCircleLabelModeAdv" class="menu-btn">-> Steps 123</button></div>
-                <div class="box circle-dup-control" style="min-width:300px;">
+                <div class="box circle-dup-control" hidden style="max-width:160px;"><label>Circle Labels</label><button id="pgCircleLabelModeAdv" class="menu-btn">-> Steps 123</button></div>
+                <div class="box circle-dup-control" hidden style="min-width:300px;">
                     <label>Pattern Editor</label>
                     <input id="pgCircleStepOrderAdv" type="text" placeholder="0, 5, 12, 30, 29, 27 or C,D#,F">
                     <div class="circle-editor-help">Use comma-separated order. Root is step `0`.</div>
                 </div>
-                <div class="box circle-dup-control" style="min-width:260px;">
+                <div class="box circle-dup-control" hidden style="min-width:260px;">
                     <label>Save As Custom Scale</label>
                     <div class="circle-save-row">
                         <input id="pgCircleScaleNameAdv" type="text" placeholder="Name">
                         <button id="pgCircleSaveScaleAdv" class="menu-btn btn-ok">Save Scale</button>
                     </div>
                 </div>
-                <div class="box circle-dup-control" style="max-width:140px;"><label>Poly Planner</label><button id="pgCirclePolyToggleAdv" class="menu-btn toggle-off">POLY OFF</button></div>
+                <div class="box circle-dup-control" hidden style="max-width:140px;"><label>Poly Planner</label><button id="pgCirclePolyToggleAdv" class="menu-btn toggle-off">POLY OFF</button></div>
                 <div class="box" style="max-width:120px;"><label>Poly Anchor</label><input id="circlePolyAnchor" type="number" min="0" max="127" step="1" value="69"></div>
-                <div class="box" style="min-width:220px;"><label>Poly Branch A (PC)</label><input id="circlePolyBranchA" type="text" value="0,4,7" placeholder="0,4,7"></div>
-                <div class="box" style="min-width:220px;"><label>Poly Branch B (PC)</label><input id="circlePolyBranchB" type="text" value="2,5,9" placeholder="2,5,9"></div>
+                <div class="box" style="min-width:220px;"><label>Poly Branch A (PC)</label><input id="circlePolyBranchA" type="text" value="" placeholder="All scale steps"></div>
+                <div class="box" style="min-width:220px;"><label>Poly Branch B (PC)</label><input id="circlePolyBranchB" type="text" value="" placeholder="All scale steps"></div>
                 <div class="circle-advanced-note">Circle controls are unified in the top dock. This tab only exposes advanced Circle tuning tools.</div>
             </div>
         </div>
@@ -1148,6 +1222,12 @@
                 <option value="superMajorTriad">Super-Major Triad</option>
                 <option value="subMinorTriad">Sub-Minor Triad</option>
                 <option value="shimmer">Shimmer</option>
+                <option value="neutral7">Neutral 7</option>
+                <option value="superMajor7">Super-Major 7</option>
+                <option value="superMajorSuper7">Super-Major Super-7</option>
+                <option value="subMinorB5">Sub-Minor b5</option>
+                <option value="shimmerMajor">Shimmer Major</option>
+                <option value="shimmerNeutral">Shimmer Neutral</option>
                 <option value="stepTriad">Compact Steps (No-Oct)</option>
                 <option value="stepWide">Open Steps (No-Oct)</option>
             </select>
@@ -1283,19 +1363,41 @@
     
     <canvas id="playgroundCanvas"></canvas>
     
-    <button id="playgroundToggle" class="menu-btn">
-        <span class="btn-text">PHYSICS MODE</span>
-    </button>
     <div id="pgCircleDock" class="pg-circle-dock">
-        <button id="pgCircleViewToggle" class="menu-btn pg-circle-toggle toggle-off" type="button" title="Circle View" aria-label="Circle View">
-            <span class="btn-text">CIRCLE OFF</span>
+        <button id="pgCircleViewToggle" class="menu-btn pg-circle-toggle" type="button" title="View Menu" aria-label="Open view menu" aria-expanded="false">
+            <span class="btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </span>
         </button>
+        <div id="pgViewPicker" class="pg-view-picker hidden" aria-hidden="true">
+            <button class="menu-btn pg-view-btn" type="button" data-view="keyboard" title="Keyboard" aria-label="Keyboard view">
+                <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 10v8M11 10v8M15 10v8" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+            </button>
+            <button class="menu-btn pg-view-btn" type="button" data-view="circle" title="Circle" aria-label="Circle view">
+                <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+            </button>
+            <button class="menu-btn pg-view-btn" type="button" data-view="poly" title="Poly Tree" aria-label="Poly Tree view">
+                <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 18V7M12 8l-5 4M12 8l5 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="5.5" r="1.5" fill="currentColor"/><circle cx="7" cy="12" r="1.5" fill="currentColor"/><circle cx="17" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="18.5" r="1.5" fill="currentColor"/></svg></span>
+            </button>
+            <button class="menu-btn pg-view-btn" type="button" data-view="lumatone" title="Lumatone" aria-label="Lumatone view">
+                <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4l6 3.5v7L12 18l-6-3.5v-7L12 4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 11h6M10 14h4M10 8h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            </button>
+            <button class="menu-btn pg-view-btn" type="button" data-view="playground" title="Playground" aria-label="Playground view">
+                <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18h16M7 18v-4l3-2 2 1 3-2 2 1v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+        </div>
         <div id="pgCircleActions" class="pg-circle-actions hidden" aria-hidden="true">
-            <div class="pg-quadran-row">
+            <div class="pg-panel-head">
+                <div id="pgCirclePanelTitle" class="pg-panel-title">CIRCLE VIEW</div>
+                <button id="pgCirclePanelToggle" class="menu-btn pg-panel-collapse" type="button" title="Collapse circle/poly controls" aria-label="Collapse circle/poly controls">-</button>
+            </div>
+            <div id="pgQuadranRowTop" class="pg-quadran-row">
                 <button id="pgQuadranLeftTop" class="menu-btn pg-circle-action pg-quadran-arrow" type="button" title="Quick: rotate the pattern counter-clockwise" aria-label="Rotate pattern counter-clockwise" data-legend="Quick: rotate held pattern one step counter-clockwise." data-legend-group="circle">&#8592;</button>
                 <button id="pgQuadranRightTop" class="menu-btn pg-circle-action pg-quadran-arrow" type="button" title="Quick: rotate the pattern clockwise" aria-label="Rotate pattern clockwise" data-legend="Quick: rotate held pattern one step clockwise." data-legend-group="circle">&#8594;</button>
             </div>
-            <button id="pgPolyPlannerTop" class="menu-btn pg-circle-action toggle-off" type="button" title="Advanced: enable Poly Planner mapping in Circle View" aria-label="Toggle Poly Planner in Circle View">POLY OFF</button>
             <button id="pgCircleLabelModeTop" class="menu-btn pg-circle-action" type="button" title="Quick: switch Circle label display mode" aria-label="Switch Circle labels between notes and steps">-> Steps 123</button>
             <input id="pgCircleStepOrderTop" class="pg-circle-steps-input" type="text" placeholder="Steps/Notes: 0,5,12,30" title="Quick: pattern editor (order + repeats)">
             <div class="pg-circle-steps-tools">
@@ -1308,6 +1410,66 @@
                 <input id="pgCircleScaleNameTop" class="pg-circle-steps-input" type="text" placeholder="Scale name" title="Quick: name for saving this custom scale">
                 <button id="pgCircleSaveScaleTop" class="menu-btn pg-circle-mini-btn btn-ok" type="button" title="Quick: save current circle pattern as custom scale">Save Scale</button>
             </div>
+            <div id="polyTreeEditor" class="poly-tree-editor hidden" aria-hidden="true">
+                <div class="poly-tree-row branch-a">
+                    <div class="poly-tree-row-top">
+                        <span class="poly-tree-label">Branch A</span>
+                        <input id="polyTreeBranchAInline" type="text" class="poly-tree-input" value="" placeholder="All scale steps">
+                    </div>
+                    <div class="poly-tree-row-bottom">
+                        <label class="poly-tree-mini-label" for="polyTreeBranchAOctave">OCT</label>
+                        <input id="polyTreeBranchAOctave" type="number" class="poly-tree-octave" min="-2" max="4" step="1" value="0" title="Branch A octave start">
+                        <button id="polyTreeBranchAGenToggle" class="menu-btn pg-circle-mini-btn poly-tree-gen-toggle toggle-on" type="button" title="Enable/Disable interval generator for Branch A">INT</button>
+                        <input id="polyTreeBranchAInterval" type="number" class="poly-tree-interval" min="0" max="127" step="1" value="8" title="Interval generator">
+                        <button id="polyTreeBranchAGen" class="menu-btn pg-circle-mini-btn poly-tree-gen-btn" type="button">GEN</button>
+                    </div>
+                </div>
+                <div class="poly-tree-row branch-b">
+                    <div class="poly-tree-row-top">
+                        <span class="poly-tree-label">Branch B</span>
+                        <input id="polyTreeBranchBInline" type="text" class="poly-tree-input" value="" placeholder="All scale steps">
+                    </div>
+                    <div class="poly-tree-row-bottom">
+                        <label class="poly-tree-mini-label" for="polyTreeBranchBOctave">OCT</label>
+                        <input id="polyTreeBranchBOctave" type="number" class="poly-tree-octave" min="-2" max="4" step="1" value="0" title="Branch B octave start">
+                        <button id="polyTreeBranchBGenToggle" class="menu-btn pg-circle-mini-btn poly-tree-gen-toggle toggle-on" type="button" title="Enable/Disable interval generator for Branch B">INT</button>
+                        <input id="polyTreeBranchBInterval" type="number" class="poly-tree-interval" min="0" max="127" step="1" value="5" title="Interval generator">
+                        <button id="polyTreeBranchBGen" class="menu-btn pg-circle-mini-btn poly-tree-gen-btn" type="button">GEN</button>
+                    </div>
+                </div>
+                <div class="poly-tree-row poly-tree-presets">
+                    <div class="preset-controls">
+                        <select id="polyTreePresetSelect" class="poly-tree-input" title="Poly Tree preset"></select>
+                        <input id="polyTreePresetName" type="text" class="poly-tree-input" placeholder="Preset name">
+                        <button id="polyTreePresetSave" class="menu-btn btn-ok" type="button">SAVE</button>
+                        <button id="polyTreePresetDel" class="menu-btn btn-danger" type="button">DEL</button>
+                        <button id="polyTreeDragToggle" class="menu-btn pg-circle-mini-btn toggle-on" type="button" title="Enable/Disable Poly Tree drag gestures">DRAG ON</button>
+                    </div>
+                </div>
+                <div class="poly-tree-row poly-tree-hint">Single number = interval sequence from 0 (max 15 values).</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="virtual-lumatone-panel lumatone-options-panel hidden" id="virtualLumatonePanel" aria-hidden="true">
+        <div class="virtual-lumatone-header">
+            <div class="virtual-lumatone-head-main">
+                <strong class="pg-window-title">LUMATONE VIEW</strong>
+                <span id="virtualLumatoneInfo" class="virtual-lumatone-info">cells: 91 | mapping: step = q*5 + r*3</span>
+            </div>
+            <button id="vlPanelClose" class="menu-btn pg-panel-collapse" type="button" title="Collapse Lumatone view controls" aria-label="Collapse Lumatone view controls">-</button>
+        </div>
+        <div class="ui-group-inline">
+            <div class="box" style="max-width:120px;"><label>Base Freq</label><input id="vlBaseFreq" type="number" min="20" max="2000" step="0.01" value="220"></div>
+            <div class="box" style="max-width:110px;"><label>Vector q</label><input id="vlVectorQ" type="number" min="-62" max="62" step="1" value="5"></div>
+            <div class="box" style="max-width:110px;"><label>Vector r</label><input id="vlVectorR" type="number" min="-62" max="62" step="1" value="3"></div>
+            <div class="box" style="max-width:90px;"><label>Rings</label><input id="vlRings" type="number" min="1" max="10" step="1" value="5"></div>
+            <div class="box" style="max-width:170px;"><label>Lumatone Mode</label><select id="vlLayout"><option value="classic">Classic Mode</option><option value="melodic">Melodic Mode</option><option value="harmonic">Harmonic Table</option></select></div>
+            <div class="box" style="max-width:170px;"><label>Clone Mode</label><select id="vlCloneMode"><option value="dense">Dense (full)</option><option value="unique">Unique-first</option><option value="hybrid">Hybrid</option></select></div>
+            <div class="box" style="max-width:110px;"><label>Hybrid Max</label><input id="vlHybridMax" type="number" min="1" max="8" step="1" value="2"></div>
+            <div class="box" style="max-width:120px;"><label>Zone</label><select id="vlZone"><option value="A">A</option><option value="B">B</option></select></div>
+            <div class="box" style="max-width:160px;"><label>Quantize to Scale</label><input id="vlQuantize" type="checkbox" checked></div>
+            <div class="box" style="max-width:150px;"><label>Double Mode</label><input id="vlDoubleMode" type="checkbox"></div>
         </div>
     </div>
 
@@ -1412,16 +1574,21 @@
                 <svg viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </span>
         </button>
+        <button id="pgHudCollapse" class="menu-btn pg-panel-collapse" type="button" title="Collapse Playground main bar" aria-label="Collapse Playground main bar">-</button>
     </div>
 
     <div id="pgAdvancedPanel" class="playground-settings-panel hidden">
-    <div class="pg-settings-tabs" id="pgSettingsTabs">
+        <div class="playground-settings-head">
+            <div class="pg-window-title">PLAYGROUND SETTINGS</div>
+            <div class="pg-settings-tabs" id="pgSettingsTabs">
             <button class="pg-tab-btn active" type="button" data-pg-tab="playability">PLAYABILITY</button>
             <button class="pg-tab-btn" type="button" data-pg-tab="macros">MACROS</button>
             <button class="pg-tab-btn" type="button" data-pg-tab="tubes">TUBES</button>
             <button class="pg-tab-btn" type="button" data-pg-tab="presets">PRESETS</button>
             <button class="pg-tab-btn" type="button" data-pg-tab="scenes">SCENES</button>
             <button class="pg-tab-btn" type="button" data-pg-tab="advanced">ADVANCED</button>
+            </div>
+            <button id="pgAdvancedClose" class="menu-btn pg-panel-collapse" type="button" title="Collapse Playground settings" aria-label="Collapse Playground settings">-</button>
         </div>
                 <div class="pg-tab-content active" data-pg-tab-content="playability">
             <div class="hud-group">

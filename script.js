@@ -98,11 +98,26 @@ const els = {
     spiralDefectVal: document.getElementById('spiralDefectVal'),
     spiralAnchor: document.getElementById('spiralAnchor'),
     spiralStatus: document.getElementById('spiralStatus'),
+    virtualLumatonePanel: document.getElementById('virtualLumatonePanel'),
+    virtualLumatoneCanvas: document.getElementById('virtualLumatoneCanvas'),
+    virtualLumatoneInfo: document.getElementById('virtualLumatoneInfo'),
+    vlBaseFreq: document.getElementById('vlBaseFreq'),
+    vlVectorQ: document.getElementById('vlVectorQ'),
+    vlVectorR: document.getElementById('vlVectorR'),
+    vlRings: document.getElementById('vlRings'),
+    vlLayout: document.getElementById('vlLayout'),
+    vlCloneMode: document.getElementById('vlCloneMode'),
+    vlHybridMax: document.getElementById('vlHybridMax'),
+    vlZone: document.getElementById('vlZone'),
+    vlQuantize: document.getElementById('vlQuantize'),
+    vlDoubleMode: document.getElementById('vlDoubleMode'),
     pgCircleViewToggle: document.getElementById('pgCircleViewToggle'),
+    pgViewPicker: document.getElementById('pgViewPicker'),
     pgCircleActions: document.getElementById('pgCircleActions'),
+    pgLumatoneOptionsToggle: document.getElementById('pgLumatoneOptionsToggle'),
+    vlPanelClose: document.getElementById('vlPanelClose'),
     pgQuadranLeftTop: document.getElementById('pgQuadranLeftTop'),
     pgQuadranRightTop: document.getElementById('pgQuadranRightTop'),
-    pgPolyPlannerTop: document.getElementById('pgPolyPlannerTop'),
     pgCircleLabelModeTop: document.getElementById('pgCircleLabelModeTop'),
     pgCircleQuadranScope: document.getElementById('pgCircleQuadranScope'),
     pgCirclePolyToggleAdv: document.getElementById('pgCirclePolyToggleAdv'),
@@ -124,6 +139,22 @@ const els = {
     circlePolyAnchor: document.getElementById('circlePolyAnchor'),
     circlePolyBranchA: document.getElementById('circlePolyBranchA'),
     circlePolyBranchB: document.getElementById('circlePolyBranchB'),
+    polyTreeEditor: document.getElementById('polyTreeEditor'),
+    polyTreeBranchAInline: document.getElementById('polyTreeBranchAInline'),
+    polyTreeBranchBInline: document.getElementById('polyTreeBranchBInline'),
+    polyTreeBranchAInterval: document.getElementById('polyTreeBranchAInterval'),
+    polyTreeBranchBInterval: document.getElementById('polyTreeBranchBInterval'),
+    polyTreeBranchAOctave: document.getElementById('polyTreeBranchAOctave'),
+    polyTreeBranchBOctave: document.getElementById('polyTreeBranchBOctave'),
+    polyTreeBranchAGenToggle: document.getElementById('polyTreeBranchAGenToggle'),
+    polyTreeBranchBGenToggle: document.getElementById('polyTreeBranchBGenToggle'),
+    polyTreeBranchAGen: document.getElementById('polyTreeBranchAGen'),
+    polyTreeBranchBGen: document.getElementById('polyTreeBranchBGen'),
+    polyTreePresetSelect: document.getElementById('polyTreePresetSelect'),
+    polyTreePresetName: document.getElementById('polyTreePresetName'),
+    polyTreePresetSave: document.getElementById('polyTreePresetSave'),
+    polyTreePresetDel: document.getElementById('polyTreePresetDel'),
+    polyTreeDragToggle: document.getElementById('polyTreeDragToggle'),
     customScaleName: document.getElementById('customScaleName'),
     customScaleSaved: document.getElementById('customScaleSaved'),
     customScaleSave: document.getElementById('customScaleSave'),
@@ -164,6 +195,24 @@ const els = {
     arpEuclidVal: document.getElementById('arpEuclidVal'),
     arpShiftVal: document.getElementById('arpShiftVal'),
     arpSwingVal: document.getElementById('arpSwingVal'),
+    arpMetricEnabled: document.getElementById('arpMetricEnabled'),
+    arpMetricSeedPreset: document.getElementById('arpMetricSeedPreset'),
+    arpMetricSeed: document.getElementById('arpMetricSeed'),
+    arpMetricSeedStatus: document.getElementById('arpMetricSeedStatus'),
+    arpMetricDepth: document.getElementById('arpMetricDepth'),
+    arpMetricWither: document.getElementById('arpMetricWither'),
+    arpMetricWitherVal: document.getElementById('arpMetricWitherVal'),
+    arpMetricNesting: document.getElementById('arpMetricNesting'),
+    arpMetricSpeed: document.getElementById('arpMetricSpeed'),
+    arpMetricSpeedVal: document.getElementById('arpMetricSpeedVal'),
+    arpMetricCycleMode: document.getElementById('arpMetricCycleMode'),
+    arpMetricCycleBars: document.getElementById('arpMetricCycleBars'),
+    arpMetricCycleBarsVal: document.getElementById('arpMetricCycleBarsVal'),
+    arpMetricPhrasePreset: document.getElementById('arpMetricPhrasePreset'),
+    arpMetricPhraseName: document.getElementById('arpMetricPhraseName'),
+    arpMetricPhraseSave: document.getElementById('arpMetricPhraseSave'),
+    arpMetricPhraseDelete: document.getElementById('arpMetricPhraseDelete'),
+    arpMetricPhraseStatus: document.getElementById('arpMetricPhraseStatus'),
     arpStepPattern: document.getElementById('arpStepPattern'),
     octDownBtn: document.getElementById('octDownBtn'),
     octUpBtn: document.getElementById('octUpBtn'),
@@ -629,6 +678,9 @@ function triggerBow(voiceObj, attackTime = 0.05) {
 }
 const PRESET_KEY = 'genca_presets_v1';
 const MPE_PRESET_KEY = 'genca_mpe_presets_v1';
+const ARP_USER_PRESETS_KEY = 'genca_arp_user_presets_v1';
+const METRIC_TREE_USER_PRESETS_KEY = 'genca_metric_phrase_presets_v1';
+const POLY_TREE_PRESET_KEY = 'genca_poly_tree_presets_v1';
 const MELODY_SAVE_KEY = 'genca_melody_saves_v1';
 const CUSTOM_SCALE_KEY = 'genca_custom_scales_v1';
 const MICROTONAL_USER_KEY = 'genca_microtonal_scales_v1';
@@ -835,6 +887,22 @@ const ARP_PRESETS = {
     Odd7Wide: { rate: '1/14', gate: 50, sync: 'internal', bpm: 120, latch: false },
     Odd9Wide: { rate: '1/18', gate: 45, sync: 'internal', bpm: 120, latch: false }
 };
+const METRIC_TREE_SEEDS = {
+    RedOak: [4, 5],
+    Fern: [8, 11],
+    Phototactic: [4, 7],
+    Vichulus: [5, 11],
+    ChaosIvy: [7, 11, 13]
+};
+const METRIC_TREE_PHRASE_PRESETS = {
+    Asym_36_16: '[2+3] + [2+2+3]*2 + [2+3]*2 + [2+2+3]',
+    Asym_5_7_Weave: '[2+3] + [2+2+3]',
+    Asym_5_7_Chain: '[2+3] + [2+2+3] + [2+3] + [2+2+3]',
+    Asym_Tresillo_Shift: '[3+3+2] + [2+3]',
+    Asym_Septuple_Split: '[2+2+3]*2 + [3+2+2]'
+};
+const METRIC_TREE_MAX_DEPTH = 6;
+const METRIC_TREE_MAX_EVENTS = 512;
 const DEFAULT_SAMPLER_GAIN = 1;
 const DEFAULT_FX = {
     attack: 0.01,
@@ -994,15 +1062,34 @@ function createArpState() {
         clockTicks: 0,
         ticksPerStep: 6,
         lastClockTime: 0,
-        tickMs: 0
+        tickMs: 0,
+        timerMode: 'interval',
+        metric: {
+            enabled: false,
+            seedPreset: 'Phototactic',
+            seed: [4, 7],
+            depth: 2,
+            wither: 0.98,
+            cycleMode: '1bar',
+            cycleBars: 1,
+            nesting: 'single',
+            slots: [],
+            slotsKey: '',
+            slotIndex: 0,
+            clockAccumMs: 0,
+            nextDueMs: 0,
+            layerNoteIndex: { trunk: 0, branch: 0, leaf: 0 }
+        }
     };
 }
 const state = {
+    dualMode: !!els.dualMode?.checked,
     midi: { output: null, outputB: null, input: null, access: null, hardwareOutput: null, hardwareOutputB: null, outputWrapper: null, outputWrapperB: null },
     currentOctave: 0,
     perfHeight: 0,
     canvasRect: canvas.getBoundingClientRect(),
     activeTouches: new Map(),
+    arpNodeFlashByZone: { A: [], B: [] },
     physicalNotes: new Map(),
     mpeChannels: Array.from({length: 15}, (_, i) => i + 2),
     mpeChannelsB: Array.from({length: 15}, (_, i) => i + 2),
@@ -1076,6 +1163,9 @@ const state = {
     pbPolicyModeByZone: { A: null, B: null },
     presets: {},
     mpePresets: {},
+    polyTreePresets: {},
+    arpUserPresets: {},
+    metricPhraseUserPresets: {},
     customScales: {},
     microScales: {},
     scaleImportStatusByZone: {
@@ -1309,6 +1399,7 @@ const state = {
     experimental: {
         circleView: {
             enabled: false,
+            mode: 'keyboard',
             divisions: 'auto',
             labelMode: 'abc',
             stepOrderInputByZone: { A: '', B: '' }
@@ -1323,7 +1414,53 @@ const state = {
             enabled: false,
             branchA: [0, 4, 7],
             branchB: [2, 5, 9],
-            anchor: 69
+            branchAEnabled: true,
+            branchBEnabled: true,
+            branchAOctaveStart: 0,
+            branchBOctaveStart: 0,
+            branchAGenEnabled: true,
+            branchBGenEnabled: true,
+            anchor: 69,
+            anchorStep: 0,
+            focusA: 0,
+            focusB: 0,
+            hoverKey: '',
+            activeKey: '',
+            activeKeys: [],
+            activeUntil: 0,
+            lastBranch: 'A',
+            playability: {
+                hitPadding: 18,
+                hysteresisPx: 16,
+                branchLock: true,
+                branchLockMode: 'auto',
+                legatoBranch: true,
+                snapMode: 'hard',
+                softSnapMs: 55,
+                glideMs: 100,
+                v2Enabled: true,
+                stretchMix: 0.6,
+                bendSemis: 2.2,
+                nodeDropMs: 2200,
+                rootRunStepMs: 140,
+                rootRunGate: 0.64,
+                dragEnabled: true
+            }
+        },
+        virtualLumatone: {
+            rings: 5,
+            vectorQ: 5,
+            vectorR: 3,
+            layout: 'classic',
+            cloneMode: 'dense',
+            hybridMax: 2,
+            quantize: true,
+            baseFreq: 220,
+            baseStep: 0,
+            doubleMode: false,
+            zone: 'A',
+            keys: [],
+            pointerMap: new Map()
         }
     },
     // Audio Recorder state
@@ -1354,6 +1491,7 @@ const FADE_TAIL_MS = 200;
 const FADE_EASE_POW = 2.2;
 const circleLayoutSequenceCache = new Map();
 let playgroundFadeTimer = null;
+let clearPlaygroundLoopsNow = null;
 const clearPlaygroundNow = () => {
     if (!window.Playground) return;
     if (Playground.clearScene) Playground.clearScene({ keepEnvironment: true, keepWalls: true });
@@ -1369,6 +1507,7 @@ const schedulePlaygroundClearAfterFade = () => {
     const delay = Math.round((seconds * 1000) + FADE_TAIL_MS + 30);
     playgroundFadeTimer = setTimeout(() => {
         playgroundFadeTimer = null;
+        if (typeof clearPlaygroundLoopsNow === 'function') clearPlaygroundLoopsNow();
         clearPlaygroundNow();
     }, delay);
 };
@@ -3729,6 +3868,480 @@ function getMorphingInterval(centsValue, useFlatOctave, defectInCents = state.au
     return Number(centsValue || 0) - (Number(defectInCents) || 0);
 }
 
+function getVirtualLumatoneConfig(zoneOverride = null) {
+    const cfg = state.experimental?.virtualLumatone || {};
+    const layout = String(els.vlLayout?.value || cfg.layout || 'classic').toLowerCase();
+    const cloneModeRaw = String(els.vlCloneMode?.value || cfg.cloneMode || 'dense').toLowerCase();
+    const cloneMode = (cloneModeRaw === 'unique' || cloneModeRaw === 'hybrid' || cloneModeRaw === 'dense')
+        ? cloneModeRaw
+        : 'dense';
+    const hybridMaxRaw = parseInt(els.vlHybridMax?.value, 10);
+    const hybridMax = Math.max(1, Math.min(8, Number.isFinite(hybridMaxRaw) ? hybridMaxRaw : (parseInt(cfg.hybridMax, 10) || 2)));
+    const zone = zoneOverride ? getScaleZoneId(zoneOverride) : ((els.vlZone?.value === 'B') ? 'B' : 'A');
+    const z = getScaleZoneId(zone);
+    const grid = getGridDegrees(z);
+    const quantize = els.vlQuantize ? !!els.vlQuantize.checked : (cfg.quantize !== false);
+    const stepOrder = getCircleStepOrderForGrid(z, grid);
+    const def = getScaleDefinition(z);
+    const periodSemis = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0
+        ? def.periodSemitones
+        : (Number.isFinite(grid?.periodSemitones) && grid.periodSemitones > 0 ? grid.periodSemitones : 12);
+    const scaleDegreeCount = normalizeDegreesForPeriod(def?.degrees || [], periodSemis).length;
+    const stepsPerOct = Math.max(1, (quantize && scaleDegreeCount > 0)
+        ? scaleDegreeCount
+        : (getCircleStepOrderForGrid(z, grid).length || 31));
+    const playableStepSet = (quantize && scaleDegreeCount > 0)
+        ? new Set(Array.from({ length: stepsPerOct }, (_, i) => i))
+        : new Set((Array.isArray(stepOrder) && stepOrder.length)
+            ? stepOrder.map((n) => ((n % stepsPerOct) + stepsPerOct) % stepsPerOct)
+            : Array.from({ length: stepsPerOct }, (_, i) => i));
+    const visibleOctaves = Math.max(1, getVisibleOctavesForZone(z));
+    const targetSpanSteps = Math.max(stepsPerOct, visibleOctaves * stepsPerOct);
+    const vectorPreset = (() => {
+        if (stepsPerOct === 31) return { q: 5, r: 3 };
+        let q = Math.max(1, Math.round((stepsPerOct * 5) / 31));
+        let r = Math.max(1, Math.round((stepsPerOct * 3) / 31));
+        if (q === r) r = Math.max(1, r - 1);
+        return { q, r };
+    })();
+    const modN = (n) => ((n % stepsPerOct) + stepsPerOct) % stepsPerOct;
+    const gcd2 = (a, b) => {
+        let x = Math.abs(a);
+        let y = Math.abs(b);
+        while (y !== 0) {
+            const t = y;
+            y = x % y;
+            x = t;
+        }
+        return x || 1;
+    };
+    const gcd3 = (a, b, c) => gcd2(gcd2(a, b), c);
+    const chooseVectorAuto = () => {
+        const lim = Math.max(4, Math.min(18, Math.round((stepsPerOct * 12) / 31)));
+        let best = { q: vectorPreset.q, r: vectorPreset.r, score: Infinity };
+        for (let q = 1; q <= lim; q += 1) {
+            for (let r = 1; r <= lim; r += 1) {
+                if (q === r) continue;
+                if (gcd3(q, r, stepsPerOct) !== 1) continue;
+                const dBase = Math.abs(q - vectorPreset.q) + Math.abs(r - vectorPreset.r);
+                const ratio = q / Math.max(1e-6, r);
+                const ratioTarget = vectorPreset.q / Math.max(1e-6, vectorPreset.r);
+                const dRatio = Math.abs(ratio - ratioTarget);
+                const score = (dBase * 2) + dRatio + ((q < r) ? 0.6 : 0);
+                if (score < best.score) best = { q, r, score };
+            }
+        }
+        return { q: best.q, r: best.r };
+    };
+    const vectorAuto = chooseVectorAuto();
+    const manualVectorQ = parseInt(els.vlVectorQ?.value, 10);
+    const manualVectorR = parseInt(els.vlVectorR?.value, 10);
+    const vectorQ = (Number.isFinite(manualVectorQ) && manualVectorQ > 0) ? manualVectorQ : vectorAuto.q;
+    const vectorR = (Number.isFinite(manualVectorR) && manualVectorR > 0) ? manualVectorR : vectorAuto.r;
+    const rowSpecsBase = (layout === 'classic')
+        ? [
+            { leftTrim: 2, rightTrim: 2 },
+            { leftTrim: 1, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 2 },
+            { leftTrim: 2, rightTrim: 2 },
+            { leftTrim: 2, rightTrim: 3 }
+        ]
+        : [
+            { leftTrim: 2, rightTrim: 2 },
+            { leftTrim: 1, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 2 },
+            { leftTrim: 2, rightTrim: 2 },
+            { leftTrim: 2, rightTrim: 2 }
+        ];
+    const coverageForRings = (ringsGuess) => {
+        const rowCrop = Math.max(0, 4 - ringsGuess);
+        const rowStart = Math.min(rowCrop, Math.max(0, rowSpecsBase.length - 4));
+        const rowEnd = Math.max(rowStart + 4, rowSpecsBase.length - rowCrop);
+        const rowSpecs = rowSpecsBase.slice(rowStart, rowEnd);
+        const baseCols = 6 + (ringsGuess * 2);
+        const covered = new Set();
+        rowSpecs.forEach((spec, rowIdx) => {
+            const start = spec.leftTrim || 0;
+            const end = baseCols - (spec.rightTrim || 0);
+            let idxInRow = 0;
+            for (let col = start; col < end; col += 1) {
+                const q = col - start;
+                const r = rowIdx;
+                covered.add(modN((q * vectorQ) + (r * vectorR)));
+                idxInRow += 1;
+            }
+        });
+        let hits = 0;
+        playableStepSet.forEach((s) => { if (covered.has(s)) hits += 1; });
+        const ratio = playableStepSet.size > 0 ? (hits / playableStepSet.size) : 1;
+        return { ratio, hits, total: playableStepSet.size };
+    };
+    let ringsAuto = 3;
+    const coverageTarget = 1.0;
+    let bestCoverage = { ratio: 0, hits: 0, total: playableStepSet.size };
+    let bestCoverageRing = ringsAuto;
+    for (let r = 1; r <= 10; r += 1) {
+        const cov = coverageForRings(r);
+        if (cov.ratio > bestCoverage.ratio) {
+            bestCoverage = cov;
+            bestCoverageRing = r;
+        }
+        if (cov.ratio >= coverageTarget) {
+            ringsAuto = r;
+            break;
+        }
+        ringsAuto = bestCoverageRing;
+    }
+    const manualRings = parseInt(els.vlRings?.value, 10);
+    const rings = (Number.isFinite(manualRings) && manualRings >= 1)
+        ? Math.max(1, Math.min(10, manualRings))
+        : ringsAuto;
+    const ringsCoverage = coverageForRings(rings);
+    const baseFreq = parseFloat(els.vlBaseFreq?.value);
+    const useDoubleMode = !!(els.vlDoubleMode?.checked || cfg.doubleMode || state.audio?.spiral?.enabled);
+    return {
+        rings,
+        vectorQ,
+        vectorR,
+        layout: ['classic', 'melodic', 'harmonic'].includes(layout) ? layout : 'classic',
+        cloneMode,
+        hybridMax,
+        quantize,
+        baseFreq: Number.isFinite(baseFreq) ? Math.max(20, Math.min(2000, baseFreq)) : 220,
+        baseStep: Number.isFinite(cfg.baseStep) ? cfg.baseStep : 0,
+        zone,
+        stepsPerOct,
+        stepCoverage: ringsCoverage,
+        gcdOK: gcd3(vectorQ, vectorR, stepsPerOct) === 1,
+        visibleOctaves,
+        targetSpanSteps,
+        doubleMode: useDoubleMode,
+        autoVector: !(Number.isFinite(manualVectorQ) && manualVectorQ > 0 && Number.isFinite(manualVectorR) && manualVectorR > 0),
+        autoRings: !(Number.isFinite(manualRings) && manualRings >= 1)
+    };
+}
+
+function drawHexPath(g, x, y, radius) {
+    g.beginPath();
+    for (let i = 0; i < 6; i += 1) {
+        const a = (Math.PI / 180) * (60 * i - 30);
+        const px = x + (radius * Math.cos(a));
+        const py = y + (radius * Math.sin(a));
+        if (i === 0) g.moveTo(px, py);
+        else g.lineTo(px, py);
+    }
+    g.closePath();
+}
+
+function getVirtualLumatoneVelocityFromEvent(e, canvas) {
+    if (!canvas) return 90;
+    const rect = canvas.getBoundingClientRect();
+    const yn = Math.max(0, Math.min(1, (e.clientY - rect.top) / Math.max(1, rect.height)));
+    return Math.max(18, Math.min(127, Math.round(127 - (yn * 100))));
+}
+
+function getVirtualLumatoneSlideFromEvent(e, canvas) {
+    if (!canvas) return 64;
+    const rect = canvas.getBoundingClientRect();
+    const yn = Math.max(0, Math.min(1, (e.clientY - rect.top) / Math.max(1, rect.height)));
+    return Math.max(0, Math.min(127, Math.round((1 - yn) * 127)));
+}
+
+function sendVirtualLumatoneVoiceUpdate(voice, noteExact, e, zoneId) {
+    if (!voice || !Number.isFinite(noteExact)) return;
+    const cfg = getVirtualLumatoneConfig(zoneId);
+    const def = getScaleDefinition(zoneId);
+    const targetExact = (cfg.quantize !== false)
+        ? mapMidiNoteToScaleWithDef(noteExact, def)
+        : noteExact;
+    const previousNote = voice.note;
+    const pbRange = Math.max(1, getPbRangeForZone(zoneId));
+    const midiFloat = targetExact;
+    let note = Math.max(0, Math.min(127, Math.round(midiFloat)));
+    let detune = midiFloat - note;
+    if (Math.abs(detune) > pbRange * 0.9) {
+        const drift = detune > 0 ? Math.floor(detune / pbRange) : Math.ceil(detune / pbRange);
+        note = Math.max(0, Math.min(127, note + drift));
+        detune = midiFloat - note;
+    }
+    const pb = clampPb(Math.round(8192 + (detune * (8192 / pbRange))));
+    const slide = getVirtualLumatoneSlideFromEvent(e, els.virtualLumatoneCanvas);
+    const press = Math.max(20, Math.min(127, getVirtualLumatoneVelocityFromEvent(e, els.virtualLumatoneCanvas)));
+    const output = getZoneOutput(zoneId);
+    if (output && voice.chan) {
+        if (previousNote !== note) {
+            sendMidi([0x80 + voice.chan - 1, previousNote, 0], output);
+            // Ensure the new note starts already at the target pitch.
+            sendMidi([0xE0 + voice.chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], output);
+            sendMidi([0x90 + voice.chan - 1, note, press], output);
+        } else {
+            sendMidi([0xE0 + voice.chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], output);
+        }
+        sendMidi([0xB0 + voice.chan - 1, 74, slide], output);
+        sendMidi([0xD0 + voice.chan - 1, press], output);
+    }
+    if (state.audio?.enabled && voice.chan) {
+        const internalChan = getInternalAudioChannel(voice.chan, zoneId);
+        const oldKey = `${internalChan}:${previousNote}`;
+        if (previousNote !== note) stopVoiceInternal(oldKey);
+        state.audio.channelPb.set(internalChan, pb);
+        updateChannelPitch(internalChan);
+        state.audio.channelTimbre.set(internalChan, slide);
+        updateChannelTimbre(internalChan);
+        state.audio.channelPress.set(internalChan, press);
+        updateChannelPress(internalChan);
+        if (previousNote !== note) void noteOnInternal(note, press, voice.chan, null, { zoneId });
+    }
+    voice.note = note;
+    voice.pb = pb;
+    voice.freq = midiToFreq(targetExact);
+}
+
+async function startVirtualLumatoneVoice(pointerId, hit, e, config) {
+    if (!hit?.cell || !Number.isFinite(hit?.noteExact)) return;
+    const zoneId = getAudioZoneId(config.zone || 'A');
+    await initAudioContext();
+    const output = getZoneOutput(zoneId);
+    const chan = allocateMpeChannelForPlay(zoneId, output, { allowStealHeld: true });
+    if (!chan) return;
+
+    const vel = getVirtualLumatoneVelocityFromEvent(e, els.virtualLumatoneCanvas);
+    const def = getScaleDefinition(zoneId);
+    const midiFloat = (config.quantize !== false)
+        ? mapMidiNoteToScaleWithDef(hit.noteExact, def)
+        : hit.noteExact;
+    const note = Math.max(0, Math.min(127, Math.round(midiFloat)));
+    const pbRange = Math.max(1, getPbRangeForZone(zoneId));
+    const detune = midiFloat - note;
+    const pb = clampPb(Math.round(8192 + (detune * (8192 / pbRange))));
+    const slide = getVirtualLumatoneSlideFromEvent(e, els.virtualLumatoneCanvas);
+
+    if (output) {
+        sendMidi([0xE0 + chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], output);
+        sendMidi([0xB0 + chan - 1, 74, slide], output);
+        sendMidi([0xD0 + chan - 1, vel], output);
+        sendMidi([0x90 + chan - 1, note, vel], output);
+    }
+    if (state.audio?.enabled) {
+        const internalChan = getInternalAudioChannel(chan, zoneId);
+        state.audio.channelPb.set(internalChan, pb);
+        updateChannelPitch(internalChan);
+        state.audio.channelTimbre.set(internalChan, slide);
+        updateChannelTimbre(internalChan);
+        state.audio.channelPress.set(internalChan, vel);
+        updateChannelPress(internalChan);
+        void noteOnInternal(note, vel, chan, null, { zoneId });
+    }
+
+    state.experimental.virtualLumatone.pointerMap.set(pointerId, {
+        chan,
+        note,
+        pb,
+        key: hit.cell,
+        stepIndex: hit.cell.absStep,
+        freq: midiToFreq(hit.noteExact),
+        zoneId
+    });
+}
+
+function stopVirtualLumatoneVoice(pointerId) {
+    const map = state.experimental.virtualLumatone.pointerMap;
+    const voice = map.get(pointerId);
+    if (!voice) return;
+    const output = getZoneOutput(voice.zoneId);
+    if (output && voice.chan) sendMidi([0x80 + voice.chan - 1, voice.note, 0], output);
+    if (state.audio?.enabled && voice.chan) {
+        const internalChan = getInternalAudioChannel(voice.chan, voice.zoneId);
+        stopVoiceInternal(`${internalChan}:${voice.note}`);
+    }
+    releaseMpeChannel(voice.zoneId, voice.chan);
+    map.delete(pointerId);
+}
+
+function drawVirtualLumatone() {
+    const cfg = getVirtualLumatoneConfig();
+    const canvasEl = els.virtualLumatoneCanvas;
+    if (!canvasEl) return;
+    const g = canvasEl.getContext('2d');
+    if (!g) return;
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    const width = Math.max(300, Math.floor(canvasEl.clientWidth || 960));
+    const height = Math.max(220, Math.floor(canvasEl.clientHeight || 420));
+    canvasEl.width = Math.floor(width * dpr);
+    canvasEl.height = Math.floor(height * dpr);
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.clearRect(0, 0, width, height);
+
+    const activePointers = state.experimental.virtualLumatone.pointerMap;
+    const activeAbsSteps = new Set(Array.from(activePointers.values()).map((v) => v.stepIndex));
+    const firstPointer = activePointers.size ? Array.from(activePointers.values())[0] : null;
+    const hit = firstPointer?.key
+        ? { q: firstPointer.key.q, r: firstPointer.key.r, step: firstPointer.key.absStep }
+        : (state.experimental?.virtualLumatone?.lastSurfaceHit || null);
+    const surface = renderLumatoneSurface(g, width, height, null, cfg.zone, {
+        hit,
+        showTitle: false,
+        activeAbsSteps
+    });
+
+    state.experimental.virtualLumatone.grid = { cells: surface.cells, hexSize: surface.hexSize, width, height };
+    state.experimental.virtualLumatone.keys = surface.cells;
+    state.experimental.virtualLumatone.rings = cfg.rings;
+    state.experimental.virtualLumatone.vectorQ = cfg.vectorQ;
+    state.experimental.virtualLumatone.vectorR = cfg.vectorR;
+    state.experimental.virtualLumatone.cloneMode = cfg.cloneMode;
+    state.experimental.virtualLumatone.hybridMax = cfg.hybridMax;
+    state.experimental.virtualLumatone.quantize = cfg.quantize;
+    state.experimental.virtualLumatone.baseFreq = cfg.baseFreq;
+    state.experimental.virtualLumatone.doubleMode = cfg.doubleMode;
+    state.experimental.virtualLumatone.zone = cfg.zone;
+
+    if (els.virtualLumatoneInfo) {
+        const mapping = (cfg.layout === 'classic')
+            ? (cfg.stepsPerOct === 31 ? 'lookup: Standard Bosanquet row map' : `vector fallback (${cfg.stepsPerOct}-step)`)
+            : `step = q*${cfg.vectorQ} + r*${cfg.vectorR}`;
+        const payload = state.experimental.virtualLumatone.lastOutput;
+        const payloadText = payload
+            ? ` | q:${payload.q} r:${payload.r} abs:${payload.noteIndex} pc:${payload.pc31} flat:${payload.isFlatOctave ? 'Y' : 'N'}`
+            : '';
+        const cov = cfg.stepCoverage || { hits: 0, total: 0, ratio: 0 };
+        const covPct = Math.round((cov.ratio || 0) * 100);
+        const vectorMode = cfg.autoVector ? 'auto' : 'manual';
+        const ringsMode = cfg.autoRings ? 'auto' : 'manual';
+        const cloneText = cfg.cloneMode === 'hybrid'
+            ? `hybrid x${cfg.hybridMax}`
+            : (cfg.cloneMode === 'unique' ? 'unique' : 'dense');
+        const before = Number.isFinite(surface?.cfg?.cellsBeforeFilter) ? surface.cfg.cellsBeforeFilter : surface.cells.length;
+        els.virtualLumatoneInfo.textContent = `cells:${surface.cells.length}/${before} | clones:${cloneText} | ${mapping} | zone:${cfg.zone} | qtz:${cfg.quantize ? 'ON' : 'OFF'} | gcd:${cfg.gcdOK ? 'OK' : 'FAIL'} | cover:${cov.hits}/${cov.total} (${covPct}%) | steps/oct:${cfg.stepsPerOct} | oct:${cfg.visibleOctaves} | rings:${ringsMode} ${cfg.rings} | vector:${vectorMode}${payloadText}`;
+    }
+    if (els.vlRings && cfg.autoRings) els.vlRings.value = String(cfg.rings);
+    if (els.vlVectorQ && cfg.autoVector) els.vlVectorQ.value = String(cfg.vectorQ);
+    if (els.vlVectorR && cfg.autoVector) els.vlVectorR.value = String(cfg.vectorR);
+    if (els.vlCloneMode) els.vlCloneMode.value = cfg.cloneMode || 'dense';
+    if (els.vlHybridMax) els.vlHybridMax.value = String(cfg.hybridMax || 2);
+}
+
+function setupVirtualLumatone() {
+    const cfg = state.experimental.virtualLumatone || {};
+    if (els.vlRings) els.vlRings.value = String(cfg.rings || 5);
+    if (els.vlVectorQ) els.vlVectorQ.value = String(cfg.vectorQ || 5);
+    if (els.vlVectorR) els.vlVectorR.value = String(cfg.vectorR || 3);
+    if (els.vlLayout) els.vlLayout.value = String(cfg.layout || 'classic');
+    if (els.vlCloneMode) els.vlCloneMode.value = String(cfg.cloneMode || 'dense');
+    if (els.vlHybridMax) els.vlHybridMax.value = String(cfg.hybridMax || 2);
+    if (els.vlQuantize) els.vlQuantize.checked = cfg.quantize !== false;
+    if (els.vlBaseFreq) els.vlBaseFreq.value = String(cfg.baseFreq || 220);
+    if (els.vlZone) els.vlZone.value = cfg.zone === 'B' ? 'B' : 'A';
+    if (els.vlDoubleMode) els.vlDoubleMode.checked = !!cfg.doubleMode;
+    state.experimental.virtualLumatone.grid = { cells: [], hexSize: 0 };
+
+    const redraw = () => drawVirtualLumatone();
+    [els.vlRings, els.vlVectorQ, els.vlVectorR, els.vlLayout, els.vlCloneMode, els.vlHybridMax, els.vlQuantize, els.vlBaseFreq, els.vlZone, els.vlDoubleMode].forEach((el) => {
+        if (!el) return;
+        el.addEventListener('input', redraw);
+        el.addEventListener('change', redraw);
+    });
+
+    const canvasEl = els.virtualLumatoneCanvas;
+    if (!canvasEl) return;
+
+    const onPointerDown = async (e) => {
+        e.preventDefault();
+        try { canvasEl.setPointerCapture(e.pointerId); } catch (_) {}
+        const cfgNow = getVirtualLumatoneConfig();
+        const rect = canvasEl.getBoundingClientRect();
+        const hit = getLumatoneHitFromPoint(e.clientX, e.clientY, cfgNow.zone, {
+            rect,
+            width: rect.width,
+            height: rect.height
+        });
+        if (!hit?.cell) return;
+        const stepClass = getLumatoneStepClass(hit.cell.absStep, hit.surface?.cfg || cfgNow);
+        state.experimental.virtualLumatone.lastOutput = {
+            noteIndex: hit.cell.absStep,
+            stepClass,
+            pc31: stepClass,
+            frequency: midiToFreq(hit.noteExact),
+            isFlatOctave: !!cfgNow.doubleMode && cfgNow.stepsPerOct === 31 && hit.cell.absStep !== 0 && (Math.abs(hit.cell.absStep) % 30 === 0),
+            q: hit.cell.q,
+            r: hit.cell.r
+        };
+        state.experimental.virtualLumatone.lastSurfaceHit = {
+            q: hit.cell.q,
+            r: hit.cell.r,
+            step: hit.cell.absStep,
+            stepClass,
+            pc31: stepClass,
+            localYNorm: hit.localYNorm,
+            hexHeight: hit.hexRadius * 2,
+            noteExact: hit.noteExact
+        };
+        await startVirtualLumatoneVoice(e.pointerId, hit, e, cfgNow);
+        drawVirtualLumatone();
+    };
+
+    const onPointerMove = (e) => {
+        const voice = state.experimental.virtualLumatone.pointerMap.get(e.pointerId);
+        if (!voice) return;
+        const cfgNow = getVirtualLumatoneConfig();
+        const rect = canvasEl.getBoundingClientRect();
+        const hit = getLumatoneHitFromPoint(e.clientX, e.clientY, cfgNow.zone, {
+            rect,
+            width: rect.width,
+            height: rect.height
+        });
+        if (!hit?.cell) return;
+        const stepClass = getLumatoneStepClass(hit.cell.absStep, hit.surface?.cfg || cfgNow);
+        voice.key = hit.cell;
+        voice.stepIndex = hit.cell.absStep;
+        state.experimental.virtualLumatone.lastOutput = {
+            noteIndex: hit.cell.absStep,
+            stepClass,
+            pc31: stepClass,
+            frequency: midiToFreq(hit.noteExact),
+            isFlatOctave: !!cfgNow.doubleMode && cfgNow.stepsPerOct === 31 && hit.cell.absStep !== 0 && (Math.abs(hit.cell.absStep) % 30 === 0),
+            q: hit.cell.q,
+            r: hit.cell.r
+        };
+        state.experimental.virtualLumatone.lastSurfaceHit = {
+            q: hit.cell.q,
+            r: hit.cell.r,
+            step: hit.cell.absStep,
+            stepClass,
+            pc31: stepClass,
+            localYNorm: hit.localYNorm,
+            hexHeight: hit.hexRadius * 2,
+            noteExact: hit.noteExact
+        };
+        sendVirtualLumatoneVoiceUpdate(voice, hit.noteExact, e, voice.zoneId);
+        drawVirtualLumatone();
+    };
+
+    const onPointerUp = (e) => {
+        stopVirtualLumatoneVoice(e.pointerId);
+        try { canvasEl.releasePointerCapture(e.pointerId); } catch (_) {}
+        drawVirtualLumatone();
+    };
+
+    canvasEl.addEventListener('pointerdown', onPointerDown);
+    canvasEl.addEventListener('pointermove', onPointerMove);
+    canvasEl.addEventListener('pointerup', onPointerUp);
+    canvasEl.addEventListener('pointercancel', onPointerUp);
+    canvasEl.addEventListener('pointerleave', onPointerUp);
+    window.addEventListener('resize', () => drawVirtualLumatone());
+    drawVirtualLumatone();
+}
+
 class SpiralSynth {
     constructor(audioCtx) {
         this.audioCtx = audioCtx;
@@ -3832,13 +4445,67 @@ function updateSpiralUiState(zoneId = null) {
 }
 
 
+function getSurfaceViewMode(zoneId = null) {
+    const raw = String(state.experimental?.circleView?.mode || '').toLowerCase();
+    if (state.playground?.enabled) return 'playground';
+    if (raw === 'circle' || raw === 'poly' || raw === 'lumatone' || raw === 'keyboard') return raw;
+    return 'keyboard';
+}
+
+function setSurfaceViewMode(mode) {
+    const normalized = (mode === 'circle' || mode === 'poly' || mode === 'lumatone' || mode === 'playground')
+        ? mode
+        : 'keyboard';
+    if (!state.experimental) state.experimental = {};
+    if (!state.experimental.circleView || typeof state.experimental.circleView !== 'object') state.experimental.circleView = {};
+    state.experimental.circleView.mode = normalized === 'playground' ? 'keyboard' : normalized;
+    state.experimental.circleView.enabled = normalized === 'circle' || normalized === 'poly';
+    if (!state.experimental.polyPlanner || typeof state.experimental.polyPlanner !== 'object') {
+        state.experimental.polyPlanner = {
+            enabled: false,
+            branchA: getPolyPlannerDefaultSteps(getActiveEditZoneId()),
+            branchB: getPolyPlannerDefaultSteps(getActiveEditZoneId())
+        };
+    }
+    state.experimental.polyPlanner.enabled = normalized === 'poly';
+}
+
+function cycleSurfaceViewMode() {
+    const mode = getSurfaceViewMode();
+    if (mode === 'keyboard') return 'circle';
+    if (mode === 'circle') return 'poly';
+    if (mode === 'poly') return 'lumatone';
+    if (mode === 'lumatone') return 'playground';
+    return 'keyboard';
+}
+
+function getSurfaceViewLabel(mode) {
+    const m = String(mode || 'keyboard').toLowerCase();
+    if (m === 'circle') return 'CIRCLE';
+    if (m === 'poly') return 'POLY TREE';
+    if (m === 'lumatone') return 'LUMATONE';
+    if (m === 'playground') return 'PLAYGROUND';
+    return 'KEYBOARD';
+}
+
 function isCircleDiesisViewActive(zoneId = null) {
-    if (isDualModeEnabled()) return false;
-    return !!state.experimental?.circleView?.enabled;
+    const mode = getSurfaceViewMode(zoneId);
+    return mode === 'circle' || mode === 'poly';
+}
+
+function isPolyTreeViewActive(zoneId = null) {
+    return getSurfaceViewMode(zoneId) === 'poly';
+}
+
+function isLumatoneViewActive(zoneId = null) {
+    return getSurfaceViewMode(zoneId) === 'lumatone';
 }
 
 function getPointerPitchMappingMode(zoneId = null) {
-    return isCircleDiesisViewActive(zoneId) ? 'circle' : 'keyboard';
+    const mode = getSurfaceViewMode(zoneId);
+    if (mode === 'circle' || mode === 'poly') return 'circle';
+    if (mode === 'lumatone') return 'lumatone';
+    return 'keyboard';
 }
 
 function getCircleGuideDivisions(zoneId = null) {
@@ -3854,8 +4521,14 @@ function getCircleGuideDivisions(zoneId = null) {
 
 function normalizeCircleStepOrderStorage() {
     if (!state.experimental) state.experimental = {};
-    if (!state.experimental.circleView) state.experimental.circleView = { enabled: false, divisions: 'auto', labelMode: 'abc' };
+    if (!state.experimental.circleView) state.experimental.circleView = { enabled: false, mode: 'keyboard', divisions: 'auto', labelMode: 'abc' };
     const cv = state.experimental.circleView;
+    if (!['keyboard', 'circle', 'poly', 'lumatone'].includes(String(cv.mode || '').toLowerCase())) {
+        cv.mode = cv.enabled ? 'circle' : 'keyboard';
+    } else {
+        cv.mode = String(cv.mode).toLowerCase();
+    }
+    cv.enabled = cv.mode === 'circle' || cv.mode === 'poly';
     if (!cv.stepOrderInputByZone || typeof cv.stepOrderInputByZone !== 'object') {
         cv.stepOrderInputByZone = { A: '', B: '' };
     } else {
@@ -3988,6 +4661,21 @@ function getCircleStepOrderForGrid(zoneId, grid = null) {
     const z = getScaleZoneId(zoneId || 'A');
     const useGrid = grid || getGridDegrees(z);
     const maxSteps = Math.max(1, useGrid.stepsPerOct || 12);
+    const completeOrder = (arr) => {
+        const used = new Set();
+        const base = (Array.isArray(arr) ? arr : [])
+            .filter((n) => Number.isFinite(n) && n >= 0 && n < maxSteps)
+            .map((n) => Math.floor(n))
+            .filter((n) => {
+                if (used.has(n)) return false;
+                used.add(n);
+                return true;
+            });
+        for (let i = 0; i < maxSteps; i += 1) {
+            if (!used.has(i)) base.push(i);
+        }
+        return base;
+    };
     const rawInput = getCircleStepOrderInputForZone(z).trim();
     const saved = getSavedCircleOrderMetaForZone(z);
     const savedOrder = (saved?.order || []).filter((n) => Number.isFinite(n) && n >= 0 && n < maxSteps);
@@ -3998,14 +4686,14 @@ function getCircleStepOrderForGrid(zoneId, grid = null) {
         const savedOrderNorm = normalizeCircleTokenText(formatCircleOrderInputTokens(saved.order));
         const savedLabelNorm = normalizeCircleTokenText(formatCircleLabelInputTokens(saved.labels));
         if (!rawNorm || (isCustom && (rawNorm === savedOrderNorm || (savedLabelNorm && rawNorm === savedLabelNorm)))) {
-            return savedOrder;
+            return completeOrder(savedOrder);
         }
     }
     const parsed = parseCircleStepOrderInput(z, useGrid);
     if (!Array.isArray(parsed) || !parsed.length) {
         return Array.from({ length: maxSteps }, (_, i) => i);
     }
-    return parsed.filter((n) => Number.isFinite(n) && n >= 0 && n < maxSteps);
+    return completeOrder(parsed);
 }
 
 function getCircleStepLabelsForGrid(zoneId, grid = null, order = null) {
@@ -4283,13 +4971,1054 @@ function drawAnnularSlice(g, cx, cy, r0, r1, a0, a1, fill, stroke = null, lineW 
     }
 }
 
+function drawPolyBranchLeaf(g, x, y, size, branch) {
+    const isA = branch === 'A';
+    const color = isA ? 'rgba(124, 227, 116, 0.95)' : 'rgba(110, 213, 255, 0.95)';
+    const stroke = isA ? 'rgba(67, 146, 61, 0.95)' : 'rgba(52, 120, 176, 0.95)';
+    const s = Math.max(4, size);
+    g.save();
+    g.lineCap = 'round';
+    g.lineJoin = 'round';
+    g.strokeStyle = stroke;
+    g.lineWidth = Math.max(1, s * 0.16);
+    g.beginPath();
+    g.moveTo(x, y + (s * 0.55));
+    g.lineTo(x, y + (s * 0.05));
+    g.stroke();
+
+    g.fillStyle = color;
+    g.beginPath();
+    g.ellipse(x - (s * 0.22), y - (s * 0.05), s * 0.30, s * 0.18, -0.6, 0, Math.PI * 2);
+    g.fill();
+    g.beginPath();
+    g.ellipse(x + (s * 0.22), y - (s * 0.05), s * 0.30, s * 0.18, 0.6, 0, Math.PI * 2);
+    g.fill();
+
+    g.fillStyle = '#0f1723';
+    g.font = `bold ${Math.max(7, Math.floor(s * 0.45))}px ${CANVAS_FONT_FAMILY}`;
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+    g.fillText(isA ? 'A' : 'B', x, y - (s * 0.02));
+    g.restore();
+}
+
+function drawPolyBranchNetwork(g, ringPoints, branch) {
+    if (!Array.isArray(ringPoints) || !ringPoints.length) return;
+    const isA = branch === 'A';
+    const stroke = isA ? 'rgba(112, 214, 99, 0.42)' : 'rgba(98, 198, 255, 0.42)';
+    const glow = isA ? 'rgba(112, 214, 99, 0.22)' : 'rgba(98, 198, 255, 0.22)';
+    g.save();
+    g.strokeStyle = stroke;
+    g.lineWidth = 1.5;
+    g.lineCap = 'round';
+    g.lineJoin = 'round';
+    g.shadowColor = glow;
+    g.shadowBlur = 6;
+
+    // Network arcs inside the same ring.
+    ringPoints.forEach((arr) => {
+        if (!Array.isArray(arr) || arr.length < 2) return;
+        const pts = arr.slice(0).sort((a, b) => a.a - b.a);
+        g.beginPath();
+        for (let i = 0; i < pts.length; i += 1) {
+            const p = pts[i];
+            if (i === 0) g.moveTo(p.x, p.y);
+            else g.lineTo(p.x, p.y);
+        }
+        if (pts.length > 2) {
+            g.lineTo(pts[0].x, pts[0].y);
+        }
+        g.stroke();
+    });
+
+    // Radial links to nearest angle in adjacent rings.
+    for (let r = 0; r < ringPoints.length - 1; r += 1) {
+        const cur = ringPoints[r] || [];
+        const nxt = ringPoints[r + 1] || [];
+        if (!cur.length || !nxt.length) continue;
+        cur.forEach((p) => {
+            let best = nxt[0];
+            let bestDiff = Math.PI * 2;
+            for (let i = 0; i < nxt.length; i += 1) {
+                const q = nxt[i];
+                const d = Math.abs(Math.atan2(Math.sin(q.a - p.a), Math.cos(q.a - p.a)));
+                if (d < bestDiff) {
+                    bestDiff = d;
+                    best = q;
+                }
+            }
+            g.beginPath();
+            g.moveTo(p.x, p.y);
+            g.lineTo(best.x, best.y);
+            g.stroke();
+        });
+    }
+    g.restore();
+}
+
+function getPolyPlannerBranchModulo(zoneId = 'A') {
+    const grid = getGridDegrees(zoneId);
+    return Math.max(1, parseInt(grid?.stepsPerOct, 10) || 12);
+}
+
+function getPolyPlannerBranchLimit(zoneId = 'A') {
+    const modulo = getPolyPlannerBranchModulo(zoneId);
+    return Math.max(1, Math.min(15, modulo));
+}
+
+function getPolyPlannerDefaultSteps(zoneId = 'A') {
+    const z = getScaleZoneId(zoneId);
+    const grid = getGridDegrees(z);
+    const modulo = getPolyPlannerBranchModulo(z);
+    const maxLen = getPolyPlannerBranchLimit(z);
+    const fallback = Array.from({ length: modulo }, (_, i) => i);
+    const orderRaw = getCircleStepOrderForGrid(z, grid);
+    const source = Array.isArray(orderRaw) && orderRaw.length ? orderRaw : fallback;
+    const out = [];
+    const seen = new Set();
+    source.forEach((v) => {
+        const raw = parseInt(v, 10);
+        if (!Number.isFinite(raw)) return;
+        const n = ((raw % modulo) + modulo) % modulo;
+        if (seen.has(n)) return;
+        seen.add(n);
+        out.push(n);
+    });
+    return (out.length ? out : fallback).slice(0, maxLen);
+}
+
+function isLegacyPolyTriad(arr, triad) {
+    if (!Array.isArray(arr) || arr.length !== triad.length) return false;
+    return triad.every((v, i) => (parseInt(arr[i], 10) || 0) === v);
+}
+
+function ensurePolyPlannerScaleDefaults(zoneId = 'A') {
+    if (!state.experimental) state.experimental = {};
+    if (!state.experimental.polyPlanner || typeof state.experimental.polyPlanner !== 'object') {
+        state.experimental.polyPlanner = {};
+    }
+    const planner = state.experimental.polyPlanner;
+    const defaults = getPolyPlannerDefaultSteps(zoneId);
+    const needA = !Array.isArray(planner.branchA) || !planner.branchA.length || isLegacyPolyTriad(planner.branchA, [0, 4, 7]);
+    const needB = !Array.isArray(planner.branchB) || !planner.branchB.length || isLegacyPolyTriad(planner.branchB, [2, 5, 9]);
+    if (needA) planner.branchA = defaults.slice();
+    if (needB) planner.branchB = defaults.slice();
+}
+
+function getPolyPlannerNodeKey(node) {
+    if (!node) return '';
+    if (node.isRoot) return 'root';
+    return `${String(node.branch || 'A')}:${parseInt(node.index, 10) || 0}`;
+}
+
+function normalizePolyTreeSnapMode(raw) {
+    void raw;
+    return 'hard';
+}
+
+function normalizePolyTreeBranchLockMode(raw, branchLockFallback = true) {
+    void raw;
+    void branchLockFallback;
+    return 'auto';
+}
+
+function getPolyTreeEffectiveLockBranch(modeRaw, voice = null, branchLockEnabled = true) {
+    const mode = normalizePolyTreeBranchLockMode(modeRaw, branchLockEnabled);
+    if (mode === 'locka') return 'A';
+    if (mode === 'lockb') return 'B';
+    if (mode === 'free') return '';
+    if (!branchLockEnabled) return '';
+    return String(voice?.polyTreeLockBranch || '');
+}
+
+function ensurePolyPlannerPlayabilityDefaults(planner = null) {
+    const p = planner || state.experimental?.polyPlanner || null;
+    if (!p) return null;
+    if (!p.playability || typeof p.playability !== 'object') p.playability = {};
+    const play = p.playability;
+    if (!Number.isFinite(parseFloat(play.hitPadding))) play.hitPadding = 18;
+    if (!Number.isFinite(parseFloat(play.hysteresisPx))) play.hysteresisPx = 16;
+    if (play.branchLock === undefined) play.branchLock = true;
+    play.branchLockMode = 'auto';
+    play.branchLock = true;
+    if (play.legatoBranch === undefined) play.legatoBranch = true;
+    play.snapMode = 'hard';
+    if (!Number.isFinite(parseInt(play.softSnapMs, 10))) play.softSnapMs = 55;
+    if (!Number.isFinite(parseInt(play.glideMs, 10))) play.glideMs = 100;
+    play.softSnapMs = Math.max(20, Math.min(220, parseInt(play.softSnapMs, 10) || 55));
+    play.glideMs = Math.max(20, Math.min(500, parseInt(play.glideMs, 10) || 100));
+    if (play.v2Enabled === undefined) play.v2Enabled = true;
+    if (!Number.isFinite(parseFloat(play.stretchMix))) play.stretchMix = 0.6;
+    if (!Number.isFinite(parseFloat(play.bendSemis))) play.bendSemis = 2.2;
+    if (!Number.isFinite(parseInt(play.nodeDropMs, 10))) play.nodeDropMs = 2200;
+    if (!Number.isFinite(parseInt(play.rootRunStepMs, 10))) play.rootRunStepMs = 140;
+    if (!Number.isFinite(parseFloat(play.rootRunGate))) play.rootRunGate = 0.64;
+    if (play.dragEnabled === undefined) play.dragEnabled = true;
+    play.dragEnabled = play.dragEnabled !== false;
+    if (!play._runtime || typeof play._runtime !== 'object') play._runtime = {};
+    if (!play._runtime.mutedNodeUntil || typeof play._runtime.mutedNodeUntil !== 'object') play._runtime.mutedNodeUntil = {};
+    if (!play._runtime.autoRunTimers || typeof play._runtime.autoRunTimers !== 'object') play._runtime.autoRunTimers = {};
+    if (!play._runtime.stretchByKey || typeof play._runtime.stretchByKey !== 'object') play._runtime.stretchByKey = {};
+    if (!play._runtime.droppedNodes || typeof play._runtime.droppedNodes !== 'object') play._runtime.droppedNodes = {};
+    if (!play._runtime.lastTap || typeof play._runtime.lastTap !== 'object') play._runtime.lastTap = { key: '', at: 0, x: 0, y: 0 };
+    return play;
+}
+
+function isPolyTreeDragEnabled(planner = null) {
+    const play = ensurePolyPlannerPlayabilityDefaults(planner || state.experimental?.polyPlanner);
+    return play?.dragEnabled !== false;
+}
+
+function isPolyPlannerNodeMuted(nodeKey, planner = null, nowMs = performance.now()) {
+    const key = String(nodeKey || '');
+    if (!key || key === 'root') return false;
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    const rt = play?._runtime;
+    if (rt?.droppedNodes && rt.droppedNodes[key]) return true;
+    const mutedUntil = Number(rt?.mutedNodeUntil?.[key]) || 0;
+    if (mutedUntil > nowMs) return true;
+    if (mutedUntil > 0 && rt?.mutedNodeUntil) delete rt.mutedNodeUntil[key];
+    return false;
+}
+
+function setPolyPlannerNodeMuted(nodeKey, durationMs = 2200, planner = null) {
+    const key = String(nodeKey || '');
+    if (!key || key === 'root') return;
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    if (!play?._runtime) return;
+    const dur = Math.max(120, Math.min(10000, parseInt(durationMs, 10) || 2200));
+    play._runtime.mutedNodeUntil[key] = performance.now() + dur;
+}
+
+function startPolyPlannerNodeDrop(node, planner = null) {
+    const key = getPolyPlannerNodeKey(node);
+    if (!key || key === 'root' || !node) return;
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    const rt = play?._runtime;
+    if (!rt) return;
+    const now = performance.now();
+    const dropMs = Math.max(220, Math.min(4000, parseInt(play.nodeDropMs, 10) || 900));
+    const targetY = Math.max(node.y + 36, state.canvasRect.height - 26);
+    rt.droppedNodes[key] = {
+        key,
+        branch: node.branch || 'A',
+        step: Number.isFinite(node.stepRaw) ? node.stepRaw : node.step,
+        x: node.x,
+        y: node.y,
+        startX: node.x,
+        startY: node.y,
+        targetY,
+        startAt: now,
+        dropMs,
+        phase: 'falling'
+    };
+}
+
+function clearPolyPlannerDroppedNodes(planner = null) {
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    const rt = play?._runtime;
+    if (!rt) return;
+    rt.droppedNodes = {};
+}
+
+function getPolyPlannerNodeLengthScale(nodeKey, planner = null) {
+    const p = planner || state.experimental?.polyPlanner || null;
+    if (!p || !nodeKey || nodeKey === 'root') return 1;
+    if (!p.nodeLengthByKey || typeof p.nodeLengthByKey !== 'object') p.nodeLengthByKey = {};
+    const raw = parseFloat(p.nodeLengthByKey[nodeKey]);
+    return Math.max(0.62, Math.min(1.85, Number.isFinite(raw) ? raw : 1));
+}
+
+function setPolyPlannerNodeLengthScale(nodeKey, value, planner = null) {
+    const p = planner || state.experimental?.polyPlanner || null;
+    if (!p || !nodeKey || nodeKey === 'root') return;
+    if (!p.nodeLengthByKey || typeof p.nodeLengthByKey !== 'object') p.nodeLengthByKey = {};
+    const v = Math.max(0.62, Math.min(1.85, parseFloat(value) || 1));
+    p.nodeLengthByKey[nodeKey] = v;
+}
+
+function applyPolyTreeLengthMpeByScale(m, lengthScale, mix = 0.62) {
+    if (!m) return m;
+    const scale = Math.max(0.62, Math.min(1.85, Number(lengthScale) || 1));
+    const mMix = Math.max(0, Math.min(1, Number(mix) || 0));
+    const center = 1;
+    const span = 0.58;
+    const signed = Math.max(-1, Math.min(1, (scale - center) / span));
+    const shaped = Math.sign(signed) * Math.pow(Math.abs(signed), 0.86);
+    const basePress = Number.isFinite(m.press) ? m.press : 90;
+    const baseSlide = Number.isFinite(m.slide) ? m.slide : 64;
+    const baseVel = Number.isFinite(m.velocity) ? m.velocity : basePress;
+    const targetPress = Math.max(8, Math.min(127, Math.round(90 + (shaped * 42))));
+    const targetSlide = Math.max(0, Math.min(127, Math.round(64 + (shaped * 52))));
+    const targetVel = Math.max(12, Math.min(127, Math.round(96 + (shaped * 40))));
+    m.press = Math.max(8, Math.min(127, Math.round((basePress * (1 - mMix)) + (targetPress * mMix))));
+    m.slide = Math.max(0, Math.min(127, Math.round((baseSlide * (1 - mMix)) + (targetSlide * mMix))));
+    m.velocity = Math.max(12, Math.min(127, Math.round((baseVel * (1 - mMix)) + (targetVel * mMix))));
+    return m;
+}
+
+function applyPolyTreeLengthMpeForKey(m, nodeKey, planner = null, mix = 0.62) {
+    const key = String(nodeKey || '');
+    if (!m || !key || key === 'root') return m;
+    const p = planner || state.experimental?.polyPlanner || null;
+    const scale = getPolyPlannerNodeLengthScale(key, p);
+    return applyPolyTreeLengthMpeByScale(m, scale, mix);
+}
+
+function getPolyPlannerRenderedNode(node, geom, planner = null, nowMs = performance.now()) {
+    if (!node) return null;
+    const key = getPolyPlannerNodeKey(node);
+    const p = planner || state.experimental?.polyPlanner || null;
+    const play = ensurePolyPlannerPlayabilityDefaults(p);
+    const dropped = play?._runtime?.droppedNodes?.[key] || null;
+    if (dropped) {
+        const t = Math.max(0, Math.min(1, (nowMs - (dropped.startAt || nowMs)) / Math.max(1, dropped.dropMs || 1)));
+        const eased = 1 - Math.pow(1 - t, 2.2);
+        const y = (dropped.phase === 'down')
+            ? (dropped.targetY || node.y)
+            : ((dropped.startY || node.y) + ((dropped.targetY || node.y) - (dropped.startY || node.y)) * eased);
+        if (dropped.phase !== 'down' && t >= 1) dropped.phase = 'down';
+        dropped.y = y;
+        if (dropped.phase === 'down') return null;
+        return { ...node, x: dropped.x || node.x, y, renderR: Math.max(6, node.r * 0.86), dropped: true };
+    }
+    if (node.isRoot) return { ...node, renderR: node.r };
+    const scale = getPolyPlannerNodeLengthScale(key, p);
+    if (Math.abs(scale - 1) < 0.001) return { ...node, renderR: node.r };
+    const dx = node.x - geom.rootNode.x;
+    const dy = node.y - geom.rootNode.y;
+    return {
+        ...node,
+        x: geom.rootNode.x + (dx * scale),
+        y: geom.rootNode.y + (dy * scale),
+        renderR: node.r
+    };
+}
+
+function isPolyPlannerNodeDoubleTap(node, clientX, clientY, planner = null) {
+    const key = getPolyPlannerNodeKey(node);
+    if (!key || key === 'root') return false;
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    if (!play?._runtime) return false;
+    const now = performance.now();
+    const last = play._runtime.lastTap || { key: '', at: 0, x: 0, y: 0 };
+    const dx = (clientX || 0) - (last.x || 0);
+    const dy = (clientY || 0) - (last.y || 0);
+    const near = Math.hypot(dx, dy) <= 28;
+    const dbl = last.key === key && near && (now - (last.at || 0)) <= 320;
+    play._runtime.lastTap = { key, at: now, x: clientX || 0, y: clientY || 0 };
+    return dbl;
+}
+
+function isPolyPlannerRootDoubleTap(clientX, clientY, planner = null) {
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    if (!play?._runtime) return false;
+    const now = performance.now();
+    const last = play._runtime.lastRootTap || { at: 0, x: 0, y: 0 };
+    const dx = (clientX || 0) - (last.x || 0);
+    const dy = (clientY || 0) - (last.y || 0);
+    const near = Math.hypot(dx, dy) <= 36;
+    const dbl = near && (now - (last.at || 0)) <= 340;
+    play._runtime.lastRootTap = { at: now, x: clientX || 0, y: clientY || 0 };
+    return dbl;
+}
+
+function stopPolyPlannerRootAutoRun(zoneId = 'A', planner = null) {
+    const z = getScaleZoneId(zoneId);
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    const rt = play?._runtime;
+    if (!rt?.autoRunTimers) return;
+    const list = Array.isArray(rt.autoRunTimers[z]) ? rt.autoRunTimers[z] : [];
+    list.forEach((id) => clearTimeout(id));
+    rt.autoRunTimers[z] = [];
+}
+
+function triggerPolyPlannerRootAutoRun(zoneId = 'A') {
+    const z = getScaleZoneId(zoneId);
+    const planner = state.experimental?.polyPlanner;
+    if (!planner?.enabled || !isPolyTreeViewActive(z)) return false;
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    if (!play || play.v2Enabled === false) return false;
+    stopPolyPlannerRootAutoRun(z, planner);
+    const width = Math.max(1, state.canvasRect.width);
+    const height = Math.max(1, state.canvasRect.height);
+    const grid = getGridDegrees(z);
+    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+    const geom = getPolyPlannerTreeGeometry(width, height, planner, baseMIDI, z);
+    const branchNodesA = (planner.branchAEnabled === false ? [] : geom.nodesA);
+    const branchNodesB = (planner.branchBEnabled === false ? [] : geom.nodesB);
+    // Keep A/B pairing stable by original index even when a node is muted.
+    const maxLen = Math.max(branchNodesA.length, branchNodesB.length);
+    const stepGroups = [];
+    for (let i = 0; i < maxLen; i += 1) {
+        const group = [];
+        const nodeA = branchNodesA[i] || null;
+        const nodeB = branchNodesB[i] || null;
+        if (nodeA && !isPolyPlannerNodeMuted(getPolyPlannerNodeKey(nodeA), planner)) group.push(nodeA);
+        if (nodeB && !isPolyPlannerNodeMuted(getPolyPlannerNodeKey(nodeB), planner)) group.push(nodeB);
+        if (group.length) stepGroups.push(group);
+    }
+    if (!stepGroups.length) return false;
+    const output = getZoneOutput(z);
+    if (!output) return false;
+    const stepMs = Math.max(50, Math.min(1200, parseInt(play.rootRunStepMs, 10) || 140));
+    const gate = Math.max(0.15, Math.min(0.95, parseFloat(play.rootRunGate) || 0.64));
+    const timers = [];
+    stepGroups.forEach((group, idx) => {
+        const onId = setTimeout(() => {
+            const activeNodes = [];
+            group.forEach((node, gi) => {
+                const noteExact = Number(node?.noteExact);
+                if (!Number.isFinite(noteExact)) return;
+                let chan = allocateMpeChannelForPlay(z, output, { allowStealHeld: true });
+                const voice = makeVoiceFromNote(noteExact, z);
+                const m = { pbValue: 8192, slide: 64, press: 96 };
+                if (!chan && activeNodes.length) {
+                    // Fallback: reuse first channel so A/B pair is still audible in tight channel pools.
+                    chan = activeNodes[0].chan;
+                }
+                if (!chan) return;
+                const pb = getVoicePb(m, voice);
+                sendMidi([0xB0 + chan - 1, 74, m.slide], output);
+                sendMidi([0xE0 + chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], output);
+                sendMidi([0xD0 + chan - 1, m.press], output);
+                sendMidi([0x90 + chan - 1, voice.note, gi === 0 ? 112 : 106], output);
+                markLocalNoteOn(voice.note);
+                activeNodes.push({ chan, note: voice.note });
+            });
+            if (!activeNodes.length) return;
+            planner.activeKey = getPolyPlannerNodeKey(group[0] || null);
+            planner.activeKeys = group.map((n) => getPolyPlannerNodeKey(n)).filter(Boolean);
+            planner.activeUntil = performance.now() + Math.max(120, Math.round(stepMs * gate));
+            requestDraw();
+            const offId = setTimeout(() => {
+                const released = new Set();
+                activeNodes.forEach((n) => {
+                    sendMidi([0x80 + n.chan - 1, n.note, 0], output);
+                    if (!released.has(n.chan)) {
+                        releaseMpeChannel(z, n.chan);
+                        released.add(n.chan);
+                    }
+                });
+            }, Math.max(40, Math.round(stepMs * gate)));
+            timers.push(offId);
+        }, idx * stepMs);
+        timers.push(onId);
+    });
+    play._runtime.autoRunTimers[z] = timers;
+    return true;
+}
+
+function getPolyPlannerTreeGeometry(width, height, planner = null, baseMIDI = 69, zoneId = 'A') {
+    const p = planner || state.experimental?.polyPlanner || { branchA: getPolyPlannerDefaultSteps(zoneId), branchB: getPolyPlannerDefaultSteps(zoneId), anchor: 69 };
+    const modulo = getPolyPlannerBranchModulo(zoneId);
+    const branchLimit = getPolyPlannerBranchLimit(zoneId);
+    const branchA = Array.isArray(p.branchA) ? p.branchA.slice(0, branchLimit) : getPolyPlannerDefaultSteps(zoneId);
+    const branchB = Array.isArray(p.branchB) ? p.branchB.slice(0, branchLimit) : getPolyPlannerDefaultSteps(zoneId);
+    const maxBranchCount = Math.max(1, branchA.length, branchB.length);
+    const nodeRadius = Math.max(12, Math.min(20, Math.round(20 - ((maxBranchCount - 7) * 0.18))));
+    const nodeFontSize = Math.max(10, Math.min(15, Math.round(nodeRadius * 0.84)));
+    const branchAEnabled = p.branchAEnabled !== false;
+    const branchBEnabled = p.branchBEnabled !== false;
+    const branchAOctaveStart = parseInt(p.branchAOctaveStart, 10) || 0;
+    const branchBOctaveStart = parseInt(p.branchBOctaveStart, 10) || 0;
+    const grid = getGridDegrees(zoneId);
+    const periodSemis = Number.isFinite(grid?.periodSemitones) ? grid.periodSemitones : 12;
+    // Keep Poly Tree pitch aligned with other views: use the same zone base MIDI.
+    const rootMidi = Math.max(0, Math.min(127, Math.round(baseMIDI) || 69));
+    const rootStep = ((parseInt(p.anchorStep, 10) || 0) % modulo + modulo) % modulo;
+    const reservedRight = Math.max(180, Math.min(420, width * 0.33));
+    const usableLeft = 24;
+    const usableRight = Math.max(usableLeft + 180, width - reservedRight);
+    const usableW = Math.max(180, usableRight - usableLeft);
+    const cx = Math.max(usableLeft + 80, Math.min(usableRight - 80, usableLeft + (usableW * 0.52)));
+    const rootY = height * 0.78;
+    const topY = height * 0.14;
+    const hBudget = Math.max(70, Math.min(cx - usableLeft - 16, usableRight - cx - 16));
+    const vBudget = Math.max(70, rootY - topY - 22);
+    const maxSpan = Math.max(60, Math.min((rootY - topY) * 0.86, vBudget, hBudget * 1.22));
+    const minSpan = Math.max(34, maxSpan * 0.24);
+    const rootR = 18;
+    const getDegreeAt = (idx) => {
+        const arr = Array.isArray(grid?.degrees) ? grid.degrees : [];
+        const n = Number(arr[idx]);
+        return Number.isFinite(n) ? n : idx;
+    };
+    const rootDeg = getDegreeAt(rootStep);
+    const toNodeNote = (stepRaw, branchName = 'A') => {
+        const raw = parseInt(stepRaw, 10) || 0;
+        const octStart = branchName === 'B' ? branchBOctaveStart : branchAOctaveStart;
+        const abs = rootStep + raw + (octStart * modulo);
+        const step = ((abs % modulo) + modulo) % modulo;
+        const oct = Math.floor(abs / modulo);
+        const deg = getDegreeAt(step);
+        const delta = deg - rootDeg + (oct * periodSemis);
+        return Math.max(0, Math.min(127, rootMidi + delta));
+    };
+    const buildBranch = (steps, branchName, enabled = true) => {
+        if (!enabled) return { nodes: [], links: [] };
+        const arr = Array.isArray(steps) ? steps : [];
+        const branchRaw = arr
+            .map((n) => parseInt(n, 10))
+            .filter((n) => Number.isFinite(n));
+        const branchMaxRaw = Math.max(modulo - 1, ...branchRaw.map((n) => Math.abs(n)));
+        const sign = branchName === 'A' ? -1 : 1;
+        const nodes = [];
+        const links = [];
+        const spread = Math.max(0.45, Math.min(1.18, 0.34 + (arr.length * 0.052)));
+        for (let i = 0; i < arr.length; i += 1) {
+            const raw = parseInt(arr[i], 10) || 0;
+            const step = ((raw % modulo) + modulo) % modulo;
+            const octStart = branchName === 'B' ? branchBOctaveStart : branchAOctaveStart;
+            const oct = Math.floor((raw + (octStart * modulo)) / modulo);
+            const norm = branchMaxRaw > 0 ? (Math.abs(raw) / branchMaxRaw) : 0;
+            const reach = minSpan + (norm * (maxSpan - minSpan));
+            const fanT = arr.length <= 1 ? 0 : ((i / (arr.length - 1)) - 0.5) * 2;
+            const fan = fanT * spread;
+            const baseAng = (Math.PI * (branchName === 'A' ? 0.80 : 0.20));
+            const ang = baseAng + fan;
+            // X is strictly step-driven: same step value -> same X, regardless of branch index.
+            const xMin = Math.max(30, Math.min(hBudget * 0.22, 120));
+            const xMax = Math.max(xMin + 16, Math.min(hBudget, maxSpan));
+            const xReach = xMin + (norm * (xMax - xMin));
+            let nx = cx + (sign * xReach);
+            let ny = rootY - (Math.sin(ang) * reach);
+            nx = Math.max(usableLeft + nodeRadius + 2, Math.min(usableRight - nodeRadius - 2, nx));
+            ny = Math.max(topY + nodeRadius + 2, Math.min(rootY - nodeRadius - 4, ny));
+            const node = {
+                x: nx,
+                y: ny,
+                r: nodeRadius,
+                isRoot: false,
+                branch: branchName,
+                index: i,
+                step,
+                stepRaw: raw,
+                octave: oct,
+                noteExact: toNodeNote(raw, branchName)
+            };
+            nodes.push(node);
+            links.push({
+                fromX: cx,
+                fromY: rootY,
+                c1x: cx + (sign * 42),
+                c1y: rootY - (reach * 0.28),
+                c2x: nx - (sign * 12),
+                c2y: ny + 6,
+                toX: nx,
+                toY: ny
+            });
+        }
+        return { nodes, links };
+    };
+    const a = buildBranch(branchA, 'A', branchAEnabled);
+    const b = buildBranch(branchB, 'B', branchBEnabled);
+    // Keep paired nodes symmetric on Y: A[i] and B[i] share the same vertical level.
+    const pairCount = Math.min(a.nodes.length, b.nodes.length);
+    for (let i = 0; i < pairCount; i += 1) {
+        const na = a.nodes[i];
+        const nb = b.nodes[i];
+        if (!na || !nb) continue;
+        const y = (na.y + nb.y) * 0.5;
+        na.y = y;
+        nb.y = y;
+        if (a.links[i]) {
+            a.links[i].toY = y;
+            a.links[i].c2y = y + 6;
+        }
+        if (b.links[i]) {
+            b.links[i].toY = y;
+            b.links[i].c2y = y + 6;
+        }
+    }
+    // Resolve vertical collisions so nodes do not overlap or hide each other.
+    const clampTop = topY + nodeRadius + 2;
+    const clampBottom = rootY - nodeRadius - 4;
+    const getDyRequired = (n1, n2) => {
+        if (!n1 || !n2) return 0;
+        const minDist = Math.max(6, (Number(n1.r) || nodeRadius) + (Number(n2.r) || nodeRadius) + 2);
+        const dx = Math.abs((Number(n2.x) || 0) - (Number(n1.x) || 0));
+        if (dx >= minDist) return 0;
+        const sq = (minDist * minDist) - (dx * dx);
+        return sq > 0 ? Math.sqrt(sq) : 0;
+    };
+    const rows = [];
+    const maxRows = Math.max(a.nodes.length, b.nodes.length);
+    for (let i = 0; i < maxRows; i += 1) {
+        const na = a.nodes[i] || null;
+        const nb = b.nodes[i] || null;
+        if (!na && !nb) continue;
+        rows.push({
+            idx: i,
+            na,
+            nb,
+            y: (na && nb) ? ((na.y + nb.y) * 0.5) : (na ? na.y : nb.y)
+        });
+    }
+    rows.sort((r1, r2) => r1.y - r2.y);
+    for (let pass = 0; pass < 2; pass += 1) {
+        for (let i = 1; i < rows.length; i += 1) {
+            const prev = rows[i - 1];
+            const cur = rows[i];
+            const reqA = getDyRequired(prev.na, cur.na);
+            const reqB = getDyRequired(prev.nb, cur.nb);
+            const req = Math.max(reqA, reqB);
+            const minY = prev.y + req;
+            if (cur.y < minY) cur.y = minY;
+            if (cur.y > clampBottom) cur.y = clampBottom;
+        }
+        for (let i = rows.length - 2; i >= 0; i -= 1) {
+            const next = rows[i + 1];
+            const cur = rows[i];
+            const reqA = getDyRequired(cur.na, next.na);
+            const reqB = getDyRequired(cur.nb, next.nb);
+            const req = Math.max(reqA, reqB);
+            const maxY = next.y - req;
+            if (cur.y > maxY) cur.y = maxY;
+            if (cur.y < clampTop) cur.y = clampTop;
+        }
+    }
+    rows.forEach((row) => {
+        const y = Math.max(clampTop, Math.min(clampBottom, row.y));
+        if (row.na) {
+            row.na.y = y;
+            if (a.links[row.idx]) {
+                a.links[row.idx].toY = y;
+                a.links[row.idx].c2y = y + 6;
+            }
+        }
+        if (row.nb) {
+            row.nb.y = y;
+            if (b.links[row.idx]) {
+                b.links[row.idx].toY = y;
+                b.links[row.idx].c2y = y + 6;
+            }
+        }
+    });
+    const labelDY = 8;
+    const labelY = topY - labelDY;
+    const labelSpan = Math.min(160, usableW * 0.26);
+    const labelAX = Math.max(usableLeft + 64, cx - labelSpan);
+    const labelBX = Math.min(usableRight - 64, cx + labelSpan);
+    const rootNode = {
+        x: cx,
+        y: rootY,
+        r: rootR,
+        isRoot: true,
+        branch: 'R',
+        index: -1,
+        step: rootStep,
+        noteExact: rootMidi
+    };
+    return {
+        modulo,
+        rootMidi,
+        rootStep,
+        nodeFontSize,
+        branchA,
+        branchB,
+        branchAEnabled,
+        branchBEnabled,
+        usableLeft,
+        usableRight,
+        cx,
+        rootY,
+        topY,
+        labelA: { x: labelAX, y: labelY, w: 116, h: 26, branch: 'A' },
+        labelB: { x: labelBX, y: labelY, w: 116, h: 26, branch: 'B' },
+        rootNode,
+        nodesA: a.nodes,
+        nodesB: b.nodes,
+        linksA: a.links,
+        linksB: b.links
+    };
+}
+
+function getPolyPlannerTreeHit(clientX, clientY, zoneId = 'A', options = null) {
+    const planner = state.experimental?.polyPlanner;
+    if (!planner?.enabled || !isPolyTreeViewActive(zoneId)) return null;
+    ensurePolyPlannerPlayabilityDefaults(planner);
+    const localX = clientX - state.canvasRect.left;
+    const localY = clientY - state.canvasRect.top;
+    const width = Math.max(1, state.canvasRect.width);
+    const height = Math.max(1, state.canvasRect.height);
+    const grid = getGridDegrees(zoneId);
+    const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * grid.periodSemitones) + grid.root;
+    const geom = getPolyPlannerTreeGeometry(width, height, planner, baseMIDI, zoneId);
+    const lockBranch = String(options?.lockBranch || '');
+    const preferredKey = String(options?.preferredKey || '');
+    const play = planner.playability || {};
+    const hitPadding = Math.max(0, Number.isFinite(options?.hitPadding) ? options.hitPadding : (parseFloat(play.hitPadding) || 18));
+    const hysteresisPx = Math.max(0, Number.isFinite(options?.hysteresisPx) ? options.hysteresisPx : (parseFloat(play.hysteresisPx) || 16));
+    const baseNodes = [geom.rootNode, ...geom.nodesA, ...geom.nodesB];
+    const rendered = baseNodes
+        .map((n) => getPolyPlannerRenderedNode(n, geom, planner))
+        .filter(Boolean);
+    const candidates = rendered.filter((n) => {
+        if (n.isRoot) return true;
+        if (isPolyPlannerNodeMuted(getPolyPlannerNodeKey(n), planner)) return false;
+        if (!lockBranch) return true;
+        return String(n.branch || '') === lockBranch;
+    });
+    let best = null;
+    let bestDist = Infinity;
+    candidates.forEach((n) => {
+        const dx = localX - n.x;
+        const dy = localY - n.y;
+        const d = Math.hypot(dx, dy);
+        const hitR = n.r + hitPadding;
+        if (d <= hitR && d < bestDist) {
+            bestDist = d;
+            best = n;
+        }
+    });
+    if (!best && preferredKey) {
+        const sticky = candidates.find((n) => getPolyPlannerNodeKey(n) === preferredKey);
+        if (sticky) {
+            const dx = localX - sticky.x;
+            const dy = localY - sticky.y;
+            const d = Math.hypot(dx, dy);
+            if (d <= (sticky.r + hitPadding + hysteresisPx)) {
+                best = sticky;
+            }
+        }
+    }
+    if (!best) return null;
+    const key = getPolyPlannerNodeKey(best);
+    return {
+        ...best,
+        key,
+        zoneId,
+        noteExact: Number.isFinite(best.noteExact) ? best.noteExact : geom.rootMidi
+    };
+}
+
+function getPolyPlannerLabelHit(clientX, clientY, zoneId = 'A') {
+    const planner = state.experimental?.polyPlanner;
+    if (!planner?.enabled || !isPolyTreeViewActive(zoneId)) return null;
+    const width = Math.max(1, state.canvasRect.width);
+    const height = Math.max(1, state.canvasRect.height);
+    const grid = getGridDegrees(zoneId);
+    const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * grid.periodSemitones) + grid.root;
+    const geom = getPolyPlannerTreeGeometry(width, height, planner, baseMIDI, zoneId);
+    const lx = clientX - state.canvasRect.left;
+    const ly = clientY - state.canvasRect.top;
+    const test = (box) => {
+        const hw = box.w * 0.5;
+        const hh = box.h * 0.5;
+        return lx >= (box.x - hw) && lx <= (box.x + hw) && ly >= (box.y - hh) && ly <= (box.y + hh);
+    };
+    if (test(geom.labelA)) return { branch: 'A' };
+    if (test(geom.labelB)) return { branch: 'B' };
+    return null;
+}
+
+function getPolyPlannerPairedHitNotes(hit, zoneId = 'A') {
+    const planner = state.experimental?.polyPlanner;
+    if (!planner?.enabled || !hit || hit.isRoot) return null;
+    const z = getScaleZoneId(zoneId);
+    const width = Math.max(1, state.canvasRect.width);
+    const height = Math.max(1, state.canvasRect.height);
+    const grid = getGridDegrees(z);
+    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+    const geom = getPolyPlannerTreeGeometry(width, height, planner, baseMIDI, z);
+    const branch = hit.branch === 'B' ? 'B' : 'A';
+    const idx = Math.max(0, parseInt(hit.index, 10) || 0);
+    const primary = branch === 'A' ? geom.nodesA[idx] : geom.nodesB[idx];
+    const paired = branch === 'A' ? geom.nodesB[idx] : geom.nodesA[idx];
+    const nodes = [primary || hit, paired].filter(Boolean);
+    const notes = [];
+    const keys = [];
+    nodes.forEach((node) => {
+        const key = getPolyPlannerNodeKey(node);
+        if (!key || key === 'root') return;
+        if (isPolyPlannerNodeMuted(key, planner)) return;
+        const note = Number(node.noteExact);
+        if (!Number.isFinite(note)) return;
+        notes.push(note);
+        keys.push(key);
+    });
+    const seenNote = new Set();
+    const dedupNotes = [];
+    notes.forEach((n) => {
+        const k = Number(n).toFixed(6);
+        if (seenNote.has(k)) return;
+        seenNote.add(k);
+        dedupNotes.push(n);
+    });
+    dedupNotes.sort((a, b) => a - b);
+    if (!dedupNotes.length) return null;
+    return {
+        notes: dedupNotes,
+        keys: Array.from(new Set(keys))
+    };
+}
+
+function getPolyPlannerRootTapNotes(zoneId = 'A') {
+    const planner = state.experimental?.polyPlanner;
+    if (!planner?.enabled) return null;
+    const z = getScaleZoneId(zoneId);
+    const width = Math.max(1, state.canvasRect.width);
+    const height = Math.max(1, state.canvasRect.height);
+    const grid = getGridDegrees(z);
+    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+    const geom = getPolyPlannerTreeGeometry(width, height, planner, baseMIDI, z);
+    const idxA = Math.max(0, Math.min(Math.max(0, geom.nodesA.length - 1), parseInt(planner.focusA, 10) || 0));
+    const idxB = Math.max(0, Math.min(Math.max(0, geom.nodesB.length - 1), parseInt(planner.focusB, 10) || 0));
+    const nodeA = geom.nodesA[idxA] || null;
+    const nodeB = geom.nodesB[idxB] || null;
+    const nodes = [nodeA, nodeB].filter(Boolean);
+    const notes = [];
+    const keys = [];
+    nodes.forEach((node) => {
+        const key = getPolyPlannerNodeKey(node);
+        if (!key || key === 'root') return;
+        if (isPolyPlannerNodeMuted(key, planner)) return;
+        const note = Number(node.noteExact);
+        if (!Number.isFinite(note)) return;
+        notes.push(note);
+        keys.push(key);
+    });
+    const seenNote = new Set();
+    const dedupNotes = [];
+    notes.forEach((n) => {
+        const k = Number(n).toFixed(6);
+        if (seenNote.has(k)) return;
+        seenNote.add(k);
+        dedupNotes.push(n);
+    });
+    dedupNotes.sort((a, b) => a - b);
+    if (!dedupNotes.length) return null;
+    return {
+        notes: dedupNotes,
+        keys: Array.from(new Set(keys))
+    };
+}
+
+function isPolyTreeVisualMode(zoneId = 'A') {
+    return !!state.experimental?.polyPlanner?.enabled && isPolyTreeViewActive(zoneId);
+}
+
+function buildPolyTreeNodeVisualState(zoneId, geom, nowAudio = null) {
+    const nowMs = performance.now();
+    const notes = [];
+    const pushNote = (note, color = '#00f2ff', alpha = 0.8, kind = '') => {
+        if (!Number.isFinite(note)) return;
+        notes.push({ note, color, alpha: Math.max(0, Math.min(1, alpha)), kind });
+    };
+    state.activeTouches.forEach((t) => {
+        const z = t.zone || t.voices?.[0]?.zone || 'A';
+        if (z !== zoneId) return;
+        const visual = getVisualModeFlags(getZoneAudioMode(z));
+        const mode = visual.layer ? 'layer' : (visual.sampler ? 'sampler' : 'wt');
+        const alpha = getTouchVisualAlpha(t, mode, nowAudio);
+        if (t.isArp && Array.isArray(t.arpNotes) && t.arpNotes.length) {
+            t.arpNotes.forEach((n) => pushNote(n.noteFloat ?? n.note, n.color || t.color || '#00e0ff', alpha, 'arp'));
+            return;
+        }
+        if (Array.isArray(t.voices) && t.voices.length) {
+            t.voices.forEach((v) => pushNote(getVoiceNoteFloat(v), v.color || t.color || '#00e0ff', alpha, 'touch'));
+            return;
+        }
+        if (Number.isFinite(t.lastM?.exact)) pushNote(t.lastM.exact, t.color || '#00e0ff', alpha, 'touch');
+    });
+    state.heldVoices.forEach((v) => {
+        const z = v.zone || 'A';
+        if (z !== zoneId) return;
+        const visual = getVisualModeFlags(getZoneAudioMode(z));
+        const mode = visual.layer ? 'layer' : (visual.sampler ? 'sampler' : 'wt');
+        const alpha = getHeldVoiceVisualAlpha(v, mode, nowAudio);
+        pushNote(getVoiceNoteFloat(v), v.color || '#ffd74d', alpha, 'hold');
+    });
+    state.arpHoldTouches.forEach((t) => {
+        const z = t.zone || t.noteObjs?.[0]?.zone || 'A';
+        if (z !== zoneId) return;
+        const list = Array.isArray(t.noteObjs) ? t.noteObjs : [];
+        list.forEach((n) => pushNote(n.noteFloat ?? n.note, n.color || t.color || '#ffaa00', 0.85, 'arpHold'));
+    });
+    const arp = getArpState(zoneId);
+    if (arp && Array.isArray(arp.active)) {
+        arp.active.forEach((a) => pushNote(a.noteFloat ?? a.note, a.color || '#00ff77', 0.9, 'arpActive'));
+    }
+    const flashes = Array.isArray(state.arpNodeFlashByZone?.[zoneId]) ? state.arpNodeFlashByZone[zoneId] : [];
+    if (flashes.length) {
+        const lifeMs = 340;
+        const kept = [];
+        flashes.forEach((f) => {
+            const age = nowMs - (Number(f?.at) || 0);
+            if (age > lifeMs) return;
+            kept.push(f);
+            const t = Math.max(0, 1 - (age / lifeMs));
+            const alpha = 0.35 + (0.65 * t);
+            pushNote(Number(f?.note), f?.color || '#74ff8a', alpha, 'arpFlash');
+        });
+        state.arpNodeFlashByZone[zoneId] = kept;
+    }
+    const nodeMap = new Map();
+    const nodes = [geom.rootNode, ...geom.nodesA, ...geom.nodesB];
+    notes.forEach((entry) => {
+        let best = null;
+        let bestDist = Infinity;
+        nodes.forEach((n) => {
+            if (!n) return;
+            const d = Math.abs((n.noteExact ?? 0) - entry.note);
+            if (d < bestDist) {
+                bestDist = d;
+                best = n;
+            }
+        });
+        if (!best) return;
+        const key = getPolyPlannerNodeKey(best);
+        const prev = nodeMap.get(key);
+        if (!prev || entry.alpha > prev.alpha) nodeMap.set(key, entry);
+    });
+    return nodeMap;
+}
+
+function drawPolyPlannerTreesView(width, height, zoneId, baseMIDI) {
+    const planner = state.experimental?.polyPlanner || { branchA: [0, 4, 7], branchB: [2, 5, 9], anchor: 69 };
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    const geom = getPolyPlannerTreeGeometry(width, height, planner, baseMIDI, zoneId);
+    const nodeVisuals = buildPolyTreeNodeVisualState(zoneId, geom, state.audio?.ctx ? state.audio.ctx.currentTime : null);
+    const hoverKey = String(planner.hoverKey || '');
+    const now = performance.now();
+    const activeKey = (planner.activeUntil && planner.activeUntil > now) ? String(planner.activeKey || '') : '';
+    const activeKeys = (planner.activeUntil && planner.activeUntil > now)
+        ? new Set((Array.isArray(planner.activeKeys) ? planner.activeKeys : []).map((k) => String(k || '')))
+        : new Set();
+    const focusA = Math.max(0, parseInt(planner.focusA, 10) || 0);
+    const focusB = Math.max(0, parseInt(planner.focusB, 10) || 0);
+    const droppedNodes = play?._runtime?.droppedNodes || {};
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, width, height);
+    ctx.clip();
+    ctx.fillStyle = 'rgba(11,16,26,0.92)';
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    const getNodeRender = (node) => getPolyPlannerRenderedNode(node, geom, planner, now);
+    const renderNodeMap = new Map();
+    [geom.rootNode, ...geom.nodesA, ...geom.nodesB].forEach((n) => {
+        renderNodeMap.set(getPolyPlannerNodeKey(n), getNodeRender(n));
+    });
+    const drawLinks = (links, color) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2.2;
+        links.forEach((ln, idx) => {
+            const branch = color.includes('110,214,97') ? 'A' : 'B';
+            const key = `${branch}:${idx}`;
+            const toNode = renderNodeMap.get(key);
+            if (!toNode) return;
+            const sign = branch === 'A' ? -1 : 1;
+            const reach = Math.hypot((toNode.x - geom.rootNode.x), (toNode.y - geom.rootNode.y));
+            ctx.beginPath();
+            ctx.moveTo(ln.fromX, ln.fromY);
+            ctx.bezierCurveTo(
+                ln.c1x,
+                ln.c1y,
+                toNode.x - (sign * 12),
+                geom.rootNode.y - (reach * 0.28),
+                toNode.x,
+                toNode.y
+            );
+            ctx.stroke();
+        });
+    };
+    drawLinks(geom.linksA, 'rgba(110,214,97,0.72)');
+    drawLinks(geom.linksB, 'rgba(98,198,255,0.72)');
+
+    const drawNode = (node, color, isFocused = false) => {
+        const baseKey = getPolyPlannerNodeKey(node);
+        const rn = renderNodeMap.get(baseKey) || node;
+        const key = getPolyPlannerNodeKey(rn);
+        const isMuted = !node.isRoot && isPolyPlannerNodeMuted(key, planner, now);
+        const isHover = key && key === hoverKey;
+        const isActive = key && (key === activeKey || activeKeys.has(key));
+        const visual = nodeVisuals.get(key) || null;
+        const visualAlpha = Number.isFinite(visual?.alpha) ? visual.alpha : 0;
+        const visualColor = visual?.color || color;
+        const glow = isMuted ? 0 : Math.max(isActive ? 1 : 0, isHover || isFocused ? 0.65 : 0, visualAlpha * 0.9);
+        if (glow > 0) {
+            ctx.save();
+            ctx.globalAlpha = 0.28 + (glow * 0.4);
+            ctx.shadowColor = visualColor;
+            ctx.shadowBlur = 18 + (glow * 16);
+            ctx.beginPath();
+            ctx.fillStyle = visualColor;
+            ctx.arc(rn.x, rn.y, (rn.renderR || rn.r) + 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+        ctx.beginPath();
+        ctx.fillStyle = node.isRoot ? '#ff6464' : (isMuted ? 'rgba(11,14,20,0.78)' : 'rgba(19,24,37,0.96)');
+        ctx.arc(rn.x, rn.y, (rn.renderR || rn.r), 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = node.isRoot ? 'rgba(255,255,255,0.72)' : (isMuted ? 'rgba(118,126,144,0.45)' : visualColor);
+        ctx.lineWidth = (isHover || isActive || isFocused) ? 2.8 : 2;
+        ctx.stroke();
+        ctx.fillStyle = isMuted ? 'rgba(206,212,223,0.45)' : '#ffffff';
+        const nodeFont = Math.max(8, Math.min(13, parseInt(geom.nodeFontSize, 10) || Math.round(node.r * 0.86)));
+        ctx.font = `bold ${nodeFont}px ${CANVAS_FONT_FAMILY}`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        if (node.isRoot) {
+            ctx.fillText('R', rn.x, rn.y);
+        } else {
+            // Show user-entered branch step (absolute/monotonic), not modulo-relative value.
+            const labelStep = Number.isFinite(node.stepRaw) ? node.stepRaw : node.step;
+            ctx.fillText(String(labelStep), rn.x, rn.y);
+        }
+    };
+
+    drawNode(geom.rootNode, 'rgba(255,100,100,0.95)', false);
+    geom.nodesA.forEach((n, i) => drawNode(n, 'rgba(110,214,97,0.95)', i === focusA));
+    geom.nodesB.forEach((n, i) => drawNode(n, 'rgba(98,198,255,0.95)', i === focusB));
+    // Dropped nodes disappear after falling and stay unavailable until root reset.
+
+    const drawBranchLabel = (box, text, enabled, color) => {
+        const hw = box.w * 0.5;
+        const hh = box.h * 0.5;
+        ctx.beginPath();
+        ctx.fillStyle = enabled ? 'rgba(22,33,50,0.92)' : 'rgba(20,20,20,0.55)';
+        ctx.strokeStyle = enabled ? color : 'rgba(130,140,155,0.45)';
+        ctx.lineWidth = enabled ? 1.8 : 1.2;
+        ctx.roundRect(box.x - hw, box.y - hh, box.w, box.h, 8);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = enabled ? '#d7e7ff' : '#9aa3b3';
+        ctx.font = `bold 13px ${CANVAS_FONT_FAMILY}`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`${text}${enabled ? '' : ' OFF'}`, box.x, box.y + 0.5);
+    };
+    drawBranchLabel(geom.labelA, 'Branch A', geom.branchAEnabled, 'rgba(110,214,97,0.95)');
+    drawBranchLabel(geom.labelB, 'Branch B', geom.branchBEnabled, 'rgba(98,198,255,0.95)');
+
+    ctx.globalAlpha = 0.8;
+    ctx.fillStyle = '#cfd2d6';
+    ctx.font = 'bold 11px Segoe UI, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillText(`Poly Planner Trees | Root Step ${geom.rootStep} | Zone: ${zoneId}`, 8, 8);
+    ctx.restore();
+}
+
 function drawCircleChordTemplate(g, cx, cy, radius, stepsPerOct, mode) {
     if (stepsPerOct !== 31) return;
     const templates = {
         superMajorTriad: [0, 11, 18],
         triad: [0, 10, 18],
         neutralTriad: [0, 9, 18],
-        subMinorTriad: [0, 7, 18]
+        subMinorTriad: [0, 7, 18],
+        neutral7: [0, 9, 18, 27],
+        superMajor7: [0, 11, 18, 28],
+        superMajorSuper7: [0, 11, 18, 29],
+        subMinorB5: [0, 7, 15],
+        shimmerMajor: [0, 9, 10, 18],
+        shimmerNeutral: [0, 8, 9, 18]
     };
     const pts = templates[mode];
     if (!pts) return;
@@ -4310,32 +6039,110 @@ function drawCircleChordTemplate(g, cx, cy, radius, stepsPerOct, mode) {
     g.restore();
 }
 
-function parsePitchClassList(raw, fallback) {
+function parsePitchClassList(raw, fallback, options = {}) {
     const base = Array.isArray(fallback) ? fallback : [];
     const src = String(raw || '').trim();
     if (!src) return base.slice(0);
-    const set = new Set();
-    src.split(',').forEach(tok => {
-        const n = parseInt(tok.trim(), 10);
-        if (!Number.isFinite(n)) return;
-        const pc = ((n % 12) + 12) % 12;
-        set.add(pc);
-    });
-    if (!set.size) return base.slice(0);
-    return Array.from(set).sort((a, b) => a - b);
+    const modulo = Math.max(1, parseInt(options.modulo, 10) || 12);
+    const maxLen = Math.max(1, Math.min(64, parseInt(options.maxLen, 10) || 12));
+    const normalize = (v) => ((v % modulo) + modulo) % modulo;
+    const floorDiv = (a, b) => Math.floor(a / b);
+    const toks = src
+        .split(',')
+        .map((t) => t.trim())
+        .filter((t) => t.length);
+    if (!toks.length) return base.slice(0);
+    if (toks.length === 1 && /^[-+]?\d+$/.test(toks[0])) {
+        const interval = Math.abs(parseInt(toks[0], 10) || 0);
+        const out = [];
+        let cur = 0;
+        for (let i = 0; i < maxLen; i += 1) {
+            out.push(cur);
+            cur += interval;
+        }
+        return out;
+    }
+    if (options.monotonicLift) {
+        const out = [];
+        let prevAbs = null;
+        for (let i = 0; i < toks.length; i += 1) {
+            const nRaw = parseInt(toks[i], 10);
+            if (!Number.isFinite(nRaw)) continue;
+            const n = normalize(nRaw);
+            if (prevAbs == null) {
+                prevAbs = n;
+                out.push(prevAbs);
+            } else {
+                let cand = n;
+                if (cand <= prevAbs) {
+                    const need = prevAbs - cand + 1;
+                    const oct = floorDiv(need + (modulo - 1), modulo);
+                    cand += Math.max(1, oct) * modulo;
+                }
+                prevAbs = cand;
+                out.push(prevAbs);
+            }
+            if (out.length >= maxLen) break;
+        }
+        return out.length ? out : base.slice(0);
+    }
+    const out = [];
+    for (let i = 0; i < toks.length; i += 1) {
+        const n = parseInt(toks[i], 10);
+        if (!Number.isFinite(n)) continue;
+        out.push(n);
+        if (out.length >= maxLen) break;
+    }
+    return out.length ? out : base.slice(0);
 }
 
 function getPolyPlannerMappingForMidi(note, zoneId = 'A') {
     const planner = state.experimental?.polyPlanner;
     if (!planner?.enabled) return { enabled: false, branch: null, useScale: false, noteFloat: note };
-    const pc = ((note % 12) + 12) % 12;
-    const inA = Array.isArray(planner.branchA) && planner.branchA.includes(pc);
-    const inB = Array.isArray(planner.branchB) && planner.branchB.includes(pc);
+    const periodSemis = getScalePeriodSemitonesForZone(zoneId || 'A');
+    const modulo = getPolyPlannerBranchModulo(zoneId || 'A');
+    const octA = (parseInt(planner.branchAOctaveStart, 10) || 0) * periodSemis;
+    const octB = (parseInt(planner.branchBOctaveStart, 10) || 0) * periodSemis;
+    // Membership is evaluated against active scale modulo, not fixed 12-TET classes.
+    const pc = ((Math.round(note) % modulo) + modulo) % modulo;
+    const branchA = Array.isArray(planner.branchA) ? planner.branchA : [];
+    const branchB = Array.isArray(planner.branchB) ? planner.branchB : [];
+    const inA = (planner.branchAEnabled !== false) && branchA.some((v) => (((parseInt(v, 10) % modulo) + modulo) % modulo) === pc);
+    const inB = (planner.branchBEnabled !== false) && branchB.some((v) => (((parseInt(v, 10) % modulo) + modulo) % modulo) === pc);
     const branch = inA ? 'A' : (inB ? 'B' : null);
+    if (branch === 'A') return { enabled: true, branch, useScale: false, noteFloat: note + octA };
     if (branch !== 'B') return { enabled: true, branch, useScale: false, noteFloat: note };
     const anchor = Math.max(0, Math.min(127, parseInt(planner.anchor, 10) || 69));
-    const noteFloat = mapMidiNoteToScaleFromMidiIndex(note, anchor, zoneId);
+    const noteFloat = mapMidiNoteToScaleFromMidiIndex(note, anchor, zoneId) + octB;
     return { enabled: true, branch, useScale: true, noteFloat };
+}
+
+function expandPolyPlannerDualBranchPairs(pairs, zoneId = 'A') {
+    const planner = state.experimental?.polyPlanner;
+    if (!planner?.enabled) return pairs;
+    if (planner.branchAEnabled === false || planner.branchBEnabled === false) return pairs;
+    const periodSemis = getScalePeriodSemitonesForZone(zoneId || 'A');
+    const octA = (parseInt(planner.branchAOctaveStart, 10) || 0) * periodSemis;
+    const octB = (parseInt(planner.branchBOctaveStart, 10) || 0) * periodSemis;
+    const anchor = Math.max(0, Math.min(127, parseInt(planner.anchor, 10) || 69));
+    const src = Array.isArray(pairs) ? pairs : [];
+    const out = [];
+    src.forEach((p) => {
+        const aNote = Number.isFinite(p?.note) ? p.note : null;
+        if (!Number.isFinite(aNote)) return;
+        out.push({
+            note: aNote + octA,
+            meta: { ...(p?.meta || {}), branchId: 'A' }
+        });
+        const bNote = mapMidiNoteToScaleFromMidiIndex(aNote, anchor, zoneId) + octB;
+        if (!Number.isFinite(bNote)) return;
+        if (Math.abs(bNote - (aNote + octA)) < 1e-6) return;
+        out.push({
+            note: bNote,
+            meta: { ...(p?.meta || {}), branchId: 'B', anchorLock: true }
+        });
+    });
+    return out.length ? out : src;
 }
 
 function getScaleShiftedNoteFloat(noteFloat, zoneId, stepOffset) {
@@ -4475,7 +6282,186 @@ function applyQuadranStage(stageIndex, direction = -1) {
     requestDraw();
 }
 
+function applyPolyPlannerQuadranStep(direction = -1, zoneId = null) {
+    const planner = state.experimental?.polyPlanner;
+    if (!planner?.enabled) return false;
+    const z = getScaleZoneId(zoneId || getActiveEditZoneId() || 'A');
+    if (!isPolyTreeViewActive(z)) return false;
+    const dir = direction >= 0 ? 1 : -1;
+    const scope = String(state.experimental?.quadran?.scope || 'both');
+    const moved = [];
+    const moveBranch = (branchKey) => {
+        const enabled = branchKey === 'branchA' ? (planner.branchAEnabled !== false) : (planner.branchBEnabled !== false);
+        if (!enabled) return null;
+        const arr = Array.isArray(planner[branchKey]) ? planner[branchKey] : [];
+        if (!arr.length) return null;
+        const focusKey = branchKey === 'branchA' ? 'focusA' : 'focusB';
+        let idx = parseInt(planner[focusKey], 10);
+        if (!Number.isFinite(idx)) idx = 0;
+        idx = (idx + dir) % arr.length;
+        if (idx < 0) idx += arr.length;
+        planner[focusKey] = idx;
+        planner.lastBranch = (branchKey === 'branchA') ? 'A' : 'B';
+        planner.activeKey = `${planner.lastBranch}:${idx}`;
+        planner.activeKeys = [planner.activeKey];
+        planner.activeUntil = performance.now() + 420;
+        const movedItem = { branch: planner.lastBranch, idx };
+        moved.push(movedItem);
+        return movedItem;
+    };
+    if (scope === 'inner') moveBranch('branchA');
+    else if (scope === 'outer') moveBranch('branchB');
+    else {
+        moveBranch('branchA');
+        moveBranch('branchB');
+    }
+
+    const grid = getGridDegrees(z);
+    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
+    const geom = getPolyPlannerTreeGeometry(
+        Math.max(1, state.canvasRect.width),
+        Math.max(1, state.canvasRect.height),
+        planner,
+        baseMIDI,
+        z
+    );
+    const aIdx = Math.max(0, Math.min(Math.max(0, geom.nodesA.length - 1), parseInt(planner.focusA, 10) || 0));
+    const bIdx = Math.max(0, Math.min(Math.max(0, geom.nodesB.length - 1), parseInt(planner.focusB, 10) || 0));
+    const targetA = geom.nodesA[aIdx]?.noteExact;
+    const targetB = geom.nodesB[bIdx]?.noteExact;
+    const branchTargets = {};
+    if (moved.length === 1) {
+        const idx = Math.max(0, parseInt(moved[0]?.idx, 10) || 0);
+        const pairA = geom.nodesA[idx]?.noteExact;
+        const pairB = geom.nodesB[idx]?.noteExact;
+        if (Number.isFinite(pairA)) branchTargets.A = pairA;
+        if (Number.isFinite(pairB)) branchTargets.B = pairB;
+        const pairKeys = [];
+        if (Number.isFinite(pairA)) pairKeys.push(`A:${idx}`);
+        if (Number.isFinite(pairB)) pairKeys.push(`B:${idx}`);
+        if (pairKeys.length) {
+            planner.activeKey = pairKeys[0];
+            planner.activeKeys = pairKeys;
+            planner.activeUntil = performance.now() + 420;
+        }
+    } else {
+        if ((scope === 'inner' || scope === 'both') && planner.branchAEnabled !== false && Number.isFinite(targetA)) branchTargets.A = targetA;
+        if ((scope === 'outer' || scope === 'both') && planner.branchBEnabled !== false && Number.isFinite(targetB)) branchTargets.B = targetB;
+    }
+    const targetList = [];
+    if (Number.isFinite(branchTargets.A)) targetList.push(branchTargets.A);
+    if (Number.isFinite(branchTargets.B)) targetList.push(branchTargets.B);
+    if (!targetList.length && Number.isFinite(geom.rootNode?.noteExact)) targetList.push(geom.rootNode.noteExact);
+    if (!targetList.length) {
+        requestDraw();
+        return true;
+    }
+
+    const applyToNoteObj = (obj, next) => {
+        const zone = obj.zone || z;
+        const voice = makeVoiceFromNote(next, zone);
+        obj.noteFloat = next;
+        obj.note = voice.note;
+        obj.basePb = voice.basePb;
+        syncCirclePointerToNote(obj.lastM, next, zone);
+    };
+    const applyToArpCollection = (list) => {
+        if (!Array.isArray(list) || !list.length) return;
+        let rr = 0;
+        list.forEach((obj) => {
+            if (!obj) return;
+            const branch = String(obj.branchId || '').toUpperCase();
+            if (branch === 'A' || branch === 'B') {
+                const nextByBranch = branchTargets[branch];
+                if (Number.isFinite(nextByBranch)) {
+                    applyToNoteObj(obj, nextByBranch);
+                }
+                return;
+            }
+            const next = targetList[rr % targetList.length];
+            rr += 1;
+            if (Number.isFinite(next)) applyToNoteObj(obj, next);
+        });
+    };
+    const held = state.heldVoices.filter((v) => (v.zone || 'A') === z);
+    const spawnHeldVoiceForTarget = (templateVoice, noteFloat) => {
+        if (!Number.isFinite(noteFloat) || !templateVoice) return null;
+        const zone = templateVoice.zone || z;
+        const output = getZoneOutput(zone);
+        if (!output) return null;
+        const m = templateVoice.lastM || { pbValue: 8192, slide: 0, press: 90 };
+        const chan = allocateMpeChannelForPlay(zone, output, { allowStealHeld: true });
+        if (!chan) return null;
+        const voice = makeVoiceFromNote(noteFloat, zone);
+        const pb = getVoicePb(m, voice);
+        sendMidi([0xB0 + chan - 1, 74, m.slide || 0], output);
+        sendMidi([0xE0 + chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], output);
+        sendMidi([0xD0 + chan - 1, m.press ?? 90], output);
+        sendMidi([0x90 + chan - 1, voice.note, Math.max(1, Math.min(127, Math.round(m.press || 90)))], output);
+        const spawned = {
+            chan,
+            note: voice.note,
+            basePb: voice.basePb,
+            lastM: m,
+            color: templateVoice.color,
+            phase: templateVoice.phase || 0,
+            group: templateVoice.group || 0,
+            rootNote: noteFloat,
+            zone,
+            addedAt: Date.now()
+        };
+        state.heldVoices.push(spawned);
+        return spawned;
+    };
+    held.forEach((v, i) => {
+        const next = targetList[i % targetList.length];
+        retuneHeldVoiceToNoteFloat(v, next);
+        v.rootNote = next;
+        syncCirclePointerToNote(v.lastM, next, z);
+    });
+    // Playability rule: with a single held note, Quadran should still sound all active branches.
+    // If more branch targets exist than held voices, spawn extra held voices for missing targets.
+    if (held.length === 1 && targetList.length > 1) {
+        const base = held[0];
+        for (let i = 1; i < targetList.length; i += 1) {
+            const next = targetList[i];
+            const exists = state.heldVoices.some((v) => {
+                if ((v.zone || 'A') !== z) return false;
+                const vf = getVoiceNoteFloat(v);
+                return Number.isFinite(vf) && Math.abs(vf - next) < 1e-3;
+            });
+            if (!exists) spawnHeldVoiceForTarget(base, next);
+        }
+    }
+    state.arpHoldTouches.forEach((hold) => {
+        if ((hold.zone || 'A') !== z || !Array.isArray(hold.noteObjs)) return;
+        applyToArpCollection(hold.noteObjs);
+    });
+    const arp = getArpState(z);
+    if (arp && Array.isArray(arp.notes)) {
+        applyToArpCollection(arp.notes);
+    }
+    state.activeTouches.forEach((t) => {
+        if ((t.zone || 'A') !== z) return;
+        if (Array.isArray(t.voices) && t.voices.length) {
+            if (t.isArp && Array.isArray(t.arpNotes) && t.arpNotes.length) {
+                const lead = t.arpNotes[0];
+                const leadBranch = String(lead?.branchId || '').toUpperCase();
+                const nextLead = (leadBranch === 'A' || leadBranch === 'B') ? branchTargets[leadBranch] : null;
+                t.initialExact = Number.isFinite(nextLead) ? nextLead : targetList[0];
+            } else {
+                t.initialExact = targetList[0];
+            }
+            t.polyTreeNodeKey = planner.activeKey || t.polyTreeNodeKey || '';
+            t.polyTreeLockBranch = (planner.lastBranch === 'A' || planner.lastBranch === 'B') ? planner.lastBranch : t.polyTreeLockBranch;
+        }
+    });
+    requestDraw();
+    return true;
+}
+
 function triggerQuadranSequence(direction = -1) {
+    if (applyPolyPlannerQuadranStep(direction)) return;
     const cfg = state.experimental?.quadran;
     if (!cfg) return;
     (cfg.timers || []).forEach(id => clearTimeout(id));
@@ -7286,6 +9272,22 @@ function getAllArpStates() {
     return [getArpState('A'), getArpState('B')];
 }
 
+function markPolyTreeArpFlash(note, zoneId = 'A', color = '#74ff8a') {
+    if (!Number.isFinite(note)) return;
+    const z = getScaleZoneId(zoneId);
+    if (!state.arpNodeFlashByZone || typeof state.arpNodeFlashByZone !== 'object') {
+        state.arpNodeFlashByZone = { A: [], B: [] };
+    }
+    if (!Array.isArray(state.arpNodeFlashByZone[z])) state.arpNodeFlashByZone[z] = [];
+    const list = state.arpNodeFlashByZone[z];
+    list.push({
+        note: Number(note),
+        at: performance.now(),
+        color: String(color || '#74ff8a')
+    });
+    if (list.length > 96) list.splice(0, list.length - 96);
+}
+
 function updateLegacyRuntimePointers(zoneId = null) {
     const z = getScaleZoneId(zoneId || getActiveEditZoneId());
     state.arp = getArpState(z);
@@ -7310,6 +9312,33 @@ const CHORD_SMART_TARGETS = {
     neutral3: 350,
     superMajor3: 450,
     subMinor3: 260
+};
+const MICROTONAL_CHORDS_31 = {
+    superMajorTriad: { steps: [0, 11, 18], family: 'core31' },
+    neutralTriad: { steps: [0, 9, 18], family: 'core31' },
+    subMinorTriad: { steps: [0, 7, 18], family: 'core31' },
+    neutral7: { steps: [0, 9, 18, 27], family: 'doubleMode' },
+    superMajor7: { steps: [0, 11, 18, 28], family: 'doubleMode' },
+    superMajorSuper7: { steps: [0, 11, 18, 29], family: 'doubleMode' },
+    subMinorB5: { steps: [0, 7, 15], family: 'doubleMode' },
+    shimmerMajor: { steps: [0, 9, 10, 18], family: 'texture' },
+    shimmerNeutral: { steps: [0, 8, 9, 18], family: 'texture' }
+};
+const MICROTONAL_CHORD_MODE_MAP_31 = {
+    neutralTriad: 'neutralTriad',
+    superMajorTriad: 'superMajorTriad',
+    subMinorTriad: 'subMinorTriad',
+    neutral7: 'neutral7',
+    superMajor7: 'superMajor7',
+    superMajorSuper7: 'superMajorSuper7',
+    subMinorB5: 'subMinorB5',
+    shimmer: 'shimmerMajor',
+    shimmerMajor: 'shimmerMajor',
+    shimmerNeutral: 'shimmerNeutral'
+};
+const DOUBLE_MODE_RULES_31 = {
+    third8_to_7: true,
+    third10_to_9: false
 };
 const SPECIAL_CHORD_STEP_PROFILES = {
     // 31-TET: explicit degree choices for stable neutral/supermajor/subminor behavior.
@@ -7538,6 +9567,18 @@ function getPresetState() {
         arpEuclideanDensity: arp.euclideanDensity,
         arpShift: arp.shiftMs,
         arpSwing: arp.swing,
+        arpMetricEnabled: !!arp.metric?.enabled,
+        arpMetricSeedPreset: arp.metric?.seedPreset || 'Phototactic',
+        arpMetricSeed: Array.isArray(arp.metric?.seed) ? arp.metric.seed.slice(0) : [4, 7],
+        arpMetricExpression: arp.metric?.expression || '',
+        arpMetricExpressionEnabled: !!arp.metric?.expressionEnabled,
+        arpMetricPhrasePreset: arp.metric?.phrasePreset || 'Custom',
+        arpMetricDepth: parseInt(arp.metric?.depth, 10) || 2,
+        arpMetricWither: Number.isFinite(arp.metric?.wither) ? arp.metric.wither : 0.98,
+        arpMetricSpeed: Number.isFinite(arp.metric?.speed) ? arp.metric.speed : 1,
+        arpMetricCycleMode: arp.metric?.cycleMode || '1bar',
+        arpMetricCycleBars: Number.isFinite(arp.metric?.cycleBars) ? arp.metric.cycleBars : 1,
+        arpMetricNesting: arp.metric?.nesting || 'single',
         currentOctave: state.currentOctave,
         activeEditZone: getActiveEditZoneId(),
         scaleByZone: {
@@ -7703,6 +9744,7 @@ function applyPresetState(presetState, options = {}) {
     if (els.dualMode) {
         els.dualMode.checked = !!presetState.dualMode;
     }
+    state.dualMode = !!els.dualMode?.checked;
     updateDualModeUI();
     state.activeEditZone = (!els.dualMode || !els.dualMode.checked)
         ? 'A'
@@ -7769,7 +9811,19 @@ function applyPresetState(presetState, options = {}) {
         arpRatchetPattern: presetState.arpRatchetPattern ? presetState.arpRatchetPattern.slice(0) : undefined,
         arpEuclideanDensity: presetState.arpEuclideanDensity,
         arpShift: presetState.arpShift,
-        arpSwing: presetState.arpSwing
+        arpSwing: presetState.arpSwing,
+        arpMetricEnabled: !!presetState.arpMetricEnabled,
+        arpMetricSeedPreset: presetState.arpMetricSeedPreset || 'Phototactic',
+        arpMetricSeed: Array.isArray(presetState.arpMetricSeed) ? presetState.arpMetricSeed.slice(0) : undefined,
+        arpMetricExpression: String(presetState.arpMetricExpression || ''),
+        arpMetricExpressionEnabled: !!presetState.arpMetricExpressionEnabled,
+        arpMetricPhrasePreset: String(presetState.arpMetricPhrasePreset || 'Custom'),
+        arpMetricDepth: presetState.arpMetricDepth,
+        arpMetricWither: presetState.arpMetricWither,
+        arpMetricSpeed: presetState.arpMetricSpeed,
+        arpMetricCycleMode: presetState.arpMetricCycleMode || '1bar',
+        arpMetricCycleBars: presetState.arpMetricCycleBars,
+        arpMetricNesting: presetState.arpMetricNesting
     };
     const perfA = (presetState.performanceByZone && presetState.performanceByZone.A)
         ? { ...legacyPerf, ...presetState.performanceByZone.A }
@@ -7800,6 +9854,20 @@ function applyPresetState(presetState, options = {}) {
             swing: cfg.arpSwing,
             ratchetPattern: cfg.arpRatchetPattern,
             stepPattern: cfg.arpStepPattern
+        }, z);
+        applyArpMetricParams({
+            enabled: !!cfg.arpMetricEnabled,
+            seedPreset: cfg.arpMetricSeedPreset,
+            seed: cfg.arpMetricSeed,
+            expression: cfg.arpMetricExpression,
+            expressionEnabled: !!cfg.arpMetricExpressionEnabled,
+            phrasePreset: cfg.arpMetricPhrasePreset,
+            depth: cfg.arpMetricDepth,
+            wither: cfg.arpMetricWither,
+            speed: cfg.arpMetricSpeed,
+            cycleMode: cfg.arpMetricCycleMode,
+            cycleBars: cfg.arpMetricCycleBars,
+            nesting: cfg.arpMetricNesting
         }, z);
         updateArpTiming(z);
     });
@@ -8077,7 +10145,7 @@ function applyPresetState(presetState, options = {}) {
         els.melodyAutoSnapScale.checked = !!presetState.melodyAutoSnapScale;
     }
     // Update range slider progress bars
-    [els.chordSpread, els.roundRate, els.deadCenterForce, els.smoothAmt, els.grabReturnMs, els.yDeadzone, els.touchSensitivity, els.arpGate, els.arpProbability, els.arpEuclid, els.arpShift, els.arpSwing, els.spiralDefect].forEach(input => {
+    [els.chordSpread, els.roundRate, els.deadCenterForce, els.smoothAmt, els.grabReturnMs, els.yDeadzone, els.touchSensitivity, els.arpGate, els.arpProbability, els.arpEuclid, els.arpShift, els.arpSwing, els.arpMetricWither, els.arpMetricSpeed, els.spiralDefect].forEach(input => {
         if (input) updateRangeProgress(input);
     });
 }
@@ -8089,6 +10157,73 @@ function loadPresets() {
 
 function savePresets(presets) {
     localStorage.setItem(PRESET_KEY, JSON.stringify(presets));
+}
+
+function loadPolyTreePresets() {
+    const raw = localStorage.getItem(POLY_TREE_PRESET_KEY);
+    return safeParseJson(raw, {});
+}
+
+function savePolyTreePresets(presets) {
+    localStorage.setItem(POLY_TREE_PRESET_KEY, JSON.stringify(presets || {}));
+}
+
+function getPolyTreePresetState(zoneId = null) {
+    const z = getScaleZoneId(zoneId || getActiveEditZoneId());
+    ensurePolyPlannerScaleDefaults(z);
+    const planner = state.experimental?.polyPlanner || {};
+    const limit = getPolyPlannerBranchLimit(z);
+    return {
+        anchor: Math.max(0, Math.min(127, parseInt(planner.anchor, 10) || 69)),
+        anchorStep: parseInt(planner.anchorStep, 10) || 0,
+        branchA: (Array.isArray(planner.branchA) ? planner.branchA : getPolyPlannerDefaultSteps(z)).slice(0, limit),
+        branchB: (Array.isArray(planner.branchB) ? planner.branchB : getPolyPlannerDefaultSteps(z)).slice(0, limit),
+        branchAEnabled: planner.branchAEnabled !== false,
+        branchBEnabled: planner.branchBEnabled !== false,
+        branchAGenEnabled: planner.branchAGenEnabled !== false,
+        branchBGenEnabled: planner.branchBGenEnabled !== false,
+        branchAOctaveStart: parseInt(planner.branchAOctaveStart, 10) || 0,
+        branchBOctaveStart: parseInt(planner.branchBOctaveStart, 10) || 0,
+        dragEnabled: planner.playability?.dragEnabled !== false,
+        focusA: Math.max(0, parseInt(planner.focusA, 10) || 0),
+        focusB: Math.max(0, parseInt(planner.focusB, 10) || 0)
+    };
+}
+
+function applyPolyTreePresetState(presetState, zoneId = null) {
+    if (!presetState || typeof presetState !== 'object') return false;
+    const z = getScaleZoneId(zoneId || getActiveEditZoneId());
+    ensurePolyPlannerScaleDefaults(z);
+    const planner = state.experimental.polyPlanner || (state.experimental.polyPlanner = {});
+    const modulo = getPolyPlannerBranchModulo(z);
+    const maxLen = getPolyPlannerBranchLimit(z);
+    planner.anchor = Math.max(0, Math.min(127, parseInt(presetState.anchor, 10) || 69));
+    planner.anchorStep = parseInt(presetState.anchorStep, 10) || 0;
+    planner.branchA = parsePitchClassList(
+        Array.isArray(presetState.branchA) ? presetState.branchA.join(',') : '',
+        planner.branchA || getPolyPlannerDefaultSteps(z),
+        { modulo, maxLen }
+    );
+    planner.branchB = parsePitchClassList(
+        Array.isArray(presetState.branchB) ? presetState.branchB.join(',') : '',
+        planner.branchB || getPolyPlannerDefaultSteps(z),
+        { modulo, maxLen }
+    );
+    planner.branchAEnabled = presetState.branchAEnabled !== false;
+    planner.branchBEnabled = presetState.branchBEnabled !== false;
+    planner.branchAGenEnabled = presetState.branchAGenEnabled !== false;
+    planner.branchBGenEnabled = presetState.branchBGenEnabled !== false;
+    planner.branchAOctaveStart = Math.max(-2, Math.min(4, parseInt(presetState.branchAOctaveStart, 10) || 0));
+    planner.branchBOctaveStart = Math.max(-2, Math.min(4, parseInt(presetState.branchBOctaveStart, 10) || 0));
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    if (play) play.dragEnabled = presetState.dragEnabled !== false;
+    planner.focusA = Math.max(0, Math.min(Math.max(0, planner.branchA.length - 1), parseInt(presetState.focusA, 10) || 0));
+    planner.focusB = Math.max(0, Math.min(Math.max(0, planner.branchB.length - 1), parseInt(presetState.focusB, 10) || 0));
+    planner.activeKey = '';
+    planner.activeKeys = [];
+    planner.activeUntil = 0;
+    planner.hoverKey = '';
+    return true;
 }
 
 function loadCustomScales() {
@@ -8348,6 +10483,42 @@ function saveMpePresets(presets) {
     localStorage.setItem(MPE_PRESET_KEY, JSON.stringify(presets));
 }
 
+function loadArpUserPresets() {
+    const raw = localStorage.getItem(ARP_USER_PRESETS_KEY);
+    const parsed = safeParseJson(raw, {});
+    const out = {};
+    Object.keys(parsed || {}).forEach((nameRaw) => {
+        const name = String(nameRaw || '').trim();
+        const p = parsed[nameRaw];
+        if (!name || !p || typeof p !== 'object') return;
+        out[name] = { ...p };
+    });
+    return out;
+}
+
+function saveArpUserPresets(presets) {
+    localStorage.setItem(ARP_USER_PRESETS_KEY, JSON.stringify(presets || {}));
+}
+
+function loadMetricPhraseUserPresets() {
+    const raw = localStorage.getItem(METRIC_TREE_USER_PRESETS_KEY);
+    const parsed = safeParseJson(raw, {});
+    const out = {};
+    Object.keys(parsed || {}).forEach((k) => {
+        const name = String(k || '').trim();
+        const expr = String(parsed[k] || '').trim();
+        if (!name || !expr) return;
+        const diag = parseMetricTreeExpression(expr);
+        if (!diag?.ok) return;
+        out[name] = expr;
+    });
+    return out;
+}
+
+function saveMetricPhraseUserPresets(presets) {
+    localStorage.setItem(METRIC_TREE_USER_PRESETS_KEY, JSON.stringify(presets || {}));
+}
+
 function safeParseJson(raw, fallback) {
     if (!raw) return fallback;
     try {
@@ -8390,6 +10561,14 @@ function refreshPresetSelect(presets, selected) {
     fillSelectFromNames(els.presetSelect, names);
     if (selected && names.includes(selected)) els.presetSelect.value = selected;
     updatePresetDescription(els.presetSelect.value);
+}
+
+function refreshPolyTreePresetSelect(presets, selected) {
+    if (!els.polyTreePresetSelect) return;
+    const names = Object.keys(presets || {}).sort();
+    fillSelectFromNames(els.polyTreePresetSelect, names, '');
+    const target = (selected && names.includes(selected)) ? selected : (names[0] || '');
+    if (target) els.polyTreePresetSelect.value = target;
 }
 
 function updatePresetDescription(name) {
@@ -9503,7 +11682,19 @@ function ensurePerformanceConfigForZone(zoneId) {
         arpRatchetPattern: arp.ratchetPattern ? arp.ratchetPattern.slice(0) : undefined,
         arpEuclideanDensity: arp.euclideanDensity,
         arpShift: arp.shiftMs,
-        arpSwing: arp.swing
+        arpSwing: arp.swing,
+        arpMetricEnabled: !!arp.metric?.enabled,
+        arpMetricSeedPreset: arp.metric?.seedPreset || 'Phototactic',
+        arpMetricSeed: Array.isArray(arp.metric?.seed) ? arp.metric.seed.slice(0) : [4, 7],
+        arpMetricExpression: arp.metric?.expression || '',
+        arpMetricExpressionEnabled: !!arp.metric?.expressionEnabled,
+        arpMetricPhrasePreset: arp.metric?.phrasePreset || 'Custom',
+        arpMetricDepth: parseInt(arp.metric?.depth, 10) || 2,
+        arpMetricWither: Number.isFinite(arp.metric?.wither) ? arp.metric.wither : 0.98,
+        arpMetricSpeed: Number.isFinite(arp.metric?.speed) ? arp.metric.speed : 1,
+        arpMetricCycleMode: arp.metric?.cycleMode || '1bar',
+        arpMetricCycleBars: Number.isFinite(arp.metric?.cycleBars) ? arp.metric.cycleBars : 1,
+        arpMetricNesting: arp.metric?.nesting || 'single'
     };
     return state.performanceConfigByZone[z];
 }
@@ -9535,6 +11726,18 @@ function syncPerformanceConfigFromUi(zoneId = null) {
     cfg.arpEuclideanDensity = arp.euclideanDensity;
     cfg.arpShift = arp.shiftMs;
     cfg.arpSwing = arp.swing;
+    cfg.arpMetricEnabled = !!arp.metric?.enabled;
+    cfg.arpMetricSeedPreset = arp.metric?.seedPreset || 'Phototactic';
+    cfg.arpMetricSeed = Array.isArray(arp.metric?.seed) ? arp.metric.seed.slice(0) : [4, 7];
+    cfg.arpMetricExpression = arp.metric?.expression || '';
+    cfg.arpMetricExpressionEnabled = !!arp.metric?.expressionEnabled;
+    cfg.arpMetricPhrasePreset = arp.metric?.phrasePreset || 'Custom';
+    cfg.arpMetricDepth = parseInt(arp.metric?.depth, 10) || 2;
+    cfg.arpMetricWither = Number.isFinite(arp.metric?.wither) ? arp.metric.wither : 0.98;
+    cfg.arpMetricSpeed = Number.isFinite(arp.metric?.speed) ? arp.metric.speed : 1;
+    cfg.arpMetricCycleMode = arp.metric?.cycleMode || '1bar';
+    cfg.arpMetricCycleBars = Number.isFinite(arp.metric?.cycleBars) ? arp.metric.cycleBars : 1;
+    cfg.arpMetricNesting = arp.metric?.nesting || 'single';
 }
 
 function applyPerformanceConfigToUi(zoneId = null, options = {}) {
@@ -9569,6 +11772,21 @@ function applyPerformanceConfigToUi(zoneId = null, options = {}) {
         shiftMs: cfg.arpShift,
         swing: cfg.arpSwing
     });
+    applyArpMetricParams({
+        enabled: !!cfg.arpMetricEnabled,
+        seedPreset: cfg.arpMetricSeedPreset,
+        seed: cfg.arpMetricSeed,
+        expression: cfg.arpMetricExpression,
+        expressionEnabled: !!cfg.arpMetricExpressionEnabled,
+        phrasePreset: cfg.arpMetricPhrasePreset,
+        depth: cfg.arpMetricDepth,
+        wither: cfg.arpMetricWither,
+        speed: cfg.arpMetricSpeed,
+        cycleMode: cfg.arpMetricCycleMode,
+        cycleBars: cfg.arpMetricCycleBars,
+        nesting: cfg.arpMetricNesting
+    }, z);
+    syncArpParamsToUI(z);
     if (applyArpRuntime) {
         syncArpFromUI(z);
     } else {
@@ -9859,7 +12077,7 @@ function updateChordBranchUI(zoneId = null) {
         els.scaleBranchBadge.classList.toggle('is-octave', branch === 'A');
         els.scaleBranchBadge.classList.toggle('is-nonoctave', branch !== 'A');
     }
-    const allowedA = new Set(['off','auto','auto7','power','triad','minTriad','dimTriad','augTriad','sus2','sus4','add9','sixth','seventh','maj7','min7','halfDim7','dim7','dom9','maj9','min9','eleventh','thirteenth','neutralTriad','superMajorTriad','subMinorTriad','shimmer']);
+    const allowedA = new Set(['off','auto','auto7','power','triad','minTriad','dimTriad','augTriad','sus2','sus4','add9','sixth','seventh','maj7','min7','halfDim7','dim7','dom9','maj9','min9','eleventh','thirteenth','neutralTriad','superMajorTriad','subMinorTriad','shimmer','neutral7','superMajor7','superMajorSuper7','subMinorB5','shimmerMajor','shimmerNeutral']);
     const allowedB = new Set(['off','stepTriad','stepWide']);
     if (els.chordMode) {
         const allowed = branch === 'A' ? allowedA : allowedB;
@@ -10392,8 +12610,10 @@ function handleExternalMIDI(message) {
     const microMapEnabled = !!(els.midiInMicroMap && els.midiInMicroMap.checked);
     const microMapBaseRaw = parseInt(els.midiInMicroBase?.value, 10);
     let microMapBase = Number.isFinite(microMapBaseRaw) ? microMapBaseRaw : null;
+    const planner = state.experimental?.polyPlanner || null;
     const plannerMap = getPolyPlannerMappingForMidi(note, 'A');
-    const effectiveMicrotonalize = !!microtonalize || !!plannerMap.useScale;
+    const dualPolyBranches = !!(planner?.enabled && planner.branchAEnabled !== false && planner.branchBEnabled !== false);
+    const effectiveMicrotonalize = !!microtonalize || !!plannerMap.useScale || dualPolyBranches;
     const mpeFromIn = els.midiInMpe && els.midiInMpe.checked;
     if (type === 0x90 && velocity > 0 && isLocalNoteOn(note)) {
         return;
@@ -10412,28 +12632,42 @@ function handleExternalMIDI(message) {
             if (els.midiInMicroBase) els.midiInMicroBase.value = String(note);
         }
         if (effectiveMicrotonalize) {
-            const noteFloat = plannerMap.useScale
+            const baseFloat = plannerMap.useScale
                 ? plannerMap.noteFloat
                 : (microMapEnabled
                     ? mapMidiNoteToScaleFromMidiIndex(note, microMapBase)
-                    : mapMidiNoteToScale(note));
-            autoFollowExternalNote(noteFloat);
-            ensureVisibleForNotes([noteFloat], { allowSingle: true });
-            const voice = makeVoiceFromNote(noteFloat, 'A');
-            const chan = state.mpeChannels.shift();
-            if (!chan) {
-                els.midiStatus.innerText = 'MPE CHANNELS FULL';
+                    : (microtonalize ? mapMidiNoteToScale(note) : note));
+            const periodSemis = getScalePeriodSemitonesForZone('A');
+            const octA = (parseInt(planner?.branchAOctaveStart, 10) || 0) * periodSemis;
+            const octB = (parseInt(planner?.branchBOctaveStart, 10) || 0) * periodSemis;
+            const noteFloats = [];
+            noteFloats.push(baseFloat + octA);
+            if (dualPolyBranches) {
+                const anchor = Math.max(0, Math.min(127, parseInt(planner?.anchor, 10) || 69));
+                const bFloat = mapMidiNoteToScaleFromMidiIndex(baseFloat, anchor, 'A') + octB;
+                if (Number.isFinite(bFloat) && Math.abs(bFloat - (baseFloat + octA)) > 1e-6) noteFloats.push(bFloat);
             }
-            if (chan && state.midi.output) {
-                const pb = getVoicePb({ pbValue: 8192 }, { ...voice, zone: 'A' });
-                state.midi.output.send([0xB0 + chan - 1, 74, 0]);
-                state.midi.output.send([0xE0 + chan - 1, pb & 0x7F, (pb >> 7) & 0x7F]);
-                state.midi.output.send([0x90 + chan - 1, voice.note, velocity]);
-            }
-            const list = state.physicalNotes.get(voice.note) || [];
-            list.push({ chan: chan || 0, note: voice.note, basePb: voice.basePb, velocity, grabbed: false, srcChan, srcNote: note, lastPb: 8192, lastSlide: 0, lastPress: 0, onTs: Date.now() });
-            state.physicalNotes.set(voice.note, list);
-            state.externalNoteMap.set(`${srcChan}:${note}`, { keyNote: voice.note, chan: chan || 0 });
+            autoFollowExternalNote(noteFloats[0]);
+            ensureVisibleForNotes(noteFloats, { allowSingle: true });
+            const spawned = [];
+            noteFloats.forEach((nf) => {
+                const voice = makeVoiceFromNote(nf, 'A');
+                const chan = state.mpeChannels.shift();
+                if (!chan) {
+                    els.midiStatus.innerText = 'MPE CHANNELS FULL';
+                }
+                if (chan && state.midi.output) {
+                    const pb = getVoicePb({ pbValue: 8192 }, { ...voice, zone: 'A' });
+                    state.midi.output.send([0xB0 + chan - 1, 74, 0]);
+                    state.midi.output.send([0xE0 + chan - 1, pb & 0x7F, (pb >> 7) & 0x7F]);
+                    state.midi.output.send([0x90 + chan - 1, voice.note, velocity]);
+                }
+                const list = state.physicalNotes.get(voice.note) || [];
+                list.push({ chan: chan || 0, note: voice.note, basePb: voice.basePb, velocity, grabbed: false, srcChan, srcNote: note, lastPb: 8192, lastSlide: 0, lastPress: 0, onTs: Date.now() });
+                state.physicalNotes.set(voice.note, list);
+                spawned.push({ keyNote: voice.note, chan: chan || 0 });
+            });
+            state.externalNoteMap.set(`${srcChan}:${note}`, { entries: spawned });
         } else {
             autoFollowExternalNote(note);
             ensureVisibleForNotes([note], { allowSingle: true });
@@ -10452,17 +12686,26 @@ function handleExternalMIDI(message) {
         if (effectiveMicrotonalize) {
             const key = state.externalNoteMap.get(`${srcChan}:${note}`);
             if (key) {
-                const list = state.physicalNotes.get(key.keyNote);
-                if (list && list.length) {
-                    const idx = list.findIndex(d => d.srcChan === srcChan && d.srcNote === note);
-                    const data = idx >= 0 ? list.splice(idx, 1)[0] : list.shift();
-                    if (data && data.chan) {
-                        if (state.midi.output) state.midi.output.send([0x80 + data.chan - 1, data.note || key.keyNote, 0]);
-                        state.mpeChannels.push(data.chan);
-                        state.mpeChannels.sort((a,b)=>a-b);
+                const entries = Array.isArray(key.entries)
+                    ? key.entries
+                    : (Number.isFinite(key.keyNote) ? [{ keyNote: key.keyNote, chan: key.chan || 0 }] : []);
+                entries.forEach((entry) => {
+                    const list = state.physicalNotes.get(entry.keyNote);
+                    if (list && list.length) {
+                        const idx = list.findIndex(d =>
+                            d.srcChan === srcChan &&
+                            d.srcNote === note &&
+                            (entry.chan ? d.chan === entry.chan : true)
+                        );
+                        const data = idx >= 0 ? list.splice(idx, 1)[0] : list.shift();
+                        if (data && data.chan) {
+                            if (state.midi.output) state.midi.output.send([0x80 + data.chan - 1, data.note || entry.keyNote, 0]);
+                            state.mpeChannels.push(data.chan);
+                            state.mpeChannels.sort((a,b)=>a-b);
+                        }
+                        if (!list.length) state.physicalNotes.delete(entry.keyNote);
                     }
-                    if (!list.length) state.physicalNotes.delete(key.keyNote);
-                }
+                });
                 state.externalNoteMap.delete(`${srcChan}:${note}`);
             }
         } else {
@@ -10544,14 +12787,24 @@ function isDualModeEnabled() {
     return !!els.dualMode?.checked;
 }
 
+function getDualSurfaceFocusZone() {
+    if (!isDualModeEnabled()) return null;
+    const active = getActiveEditZoneId();
+    if (isCircleDiesisViewActive(active) || isLumatoneViewActive(active)) return active;
+    return null;
+}
+
 function getZoneForY(clientY) {
     if (!isDualModeEnabled()) return 'A';
+    const focus = getDualSurfaceFocusZone();
+    if (focus) return focus;
     const splitY = state.canvasRect.top + (state.canvasRect.height / 2);
     return clientY < splitY ? 'A' : 'B';
 }
 
 function clampClientYToZone(clientY, zoneId) {
     if (!isDualModeEnabled()) return clientY;
+    if (getDualSurfaceFocusZone()) return clientY;
     const bounds = getZoneBounds(zoneId || getZoneForY(clientY));
     return Math.max(bounds.top, Math.min(bounds.bottom, clientY));
 }
@@ -10719,8 +12972,147 @@ function getStepMs(zoneId = null) {
     return (60 / Math.max(40, arp.bpm)) * 1000 * factor;
 }
 
+function getArpMetricCycleMs(zoneId = null) {
+    const z = getScaleZoneId(zoneId || getActiveEditZoneId());
+    const arp = getArpState(z);
+    const metric = ensureArpMetricDefaults(arp);
+    const stepMs = getStepMs(z);
+    let bars = 1;
+    if (metric.cycleMode === '2bar') bars = 2;
+    else if (metric.cycleMode === 'custom') bars = Math.max(0.25, Math.min(8, Number(metric.cycleBars) || 1));
+    const sixteenthPerBar = 16;
+    const baseCycleMs = Math.max(120, stepMs * sixteenthPerBar * bars);
+    const speed = Math.max(0.25, Math.min(3, Number(metric.speed) || 1));
+    return Math.max(40, baseCycleMs / speed);
+}
+
+function captureArpPresetFromCurrentUi(zoneId = null) {
+    const z = getScaleZoneId(zoneId || getActiveEditZoneId());
+    const arp = getArpState(z);
+    const metric = ensureArpMetricDefaults(arp);
+    const seedRaw = String(els.arpMetricSeed?.value || '').trim();
+    const exprCandidate = seedRaw.includes('[') ? seedRaw : '';
+    const exprDiag = exprCandidate ? parseMetricTreeExpression(exprCandidate) : null;
+    const exprEnabled = !!(exprDiag?.ok);
+    return {
+        enabled: !!els.arpEnabled?.checked,
+        rate: els.arpRate?.value || arp.rate || '1/16',
+        gate: parseInt(els.arpGate?.value, 10) || Math.round((arp.gate || 0.6) * 100),
+        sync: els.arpSync?.value || arp.sync || 'internal',
+        bpm: parseInt(els.arpBpm?.value, 10) || arp.bpm || 120,
+        latch: !!els.arpLatch?.checked,
+        mode: els.arpMode?.value || arp.mode || 'up',
+        octaveRange: parseInt(els.arpOctaveRange?.value, 10) || arp.octaveRange || 1,
+        octaveMode: els.arpOctaveMode?.value || arp.octaveMode || 'serial',
+        probability: parseInt(els.arpProbability?.value, 10) / 100,
+        ratchet: parseInt(els.arpRatchet?.value, 10) || arp.ratchet || 1,
+        stepPattern: readArpStepPatternFromUI(),
+        ratchetPattern: readArpRatchetPatternFromUI(),
+        euclideanDensity: parseInt(els.arpEuclid?.value, 10) || 0,
+        shiftMs: parseInt(els.arpShift?.value, 10) || 0,
+        swing: (parseInt(els.arpSwing?.value, 10) || 0) / 100,
+        humanizeApplyToArp: !!els.melodyHumanApplyArp?.checked,
+        metric: {
+            enabled: !!els.arpMetricEnabled?.classList.contains('toggle-on'),
+            seedPreset: els.arpMetricSeedPreset?.value || metric.seedPreset || 'Phototactic',
+            seed: normalizeMetricTreeSeed(parseMetricTreeSeedInput(seedRaw, metric.seed || [4, 7]), metric.seed || [4, 7]),
+            expression: exprEnabled ? exprCandidate : '',
+            expressionEnabled: exprEnabled,
+            phrasePreset: String(els.arpMetricPhrasePreset?.value || metric.phrasePreset || 'Custom'),
+            depth: parseInt(els.arpMetricDepth?.value, 10) || metric.depth || 2,
+            wither: (parseInt(els.arpMetricWither?.value, 10) || Math.round((metric.wither || 0.98) * 100)) / 100,
+            speed: (parseInt(els.arpMetricSpeed?.value, 10) || Math.round((metric.speed || 1) * 100)) / 100,
+            cycleMode: els.arpMetricCycleMode?.value || metric.cycleMode || '1bar',
+            cycleBars: parseFloat(els.arpMetricCycleBars?.value) || metric.cycleBars || 1,
+            nesting: els.arpMetricNesting?.value || metric.nesting || 'single'
+        }
+    };
+}
+
+function applyArpPresetSnapshot(preset) {
+    if (!preset || typeof preset !== 'object') return;
+    if (els.arpEnabled) els.arpEnabled.checked = !!preset.enabled;
+    if (els.arpRate && preset.rate) els.arpRate.value = preset.rate;
+    if (els.arpRateSelect && preset.rate) els.arpRateSelect.value = preset.rate;
+    if (els.arpGate != null && preset.gate != null) els.arpGate.value = String(parseInt(preset.gate, 10) || 60);
+    if (els.arpSync && preset.sync) els.arpSync.value = preset.sync;
+    if (els.arpBpm && preset.bpm != null) els.arpBpm.value = String(parseInt(preset.bpm, 10) || 120);
+    if (els.arpLatch) els.arpLatch.checked = !!preset.latch;
+    if (els.arpMode && preset.mode) els.arpMode.value = preset.mode;
+    if (els.arpOctaveRange && preset.octaveRange != null) els.arpOctaveRange.value = String(parseInt(preset.octaveRange, 10) || 1);
+    if (els.arpOctaveMode && preset.octaveMode) els.arpOctaveMode.value = preset.octaveMode;
+    if (els.arpProbability && preset.probability != null) els.arpProbability.value = String(Math.round(Math.max(0, Math.min(1, Number(preset.probability) || 0)) * 100));
+    if (els.arpRatchet && preset.ratchet != null) els.arpRatchet.value = String(parseInt(preset.ratchet, 10) || 1);
+    if (els.arpEuclid && preset.euclideanDensity != null) els.arpEuclid.value = String(parseInt(preset.euclideanDensity, 10) || 0);
+    if (els.arpShift && preset.shiftMs != null) els.arpShift.value = String(parseInt(preset.shiftMs, 10) || 0);
+    if (els.arpSwing && preset.swing != null) els.arpSwing.value = String(Math.round(Math.max(0, Math.min(1, Number(preset.swing) || 0)) * 100));
+    if (Array.isArray(preset.stepPattern)) writeArpStepPatternToUI(preset.stepPattern);
+    if (Array.isArray(preset.ratchetPattern)) writeArpRatchetPatternToUI(preset.ratchetPattern);
+    if (els.melodyHumanApplyArp) {
+        els.melodyHumanApplyArp.checked = !!preset.humanizeApplyToArp;
+    }
+    const m = preset.metric || {};
+    if (els.arpMetricEnabled) {
+        const on = !!m.enabled;
+        els.arpMetricEnabled.classList.toggle('toggle-on', on);
+        els.arpMetricEnabled.classList.toggle('toggle-off', !on);
+        els.arpMetricEnabled.textContent = on ? 'METRIC ON' : 'METRIC OFF';
+    }
+    if (els.arpMetricSeedPreset) els.arpMetricSeedPreset.value = m.seedPreset || 'Phototactic';
+    if (els.arpMetricSeed) {
+        if (m.expressionEnabled && m.expression) els.arpMetricSeed.value = String(m.expression);
+        else if (Array.isArray(m.seed)) els.arpMetricSeed.value = m.seed.join(',');
+    }
+    if (els.arpMetricDepth && m.depth != null) els.arpMetricDepth.value = String(parseInt(m.depth, 10) || 2);
+    if (els.arpMetricWither && m.wither != null) els.arpMetricWither.value = String(Math.round((Number(m.wither) || 0.98) * 100));
+    if (els.arpMetricNesting && m.nesting) els.arpMetricNesting.value = m.nesting;
+    if (els.arpMetricSpeed && m.speed != null) els.arpMetricSpeed.value = String(Math.round((Number(m.speed) || 1) * 100));
+    if (els.arpMetricCycleMode && m.cycleMode) els.arpMetricCycleMode.value = m.cycleMode;
+    if (els.arpMetricCycleBars && m.cycleBars != null) els.arpMetricCycleBars.value = String(Number(m.cycleBars).toFixed(2));
+    if (els.arpMetricPhrasePreset && m.phrasePreset) {
+        refreshMetricPhrasePresetSelect(m.phrasePreset);
+        els.arpMetricPhrasePreset.value = m.phrasePreset;
+    }
+    updateRangeProgress(els.arpMetricWither);
+    updateRangeProgress(els.arpMetricSpeed);
+    updateMelodyHumanizeEffective();
+    syncArpFromUI();
+}
+
+function refreshArpPresetSelectOptions(selectedValue = null) {
+    if (!els.arpPresetSelect) return;
+    const current = String(selectedValue != null ? selectedValue : (els.arpPresetSelect.value || 'Init'));
+    const builtinOptions = Array.from(els.arpPresetSelect.querySelectorAll('option'))
+        .map((o) => ({ value: String(o.value || ''), label: String(o.textContent || o.value || '') }))
+        .filter((o) => !!ARP_PRESETS[o.value]);
+    const labelsByValue = {};
+    builtinOptions.forEach((o) => { labelsByValue[o.value] = o.label; });
+    while (els.arpPresetSelect.firstChild) els.arpPresetSelect.removeChild(els.arpPresetSelect.firstChild);
+    Object.keys(ARP_PRESETS).forEach((key) => {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = labelsByValue[key] || key;
+        els.arpPresetSelect.appendChild(opt);
+    });
+    const users = state.arpUserPresets || {};
+    Object.keys(users).sort((a, b) => a.localeCompare(b)).forEach((name) => {
+        const opt = document.createElement('option');
+        opt.value = `user:${name}`;
+        opt.textContent = `User: ${name}`;
+        els.arpPresetSelect.appendChild(opt);
+    });
+    els.arpPresetSelect.value = Array.from(els.arpPresetSelect.options).some((o) => o.value === current) ? current : 'Init';
+}
+
 function applyArpPreset(name) {
-    const preset = ARP_PRESETS[name];
+    const key = String(name || '');
+    if (key.startsWith('user:')) {
+        const userName = key.slice(5);
+        const preset = state.arpUserPresets?.[userName];
+        if (preset) applyArpPresetSnapshot(preset);
+        return;
+    }
+    const preset = ARP_PRESETS[key];
     if (!preset) return;
     if (els.arpRate) els.arpRate.value = preset.rate;
     if (els.arpRateSelect) els.arpRateSelect.value = preset.rate;
@@ -14394,15 +16786,465 @@ function normalizeArpRatchetPattern(pattern) {
     });
 }
 
+function normalizeMetricTreeSeed(seed, fallback = [4, 7]) {
+    const src = Array.isArray(seed) ? seed : [];
+    const out = src
+        .map((v) => parseInt(v, 10))
+        .filter((v) => Number.isFinite(v) && v > 0 && v <= 24)
+        .slice(0, METRIC_TREE_MAX_DEPTH);
+    return out.length ? out : fallback.slice(0);
+}
+
+function parseMetricTreeSeedInput(text, fallback = [4, 7]) {
+    if (!text || typeof text !== 'string') return fallback.slice(0);
+    const seed = text
+        .split(/[\s,;]+/)
+        .map((t) => parseInt(t.trim(), 10))
+        .filter((v) => Number.isFinite(v) && v > 0 && v <= 24)
+        .slice(0, METRIC_TREE_MAX_DEPTH);
+    return seed.length ? seed : fallback.slice(0);
+}
+
+function parseMetricTreeSeedInputDiagnostics(text) {
+    if (!text || typeof text !== 'string' || !text.trim()) return { ok: false, empty: true, values: [] };
+    const rawTokens = text.split(/[\s,;]+/).map((t) => t.trim()).filter(Boolean);
+    if (!rawTokens.length) return { ok: false, empty: true, values: [] };
+    const values = [];
+    let bad = 0;
+    rawTokens.forEach((tok) => {
+        const v = parseInt(tok, 10);
+        if (Number.isFinite(v) && v > 0 && v <= 24) values.push(v);
+        else bad += 1;
+    });
+    if (bad > 0) return { ok: false, empty: false, bad, values };
+    if (!values.length) return { ok: false, empty: false, bad: rawTokens.length, values: [] };
+    return { ok: true, empty: false, values: values.slice(0, METRIC_TREE_MAX_DEPTH) };
+}
+
+function parseMetricTreeExpression(text) {
+    if (!text || typeof text !== 'string') return { ok: false, reason: 'empty', expandedGroups: [] };
+    const src = text.trim();
+    if (!src.includes('[')) return { ok: false, reason: 'no_brackets', expandedGroups: [] };
+    let i = 0;
+    const len = src.length;
+    const groups = [];
+    const skipWs = () => {
+        while (i < len && /\s/.test(src[i])) i += 1;
+    };
+    const parseIntAt = () => {
+        skipWs();
+        let start = i;
+        while (i < len && /[0-9]/.test(src[i])) i += 1;
+        if (start === i) return null;
+        return parseInt(src.slice(start, i), 10);
+    };
+    while (i < len) {
+        skipWs();
+        if (i >= len) break;
+        if (src[i] !== '[') return { ok: false, reason: 'expected_group', expandedGroups: [] };
+        i += 1;
+        const parts = [];
+        while (i < len) {
+            const n = parseIntAt();
+            if (!Number.isFinite(n) || n <= 0) return { ok: false, reason: 'bad_number', expandedGroups: [] };
+            parts.push(n);
+            skipWs();
+            if (i >= len) return { ok: false, reason: 'unterminated_group', expandedGroups: [] };
+            if (src[i] === '+') {
+                i += 1;
+                continue;
+            }
+            if (src[i] === ']') {
+                i += 1;
+                break;
+            }
+            return { ok: false, reason: 'bad_group_separator', expandedGroups: [] };
+        }
+        skipWs();
+        let repeat = 1;
+        if (i < len && src[i] === '*') {
+            i += 1;
+            const rep = parseIntAt();
+            if (!Number.isFinite(rep) || rep <= 0 || rep > 128) return { ok: false, reason: 'bad_repeat', expandedGroups: [] };
+            repeat = rep;
+        }
+        groups.push({ parts, repeat });
+        skipWs();
+        if (i >= len) break;
+        if (src[i] !== '+') return { ok: false, reason: 'expected_plus', expandedGroups: [] };
+        i += 1;
+    }
+    const expandedGroups = [];
+    groups.forEach((g) => {
+        for (let r = 0; r < g.repeat; r += 1) expandedGroups.push(g.parts.slice(0));
+    });
+    if (!expandedGroups.length) return { ok: false, reason: 'no_groups', expandedGroups: [] };
+    return { ok: true, expandedGroups };
+}
+
+function normalizeMetricTreeExpressionText(text) {
+    return String(text || '').replace(/\s+/g, '');
+}
+
+function makeMetricUserPresetKey(name) {
+    return `U:${String(name || '').trim()}`;
+}
+
+function isMetricUserPresetKey(key) {
+    return String(key || '').startsWith('U:');
+}
+
+function metricUserPresetNameFromKey(key) {
+    return String(key || '').replace(/^U:/, '').trim();
+}
+
+function getMetricPhraseExpressionByKey(key) {
+    const k = String(key || 'Custom');
+    if (k === 'Custom') return '';
+    if (METRIC_TREE_PHRASE_PRESETS[k]) return METRIC_TREE_PHRASE_PRESETS[k];
+    if (isMetricUserPresetKey(k)) {
+        const name = metricUserPresetNameFromKey(k);
+        return String(state.metricPhraseUserPresets?.[name] || '');
+    }
+    return '';
+}
+
+function getMetricPhrasePresetKeyByExpression(expressionText) {
+    const normalized = normalizeMetricTreeExpressionText(expressionText);
+    if (!normalized) return 'Custom';
+    const keys = Object.keys(METRIC_TREE_PHRASE_PRESETS);
+    for (let i = 0; i < keys.length; i += 1) {
+        const k = keys[i];
+        if (normalizeMetricTreeExpressionText(METRIC_TREE_PHRASE_PRESETS[k]) === normalized) return k;
+    }
+    const user = state.metricPhraseUserPresets || {};
+    const names = Object.keys(user);
+    for (let i = 0; i < names.length; i += 1) {
+        const n = names[i];
+        if (normalizeMetricTreeExpressionText(user[n]) === normalized) return makeMetricUserPresetKey(n);
+    }
+    return 'Custom';
+}
+
+function refreshMetricPhrasePresetSelect(selectedKey = null) {
+    if (!els.arpMetricPhrasePreset) return;
+    const keep = selectedKey != null ? String(selectedKey) : String(els.arpMetricPhrasePreset.value || 'Custom');
+    const sel = els.arpMetricPhrasePreset;
+    while (sel.firstChild) sel.removeChild(sel.firstChild);
+    const add = (value, label) => {
+        const opt = document.createElement('option');
+        opt.value = value;
+        opt.textContent = label;
+        sel.appendChild(opt);
+    };
+    add('Custom', 'Custom (manual)');
+    add('Asym_36_16', 'Asym 36/16 [2+3] + [2+2+3]*2 + [2+3]*2 + [2+2+3]');
+    add('Asym_5_7_Weave', 'Asym 5/7 Weave [2+3] + [2+2+3]');
+    add('Asym_5_7_Chain', 'Asym 5/7 Chain [2+3] + [2+2+3] + [2+3] + [2+2+3]');
+    add('Asym_Tresillo_Shift', 'Tresillo Shift [3+3+2] + [2+3]');
+    add('Asym_Septuple_Split', 'Septuple Split [2+2+3]*2 + [3+2+2]');
+    const user = state.metricPhraseUserPresets || {};
+    const names = Object.keys(user).sort((a, b) => a.localeCompare(b));
+    names.forEach((name) => {
+        add(makeMetricUserPresetKey(name), `User: ${name}`);
+    });
+    sel.value = Array.from(sel.options).some((o) => o.value === keep) ? keep : 'Custom';
+}
+
+function updateMetricPhrasePresetStatus(text, color = '') {
+    if (!els.arpMetricPhraseStatus) return;
+    els.arpMetricPhraseStatus.textContent = text;
+    els.arpMetricPhraseStatus.style.color = color || '#9aa';
+}
+
+function updateMetricSeedSyntaxBadge(rawInput = null) {
+    if (!els.arpMetricSeedStatus) return;
+    const text = (rawInput == null) ? String(els.arpMetricSeed?.value || '') : String(rawInput || '');
+    const statusEl = els.arpMetricSeedStatus;
+    const setState = (label, color) => {
+        statusEl.textContent = label;
+        if (color) statusEl.style.color = color;
+    };
+    if (!text.trim()) {
+        setState('Seed mode', '#9aa');
+        return;
+    }
+    if (text.includes('[')) {
+        const parsed = parseMetricTreeExpression(text);
+        if (parsed.ok) {
+            setState(`Expression OK (${parsed.expandedGroups.length} groups)`, '#6adf8f');
+        } else {
+            setState(`Syntax error (${parsed.reason || 'invalid'})`, '#ff7070');
+        }
+        return;
+    }
+    const diag = parseMetricTreeSeedInputDiagnostics(text);
+    if (diag.ok) {
+        setState(`Seed mode OK (${diag.values.join(',')})`, '#6adf8f');
+    } else {
+        setState('Syntax error (use 4,7 or [2+3]+...)', '#ff7070');
+    }
+}
+
+function normalizeMetricTreeNesting(value) {
+    return value === 'stacked' ? 'stacked' : 'single';
+}
+
+function ensureArpMetricDefaults(arp) {
+    if (!arp.metric || typeof arp.metric !== 'object') arp.metric = {};
+    const m = arp.metric;
+    const presetName = (typeof m.seedPreset === 'string' && METRIC_TREE_SEEDS[m.seedPreset]) ? m.seedPreset : 'Phototactic';
+    const presetSeed = METRIC_TREE_SEEDS[presetName] || [4, 7];
+    m.enabled = !!m.enabled;
+    m.seedPreset = presetName;
+    m.seed = normalizeMetricTreeSeed(m.seed, presetSeed);
+    m.expression = (typeof m.expression === 'string') ? m.expression.trim() : '';
+    m.expressionEnabled = !!m.expressionEnabled;
+    const rawPhrasePreset = String(m.phrasePreset || 'Custom');
+    const phraseValid = rawPhrasePreset === 'Custom'
+        || !!METRIC_TREE_PHRASE_PRESETS[rawPhrasePreset]
+        || (isMetricUserPresetKey(rawPhrasePreset) && !!state.metricPhraseUserPresets?.[metricUserPresetNameFromKey(rawPhrasePreset)]);
+    m.phrasePreset = phraseValid ? rawPhrasePreset : 'Custom';
+    m.depth = Math.max(1, Math.min(METRIC_TREE_MAX_DEPTH, parseInt(m.depth, 10) || 2));
+    const witherRaw = Number(m.wither);
+    m.wither = Math.max(0.8, Math.min(1.02, Number.isFinite(witherRaw) ? witherRaw : 0.98));
+    const speedRaw = Number(m.speed);
+    m.speed = Math.max(0.25, Math.min(3, Number.isFinite(speedRaw) ? speedRaw : 1));
+    m.cycleMode = (m.cycleMode === '2bar' || m.cycleMode === 'custom') ? m.cycleMode : '1bar';
+    const cycleBarsRaw = Number(m.cycleBars);
+    m.cycleBars = Math.max(0.25, Math.min(8, Number.isFinite(cycleBarsRaw) ? cycleBarsRaw : 1));
+    m.nesting = normalizeMetricTreeNesting(m.nesting);
+    if (!Array.isArray(m.slots)) m.slots = [];
+    if (typeof m.slotsKey !== 'string') m.slotsKey = '';
+    m.slotIndex = Math.max(0, parseInt(m.slotIndex, 10) || 0);
+    m.clockAccumMs = Number.isFinite(m.clockAccumMs) ? Math.max(0, m.clockAccumMs) : 0;
+    m.nextDueMs = Number.isFinite(m.nextDueMs) ? Math.max(0, m.nextDueMs) : 0;
+    if (!m.layerNoteIndex || typeof m.layerNoteIndex !== 'object') {
+        m.layerNoteIndex = { trunk: 0, branch: 0, leaf: 0 };
+    }
+    ['trunk', 'branch', 'leaf'].forEach((k) => {
+        m.layerNoteIndex[k] = Math.max(0, parseInt(m.layerNoteIndex[k], 10) || 0);
+    });
+    return m;
+}
+
+function resetArpMetricRuntime(zoneId = null) {
+    const arp = getArpState(zoneId || getActiveEditZoneId());
+    const m = ensureArpMetricDefaults(arp);
+    m.slotIndex = 0;
+    m.clockAccumMs = 0;
+    m.nextDueMs = 0;
+    m.layerNoteIndex.trunk = 0;
+    m.layerNoteIndex.branch = 0;
+    m.layerNoteIndex.leaf = 0;
+}
+
+function buildArpMetricSlots(seedRaw, depthRaw, witherRaw, nestingRaw, expressionRaw = '', expressionEnabled = false) {
+    const seed = normalizeMetricTreeSeed(seedRaw, [4, 7]);
+    const depth = Math.max(1, Math.min(METRIC_TREE_MAX_DEPTH, parseInt(depthRaw, 10) || 2));
+    const wither = Math.max(0.8, Math.min(1.02, Number(witherRaw) || 0.98));
+    const nesting = normalizeMetricTreeNesting(nestingRaw);
+    const expression = (typeof expressionRaw === 'string') ? expressionRaw.trim() : '';
+    const useExpr = !!expressionEnabled && !!expression;
+    const exprParsed = useExpr ? parseMetricTreeExpression(expression) : null;
+    if (useExpr && exprParsed?.ok) {
+        const expandedGroups = exprParsed.expandedGroups;
+        const groupSums = expandedGroups.map((parts) => parts.reduce((a, b) => a + Math.max(1, parseInt(b, 10) || 1), 0));
+        const totalUnits = groupSums.reduce((a, b) => a + b, 0);
+        if (totalUnits > 0) {
+            const events = [];
+            let unitOffset = 0;
+            for (let gi = 0; gi < expandedGroups.length; gi += 1) {
+                const parts = expandedGroups[gi];
+                const groupUnits = groupSums[gi];
+                const groupStart = unitOffset / totalUnits;
+                const groupDur = (groupUnits / totalUnits) * wither;
+                events.push({ startNorm: groupStart, durationNorm: Math.max(0.00025, groupDur), layer: 'trunk' });
+                let localOffset = 0;
+                for (let pi = 0; pi < parts.length; pi += 1) {
+                    const partUnits = Math.max(1, parseInt(parts[pi], 10) || 1);
+                    const partStartUnits = unitOffset + localOffset;
+                    const partStart = partStartUnits / totalUnits;
+                    const partDur = (partUnits / totalUnits) * wither;
+                    events.push({ startNorm: partStart, durationNorm: Math.max(0.00025, partDur), layer: 'branch' });
+                    for (let u = 0; u < partUnits; u += 1) {
+                        const leafStart = (partStartUnits + u) / totalUnits;
+                        const leafDur = (1 / totalUnits) * wither;
+                        events.push({ startNorm: leafStart, durationNorm: Math.max(0.00025, leafDur), layer: 'leaf' });
+                        if (events.length >= METRIC_TREE_MAX_EVENTS) break;
+                    }
+                    localOffset += partUnits;
+                    if (events.length >= METRIC_TREE_MAX_EVENTS) break;
+                }
+                unitOffset += groupUnits;
+                if (events.length >= METRIC_TREE_MAX_EVENTS) break;
+            }
+            const enabledLayers = nesting === 'stacked' ? new Set(['trunk', 'branch', 'leaf']) : new Set(['leaf']);
+            const filtered = events.filter((ev) => enabledLayers.has(ev.layer));
+            filtered.sort((a, b) => a.startNorm - b.startNorm || a.durationNorm - b.durationNorm);
+            const slots = [];
+            const eps = 1e-7;
+            filtered.forEach((ev) => {
+                const last = slots.length ? slots[slots.length - 1] : null;
+                if (last && Math.abs(last.startNorm - ev.startNorm) <= eps) last.events.push(ev);
+                else slots.push({ startNorm: ev.startNorm, events: [ev], deltaNorm: 1 });
+            });
+            if (!slots.length) slots.push({ startNorm: 0, events: [{ startNorm: 0, durationNorm: 1, layer: 'leaf' }], deltaNorm: 1 });
+            for (let i = 0; i < slots.length; i += 1) {
+                const cur = slots[i];
+                const next = slots[(i + 1) % slots.length];
+                const rawDelta = (i === slots.length - 1)
+                    ? ((1 - cur.startNorm) + next.startNorm)
+                    : (next.startNorm - cur.startNorm);
+                cur.deltaNorm = Math.max(0.00025, rawDelta);
+            }
+            return slots;
+        }
+    }
+    const layers = nesting === 'stacked'
+        ? [
+            { id: 'trunk', depth: 1 },
+            { id: 'branch', depth: Math.min(2, depth) },
+            { id: 'leaf', depth }
+        ]
+        : [{ id: 'leaf', depth }];
+    const eps = 1e-7;
+    const events = [];
+    const visit = (startNorm, durNorm, level, targetDepth, layerId) => {
+        if (events.length >= METRIC_TREE_MAX_EVENTS) return;
+        if (level >= targetDepth || level >= seed.length) {
+            events.push({
+                startNorm: Math.max(0, Math.min(1, startNorm)),
+                durationNorm: Math.max(0.00025, durNorm),
+                layer: layerId
+            });
+            return;
+        }
+        const div = Math.max(1, parseInt(seed[level], 10) || 1);
+        const slice = durNorm / div;
+        const childDur = slice * wither;
+        for (let i = 0; i < div; i += 1) {
+            visit(startNorm + (i * slice), childDur, level + 1, targetDepth, layerId);
+            if (events.length >= METRIC_TREE_MAX_EVENTS) break;
+        }
+    };
+    layers.forEach((layer) => visit(0, 1, 0, layer.depth, layer.id));
+    events.sort((a, b) => a.startNorm - b.startNorm || a.durationNorm - b.durationNorm);
+    const slots = [];
+    events.forEach((ev) => {
+        const last = slots.length ? slots[slots.length - 1] : null;
+        if (last && Math.abs(last.startNorm - ev.startNorm) <= eps) {
+            last.events.push(ev);
+        } else {
+            slots.push({ startNorm: ev.startNorm, events: [ev], deltaNorm: 1 });
+        }
+    });
+    if (!slots.length) {
+        slots.push({ startNorm: 0, events: [{ startNorm: 0, durationNorm: 1, layer: 'leaf' }], deltaNorm: 1 });
+    }
+    for (let i = 0; i < slots.length; i += 1) {
+        const cur = slots[i];
+        const next = slots[(i + 1) % slots.length];
+        const rawDelta = (i === slots.length - 1)
+            ? ((1 - cur.startNorm) + next.startNorm)
+            : (next.startNorm - cur.startNorm);
+        cur.deltaNorm = Math.max(0.00025, rawDelta);
+    }
+    return slots;
+}
+
+function buildArpMetricSlotsKey(metric) {
+    const m = metric || {};
+    const seedKey = normalizeMetricTreeSeed(m.seed, [4, 7]).join(',');
+    const expr = (typeof m.expression === 'string') ? m.expression.trim() : '';
+    const exprOn = !!m.expressionEnabled && !!expr;
+    const depth = Math.max(1, Math.min(METRIC_TREE_MAX_DEPTH, parseInt(m.depth, 10) || 2));
+    const wither = Math.round(Math.max(0.8, Math.min(1.02, Number(m.wither) || 0.98)) * 1000);
+    const nesting = normalizeMetricTreeNesting(m.nesting);
+    return `${seedKey}|${depth}|${wither}|${nesting}|expr:${exprOn ? expr : ''}`;
+}
+
+function getArpMetricSlots(zoneId = null) {
+    const arp = getArpState(zoneId || getActiveEditZoneId());
+    const m = ensureArpMetricDefaults(arp);
+    const key = buildArpMetricSlotsKey(m);
+    if (m.slotsKey !== key || !Array.isArray(m.slots) || !m.slots.length) {
+        m.slots = buildArpMetricSlots(m.seed, m.depth, m.wither, m.nesting, m.expression, m.expressionEnabled);
+        m.slotsKey = key;
+        m.slotIndex = 0;
+    }
+    return m.slots;
+}
+
+function applyArpMetricParams(params = {}, zoneId = null) {
+    const arp = getArpState(zoneId || getActiveEditZoneId());
+    const m = ensureArpMetricDefaults(arp);
+    if (params.enabled !== undefined) m.enabled = !!params.enabled;
+    if (params.seedPreset !== undefined) {
+        const preset = String(params.seedPreset || '').trim();
+        m.seedPreset = METRIC_TREE_SEEDS[preset] ? preset : 'Custom';
+    }
+    if (params.seed !== undefined) {
+        const presetSeed = METRIC_TREE_SEEDS[m.seedPreset] || [4, 7];
+        m.seed = normalizeMetricTreeSeed(params.seed, presetSeed);
+    }
+    if (params.expression !== undefined) m.expression = String(params.expression || '').trim();
+    if (params.expressionEnabled !== undefined) m.expressionEnabled = !!params.expressionEnabled;
+    if (params.phrasePreset !== undefined) {
+        const k = String(params.phrasePreset || 'Custom');
+        m.phrasePreset = (k === 'Custom'
+            || !!METRIC_TREE_PHRASE_PRESETS[k]
+            || (isMetricUserPresetKey(k) && !!state.metricPhraseUserPresets?.[metricUserPresetNameFromKey(k)]))
+            ? k
+            : 'Custom';
+    }
+    if (m.expressionEnabled && m.expression) m.seedPreset = 'Custom';
+    if (params.speed !== undefined) {
+        const speedRaw = Number(params.speed);
+        m.speed = Math.max(0.25, Math.min(3, Number.isFinite(speedRaw) ? speedRaw : 1));
+    }
+    if (params.cycleMode !== undefined) {
+        const mode = String(params.cycleMode || '1bar');
+        m.cycleMode = (mode === '2bar' || mode === 'custom') ? mode : '1bar';
+    }
+    if (params.cycleBars !== undefined) {
+        const barsRaw = Number(params.cycleBars);
+        m.cycleBars = Math.max(0.25, Math.min(8, Number.isFinite(barsRaw) ? barsRaw : 1));
+    }
+    if (m.expressionEnabled && m.expression && (!m.phrasePreset || m.phrasePreset === 'Custom')) {
+        m.phrasePreset = getMetricPhrasePresetKeyByExpression(m.expression);
+    }
+    if (params.depth !== undefined) {
+        m.depth = Math.max(1, Math.min(METRIC_TREE_MAX_DEPTH, parseInt(params.depth, 10) || 2));
+    }
+    if (params.wither !== undefined) {
+        m.wither = Math.max(0.8, Math.min(1.02, Number(params.wither) || 0.98));
+    }
+    if (params.nesting !== undefined) {
+        m.nesting = normalizeMetricTreeNesting(params.nesting);
+    }
+    m.slotsKey = '';
+    m.slots = [];
+    resetArpMetricRuntime(zoneId);
+}
+
 function updateArpPresetDesc(zoneId = null) {
     if (!els.arpPresetDesc) return;
     const arp = getArpState(zoneId || getActiveEditZoneId());
+    const metric = ensureArpMetricDefaults(arp);
     const pattern = arp.stepPattern || [];
     const stepsOn = pattern.filter(Boolean).length;
     const prob = Math.round((Number.isFinite(arp.probability) ? arp.probability : 1) * 100);
     const avgRatchet = (arp.ratchetPattern || []).reduce((a, b) => a + b, 0) / Math.max(1, (arp.ratchetPattern || []).length);
     const ratchetLabel = Number.isFinite(avgRatchet) ? avgRatchet.toFixed(1) : arp.ratchet;
-    els.arpPresetDesc.textContent = `Mode ${arp.mode} | Oct ${arp.octaveRange} ${arp.octaveMode} | Prob ${prob}% | Ratchet ${ratchetLabel} | Steps ${stepsOn}/${pattern.length || 0}`;
+    const metricCore = (metric.expressionEnabled && metric.expression)
+        ? `Expr ${metric.expression}`
+        : `${metric.seed.join(':')} d${metric.depth}`;
+    const cycleLabel = metric.cycleMode === 'custom'
+        ? `${(Number(metric.cycleBars || 1)).toFixed(2)}bar`
+        : (metric.cycleMode === '2bar' ? '2bar' : '1bar');
+    const metricLabel = metric.enabled ? ` | Metric ${metricCore} @${Math.round((metric.speed || 1) * 100)}% ${cycleLabel}` : '';
+    els.arpPresetDesc.textContent = `Mode ${arp.mode} | Oct ${arp.octaveRange} ${arp.octaveMode} | Prob ${prob}% | Ratchet ${ratchetLabel} | Steps ${stepsOn}/${pattern.length || 0}${metricLabel}`;
 }
 
 function updateArpValueLabels(zoneId = null) {
@@ -14423,6 +17265,18 @@ function updateArpValueLabels(zoneId = null) {
     if (els.arpSwingVal) {
         const pct = Math.round((Number.isFinite(arp.swing) ? arp.swing : 0) * 100);
         els.arpSwingVal.textContent = `${pct}%`;
+    }
+    if (els.arpMetricWitherVal) {
+        const m = ensureArpMetricDefaults(arp);
+        els.arpMetricWitherVal.textContent = `${Math.round(m.wither * 100)}%`;
+    }
+    if (els.arpMetricSpeedVal) {
+        const m = ensureArpMetricDefaults(arp);
+        els.arpMetricSpeedVal.textContent = `${Math.round((m.speed || 1) * 100)}%`;
+    }
+    if (els.arpMetricCycleBarsVal) {
+        const m = ensureArpMetricDefaults(arp);
+        els.arpMetricCycleBarsVal.textContent = `${(Number(m.cycleBars || 1)).toFixed(2)} bars`;
     }
 }
 
@@ -14450,6 +17304,7 @@ function invalidateArpSequenceCache(zoneId = null) {
     arp.sequence = [];
     arp.brownianIndex = 0;
     arp.noteIndex = 0;
+    resetArpMetricRuntime(zoneId);
 }
 
 function readArpStepPatternFromUI() {
@@ -14497,6 +17352,7 @@ function writeArpRatchetPatternToUI(pattern) {
 
 function syncArpParamsToUI(zoneId = null) {
     const arp = getArpState(zoneId || getActiveEditZoneId());
+    const metric = ensureArpMetricDefaults(arp);
     if (els.arpMode) els.arpMode.value = arp.mode || 'up';
     if (els.arpOctaveRange) els.arpOctaveRange.value = arp.octaveRange || 1;
     if (els.arpOctaveMode) els.arpOctaveMode.value = arp.octaveMode || 'serial';
@@ -14505,9 +17361,54 @@ function syncArpParamsToUI(zoneId = null) {
     if (els.arpEuclid) els.arpEuclid.value = arp.euclideanDensity || 0;
     if (els.arpShift) els.arpShift.value = arp.shiftMs || 0;
     if (els.arpSwing) els.arpSwing.value = Math.round((arp.swing || 0) * 100);
+    if (els.arpMetricEnabled) {
+        const on = !!metric.enabled;
+        els.arpMetricEnabled.textContent = on ? 'METRIC ON' : 'METRIC OFF';
+        els.arpMetricEnabled.classList.toggle('toggle-on', on);
+        els.arpMetricEnabled.classList.toggle('toggle-off', !on);
+    }
+    if (els.arpMetricSeedPreset) {
+        const presetName = (metric.expressionEnabled && metric.expression)
+            ? 'Custom'
+            : (METRIC_TREE_SEEDS[metric.seedPreset] ? metric.seedPreset : 'Custom');
+        els.arpMetricSeedPreset.value = presetName;
+    }
+    if (els.arpMetricSeed) {
+        els.arpMetricSeed.value = (metric.expressionEnabled && metric.expression)
+            ? metric.expression
+            : (metric.seed || [4, 7]).join(',');
+    }
+    if (els.arpMetricDepth) els.arpMetricDepth.value = String(metric.depth || 2);
+    if (els.arpMetricWither) els.arpMetricWither.value = String(Math.round((metric.wither || 0.98) * 100));
+    if (els.arpMetricNesting) els.arpMetricNesting.value = normalizeMetricTreeNesting(metric.nesting);
+    if (els.arpMetricSpeed) els.arpMetricSpeed.value = String(Math.round((metric.speed || 1) * 100));
+    if (els.arpMetricCycleMode) els.arpMetricCycleMode.value = (metric.cycleMode === '2bar' || metric.cycleMode === 'custom') ? metric.cycleMode : '1bar';
+    if (els.arpMetricCycleBars) {
+        els.arpMetricCycleBars.value = (Number(metric.cycleBars || 1)).toFixed(2);
+        const mode = els.arpMetricCycleMode ? els.arpMetricCycleMode.value : '1bar';
+        els.arpMetricCycleBars.disabled = mode !== 'custom';
+    }
+    if (els.arpMetricPhraseName) {
+        const k = String(metric.phrasePreset || 'Custom');
+        els.arpMetricPhraseName.value = isMetricUserPresetKey(k) ? metricUserPresetNameFromKey(k) : '';
+    }
+    if (els.arpMetricPhrasePreset) {
+        refreshMetricPhrasePresetSelect(metric.phrasePreset || 'Custom');
+        const presetKey = metric.expressionEnabled && metric.expression
+            ? getMetricPhrasePresetKeyByExpression(metric.expression)
+            : (metric.phrasePreset || 'Custom');
+        els.arpMetricPhrasePreset.value = presetKey;
+    }
     writeArpStepPatternToUI(arp.stepPattern);
     writeArpRatchetPatternToUI(arp.ratchetPattern);
     updateArpValueLabels(zoneId);
+    updateMetricSeedSyntaxBadge(els.arpMetricSeed?.value || '');
+    const arpSelKey = String(els.arpPresetSelect?.value || '');
+    if (arpSelKey.startsWith('user:')) {
+        updateMetricPhrasePresetStatus('User ARP preset selected. Save can update/rename.', '#9fd3ff');
+    } else {
+        updateMetricPhrasePresetStatus('Built-in ARP preset selected. Save to create/update a user preset.', '#9aa');
+    }
 }
 
 function updateArpParams(params = {}, zoneId = null) {
@@ -14768,7 +17669,16 @@ function arpNoteOn(noteObj, stepMs, stepIdx, offsetMs = 0, zoneId = null) {
         sendMidi([0xD0 + chan - 1, press], output);
         sendMidi([0x90 + chan - 1, noteObj.note, velocity], output);
         markLocalNoteOn(noteObj.note);
-        const entry = { chan, note: noteObj.note, color: noteObj.color, offTimer: null, zone: z };
+        markPolyTreeArpFlash(noteObj.noteFloat ?? noteObj.note, z, noteObj.color || '#74ff8a');
+        const entry = {
+            chan,
+            note: noteObj.note,
+            basePb: Number.isFinite(noteObj.basePb) ? noteObj.basePb : 0,
+            noteFloat: Number.isFinite(noteObj.noteFloat) ? noteObj.noteFloat : getVoiceNoteFloat(noteObj),
+            color: noteObj.color,
+            offTimer: null,
+            zone: z
+        };
         arp.active.push(entry);
         entry.offTimer = setTimeout(() => {
             if (!arp.active.includes(entry)) return;
@@ -14780,7 +17690,7 @@ function arpNoteOn(noteObj, stepMs, stepIdx, offsetMs = 0, zoneId = null) {
     if (delayMs > 0) setTimeout(sendNote, delayMs); else sendNote();
 }
 
-function arpStep(zoneId, stepMsOverride) {
+function arpRunSingleEvent(zoneId, stepMsOverride, options = {}) {
     const z = getScaleZoneId(zoneId || 'A');
     const arp = getArpState(z);
     if (state.fadeState.active) return;
@@ -14800,15 +17710,19 @@ function arpStep(zoneId, stepMsOverride) {
     const probability = Number.isFinite(arp.probability) ? arp.probability : 1;
     if (Math.random() >= Math.max(0, Math.min(1, probability))) {
         requestDraw();
-        return;
+        return { played: false, stepIdx };
     }
-    const playIndex = Number.isFinite(arp.noteIndex) ? arp.noteIndex : 0;
+    const playIndex = Number.isFinite(options.playIndex)
+        ? options.playIndex
+        : (Number.isFinite(arp.noteIndex) ? arp.noteIndex : 0);
     const noteObj = sequence[getArpNoteIndex(playIndex, sequence.length, z)];
     const ratchetPattern = arp.ratchetPattern || [];
     const ratchetLen = ratchetPattern.length || 0;
     const stepRatchet = ratchetLen ? ratchetPattern[stepIdx % ratchetLen] : arp.ratchet;
     const ratchetCount = Math.max(1, Math.min(4, parseInt(stepRatchet, 10) || 1));
-    arp.noteIndex = playIndex + 1;
+    if (!options.freezeGlobalNoteIndex) {
+        arp.noteIndex = playIndex + 1;
+    }
     const subStepMs = stepMs / ratchetCount;
     const swingAmt = Math.max(0, Math.min(1, Number(arp.swing) || 0));
     const swingOffset = (stepIdx % 2 === 1) ? (subStepMs * 0.33 * swingAmt) : 0;
@@ -14817,7 +17731,7 @@ function arpStep(zoneId, stepMsOverride) {
     if (ratchetCount === 1) {
         arpNoteOn(noteObj, stepMs, stepIdx, baseOffset, z);
         requestDraw();
-        return;
+        return { played: true, stepIdx, nextPlayIndex: playIndex + 1 };
     }
     for (let r = 0; r < ratchetCount; r++) {
         const offset = r * subStepMs;
@@ -14830,6 +17744,53 @@ function arpStep(zoneId, stepMsOverride) {
         }
     }
     requestDraw();
+    return { played: true, stepIdx, nextPlayIndex: playIndex + 1 };
+}
+
+function arpRunMetricSlot(zoneId, cycleMs, slot) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const arp = getArpState(z);
+    const metric = ensureArpMetricDefaults(arp);
+    const slotEvents = (slot && Array.isArray(slot.events) && slot.events.length)
+        ? slot.events
+        : [{ durationNorm: 1, layer: 'leaf' }];
+    const isStacked = metric.nesting === 'stacked';
+    if (!isStacked) {
+        const ev = slotEvents[slotEvents.length - 1];
+        const eventMs = Math.max(12, cycleMs * Math.max(0.00025, Number(ev.durationNorm) || 1));
+        return arpRunSingleEvent(z, eventMs);
+    }
+    let played = false;
+    slotEvents.forEach((ev) => {
+        const layer = String(ev.layer || 'leaf');
+        const playIndex = Number.isFinite(metric.layerNoteIndex[layer]) ? metric.layerNoteIndex[layer] : 0;
+        const eventMs = Math.max(10, cycleMs * Math.max(0.00025, Number(ev.durationNorm) || 1));
+        const res = arpRunSingleEvent(z, eventMs, { playIndex, freezeGlobalNoteIndex: true });
+        metric.layerNoteIndex[layer] = playIndex + 1;
+        played = played || !!res?.played;
+    });
+    return { played };
+}
+
+function arpStep(zoneId, stepMsOverride) {
+    return arpRunSingleEvent(zoneId, stepMsOverride);
+}
+
+function scheduleNextInternalMetricSlot(zoneId, cycleMs) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const arp = getArpState(z);
+    const metric = ensureArpMetricDefaults(arp);
+    if ((!arp.enabled && !arp.keepHold) || arp.sync !== 'internal' || !metric.enabled) return;
+    const slots = getArpMetricSlots(z);
+    if (!slots.length) return;
+    const idx = metric.slotIndex % slots.length;
+    const slot = slots[idx];
+    arpRunMetricSlot(z, cycleMs, slot);
+    metric.slotIndex = (idx + 1) % slots.length;
+    const delayNorm = Math.max(0.00025, Number(slot.deltaNorm) || 1);
+    const delayMs = Math.max(8, cycleMs * delayNorm);
+    arp.timerMode = 'metric';
+    arp.timer = setTimeout(() => scheduleNextInternalMetricSlot(z, cycleMs), delayMs);
 }
 
 function restartInternalArp(zoneId = null) {
@@ -14837,8 +17798,16 @@ function restartInternalArp(zoneId = null) {
     const arp = getArpState(z);
     if (arp.timer) clearInterval(arp.timer);
     if ((!arp.enabled && !arp.keepHold) || arp.sync !== 'internal') return;
-    const stepMs = getStepMs(z);
     arp.running = true;
+    const stepMs = getStepMs(z);
+    const metricCycleMs = getArpMetricCycleMs(z);
+    const metric = ensureArpMetricDefaults(arp);
+    if (metric.enabled) {
+        resetArpMetricRuntime(z);
+        scheduleNextInternalMetricSlot(z, metricCycleMs);
+        return;
+    }
+    arp.timerMode = 'interval';
     arp.timer = setInterval(() => arpStep(z, stepMs), stepMs);
 }
 
@@ -14847,11 +17816,13 @@ function stopInternalArp(zoneId = null) {
     const arp = getArpState(z);
     if (arp.timer) clearInterval(arp.timer);
     arp.timer = null;
+    arp.timerMode = '';
 }
 
 function syncArpFromUI(zoneId = null) {
     const z = getScaleZoneId(zoneId || getActiveEditZoneId());
     const arp = getArpState(z);
+    const metric = ensureArpMetricDefaults(arp);
     const wasEnabled = arp.enabled;
     arp.enabled = !!els.arpEnabled.checked;
     arp.keepHold = !arp.enabled && isKeepEnabled(z) && state.arpHoldTouches.some(t => getAudioZoneId(t?.zone || t?.noteObjs?.[0]?.zone || 'A') === z);
@@ -14860,6 +17831,33 @@ function syncArpFromUI(zoneId = null) {
     arp.sync = els.arpSync.value;
     arp.bpm = parseInt(els.arpBpm.value, 10) || 120;
     arp.latch = !!els.arpLatch.checked;
+    const seedRawInput = String(els.arpMetricSeed?.value || '').trim();
+    let phrasePreset = String(els.arpMetricPhrasePreset?.value || metric.phrasePreset || 'Custom');
+    const expressionCandidate = seedRawInput.includes('[') ? seedRawInput : '';
+    const exprParsed = expressionCandidate ? parseMetricTreeExpression(expressionCandidate) : { ok: false };
+    const expressionEnabled = !!(expressionCandidate && exprParsed.ok);
+    if (expressionEnabled) phrasePreset = getMetricPhrasePresetKeyByExpression(expressionCandidate);
+    const selectedPreset = String(els.arpMetricSeedPreset?.value || metric.seedPreset || 'Phototactic');
+    const presetSeed = METRIC_TREE_SEEDS[selectedPreset] || metric.seed || [4, 7];
+    const parsedSeed = expressionEnabled
+        ? normalizeMetricTreeSeed(metric.seed, presetSeed)
+        : parseMetricTreeSeedInput(seedRawInput, presetSeed);
+    const witherPct = parseInt(els.arpMetricWither?.value, 10);
+    const metricOn = els.arpMetricEnabled ? els.arpMetricEnabled.classList.contains('toggle-on') : !!metric.enabled;
+    applyArpMetricParams({
+        enabled: metricOn,
+        seedPreset: selectedPreset,
+        seed: parsedSeed,
+        expression: expressionCandidate,
+        expressionEnabled,
+        phrasePreset,
+        depth: parseInt(els.arpMetricDepth?.value, 10) || metric.depth || 2,
+        wither: (Number.isFinite(witherPct) ? witherPct : Math.round(metric.wither * 100)) / 100,
+        nesting: els.arpMetricNesting?.value || metric.nesting || 'single',
+        speed: (parseInt(els.arpMetricSpeed?.value, 10) || Math.round((metric.speed || 1) * 100)) / 100,
+        cycleMode: els.arpMetricCycleMode?.value || metric.cycleMode || '1bar',
+        cycleBars: parseFloat(els.arpMetricCycleBars?.value) || metric.cycleBars || 1
+    }, z);
     updateArpParams({
         mode: els.arpMode ? els.arpMode.value : undefined,
         octaveRange: els.arpOctaveRange ? els.arpOctaveRange.value : undefined,
@@ -14873,6 +17871,7 @@ function syncArpFromUI(zoneId = null) {
         ratchetPattern: els.arpStepPattern ? readArpRatchetPatternFromUI() : undefined
     }, z);
     updateArpTiming(z);
+    syncArpParamsToUI(z);
     updateArpControlsUI();
     if (!arp.enabled && !arp.keepHold) {
         arp.running = false;
@@ -14901,6 +17900,7 @@ function handleClockMessage(status) {
             arp.noteIndex = 0;
             arp.clockTicks = 0;
             arp.lastClockTime = 0;
+            resetArpMetricRuntime(z);
             stopAllArpNotes(z);
             return;
         }
@@ -14908,6 +17908,7 @@ function handleClockMessage(status) {
             arp.running = false;
             arp.lastClockTime = 0;
             arp.noteIndex = 0;
+            resetArpMetricRuntime(z);
             stopAllArpNotes(z);
             return;
         }
@@ -14923,7 +17924,28 @@ function handleClockMessage(status) {
             arp.clockTicks++;
             if (arp.clockTicks % arp.ticksPerStep === 0) {
                 const stepMs = arp.tickMs ? arp.tickMs * arp.ticksPerStep : getStepMs(z);
-                arpStep(z, stepMs);
+                const metric = ensureArpMetricDefaults(arp);
+                if (!metric.enabled) {
+                    arpStep(z, stepMs);
+                } else {
+                    const slots = getArpMetricSlots(z);
+                    if (!slots.length) return;
+                    const metricCycleMs = getArpMetricCycleMs(z);
+                    metric.clockAccumMs += Math.max(0, stepMs);
+                    if (!Number.isFinite(metric.nextDueMs) || metric.nextDueMs < 0) metric.nextDueMs = 0;
+                    let loops = 0;
+                    while (metric.clockAccumMs >= metric.nextDueMs && loops < 64) {
+                        const idx = metric.slotIndex % slots.length;
+                        const slot = slots[idx];
+                        if (!slot) break;
+                        const slotDelayMs = Math.max(1, metricCycleMs * Math.max(0.00025, Number(slot.deltaNorm) || 1));
+                        arpRunMetricSlot(z, metricCycleMs, slot);
+                        metric.slotIndex = (idx + 1) % slots.length;
+                        metric.clockAccumMs = Math.max(0, metric.clockAccumMs - metric.nextDueMs);
+                        metric.nextDueMs = slotDelayMs;
+                        loops += 1;
+                    }
+                }
             }
         }
     });
@@ -14959,10 +17981,30 @@ function getMPEData(e, voice = null, forceSnap = false, inputMode = null) {
     const stepOrder = getCircleStepOrderForGrid(zoneId, grid);
     const circleSteps = Math.max(1, stepOrder.length);
     const totalNotes = Math.max(1, numOct * circleSteps);
-    const mode = (inputMode === 'circle' || inputMode === 'keyboard')
+    const mode = (inputMode === 'circle' || inputMode === 'keyboard' || inputMode === 'lumatone')
         ? inputMode
         : getPointerPitchMappingMode(zoneId);
     const linearExact = ((e.clientX - state.canvasRect.left) / Math.max(1, state.canvasRect.width)) * totalNotes;
+    const lumatoneHit = mode === 'lumatone' ? getLumatoneNoteExactForPointer(e.clientX, e.clientY, zoneId) : null;
+    const plannerPlay = ensurePolyPlannerPlayabilityDefaults(state.experimental?.polyPlanner) || {};
+    const plannerLockMode = normalizePolyTreeBranchLockMode(plannerPlay.branchLockMode, plannerPlay.branchLock !== false);
+    const plannerSnapMode = 'hard';
+    const polyDragDisabled = (
+        mode === 'circle'
+        && state.experimental?.polyPlanner?.enabled
+        && !!voice
+        && !voice.isHoldGrab
+        && !voice.isArpHoldGrab
+        && !voice.isArpLiveGrab
+    );
+    const polyTreeHit = (mode === 'circle' && state.experimental?.polyPlanner?.enabled)
+        ? getPolyPlannerTreeHit(e.clientX, e.clientY, zoneId, {
+            lockBranch: getPolyTreeEffectiveLockBranch(plannerLockMode, voice, plannerPlay.branchLock !== false),
+            preferredKey: voice?.polyTreeNodeKey || '',
+            hitPadding: parseFloat(plannerPlay.hitPadding),
+            hysteresisPx: parseFloat(plannerPlay.hysteresisPx)
+        })
+        : null;
     const stepExact = mode === 'circle'
         ? getCircleStepExactForPointer(e.clientX, e.clientY, zoneId, totalNotes, circleSteps)
         : linearExact;
@@ -14971,9 +18013,112 @@ function getMPEData(e, voice = null, forceSnap = false, inputMode = null) {
     const stepFrac = centerExact - stepIdx;
     const mapA = getCircleLayoutNoteAt(stepIdx, zoneId, grid, baseMIDI, numOct);
     const mapB = getCircleLayoutNoteAt(Math.min(stepIdx + 1, totalNotes - 1), zoneId, grid, baseMIDI, numOct);
-    const noteA = mapA.note;
-    const noteB = mapB.note;
-    const currentExact = noteA + ((noteB - noteA) * stepFrac);
+    let noteA = mapA.note;
+    let noteB = mapB.note;
+    if (mode === 'circle' && state.experimental?.polyPlanner?.enabled) {
+        const polyA = getPolyPlannerMappingForMidi(noteA, zoneId);
+        const polyB = getPolyPlannerMappingForMidi(noteB, zoneId);
+        if (Number.isFinite(polyA?.noteFloat)) noteA = polyA.noteFloat;
+        if (Number.isFinite(polyB?.noteFloat)) noteB = polyB.noteFloat;
+    }
+    let currentExact = lumatoneHit?.noteExact ?? (noteA + ((noteB - noteA) * stepFrac));
+    let nearestPitchRef = lumatoneHit?.noteExact ?? noteA;
+    let resolvedPolyHit = null;
+    if (mode === 'circle' && state.experimental?.polyPlanner?.enabled) {
+        if (polyDragDisabled) {
+            if (Number.isFinite(voice?.initialExact)) {
+                currentExact = voice.initialExact;
+                nearestPitchRef = voice.initialExact;
+            }
+            if (voice) {
+                voice.polyTreePendingKey = '';
+                voice.polyTreePendingBranch = '';
+                voice.polyTreePendingSince = 0;
+            }
+            resolvedPolyHit = null;
+        } else {
+            const nowMs = performance.now();
+            let acceptedPolyHit = polyTreeHit;
+            if (voice && plannerSnapMode === 'soft') {
+                const key = String(polyTreeHit?.key || '');
+                const curKey = String(voice.polyTreeNodeKey || '');
+                if (key && curKey && key !== curKey) {
+                    const softMs = Math.max(20, Math.min(220, parseInt(plannerPlay.softSnapMs, 10) || 55));
+                    if (voice.polyTreePendingKey !== key) {
+                        voice.polyTreePendingKey = key;
+                        voice.polyTreePendingBranch = String(polyTreeHit?.branch || '');
+                        voice.polyTreePendingSince = nowMs;
+                        acceptedPolyHit = null;
+                    } else if ((nowMs - (voice.polyTreePendingSince || 0)) < softMs) {
+                        acceptedPolyHit = null;
+                    } else {
+                        voice.polyTreePendingKey = '';
+                        voice.polyTreePendingBranch = '';
+                        voice.polyTreePendingSince = 0;
+                    }
+                } else if (!key || key === curKey) {
+                    voice.polyTreePendingKey = '';
+                    voice.polyTreePendingBranch = '';
+                    voice.polyTreePendingSince = 0;
+                }
+            } else if (voice) {
+                voice.polyTreePendingKey = '';
+                voice.polyTreePendingBranch = '';
+                voice.polyTreePendingSince = 0;
+            }
+            if (acceptedPolyHit && Number.isFinite(acceptedPolyHit.noteExact)) {
+                resolvedPolyHit = acceptedPolyHit;
+                const keyChanged = !!(voice && acceptedPolyHit.key && acceptedPolyHit.key !== voice.polyTreeNodeKey);
+                if (voice && keyChanged) {
+                    if (plannerPlay.legatoBranch && plannerSnapMode !== 'glide') {
+                        voice.initialExact = acceptedPolyHit.noteExact;
+                    }
+                    voice.polyTreeNodeKey = acceptedPolyHit.key;
+                    if (acceptedPolyHit.branch) {
+                        if (plannerLockMode === 'locka') voice.polyTreeLockBranch = 'A';
+                        else if (plannerLockMode === 'lockb') voice.polyTreeLockBranch = 'B';
+                        else if (plannerLockMode === 'auto' && plannerPlay.branchLock !== false) voice.polyTreeLockBranch = voice.polyTreeLockBranch || acceptedPolyHit.branch;
+                    }
+                }
+                if (voice && plannerSnapMode === 'glide' && keyChanged) {
+                    const from = Number.isFinite(voice.polyTreeGlideValue)
+                        ? voice.polyTreeGlideValue
+                        : (Number.isFinite(voice.initialExact) ? voice.initialExact : acceptedPolyHit.noteExact);
+                    const glideMs = Math.max(20, Math.min(500, parseInt(plannerPlay.glideMs, 10) || 100));
+                    voice.polyTreeGlideFrom = from;
+                    voice.polyTreeGlideTo = acceptedPolyHit.noteExact;
+                    voice.polyTreeGlideStartMs = nowMs;
+                    voice.polyTreeGlideUntilMs = nowMs + glideMs;
+                    voice.polyTreeGlideValue = from;
+                }
+                currentExact = acceptedPolyHit.noteExact;
+                nearestPitchRef = acceptedPolyHit.noteExact;
+            } else if (voice && Number.isFinite(voice.initialExact)) {
+                if (plannerSnapMode === 'glide' && Number.isFinite(voice.polyTreeGlideUntilMs) && Number.isFinite(voice.polyTreeGlideTo)) {
+                    const glideStart = Number.isFinite(voice.polyTreeGlideStartMs) ? voice.polyTreeGlideStartMs : nowMs;
+                    const glideEnd = voice.polyTreeGlideUntilMs;
+                    const dur = Math.max(1, glideEnd - glideStart);
+                    const t = Math.max(0, Math.min(1, (nowMs - glideStart) / dur));
+                    const eased = 1 - Math.pow(1 - t, 2);
+                    const from = Number.isFinite(voice.polyTreeGlideFrom) ? voice.polyTreeGlideFrom : voice.initialExact;
+                    const to = voice.polyTreeGlideTo;
+                    const glideExact = from + ((to - from) * eased);
+                    voice.polyTreeGlideValue = glideExact;
+                    if (t >= 1) {
+                        voice.polyTreeGlideFrom = to;
+                        voice.polyTreeGlideTo = to;
+                        voice.polyTreeGlideStartMs = nowMs;
+                        voice.polyTreeGlideUntilMs = nowMs;
+                    }
+                    currentExact = glideExact;
+                    nearestPitchRef = to;
+                } else {
+                    currentExact = voice.initialExact;
+                    nearestPitchRef = voice.initialExact;
+                }
+            }
+        }
+    }
     
     let finalExact = currentExact;
     let detune = 0;
@@ -14981,15 +18126,14 @@ function getMPEData(e, voice = null, forceSnap = false, inputMode = null) {
         if (!Number.isFinite(voice.initialExact)) {
             voice.initialExact = currentExact;
         }
-        const nearestNote = noteA;
-        const distanceToNote = Math.abs(currentExact - nearestNote);
+        const distanceToNote = Math.abs(currentExact - nearestPitchRef);
         const dcZone = round * (0.2 + (dcForce * 0.8));
         if (deadCenter && distanceToNote < dcZone) {
             const force = 1 - (distanceToNote / Math.max(0.0001, dcZone));
-            finalExact = currentExact + (nearestNote - currentExact) * force;
+            finalExact = currentExact + (nearestPitchRef - currentExact) * force;
         } else if (distanceToNote < round) {
             const force = 1 - (distanceToNote / round);
-            finalExact = currentExact + (nearestNote - currentExact) * force;
+            finalExact = currentExact + (nearestPitchRef - currentExact) * force;
         }
         detune = finalExact - voice.initialExact;
         voice.vibratoSpeed = Math.abs(e.clientX - voice.lastX) * 2.8;
@@ -14999,9 +18143,138 @@ function getMPEData(e, voice = null, forceSnap = false, inputMode = null) {
     let pbValue = Math.floor(8192 + (detune * (8192 / pbRange)));
     pbValue = Math.max(0, Math.min(16383, pbValue));
     const yData = getYDataFromEvent(e, zoneId);
+    if (mode === 'circle' && state.experimental?.polyPlanner?.enabled && (resolvedPolyHit || polyDragDisabled)) {
+        // Poly Tree v2: expression is branch-gesture driven, not global/local Y.
+        yData.slide = 64;
+        yData.press = 90;
+        yData.velocity = 96;
+        yData.yNorm = 0.5;
+        yData.circleYNorm = 0.5;
+    }
+    if (mode === 'lumatone' && lumatoneHit && Number.isFinite(lumatoneHit.localYNorm)) {
+        // Lumatone local Y tuning: favor extremes (0/127) with wider range and center-expanding curve.
+        const localMinNorm = 0.01;
+        const localMaxNorm = 0.99;
+        const rawNorm = localMinNorm + (Math.max(0, Math.min(1, lumatoneHit.localYNorm)) * (localMaxNorm - localMinNorm));
+        const center = 0.5;
+        const dist = rawNorm - center;
+        const expanded = center + (Math.sign(dist) * Math.pow(Math.abs(dist) * 2, 0.55) * 0.5);
+        const localNorm = Math.max(0, Math.min(1, expanded));
+        const local = mapYNormToMPE(localNorm, e, { deadzoneScale: 0.2 });
+        yData.slide = local.slide;
+        yData.press = local.press;
+        yData.velocity = local.velocity;
+        yData.yNorm = local.yNorm;
+        yData.circleYNorm = local.yNorm;
+    }
+    if (mode === 'lumatone' && !isHoldEnabled(zoneId)) {
+        if (voice && !Number.isFinite(voice.touchStartMs)) voice.touchStartMs = performance.now();
+        const heldMs = (voice && Number.isFinite(voice.touchStartMs))
+            ? (performance.now() - voice.touchStartMs)
+            : 0;
+        const boost = getLumatoneHoldTimeBoost(heldMs);
+        yData.slide = Math.max(0, Math.min(127, Math.round((Number(yData.slide) || 0) + boost.slide)));
+        yData.press = Math.max(0, Math.min(127, Math.round((Number(yData.press) || 0) + boost.press)));
+        if (Number.isFinite(yData.velocity)) {
+            yData.velocity = Math.max(1, Math.min(127, Math.round(yData.velocity + boost.velocity)));
+        }
+    }
     const slide = yData.slide;
     const press = yData.press;
-    return { pbValue, slide, press, x: e.clientX, y: e.clientY, exact: finalExact };
+    const velocity = Number.isFinite(yData.velocity)
+        ? yData.velocity
+        : Math.max(1, Math.min(127, Math.round(press)));
+    return {
+        pbValue, slide, press, velocity, x: e.clientX, y: e.clientY, exact: finalExact,
+        circleYNorm: yData.circleYNorm,
+        circleRing: yData.circleRing,
+        circleRingSide: yData.circleRingSide,
+        polyHitKey: resolvedPolyHit?.key || '',
+        polyHitBranch: resolvedPolyHit?.branch || ''
+    };
+}
+
+function applyPolyTreePlayabilityV2(touch, m, e, zoneId) {
+    if (!touch || !m || !state.experimental?.polyPlanner?.enabled) return m;
+    const planner = state.experimental.polyPlanner;
+    const play = ensurePolyPlannerPlayabilityDefaults(planner);
+    if (!play || play.v2Enabled === false) return m;
+    if (!isPolyTreeViewActive(zoneId)) return m;
+    const lockMode = normalizePolyTreeBranchLockMode(play.branchLockMode, play.branchLock !== false);
+    const width = Math.max(1, state.canvasRect.width);
+    const height = Math.max(1, state.canvasRect.height);
+    const grid = getGridDegrees(zoneId);
+    const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * grid.periodSemitones) + grid.root;
+    const geom = getPolyPlannerTreeGeometry(width, height, planner, baseMIDI, zoneId);
+    const localX = e.clientX - state.canvasRect.left;
+    const localY = e.clientY - state.canvasRect.top;
+    if (m.polyHitKey && m.polyHitKey !== touch.polyTreeNodeKey && m.polyHitKey !== 'root' && !isPolyPlannerNodeMuted(m.polyHitKey, planner)) {
+        touch.polyTreeNodeKey = m.polyHitKey;
+        if (m.polyHitBranch) {
+            if (lockMode === 'locka') touch.polyTreeLockBranch = 'A';
+            else if (lockMode === 'lockb') touch.polyTreeLockBranch = 'B';
+            else if (lockMode === 'free') touch.polyTreeLockBranch = '';
+            else if (play.branchLock !== false) touch.polyTreeLockBranch = touch.polyTreeLockBranch || m.polyHitBranch;
+        }
+        if (Number.isFinite(m.exact) && normalizePolyTreeSnapMode(play.snapMode) !== 'glide') touch.initialExact = m.exact;
+        planner.activeKey = m.polyHitKey;
+        planner.activeKeys = [m.polyHitKey];
+        planner.activeUntil = performance.now() + 340;
+        if (m.polyHitBranch === 'A') planner.focusA = Math.max(0, parseInt(String(m.polyHitKey).split(':')[1], 10) || planner.focusA || 0);
+        if (m.polyHitBranch === 'B') planner.focusB = Math.max(0, parseInt(String(m.polyHitKey).split(':')[1], 10) || planner.focusB || 0);
+    }
+    const nodeKey = String(touch.polyTreeNodeKey || touch.polyTreeStartNodeKey || '');
+    const allNodes = [geom.rootNode, ...geom.nodesA, ...geom.nodesB];
+    const startNode = allNodes.find((n) => getPolyPlannerNodeKey(n) === nodeKey) || null;
+    if (!startNode || startNode.isRoot) return m;
+
+    // Gesture 1: branch stretch (persistent) -> MPE values mapped like Y controls.
+    const mix = Math.max(0, Math.min(1, parseFloat(play.stretchMix) || 0.6));
+    const rvx = startNode.x - geom.rootNode.x;
+    const rvy = startNode.y - geom.rootNode.y;
+    const rLen = Math.max(1, Math.hypot(rvx, rvy));
+    const ux = rvx / rLen;
+    const uy = rvy / rLen;
+    const pvx = localX - geom.rootNode.x;
+    const pvy = localY - geom.rootNode.y;
+    const projAbs = (pvx * ux) + (pvy * uy);
+    const curScale = getPolyPlannerNodeLengthScale(nodeKey, planner);
+    if (!touch.polyTreeStretchRef || touch.polyTreeStretchRef.key !== nodeKey) {
+        touch.polyTreeStretchRef = {
+            key: nodeKey,
+            startProj: projAbs,
+            startScale: curScale
+        };
+    }
+    const ref = touch.polyTreeStretchRef;
+    const projDelta = projAbs - (Number.isFinite(ref.startProj) ? ref.startProj : projAbs);
+    const stretchGain = 0.0032;
+    const targetScale = Math.max(0.78, Math.min(1.34, (Number.isFinite(ref.startScale) ? ref.startScale : curScale) + (projDelta * stretchGain)));
+    const nowMs = performance.now();
+    const prevScale = curScale;
+    const prevTs = Number.isFinite(touch.polyTreeStretchTs) ? touch.polyTreeStretchTs : nowMs;
+    const dtMs = Math.max(8, Math.min(50, nowMs - prevTs));
+    const dtSec = dtMs / 1000;
+    const maxUpPerSec = 0.58;
+    const maxDownPerSec = 0.82;
+    const maxUpStep = maxUpPerSec * dtSec;
+    const maxDownStep = maxDownPerSec * dtSec;
+    const delta = targetScale - prevScale;
+    const deadband = 0.004;
+    let nextScale = prevScale;
+    if (Math.abs(delta) >= deadband) {
+        if (delta > 0) nextScale = prevScale + Math.min(delta, maxUpStep);
+        else nextScale = prevScale + Math.max(delta, -maxDownStep);
+    }
+    const stretchVisual = Math.max(0.78, Math.min(1.34, nextScale));
+    touch.polyTreeStretchNorm = Math.max(0, Math.min(1, (stretchVisual - 0.72) / 0.86));
+    touch.polyTreeStretchTs = nowMs;
+    if (nodeKey) setPolyPlannerNodeLengthScale(nodeKey, stretchVisual, planner);
+    applyPolyTreeLengthMpeByScale(m, stretchVisual, (0.28 + (mix * 0.56)));
+
+    // Keep pitch stable in Poly Tree playability: only expression (velocity/press/slide) is length-driven.
+    m.pbValue = Number.isFinite(m.pbValue) ? m.pbValue : 8192;
+    return m;
 }
 
 function clampPb(value) {
@@ -16104,8 +19377,8 @@ function updateGridCache(zoneId = null) {
 
 function getNearestNoteX(noteFloat, zoneId = null) {
     const z = getScaleZoneId(zoneId);
-    const circlePt = getCircleVisualPointForNote(noteFloat, z);
-    if (circlePt) return circlePt.x;
+    const surfacePt = getSurfaceVisualPointForNote(noteFloat, z);
+    if (surfacePt) return surfacePt.x;
     if (!state.gridCache || (zoneId && state.gridCache.zoneId !== z)) {
         updateGridCache(zoneId);
     }
@@ -16127,8 +19400,8 @@ function getHeldVoiceX(voice) {
     const m = voice?.lastM;
     const zoneId = voice?.zone || 'A';
     const noteFloat = getVoiceNoteFloat(voice);
-    const circlePt = getCircleVisualPointForNote(noteFloat, zoneId);
-    if (circlePt) return circlePt.x;
+    const surfacePt = getSurfaceVisualPointForNote(noteFloat, zoneId);
+    if (surfacePt) return surfacePt.x;
     if (!voice?.chordHold && els.holdDetune?.checked && m && Number.isFinite(m.x)) return m.x;
     return getNearestNoteX(noteFloat, zoneId) ?? m?.x ?? 0;
 }
@@ -16136,8 +19409,8 @@ function getHeldVoiceX(voice) {
 function getArpHoldNoteX(noteObj, m) {
     const noteFloat = noteObj?.noteFloat ?? noteObj?.note;
     const zoneId = noteObj?.zone || 'A';
-    const circlePt = getCircleVisualPointForNote(noteFloat, zoneId);
-    if (circlePt) return circlePt.x;
+    const surfacePt = getSurfaceVisualPointForNote(noteFloat, zoneId);
+    if (surfacePt) return surfacePt.x;
     if (els.holdDetune?.checked && m && Number.isFinite(m.x)) return m.x;
     return getNearestNoteX(noteFloat, zoneId) ?? m?.x ?? 0;
 }
@@ -16213,12 +19486,83 @@ function drawNoteBubble(x, y, radius, color, label) {
     }
 }
 
-function getVisualBubbleRadius(m, base = 12, span = 22) {
-    if (Number.isFinite(m?.circleYNorm)) {
-        return base + (Math.max(0, Math.min(1, m.circleYNorm)) * span);
+function getSurfaceBubbleRadiusCap(zoneId = 'A') {
+    const z = getScaleZoneId(zoneId || 'A');
+    if (isCircleDiesisViewActive(z)) {
+        const grid = getGridDegrees(z);
+        const numOct = Math.max(1, getVisibleOctavesForZone(z));
+        const steps = Math.max(1, getCircleStepOrderForGrid(z, grid).length);
+        const geo = getCircleGeometry();
+        const ringW = Math.max(1, (geo.maxR - geo.minR) / numOct);
+        const innerR = geo.minR + (ringW * 0.5);
+        const arcLen = (innerR * Math.PI * 2) / steps;
+        return Math.max(6, Math.min(20, ringW * 0.32, arcLen * 0.32));
     }
-    const press = Number.isFinite(m?.press) ? m.press : 90;
-    return base + ((Math.max(0, Math.min(127, press)) / 127) * span);
+    if (!isLumatoneViewActive(z)) {
+        const width = Math.max(1, Math.floor(state.canvasRect.width));
+        const grid = getGridDegrees(z);
+        const numOct = Math.max(1, getVisibleOctavesForZone(z));
+        const steps = Math.max(1, getCircleStepOrderForGrid(z, grid).length);
+        const totalNotes = Math.max(1, numOct * steps);
+        const noteW = width / totalNotes;
+        return Math.max(5, Math.min(18, noteW * 0.4));
+    }
+    const width = Math.max(1, Math.floor(state.canvasRect.width));
+    const height = Math.max(1, Math.floor(state.canvasRect.height));
+    const surface = buildLumatoneSurfaceCells(width, height, z);
+    return Math.max(6, Math.min(16, surface.hexSize * 0.28));
+}
+
+function getBubbleVisualProfile(zoneId = 'A') {
+    const z = getScaleZoneId(zoneId || 'A');
+    if (isLumatoneViewActive(z)) {
+        return {
+            baseScale: 0.74,
+            spanScale: 0.72,
+            gamma: 0.84,
+            capScale: 0.92,
+            minHeadroomPx: 5,
+            headroomRatio: 0.36
+        };
+    }
+    if (isCircleDiesisViewActive(z)) {
+        return {
+            baseScale: 0.92,
+            spanScale: 1.06,
+            gamma: 0.84,
+            capScale: 1.04,
+            minHeadroomPx: 5,
+            headroomRatio: 0.42
+        };
+    }
+    return {
+        baseScale: 1.0,
+        spanScale: 1.0,
+        gamma: 1.0,
+        capScale: 1.0,
+        minHeadroomPx: 4,
+        headroomRatio: 0.35
+    };
+}
+
+function getVisualBubbleRadius(m, base = 12, span = 22, zoneId = null) {
+    const z = zoneId || m?.zone || m?.zoneId || 'A';
+    const profile = getBubbleVisualProfile(z);
+    const cap = getSurfaceBubbleRadiusCap(z);
+    const normLinear = Number.isFinite(m?.circleYNorm)
+        ? Math.max(0, Math.min(1, m.circleYNorm))
+        : (Math.max(0, Math.min(127, Number.isFinite(m?.press) ? m.press : 90)) / 127);
+    const norm = Math.pow(normLinear, Math.max(0.3, Math.min(2.2, profile.gamma || 1)));
+    const effBase = base * (profile.baseScale || 1);
+    const effSpan = span * (profile.spanScale || 1);
+    const raw = effBase + (norm * effSpan);
+    const minRaw = effBase;
+    const dynamicHeadroom = Math.max(profile.minHeadroomPx || 4, effSpan * (profile.headroomRatio || 0.35));
+    const capScaled = Number.isFinite(cap) ? (cap * (profile.capScale || 1)) : Infinity;
+    const effectiveCap = Number.isFinite(cap)
+        ? Math.max(capScaled, minRaw + dynamicHeadroom)
+        : Infinity;
+    return Math.max(minRaw, Math.min(raw, effectiveCap));
 }
 
 function getCircleTouchVisualPoint(m, fallbackX, fallbackY, zoneId) {
@@ -16236,14 +19580,32 @@ function getCircleTouchVisualPoint(m, fallbackX, fallbackY, zoneId) {
             const ringInset = Math.max(1, metrics.ringW * 0.12);
             const r0 = metrics.minR + (ring * metrics.ringW) + ringInset;
             const r1 = metrics.minR + ((ring + 1) * metrics.ringW) - ringInset;
-            const distClamped = Math.max(r0, Math.min(r1, metrics.dist));
-            const ux = metrics.dist > 1e-6 ? (metrics.dx / metrics.dist) : 0;
-            const uy = metrics.dist > 1e-6 ? (metrics.dy / metrics.dist) : -1;
+            const ringNorm = Number.isFinite(m?.circleYNorm)
+                ? Math.max(0, Math.min(1, m.circleYNorm))
+                : Math.max(0, Math.min(1, metrics.ringNorm));
+            const distClamped = Math.max(r0, Math.min(r1, r0 + ((r1 - r0) * ringNorm)));
+            const noteDx = Number.isFinite(fallbackX) ? (fallbackX - metrics.cxLocal) : metrics.dx;
+            const noteDy = Number.isFinite(fallbackY) ? (fallbackY - metrics.cyLocal) : metrics.dy;
+            const ang = Math.atan2(noteDy, noteDx);
             return {
-                x: metrics.cxLocal + (ux * distClamped),
-                y: metrics.cyLocal + (uy * distClamped)
+                x: metrics.cxLocal + (Math.cos(ang) * distClamped),
+                y: metrics.cyLocal + (Math.sin(ang) * distClamped)
             };
         }
+    }
+    if (isLumatoneViewActive(zoneId) && Number.isFinite(m?.x) && Number.isFinite(m?.y)) {
+        const z = getScaleZoneId(zoneId || 'A');
+        const hit = getLumatoneHitFromPoint(m.x, m.y, z);
+        if (hit?.cell) {
+            const hexR = Math.max(1e-6, Number(hit.hexRadius) || 1);
+            const x = Number.isFinite(fallbackX) ? fallbackX : hit.cell.x;
+            const yRaw = m.y;
+            const yMin = hit.cell.y - hexR;
+            const yMax = hit.cell.y + hexR;
+            const y = Math.max(yMin, Math.min(yMax, yRaw));
+            return { x, y };
+        }
+        return { x: fallbackX, y: m.y };
     }
     return { x: fallbackX, y: fallbackY };
 }
@@ -16258,15 +19620,26 @@ function getRenderedBubblePointForNote({
     height = null,
     followTouch = true
 } = {}) {
-    const circlePt = Number.isFinite(noteFloat) ? getCircleVisualPointForNote(noteFloat, zoneId) : null;
-    const baseX = circlePt ? circlePt.x : fallbackX;
-    const baseY = circlePt ? circlePt.y : fallbackY;
+    const surfacePt = Number.isFinite(noteFloat) ? getSurfaceVisualPointForNote(noteFloat, zoneId) : null;
+    const baseX = surfacePt ? surfacePt.x : fallbackX;
+    const baseY = surfacePt ? surfacePt.y : fallbackY;
     const rawPt = (followTouch && m)
         ? getCircleTouchVisualPoint(m, baseX, baseY, zoneId)
         : { x: baseX, y: baseY };
     const h = Number.isFinite(height) ? height : (state.canvasRect?.height ?? canvas?.height ?? 0);
     const y = (h > 0) ? getClampedVisualY(rawPt.y, radius, h) : rawPt.y;
-    return { x: rawPt.x, y, circlePt };
+    let outX = rawPt.x;
+    let outY = y;
+    let outRadius = radius;
+    if (isLumatoneViewActive(zoneId)) {
+        const fit = getLumatoneBubbleFitForPoint(rawPt.x, y, radius, zoneId, surfacePt?.cell || null);
+        if (fit) {
+            outX = fit.x;
+            outY = fit.y;
+            outRadius = fit.radius;
+        }
+    }
+    return { x: outX, y: outY, radius: outRadius, circlePt: surfacePt };
 }
 
 
@@ -16298,15 +19671,27 @@ function isDoubleTapKey(key, x, y) {
 }
 
 function getZoneBounds(zoneId) {
-    const top = state.canvasRect.top;
-    const height = Math.max(1, state.canvasRect.height);
-    if (!isDualModeEnabled()) {
-        return { top, bottom: top + height };
+    const top = Number.isFinite(state.canvasRect?.top) ? state.canvasRect.top : 0;
+    let bottom = top + Math.max(1, Number.isFinite(state.canvasRect?.height) ? state.canvasRect.height : 1);
+    // Exclude the area covered by the fixed performance bar from expressive Y mapping.
+    if (els.performance && typeof els.performance.getBoundingClientRect === 'function') {
+        const perfRect = els.performance.getBoundingClientRect();
+        if (Number.isFinite(perfRect?.top) && perfRect.top > top && perfRect.top < bottom) {
+            bottom = Math.max(top + 1, perfRect.top - 2);
+        }
     }
-    const mid = top + (height / 2);
+    // Keep zone boundaries snapped to integer pixels to avoid subtle split-line misalignment.
+    const topPx = Math.round(top);
+    const bottomPx = Math.max(topPx + 1, Math.round(bottom));
+    if (!isDualModeEnabled()) {
+        return { top: topPx, bottom: bottomPx };
+    }
+    const height = Math.max(1, bottomPx - topPx);
+    // Prefer floor to keep split from drifting 1px downward on odd heights.
+    const mid = topPx + Math.floor(height / 2);
     return zoneId === 'B'
-        ? { top: mid, bottom: top + height }
-        : { top, bottom: mid };
+        ? { top: mid, bottom: bottomPx }
+        : { top: topPx, bottom: mid };
 }
 
 function getCanvasBottomY(zoneId) {
@@ -16342,20 +19727,53 @@ function getYDataFromEvent(e, zoneId) {
             }
         }
     }
-    const dz = parseInt(els.yDeadzone.value, 10) / 100;
-    let slideNorm = yNorm;
+    const pitchMode = getPointerPitchMappingMode(z);
+    const forceYForPress = pitchMode === 'keyboard' || pitchMode === 'circle';
+    const mapped = mapYNormToMPE(yNorm, e, { forceYForPress });
+    return {
+        slide: mapped.slide,
+        press: mapped.press,
+        velocity: mapped.velocity,
+        y: e.clientY,
+        yNorm,
+        circleRing,
+        circleRingSide,
+        circleYNorm: yNorm
+    };
+}
+
+function mapYNormToMPE(yNorm, e = null, options = {}) {
+    const yn = Math.max(0, Math.min(1, Number(yNorm) || 0));
+    const deadzoneScale = Number.isFinite(options?.deadzoneScale) ? Math.max(0, Math.min(2, options.deadzoneScale)) : 1;
+    const dz = (parseInt(els.yDeadzone.value, 10) / 100) * deadzoneScale;
+    let slideNorm = yn;
     if (dz > 0) {
         slideNorm = slideNorm < dz ? 0 : (slideNorm - dz) / (1 - dz);
     }
     slideNorm = applyCurve(slideNorm);
     const slide = Math.floor(slideNorm * 127);
-    const useYForVelocity = els.linkPressToY.checked && els.linkYToVelocity.checked;
+    const forceYForPress = !!options.forceYForPress;
+    const useYForVelocity = forceYForPress || (els.linkPressToY.checked && els.linkYToVelocity.checked);
     const sens = parseInt(els.touchSensitivity ? els.touchSensitivity.value : 75, 10) || 75;
-    let pressNorm = useYForVelocity ? slideNorm : Math.min(((e.width + e.height) / sens), 1.0);
+    const widthVal = Number.isFinite(e?.width) ? e.width : 35;
+    const heightVal = Number.isFinite(e?.height) ? e.height : 35;
+    let pressNorm = useYForVelocity ? slideNorm : Math.min(((widthVal + heightVal) / sens), 1.0);
     pressNorm = applyCurve(pressNorm);
     const press = Math.floor(pressNorm * 127);
-    return { slide, press, y: e.clientY, yNorm, circleRing, circleRingSide, circleYNorm: yNorm };
+    return { slide, press, velocity: press, yNorm: yn, slideNorm, pressNorm };
 }
+
+function getLumatoneHoldTimeBoost(heldMs) {
+    const ms = Math.max(0, Number(heldMs) || 0);
+    const t = Math.max(0, Math.min(1, ms / 1200));
+    const curve = t * t * (3 - (2 * t)); // smoothstep
+    return {
+        press: curve * 8,      // subtle extra pressure growth
+        slide: curve * 10,     // subtle extra timbre growth
+        velocity: curve * 4    // tiny addition for first-note usage
+    };
+}
+
 
 function getHoldLastMForZone(t, zoneId) {
     if (!t?.lastM) return { press: 90, slide: 0, pbValue: 8192, x: 0, y: getCanvasBottomY(zoneId) };
@@ -16821,6 +20239,24 @@ function degreeSemisFromStepIndex(stepIndex, stepCtx) {
     return (periodShift * stepCtx.periodSemis) + (stepCtx.degrees[idx] ?? 0);
 }
 
+function lumatoneSemisFromAbsStep(absStep, def, stepCtx = null) {
+    const n = Math.round(Number(absStep) || 0);
+    if (stepCtx && stepCtx.stepsPerPeriod > 0) {
+        return degreeSemisFromStepIndex(n, stepCtx);
+    }
+    const periodSemis = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const degrees = normalizeDegreesForPeriod(def?.degrees || [], periodSemis);
+    const steps = degrees.length;
+    if (!steps) return n;
+    let periodShift = Math.floor(n / steps);
+    let idx = n % steps;
+    if (idx < 0) {
+        idx += steps;
+        periodShift -= 1;
+    }
+    return (periodShift * periodSemis) + (degrees[idx] ?? 0);
+}
+
 function nearestStepIndexForTargetCents(stepCtx, targetCents) {
     const stepCents = stepCtx.stepSemis * 100;
     if (!(stepCents > 0)) return 0;
@@ -16830,6 +20266,42 @@ function nearestStepIndexForTargetCents(stepCtx, targetCents) {
     const dLo = Math.abs(targetCents - (lo * stepCents));
     const dHi = Math.abs((hi * stepCents) - targetCents);
     return dLo <= dHi ? lo : hi;
+}
+
+function isDoubleModeActive31() {
+    return !!state.audio?.spiral?.enabled;
+}
+
+function applyDoubleModeTo31Steps(steps) {
+    if (!Array.isArray(steps)) return [];
+    return steps.map((value) => {
+        let step = parseInt(value, 10);
+        if (!Number.isFinite(step)) step = 0;
+        if (DOUBLE_MODE_RULES_31.third8_to_7 && step % 31 === 8) step -= 1;
+        if (DOUBLE_MODE_RULES_31.third10_to_9 && step % 31 === 10) step -= 1;
+        return step;
+    });
+}
+
+function get31EdoChordSemitoneOffsets(def, chordMode, options = {}) {
+    const stepCtx = getUniformScaleStepContext(def);
+    if (!stepCtx || stepCtx.stepsPerPeriod !== 31) return null;
+    const toSemis = (step) => degreeSemisFromStepIndex(step, stepCtx);
+    const mapped = MICROTONAL_CHORD_MODE_MAP_31[chordMode];
+    const useDoubleMode = !!options.doubleMode;
+
+    if (mapped && MICROTONAL_CHORDS_31[mapped]) {
+        const baseSteps = MICROTONAL_CHORDS_31[mapped].steps || [0];
+        const transformed = useDoubleMode ? applyDoubleModeTo31Steps(baseSteps) : baseSteps.slice(0);
+        return transformed.map((step) => toSemis(step));
+    }
+
+    // Procedural conversion: diminished -> sub-minor b5 when Double Mode is active.
+    if (chordMode === 'dimTriad') {
+        const dimSteps = useDoubleMode ? [0, 7, 15] : [0, 8, 15];
+        return dimSteps.map((step) => toSemis(step));
+    }
+    return null;
 }
 
 function getSpecialChordDegreeOffsets(def) {
@@ -16867,10 +20339,11 @@ function getSpecialChordDegreeOffsets(def) {
     };
 }
 
-function computeChordNotes(rootNote, zoneId = null) {
+function computeChordNotes(rootNote, zoneId = null, options = {}) {
     const z = getScaleZoneId(zoneId);
     const perf = ensurePerformanceConfigForZone(z);
-    const chordMode = perf.chordMode || (els.chordMode?.value || 'off');
+    const chordMode = perf.chordMode || 'off';
+    const quantizeToScale = options.quantize !== false;
     const zoneScale = state.scaleNotesByZone[z] || state.scaleNotes;
     const def = getScaleDefinition(z);
     const branch = getChordBranchForDef(def);
@@ -16881,6 +20354,7 @@ function computeChordNotes(rootNote, zoneId = null) {
     let chordNotes = [];
 
     if (branch === 'A') {
+        const library31Offsets = get31EdoChordSemitoneOffsets(def, chordMode, { doubleMode: isDoubleModeActive31() });
         if (chordMode === 'auto' || chordMode === 'auto7') {
             const diatonic = chordMode === 'auto7' ? [0, 2, 4, 6] : [0, 2, 4];
             if (rootIdx >= 0) {
@@ -16888,6 +20362,8 @@ function computeChordNotes(rootNote, zoneId = null) {
                     .map(step => getScaleNoteByIndexOffset(zoneScale.notes, rootIdx, step))
                     .filter(Number.isFinite);
             }
+        } else if (Array.isArray(library31Offsets) && library31Offsets.length) {
+            chordNotes = library31Offsets.map((off) => rootNote + off);
         } else if (chordMode === 'neutralTriad' || chordMode === 'superMajorTriad' || chordMode === 'subMinorTriad' || chordMode === 'shimmer') {
             const offsets = getSpecialChordDegreeOffsets(def);
             if (chordMode === 'neutralTriad') {
@@ -16904,7 +20380,7 @@ function computeChordNotes(rootNote, zoneId = null) {
             chordNotes = chordSteps.map(step => rootNote + step);
         }
 
-        if (chordNotes.length) {
+        if (quantizeToScale && chordNotes.length) {
             const snapped = chordNotes.map(note => mapMidiNoteToScaleWithDef(note, def));
             const seen = new Set();
             chordNotes = snapped.filter(note => {
@@ -16923,7 +20399,9 @@ function computeChordNotes(rootNote, zoneId = null) {
         } else if (chordMode === 'stepWide') {
             offsets = [0, step2 + 2, step3 + 4];
         }
-        if (rootIdx >= 0) {
+        if (!quantizeToScale && chordMode === 'off' && Number.isFinite(rootNote)) {
+            chordNotes = [rootNote];
+        } else if (rootIdx >= 0) {
             chordNotes = offsets
                 .map(off => getScaleNoteByIndexOffset(zoneScale.notes, rootIdx, off))
                 .filter(Number.isFinite);
@@ -16957,7 +20435,7 @@ function computeChordNotes(rootNote, zoneId = null) {
 
     const inversion = (branch === 'A') ? (parseInt(perf.chordInversion, 10) || 0) : 0;
     const spread = parseInt(perf.chordSpread, 10) || 0;
-    const pairs = chordNotes.map((note, i) => ({ note, meta: polyMeta[i] || null }));
+    let pairs = chordNotes.map((note, i) => ({ note, meta: polyMeta[i] || null }));
     const inv = Math.min(inversion, Math.max(0, pairs.length - 1));
     for (let i = 0; i < inv; i += 1) {
         const x = pairs.shift();
@@ -16969,14 +20447,65 @@ function computeChordNotes(rootNote, zoneId = null) {
     for (let i = 0; i < pairs.length; i += 1) {
         pairs[i].note += i * spread;
     }
+    pairs = expandPolyPlannerDualBranchPairs(pairs, z);
+    const seenPairs = new Set();
+    pairs = pairs.filter((p) => {
+        const key = Number.isFinite(p?.note) ? p.note.toFixed(6) : String(p?.note);
+        if (seenPairs.has(key)) return false;
+        seenPairs.add(key);
+        return true;
+    });
     state.polyMicroLastChordMetaByZone[z] = pairs.map((p) => p.meta || null);
     return pairs.map((p) => p.note);
 }
 
-function refreshArpNotes(noteObjs, m, rootNote, zoneId) {
+function dedupeNoteMetaLists(notes = [], meta = []) {
+    const outNotes = [];
+    const outMeta = [];
+    const seen = new Set();
+    (Array.isArray(notes) ? notes : []).forEach((n, i) => {
+        if (!Number.isFinite(n)) return;
+        const k = Number(n).toFixed(6);
+        if (seen.has(k)) return;
+        seen.add(k);
+        outNotes.push(Number(n));
+        outMeta.push(Array.isArray(meta) ? (meta[i] || null) : null);
+    });
+    return { notes: outNotes, meta: outMeta };
+}
+
+function getChordModeForZone(zoneId = null) {
+    const z = getScaleZoneId(zoneId);
+    const perf = ensurePerformanceConfigForZone(z);
+    return String(perf?.chordMode || 'off').toLowerCase();
+}
+
+function isChordEnabledForZone(zoneId = null) {
+    return getChordModeForZone(zoneId) !== 'off';
+}
+
+function refreshArpNotes(noteObjs, m, rootNote, zoneId, options = {}) {
     const zone = zoneId || noteObjs?.[0]?.zone || 'A';
     const arp = getArpState(zone);
-    const chordNotes = computeChordNotes(rootNote, zone);
+    let chordMeta = [];
+    let chordNotes = [];
+    if (Array.isArray(options.forceNotes) && options.forceNotes.length) {
+        chordNotes = options.forceNotes.slice(0);
+        chordMeta = Array.isArray(options.forceMeta) ? options.forceMeta.slice(0) : [];
+    } else {
+        const useChord = (options.useChord === undefined || options.useChord === null)
+            ? isChordEnabledForZone(zone)
+            : !!options.useChord;
+        chordNotes = useChord
+            ? computeChordNotes(rootNote, zone, { quantize: options.quantize !== false })
+            : [rootNote];
+        if (useChord) {
+            chordMeta = Array.isArray(state.polyMicroLastChordMetaByZone?.[zone]) ? state.polyMicroLastChordMetaByZone[zone] : [];
+        }
+    }
+    chordNotes = chordNotes.filter((n) => Number.isFinite(n));
+    ({ notes: chordNotes, meta: chordMeta } = dedupeNoteMetaLists(chordNotes, chordMeta));
+    if (!chordNotes.length && Number.isFinite(rootNote)) chordNotes = [rootNote];
     ensureVisibleForNotes(chordNotes, { zoneId: zone });
     if (noteObjs.length > chordNotes.length) {
         const extra = noteObjs.splice(chordNotes.length);
@@ -16984,7 +20513,7 @@ function refreshArpNotes(noteObjs, m, rootNote, zoneId) {
     } else if (noteObjs.length < chordNotes.length) {
         const add = chordNotes.slice(noteObjs.length).map(noteFloat => ({
             noteFloat,
-            ...makeVoiceFromNote(noteFloat, zoneId),
+            ...makeVoiceFromNote(noteFloat, zone),
             lastM: m,
             color: nextArpColor(zone),
             zone
@@ -16994,14 +20523,34 @@ function refreshArpNotes(noteObjs, m, rootNote, zoneId) {
     }
     for (let i = 0; i < chordNotes.length && i < noteObjs.length; i++) {
         const noteFloat = chordNotes[i];
-        const voice = makeVoiceFromNote(noteFloat, zoneId);
+        const voice = makeVoiceFromNote(noteFloat, zone);
         noteObjs[i].noteFloat = noteFloat;
         noteObjs[i].note = voice.note;
         noteObjs[i].basePb = voice.basePb;
         noteObjs[i].lastM = m;
         noteObjs[i].zone = noteObjs[i].zone || zone;
+        const meta = chordMeta[i] || null;
+        if (meta) {
+            noteObjs[i].branchId = meta.branchId || noteObjs[i].branchId || null;
+            noteObjs[i].tuningId = meta.tuningId || noteObjs[i].tuningId || null;
+            noteObjs[i].anchorLock = !!(meta.anchorLock || noteObjs[i].anchorLock);
+        }
     }
     return chordNotes;
+}
+
+function isLumatoneScaleQuantizeEnabled(zoneId = null) {
+    const cfg = getVirtualLumatoneConfig(zoneId || getScaleZoneId());
+    return cfg.quantize !== false;
+}
+
+function resolveGestureRootNote(exactNote, zoneId = null, pitchMode = null) {
+    const z = getScaleZoneId(zoneId);
+    if (!Number.isFinite(exactNote)) return exactNote;
+    if (pitchMode === 'lumatone' && !isLumatoneScaleQuantizeEnabled(z)) return exactNote;
+    const zoneScale = getScaleNotesState(z);
+    if (!zoneScale?.notes?.length) return exactNote;
+    return zoneScale.notes.reduce((prev, curr) => (Math.abs(curr - exactNote) < Math.abs(prev - exactNote) ? curr : prev));
 }
 
 function convertHeldToArp(zoneId = null) {
@@ -17083,10 +20632,7 @@ function updateArpChords() {
         
         // Get the root note from the first note object
         const rootNoteFloat = touch.noteObjs[0].noteFloat;
-        const zoneScale = getScaleNotesState(zoneId);
-        const rootNote = zoneScale.notes.reduce((prev, curr) => 
-            Math.abs(curr - rootNoteFloat) < Math.abs(prev - rootNoteFloat) ? curr : prev
-        );
+        const rootNote = resolveGestureRootNote(rootNoteFloat, zoneId, getPointerPitchMappingMode(zoneId));
         
         const m = touch.lastM || { press: 90, slide: 0, pbValue: 8192 };
         
@@ -17103,7 +20649,8 @@ function updateArpChords() {
             touch.noteObjs[0].basePb = voice.basePb;
         } else {
             // Refresh with new chord notes
-            refreshArpNotes(touch.noteObjs, m, rootNote, zoneId);
+            const quantize = !(isLumatoneViewActive(zoneId) && !isLumatoneScaleQuantizeEnabled(zoneId));
+            refreshArpNotes(touch.noteObjs, m, rootNote, zoneId, { quantize, useChord: true });
         }
     });
     
@@ -17147,7 +20694,8 @@ function updateHeldChords() {
             releaseMpeChannel(zoneId, v.chan);
         });
         const m = ref.lastM || { pbValue: 8192, slide: 0, press: 90 };
-        const chordNotes = computeChordNotes(rootNote, zoneId);
+        const quantize = !(isLumatoneViewActive(zoneId) && !isLumatoneScaleQuantizeEnabled(zoneId));
+        const chordNotes = computeChordNotes(rootNote, zoneId, { quantize });
         ensureVisibleForNotes(chordNotes, { zoneId });
         chordNotes.forEach(noteFloat => {
             const chan = allocateMpeChannelForPlay(zoneId, output, { allowStealHeld: true });
@@ -17204,6 +20752,16 @@ canvas.addEventListener('pointerdown', e => {
         state.pointerIds.delete(e.pointerId);
         document.body.classList.remove('note-dragging');
         return;
+    }
+    if (pointerPitchMode === 'circle' && state.experimental?.polyPlanner?.enabled) {
+        const labelHit = getPolyPlannerLabelHit(e.clientX, e.clientY, zoneId);
+        if (labelHit?.branch) {
+            const planner = state.experimental.polyPlanner;
+            if (labelHit.branch === 'A') planner.branchAEnabled = planner.branchAEnabled === false;
+            if (labelHit.branch === 'B') planner.branchBEnabled = planner.branchBEnabled === false;
+            requestDraw();
+            return;
+        }
     }
     // BOW FADER INTERACTION
     // Check if touch is in bottom 60px of canvas (Only if audio enabled/bow visible)
@@ -17410,13 +20968,69 @@ canvas.addEventListener('pointerdown', e => {
     const nearArpHold = findArpHoldNoteAt(e.clientX, e.clientY, 20);
     const nearActive = findActiveTouchVoiceAt(e.clientX, e.clientY, e.pointerId, 20);
     if (nearHeld || nearArpHold || nearActive) return;
+    let polyTreeStartHit = null;
+    let polyTreeStartPair = null;
+    if (pointerPitchMode === 'circle' && state.experimental?.polyPlanner?.enabled) {
+        polyTreeStartHit = getPolyPlannerTreeHit(e.clientX, e.clientY, zoneId);
+        const treeHit = polyTreeStartHit;
+        if (!treeHit) {
+            return;
+        }
+        const planner = state.experimental.polyPlanner;
+        const play = ensurePolyPlannerPlayabilityDefaults(planner);
+        if (!treeHit.isRoot && isPolyPlannerNodeDoubleTap(treeHit, e.clientX, e.clientY, planner)) {
+            startPolyPlannerNodeDrop(treeHit, planner);
+            planner.activeKey = '';
+            planner.activeKeys = [];
+            planner.activeUntil = 0;
+            planner.hoverKey = '';
+            requestDraw();
+            return;
+        }
+        if (treeHit.isRoot && play?.v2Enabled !== false) {
+            if (isPolyPlannerRootDoubleTap(e.clientX, e.clientY, planner)) {
+                clearPolyPlannerDroppedNodes(planner);
+                triggerPolyPlannerRootAutoRun(zoneId);
+                requestDraw();
+                return;
+            }
+            const rootPair = getPolyPlannerRootTapNotes(zoneId);
+            if (rootPair?.notes?.length) {
+                polyTreeStartPair = rootPair;
+                planner.activeKey = 'root';
+                planner.activeKeys = rootPair.keys.slice(0);
+                planner.activeUntil = performance.now() + 700;
+                planner.hoverKey = 'root';
+            } else {
+                requestDraw();
+                return;
+            }
+        }
+        if (!polyTreeStartPair) polyTreeStartPair = getPolyPlannerPairedHitNotes(treeHit, zoneId);
+        planner.activeKey = treeHit.key || '';
+        planner.activeKeys = (polyTreeStartPair?.keys && polyTreeStartPair.keys.length)
+            ? polyTreeStartPair.keys.slice(0)
+            : (planner.activeKey ? [planner.activeKey] : []);
+        planner.activeUntil = performance.now() + 700;
+        planner.hoverKey = treeHit.key || '';
+        if (treeHit.branch === 'A') planner.focusA = Math.max(0, parseInt(treeHit.index, 10) || 0);
+        if (treeHit.branch === 'B') planner.focusB = Math.max(0, parseInt(treeHit.index, 10) || 0);
+    }
 
     const touchState = { smoothPb: null, smoothSlide: null, smoothPress: null };
-    const baseM = applySmoothing(touchState, getMPEData(getClampedPointerEvent(e, zoneId), null, false, pointerPitchMode));
+    let baseM = applySmoothing(touchState, getMPEData(getClampedPointerEvent(e, zoneId), null, false, pointerPitchMode));
+    if (
+        pointerPitchMode === 'circle'
+        && state.experimental?.polyPlanner?.enabled
+        && isPolyTreeViewActive(zoneId)
+        && polyTreeStartHit?.key
+        && polyTreeStartHit.key !== 'root'
+    ) {
+        baseM = applyPolyTreeLengthMpeForKey(baseM, polyTreeStartHit.key, state.experimental.polyPlanner, 0.64);
+    }
 
     // STANDALONE: Produzione suono diretta
-    const zoneScale = getScaleNotesState(zoneId);
-    const rootNote = zoneScale.notes.reduce((prev, curr) => Math.abs(curr - baseM.exact) < Math.abs(prev - baseM.exact) ? curr : prev);
+    const rootNote = resolveGestureRootNote(baseM.exact, zoneId, pointerPitchMode);
     const initialExact = Number.isFinite(rootNote) ? rootNote : baseM.exact;
     const touchColor = getZoneColor((e.pointerId * 47) % 360, zoneId);
 
@@ -17449,13 +21063,53 @@ canvas.addEventListener('pointerdown', e => {
     }
 
     let voices = [];
-    let chordNotes = computeChordNotes(rootNote, zoneId);
-    const chordMeta = Array.isArray(state.polyMicroLastChordMetaByZone?.[zoneId]) ? state.polyMicroLastChordMetaByZone[zoneId] : [];
+    const quantizeScale = !(pointerPitchMode === 'lumatone' && !isLumatoneScaleQuantizeEnabled(zoneId));
+    let chordNotes = [];
+    let chordMeta = [];
+    const isPolyTreeTouch = (pointerPitchMode === 'circle' && state.experimental?.polyPlanner?.enabled);
+    const polyPerf = ensurePerformanceConfigForZone(zoneId);
+    const polyChordMode = String(polyPerf?.chordMode || 'off').toLowerCase();
+    const polyChordOn = polyChordMode !== 'off';
+    const forcedPolyPair = (isPolyTreeTouch && polyTreeStartPair?.notes?.length)
+        ? polyTreeStartPair
+        : null;
+    if (isPolyTreeTouch) {
+        if (polyTreeStartHit?.isRoot && forcedPolyPair) {
+            chordNotes = forcedPolyPair.notes.slice(0);
+            chordMeta = forcedPolyPair.keys.map((key) => {
+                const branch = String(key || '').startsWith('B:') ? 'B' : (String(key || '').startsWith('A:') ? 'A' : null);
+                return { branchId: branch, tuningId: null, anchorLock: false };
+            });
+        } else if (polyChordOn) {
+            chordNotes = computeChordNotes(rootNote, zoneId, { quantize: quantizeScale });
+            chordMeta = Array.isArray(state.polyMicroLastChordMetaByZone?.[zoneId]) ? state.polyMicroLastChordMetaByZone[zoneId] : [];
+        } else if (forcedPolyPair) {
+            chordNotes = forcedPolyPair.notes.slice(0);
+            chordMeta = forcedPolyPair.keys.map((key) => {
+                const branch = String(key || '').startsWith('B:') ? 'B' : (String(key || '').startsWith('A:') ? 'A' : null);
+                return { branchId: branch, tuningId: null, anchorLock: false };
+            });
+        } else if (Number.isFinite(polyTreeStartHit?.noteExact) && !polyTreeStartHit?.isRoot) {
+            chordNotes = [Number(polyTreeStartHit.noteExact)];
+            chordMeta = [{
+                branchId: (polyTreeStartHit?.branch === 'B') ? 'B' : 'A',
+                tuningId: null,
+                anchorLock: false
+            }];
+        }
+    } else {
+        chordNotes = computeChordNotes(rootNote, zoneId, { quantize: quantizeScale });
+        chordMeta = Array.isArray(state.polyMicroLastChordMetaByZone?.[zoneId]) ? state.polyMicroLastChordMetaByZone[zoneId] : [];
+    }
+    ({ notes: chordNotes, meta: chordMeta } = dedupeNoteMetaLists(chordNotes, chordMeta));
     if (!chordNotes.length) return;
     ensureVisibleForNotes(chordNotes, { zoneId });
     const arpZone = getArpState(zoneId);
     if (arpZone.enabled && !arpZone.latch) {
-        const noteObjs = chordNotes.map(noteFloat => ({
+        const arpTouchNotes = isPolyTreeTouch
+            ? chordNotes.slice(0)
+            : (polyChordOn ? chordNotes.slice(0) : (chordNotes.length ? [chordNotes[0]] : []));
+        const noteObjs = arpTouchNotes.map(noteFloat => ({
             noteFloat,
             ...makeVoiceFromNote(noteFloat, zoneId),
             lastM: baseM,
@@ -17500,7 +21154,8 @@ canvas.addEventListener('pointerdown', e => {
             const pb = getVoicePb(baseM, voice);
             // FIX: Usa ?? 90 invece di || 90 per permettere velocity/pressure pari a 0
             const rawPress = baseM.press ?? 90;
-            const vel = Math.max(1, Math.min(127, Math.round(rawPress)));
+            const velSrc = Number.isFinite(baseM.velocity) ? baseM.velocity : rawPress;
+            const vel = Math.max(1, Math.min(127, Math.round(velSrc)));
 
             sendMidi([0xB0 + chan - 1, 74, baseM.slide], output);
             sendMidi([0xE0 + chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], output);
@@ -17523,6 +21178,12 @@ canvas.addEventListener('pointerdown', e => {
         }
     }
     if (!voices.length) return;
+    const plannerPlay = ensurePolyPlannerPlayabilityDefaults(state.experimental?.polyPlanner) || {};
+    const lockMode = normalizePolyTreeBranchLockMode(plannerPlay.branchLockMode, plannerPlay.branchLock !== false);
+    let startLockBranch = '';
+    if (lockMode === 'locka') startLockBranch = 'A';
+    else if (lockMode === 'lockb') startLockBranch = 'B';
+    else if (lockMode === 'auto' && plannerPlay.branchLock !== false && polyTreeStartHit?.branch) startLockBranch = polyTreeStartHit.branch;
     state.activeTouches.set(e.pointerId, {
         voices,
         initialExact,
@@ -17537,7 +21198,15 @@ canvas.addEventListener('pointerdown', e => {
         smoothSlide: touchState.smoothSlide,
         smoothPress: touchState.smoothPress,
         zone: zoneId,
-        pitchInputMode: pointerPitchMode
+        pitchInputMode: pointerPitchMode,
+        polyTreeNodeKey: polyTreeStartHit?.key || '',
+        polyTreeLockBranch: startLockBranch,
+        polyTreeLegato: !!state.experimental?.polyPlanner?.playability?.legatoBranch,
+        polyTreeStartNodeKey: polyTreeStartHit?.key || '',
+        polyTreeStartX: e.clientX,
+        polyTreeStartY: e.clientY,
+        polyTreeStartTime: performance.now(),
+        polyTreeGestureV2: !!ensurePolyPlannerPlayabilityDefaults(state.experimental?.polyPlanner)?.v2Enabled
     });
 });
 
@@ -17546,6 +21215,24 @@ let lastPointerMoveTime = 0;
 const POINTER_MOVE_THROTTLE_MS = 16; // ~60fps max
 
 canvas.addEventListener('pointermove', e => {
+    if (state.experimental?.polyPlanner?.enabled) {
+        const hz = getZoneForY(e.clientY);
+        if (!isCircleDiesisViewActive(hz)) {
+            const plannerOff = state.experimental.polyPlanner;
+            if (plannerOff.hoverKey) {
+                plannerOff.hoverKey = '';
+                requestDraw();
+            }
+        } else {
+        const hit = getPolyPlannerTreeHit(e.clientX, e.clientY, hz);
+        const planner = state.experimental.polyPlanner;
+        const key = hit?.key || '';
+        if (planner.hoverKey !== key) {
+            planner.hoverKey = key;
+            requestDraw();
+        }
+        }
+    }
     const t = state.activeTouches.get(e.pointerId);
     const baseZone = t?.zone || t?.voices?.[0]?.zone || getZoneForY(e.clientY);
     const output = t ? getZoneOutput(baseZone) : null;
@@ -17567,15 +21254,127 @@ canvas.addEventListener('pointermove', e => {
     const eClamped = getClampedPointerEvent(e, baseZone);
     t.lastM = t.lastM ? { ...t.lastM, x: eClamped.clientX, y: eClamped.clientY } : { x: eClamped.clientX, y: eClamped.clientY, press: 0, slide: 0, pbValue: 8192, exact: t.initialExact ?? 0 };
     const lockedPitchMode = t.pitchInputMode || getPointerPitchMappingMode(baseZone);
-    const m = applySmoothing(t, getMPEData(eClamped, t, false, lockedPitchMode));
+    const polyTreeDragEnabled = isPolyTreeDragEnabled(state.experimental?.polyPlanner);
+    let m = applySmoothing(t, getMPEData(eClamped, t, false, lockedPitchMode));
+    if (lockedPitchMode === 'circle' && state.experimental?.polyPlanner?.enabled && isPolyTreeViewActive(baseZone) && polyTreeDragEnabled) {
+        m = applyPolyTreePlayabilityV2(t, m, eClamped, baseZone);
+    }
     if (!Number.isFinite(m.pbValue)) m.pbValue = 8192;
+    if (
+        lockedPitchMode === 'circle'
+        && state.experimental?.polyPlanner?.enabled
+        && isPolyTreeViewActive(baseZone)
+        && Array.isArray(t.voices)
+        && t.voices.length
+        && !t.isArp
+        && !t.isArpLiveGrab
+        && !t.isArpHoldGrab
+        && !t.isHoldGrab
+        && !t.isGrab
+    ) {
+        const planner = state.experimental.polyPlanner;
+        const play = ensurePolyPlannerPlayabilityDefaults(planner) || {};
+        const lockMode = normalizePolyTreeBranchLockMode(play.branchLockMode, play.branchLock !== false);
+        const hit = getPolyPlannerTreeHit(eClamped.clientX, eClamped.clientY, baseZone, {
+            lockBranch: getPolyTreeEffectiveLockBranch(lockMode, t, play.branchLock !== false),
+            preferredKey: t.polyTreeNodeKey || '',
+            hitPadding: parseFloat(play.hitPadding),
+            hysteresisPx: parseFloat(play.hysteresisPx)
+        });
+        if (hit && !hit.isRoot && hit.key && hit.key !== t.polyTreeNodeKey) {
+            const perf = ensurePerformanceConfigForZone(baseZone);
+            const chordMode = String(perf?.chordMode || 'off').toLowerCase();
+            const chordOn = chordMode !== 'off';
+            let targetNotes = [];
+            let targetMeta = [];
+            let targetKeys = [hit.key];
+            if (chordOn) {
+                const quantizeScale = !(lockedPitchMode === 'lumatone' && !isLumatoneScaleQuantizeEnabled(baseZone));
+                const rootNote = resolveGestureRootNote(Number(hit.noteExact), baseZone, lockedPitchMode);
+                targetNotes = computeChordNotes(rootNote, baseZone, { quantize: quantizeScale });
+                targetMeta = Array.isArray(state.polyMicroLastChordMetaByZone?.[baseZone]) ? state.polyMicroLastChordMetaByZone[baseZone] : [];
+            } else {
+                const paired = getPolyPlannerPairedHitNotes(hit, baseZone);
+                if (paired?.notes?.length) {
+                    targetNotes = paired.notes.slice(0);
+                    targetKeys = paired.keys.slice(0);
+                    targetMeta = paired.keys.map((key) => {
+                        const branch = String(key || '').startsWith('B:') ? 'B' : (String(key || '').startsWith('A:') ? 'A' : null);
+                        return { branchId: branch, tuningId: null, anchorLock: false };
+                    });
+                } else if (Number.isFinite(hit.noteExact)) {
+                    targetNotes = [Number(hit.noteExact)];
+                    targetMeta = [{ branchId: hit.branch === 'B' ? 'B' : 'A', tuningId: null, anchorLock: false }];
+                }
+            }
+            ({ notes: targetNotes, meta: targetMeta } = dedupeNoteMetaLists(targetNotes, targetMeta));
+            if (targetNotes.length) {
+                const oldVoices = Array.isArray(t.voices) ? t.voices.slice(0) : [];
+                oldVoices.forEach((v) => {
+                    const out = getZoneOutput(v.zone || baseZone);
+                    if (!out) return;
+                    sendMidi([0x80 + v.chan - 1, v.note, 0], out);
+                    releaseMpeChannel(v.zone || baseZone, v.chan);
+                });
+                const rebuilt = [];
+                for (let i = 0; i < targetNotes.length; i += 1) {
+                    const chan = allocateMpeChannelForPlay(baseZone, output, { allowStealHeld: true });
+                    if (!chan) break;
+                    const noteFloat = targetNotes[i];
+                    const voice = makeVoiceFromNote(noteFloat, baseZone);
+                    const mNode = { ...m, pbValue: 8192, exact: noteFloat };
+                    const pb = getVoicePb(mNode, voice);
+                    const rawPress = Number.isFinite(m.press) ? m.press : 90;
+                    const rawSlide = Number.isFinite(m.slide) ? m.slide : 64;
+                    const velSrc = Number.isFinite(m.velocity) ? m.velocity : rawPress;
+                    const vel = Math.max(1, Math.min(127, Math.round(velSrc)));
+                    sendMidi([0xB0 + chan - 1, 74, rawSlide], output);
+                    sendMidi([0xE0 + chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], output);
+                    sendMidi([0xD0 + chan - 1, rawPress], output);
+                    sendMidi([0x90 + chan - 1, voice.note, vel], output);
+                    markLocalNoteOn(voice.note);
+                    const meta = targetMeta[i] || null;
+                    rebuilt.push({
+                        chan,
+                        note: voice.note,
+                        basePb: voice.basePb,
+                        zone: baseZone,
+                        branchId: meta?.branchId || null,
+                        tuningId: meta?.tuningId || null,
+                        anchorLock: !!meta?.anchorLock
+                    });
+                }
+                if (rebuilt.length) {
+                    t.voices = rebuilt;
+                    t.isChordHold = rebuilt.length > 1;
+                    t.initialExact = targetNotes[0];
+                    m.exact = targetNotes[0];
+                    m.pbValue = 8192;
+                    t.polyTreeNodeKey = hit.key;
+                    if (hit.branch) {
+                        if (lockMode === 'locka') t.polyTreeLockBranch = 'A';
+                        else if (lockMode === 'lockb') t.polyTreeLockBranch = 'B';
+                        else if (lockMode === 'free') t.polyTreeLockBranch = '';
+                        else if (play.branchLock !== false) t.polyTreeLockBranch = t.polyTreeLockBranch || hit.branch;
+                    }
+                    planner.activeKey = hit.key;
+                    planner.activeKeys = Array.from(new Set(targetKeys.filter(Boolean)));
+                    planner.activeUntil = performance.now() + 340;
+                    if (hit.branch === 'A') planner.focusA = Math.max(0, parseInt(hit.index, 10) || planner.focusA || 0);
+                    if (hit.branch === 'B') planner.focusB = Math.max(0, parseInt(hit.index, 10) || planner.focusB || 0);
+                } else {
+                    t.voices = [];
+                    t.isChordHold = false;
+                }
+            }
+        }
+    }
     t.lastM = m;
     if (t.isArpLiveGrab) {
         const noteObj = t.arpNoteObj;
         const z = t.zone || noteObj?.zone || baseZone || 'A';
         if (noteObj) {
-            const zoneScale = getScaleNotesState(z);
-            const rootNote = zoneScale.notes.reduce((prev, curr) => Math.abs(curr - m.exact) < Math.abs(prev - m.exact) ? curr : prev);
+            const rootNote = resolveGestureRootNote(m.exact, z, t.pitchInputMode || getPointerPitchMappingMode(z));
             const voice = makeVoiceFromNote(rootNote, z);
             noteObj.noteFloat = rootNote;
             noteObj.note = voice.note;
@@ -17594,8 +21393,8 @@ canvas.addEventListener('pointermove', e => {
         const hold = state.arpHoldTouches[t.holdIdx];
         if (hold) {
             if (t.arpNoteObj) {
-                const zoneScale = getScaleNotesState(t.zone || t.arpNoteObj.zone || 'A');
-                const rootNote = zoneScale.notes.reduce((prev, curr) => Math.abs(curr - m.exact) < Math.abs(prev - m.exact) ? curr : prev);
+                const rz = t.zone || t.arpNoteObj.zone || 'A';
+                const rootNote = resolveGestureRootNote(m.exact, rz, t.pitchInputMode || getPointerPitchMappingMode(rz));
                 const voice = makeVoiceFromNote(rootNote, t.zone || t.arpNoteObj.zone || 'A');
                 t.arpNoteObj.noteFloat = rootNote;
                 t.arpNoteObj.note = voice.note;
@@ -17604,10 +21403,45 @@ canvas.addEventListener('pointermove', e => {
                 t.initialExact = rootNote;
                 if (m.press <= 0) stopArpActiveNote(t.arpNoteObj.note, t.arpNoteObj.zone || t.zone);
             } else {
-                const zoneScale = getScaleNotesState(t.zone || hold.zone || 'A');
-                const rootNote = zoneScale.notes.reduce((prev, curr) => Math.abs(curr - m.exact) < Math.abs(prev - m.exact) ? curr : prev);
+                const rz = t.zone || hold.zone || 'A';
+                const pitchMode = t.pitchInputMode || getPointerPitchMappingMode(rz);
+                let forcedNotes = null;
+                let forcedMeta = [];
+                if (pitchMode === 'circle' && state.experimental?.polyPlanner?.enabled && isPolyTreeViewActive(rz)) {
+                    const planner = state.experimental.polyPlanner;
+                    const play = ensurePolyPlannerPlayabilityDefaults(planner) || {};
+                    const lockMode = normalizePolyTreeBranchLockMode(play.branchLockMode, play.branchLock !== false);
+                    const hit = getPolyPlannerTreeHit(eClamped.clientX, eClamped.clientY, rz, {
+                        lockBranch: getPolyTreeEffectiveLockBranch(lockMode, t, play.branchLock !== false),
+                        preferredKey: t.polyTreeNodeKey || '',
+                        hitPadding: parseFloat(play.hitPadding),
+                        hysteresisPx: parseFloat(play.hysteresisPx)
+                    });
+                    if (hit && !hit.isRoot && hit.key) {
+                        const paired = getPolyPlannerPairedHitNotes(hit, rz);
+                        if (paired?.notes?.length) {
+                            forcedNotes = paired.notes.slice(0);
+                            forcedMeta = paired.keys.map((key) => {
+                                const branch = String(key || '').startsWith('B:') ? 'B' : (String(key || '').startsWith('A:') ? 'A' : null);
+                                return { branchId: branch, tuningId: null, anchorLock: false };
+                            });
+                            m.exact = forcedNotes[0];
+                            t.polyTreeNodeKey = hit.key;
+                            planner.activeKey = hit.key;
+                            planner.activeKeys = paired.keys.slice(0);
+                            planner.activeUntil = performance.now() + 320;
+                        }
+                    }
+                }
+                const rootNote = resolveGestureRootNote(m.exact, rz, pitchMode);
                 if (hold.noteObjs) {
-                    refreshArpNotes(hold.noteObjs, m, rootNote, t.zone);
+                    const quantize = !(pitchMode === 'lumatone' && !isLumatoneScaleQuantizeEnabled(rz));
+                    refreshArpNotes(hold.noteObjs, m, rootNote, t.zone, {
+                        quantize,
+                        useChord: isChordEnabledForZone(rz),
+                        forceNotes: forcedNotes,
+                        forceMeta: forcedMeta
+                    });
                 }
                 const pbRange = getPbRangeForZone(t.zone || hold.zone || 'A');
                 const detune = m.exact - rootNote;
@@ -17624,9 +21458,48 @@ canvas.addEventListener('pointermove', e => {
     }
     if (t.isArp) {
         if (t.arpNotes) {
-            const zoneScale = getScaleNotesState(t.zone || 'A');
-            const rootNote = zoneScale.notes.reduce((prev, curr) => Math.abs(curr - m.exact) < Math.abs(prev - m.exact) ? curr : prev);
-            refreshArpNotes(t.arpNotes, m, rootNote, t.zone);
+            const rz = t.zone || 'A';
+            const pitchMode = t.pitchInputMode || getPointerPitchMappingMode(rz);
+            let forcedNotes = null;
+            let forcedMeta = [];
+            if (pitchMode === 'circle' && state.experimental?.polyPlanner?.enabled && isPolyTreeViewActive(rz)) {
+                const planner = state.experimental.polyPlanner;
+                const play = ensurePolyPlannerPlayabilityDefaults(planner) || {};
+                const lockMode = normalizePolyTreeBranchLockMode(play.branchLockMode, play.branchLock !== false);
+                let forcedKeys = [];
+                const hit = getPolyPlannerTreeHit(eClamped.clientX, eClamped.clientY, rz, {
+                    lockBranch: getPolyTreeEffectiveLockBranch(lockMode, t, play.branchLock !== false),
+                    preferredKey: t.polyTreeNodeKey || '',
+                    hitPadding: parseFloat(play.hitPadding),
+                    hysteresisPx: parseFloat(play.hysteresisPx)
+                });
+                if (hit && !hit.isRoot && hit.key && Number.isFinite(hit.noteExact)) {
+                    const paired = getPolyPlannerPairedHitNotes(hit, rz);
+                    if (paired?.notes?.length) {
+                        forcedNotes = paired.notes.slice(0);
+                        forcedKeys = paired.keys.slice(0);
+                        forcedMeta = paired.keys.map((key) => {
+                            const branch = String(key || '').startsWith('B:') ? 'B' : (String(key || '').startsWith('A:') ? 'A' : null);
+                            return { branchId: branch, tuningId: null, anchorLock: false };
+                        });
+                        m.exact = forcedNotes[0];
+                    } else {
+                        m.exact = Number(hit.noteExact);
+                    }
+                    t.polyTreeNodeKey = hit.key;
+                    planner.activeKey = hit.key;
+                    planner.activeKeys = forcedKeys.length ? forcedKeys : [hit.key];
+                    planner.activeUntil = performance.now() + 320;
+                }
+            }
+            const rootNote = resolveGestureRootNote(m.exact, rz, pitchMode);
+            const quantize = !(pitchMode === 'lumatone' && !isLumatoneScaleQuantizeEnabled(rz));
+            refreshArpNotes(t.arpNotes, m, rootNote, t.zone, {
+                quantize,
+                useChord: isChordEnabledForZone(rz),
+                forceNotes: forcedNotes,
+                forceMeta: forcedMeta
+            });
             const pbRange = getPbRangeForZone(t.zone || 'A');
             const detune = m.exact - rootNote;
             m.pbValue = clampPb(Math.round(8192 + (detune * (8192 / pbRange))));
@@ -17638,8 +21511,14 @@ canvas.addEventListener('pointermove', e => {
     t.voices.forEach(v => {
         const voiceOutput = getZoneOutput(v.zone || baseZone);
         if (!voiceOutput) return;
-        const yData = getYDataFromEvent(e, v.zone || baseZone);
-        const mV = { ...m, slide: yData.slide, press: yData.press, y: yData.y };
+        const useMappedY = (lockedPitchMode === 'lumatone')
+            || (lockedPitchMode === 'circle' && state.experimental?.polyPlanner?.enabled);
+        const mV = useMappedY
+            ? { ...m }
+            : (() => {
+                const yData = getYDataFromEvent(e, v.zone || baseZone);
+                return { ...m, slide: yData.slide, press: yData.press, y: yData.y };
+            })();
         const pb = getVoicePb(mV, v);
         sendMidi([0xE0 + v.chan - 1, pb & 0x7F, (pb >> 7) & 0x7F], voiceOutput);
         sendMidi([0xB0 + v.chan - 1, 74, mV.slide], voiceOutput);
@@ -17661,6 +21540,13 @@ canvas.addEventListener('pointerup', e => {
     };
     const t = state.activeTouches.get(e.pointerId);
     if (t) {
+        const clearPolyStretch = () => {
+            const key = String(t.polyTreeNodeKey || t.polyTreeStartNodeKey || '');
+            const planner = state.experimental?.polyPlanner;
+            const play = ensurePolyPlannerPlayabilityDefaults(state.experimental?.polyPlanner);
+            if (key && play?._runtime?.stretchByKey) delete play._runtime.stretchByKey[key];
+            if (t.polyTreeStretchRef) t.polyTreeStretchRef = null;
+        };
         requestDraw();
         const zoneId = t.zone || 'A';
         const output = getZoneOutput(zoneId);
@@ -17687,12 +21573,14 @@ canvas.addEventListener('pointerup', e => {
                 item.color = item.noteObjs?.[0]?.color || t.color;
                 item.zone = t.zone || item.zone;
             }
+            clearPolyStretch();
             state.activeTouches.delete(e.pointerId);
             finalizePointerUp();
             return;
         }
         if (t.isArpLiveGrab) {
             if (t.arpNoteObj) t.arpNoteObj.lastM = t.lastM;
+            clearPolyStretch();
             state.activeTouches.delete(e.pointerId);
             finalizePointerUp();
             return;
@@ -17725,6 +21613,7 @@ canvas.addEventListener('pointerup', e => {
                 const holdZone = t.arpNotes?.[0]?.zone || t.zone || 'A';
                 state.arpHoldTouches.push({ lastM: t.lastM, color: holdColor, phase: t.phase || 0, noteObjs: t.arpNotes, zone: holdZone });
             }
+            clearPolyStretch();
             state.activeTouches.delete(e.pointerId);
             finalizePointerUp();
             return;
@@ -17758,6 +21647,7 @@ canvas.addEventListener('pointerup', e => {
                     releaseMpeChannel(v.zone || t.zone || 'A', v.chan);
                 });
             }
+            clearPolyStretch();
             state.activeTouches.delete(e.pointerId);
             finalizePointerUp();
             return;
@@ -17846,6 +21736,7 @@ canvas.addEventListener('pointerup', e => {
                 }
             }
         });
+        clearPolyStretch();
         state.activeTouches.delete(e.pointerId);
     }
     finalizePointerUp();
@@ -17864,6 +21755,11 @@ function cancelActivePointer(pointerId) {
     if (t.isArp) {
         const keep = isHoldEnabled(t.zone || 'A');
         if (!keep) removeArpNotes(t.arpNotes);
+        const key = String(t.polyTreeNodeKey || t.polyTreeStartNodeKey || '');
+        const planner = state.experimental?.polyPlanner;
+        const play = ensurePolyPlannerPlayabilityDefaults(state.experimental?.polyPlanner);
+        if (key && play?._runtime?.stretchByKey) delete play._runtime.stretchByKey[key];
+        if (t.polyTreeStretchRef) t.polyTreeStretchRef = null;
         state.activeTouches.delete(pointerId);
         return;
     }
@@ -17876,6 +21772,11 @@ function cancelActivePointer(pointerId) {
         sendMidi([0x80 + v.chan - 1, v.note, 0], output);
         releaseMpeChannel(v.zone || t.zone || 'A', v.chan);
     });
+    const key = String(t.polyTreeNodeKey || t.polyTreeStartNodeKey || '');
+    const planner = state.experimental?.polyPlanner;
+    const play = ensurePolyPlannerPlayabilityDefaults(state.experimental?.polyPlanner);
+    if (key && play?._runtime?.stretchByKey) delete play._runtime.stretchByKey[key];
+    if (t.polyTreeStretchRef) t.polyTreeStretchRef = null;
     state.activeTouches.delete(pointerId);
     // Remove note-dragging class when no more active pointers
     if (state.pointerIds.size === 0) {
@@ -17994,6 +21895,7 @@ function setupChordKnob() {
         if (!didRotate) toggleChord();
         wheel.classList.toggle('knob-on', select.value !== 'off');
         wheel.classList.toggle('knob-off', select.value === 'off');
+        wheel.classList.remove('active');
         requestDraw();
     });
     wheel.addEventListener('pointercancel', () => {
@@ -18001,6 +21903,7 @@ function setupChordKnob() {
         angleAccum = 0;
         wheel.classList.toggle('knob-on', select.value !== 'off');
         wheel.classList.toggle('knob-off', select.value === 'off');
+        wheel.classList.remove('active');
     });
     applyIndex(currentIndex);
 }
@@ -18193,12 +22096,12 @@ function findHeldVoiceAt(x, y, extraPad = 0) {
         const heldVoice = state.heldVoices[i];
         const m = heldVoice.lastM;
         if (!m) continue;
-        const radius = getVisualBubbleRadius(m, 12, 22);
-        const noteFloat = getVoiceNoteFloat(heldVoice);
         const zoneId = heldVoice?.zone || 'A';
+        const radius = getVisualBubbleRadius(m, 12, 22, zoneId);
+        const noteFloat = getVoiceNoteFloat(heldVoice);
         const fallbackX = getHeldVoiceX(heldVoice);
         const fallbackY = m.y;
-        const followTouch = !isCircleDiesisViewActive(zoneId);
+        const followTouch = true;
         const pt = getRenderedBubblePointForNote({
             noteFloat,
             zoneId,
@@ -18214,8 +22117,18 @@ function findHeldVoiceAt(x, y, extraPad = 0) {
         const dx = x - px;
         const dy = y - py;
         const hitPad = (isCircleDiesisViewActive(zoneId) ? 14 : 10) + Math.max(0, extraPad);
-        if ((dx * dx + dy * dy) <= ((radius + hitPad) * (radius + hitPad))) {
+        const hitR = radius + hitPad;
+        if ((dx * dx + dy * dy) <= (hitR * hitR)) {
             return { idx: i };
+        }
+        // Fallback: also allow grabbing by raw touch anchor (more forgiving across view mappings).
+        if (Number.isFinite(m?.x) && Number.isFinite(m?.y)) {
+            const dxRaw = x - m.x;
+            const dyRaw = y - m.y;
+            const rawHitR = Math.max(hitR, radius + 16 + Math.max(0, extraPad));
+            if ((dxRaw * dxRaw + dyRaw * dyRaw) <= (rawHitR * rawHitR)) {
+                return { idx: i };
+            }
         }
     }
     return null;
@@ -18230,12 +22143,12 @@ function findArpHoldNoteAt(x, y, extraPad = 0) {
             const noteObj = hold.noteObjs[n];
             const m = noteObj.lastM || hold.lastM;
             if (!m) continue;
-            const radius = getVisualBubbleRadius(m, 10, 18);
-            const noteFloat = noteObj?.noteFloat ?? noteObj?.note;
             const zoneId = noteObj?.zone || hold?.zone || 'A';
+            const radius = getVisualBubbleRadius(m, 10, 18, zoneId);
+            const noteFloat = noteObj?.noteFloat ?? noteObj?.note;
             const fallbackX = getArpHoldNoteX(noteObj, m);
             const fallbackY = m.y;
-            const followTouch = !isCircleDiesisViewActive(zoneId);
+            const followTouch = true;
             const pt = getRenderedBubblePointForNote({
                 noteFloat,
                 zoneId,
@@ -18251,8 +22164,17 @@ function findArpHoldNoteAt(x, y, extraPad = 0) {
             const dx = x - px;
             const dy = y - py;
             const hitPad = (isCircleDiesisViewActive(zoneId) ? 14 : 10) + Math.max(0, extraPad);
-            if ((dx * dx + dy * dy) <= ((radius + hitPad) * (radius + hitPad))) {
+            const hitR = radius + hitPad;
+            if ((dx * dx + dy * dy) <= (hitR * hitR)) {
                 return { holdIdx: i, noteIdx: n };
+            }
+            if (Number.isFinite(m?.x) && Number.isFinite(m?.y)) {
+                const dxRaw = x - m.x;
+                const dyRaw = y - m.y;
+                const rawHitR = Math.max(hitR, radius + 16 + Math.max(0, extraPad));
+                if ((dxRaw * dxRaw + dyRaw * dyRaw) <= (rawHitR * rawHitR)) {
+                    return { holdIdx: i, noteIdx: n };
+                }
             }
         }
     }
@@ -18263,7 +22185,7 @@ function findArpHoldAt(x, y) {
     for (let i = state.arpHoldTouches.length - 1; i >= 0; i--) {
         const m = state.arpHoldTouches[i].lastM;
         if (!m) continue;
-        const radius = getVisualBubbleRadius(m, 10, 18);
+        const radius = getVisualBubbleRadius(m, 10, 18, state.arpHoldTouches[i]?.zone || 'A');
         const dx = x - m.x;
         const dy = y - m.y;
         if ((dx * dx + dy * dy) <= ((radius + 10) * (radius + 10))) {
@@ -18280,7 +22202,7 @@ function findActiveTouchVoiceAt(x, y, excludePointerId = null, extraPad = 0) {
         if (pointerId === excludePointerId) return;
         if (!t || t.isArpHoldGrab) return;
         const baseM = t.lastM || { x: t.lastX, y: t.lastY, press: 90 };
-        const radius = getVisualBubbleRadius(baseM, 12, 22);
+        const radius = getVisualBubbleRadius(baseM, 12, 22, t.zone || t.voices?.[0]?.zone || 'A');
         if (t.isArp && Array.isArray(t.arpNotes) && t.arpNotes.length) {
             t.arpNotes.forEach((n, idx) => {
                 const zoneId = n?.zone || t.zone || 'A';
@@ -18379,6 +22301,9 @@ function findPhysicalNoteAt(x, y, zoneId = 'A', extraPad = 0) {
 
 state.presets = loadPresets();
 state.mpePresets = loadMpePresets();
+state.polyTreePresets = loadPolyTreePresets();
+state.arpUserPresets = loadArpUserPresets();
+state.metricPhraseUserPresets = loadMetricPhraseUserPresets();
 state.customScales = loadCustomScales();
 state.microScales = loadUserMicroScales();
 initializeSevishManifestScales();
@@ -18441,6 +22366,16 @@ if (!Object.keys(state.mpePresets).length) {
 }
 saveMpePresets(state.mpePresets);
 refreshMpePresetSelect(state.mpePresets, 'Tight');
+if (!state.polyTreePresets || !Object.keys(state.polyTreePresets).length) {
+    state.polyTreePresets = { Init: getPolyTreePresetState(getActiveEditZoneId()) };
+}
+if (!state.polyTreePresets.Init) {
+    state.polyTreePresets.Init = getPolyTreePresetState(getActiveEditZoneId());
+}
+savePolyTreePresets(state.polyTreePresets);
+refreshPolyTreePresetSelect(state.polyTreePresets, 'Init');
+refreshArpPresetSelectOptions(els.arpPresetSelect?.value || 'Init');
+refreshMetricPhrasePresetSelect('Custom');
 populateMicrotonalSelect();
 state.customScales = { ...DEFAULT_CUSTOM_SCALES, ...state.customScales };
 saveCustomScales(state.customScales);
@@ -18862,6 +22797,7 @@ function bindUI() {
             if (!allowed) state.audio.spiral.enabled = false;
             updateSpiralUiState(z);
             refreshSpiralPitchForActiveVoices();
+            drawVirtualLumatone();
         };
     }
     if (els.spiralShimmer) {
@@ -18869,6 +22805,7 @@ function bindUI() {
             state.audio.spiral.shimmer = !!els.spiralShimmer.checked;
             if (state.audio.spiralEngine) state.audio.spiralEngine.setShimmer(state.audio.spiral.shimmer);
             updateSpiralUiState(getScaleZoneId());
+            drawVirtualLumatone();
         };
     }
     if (els.spiralDefect) {
@@ -18877,6 +22814,7 @@ function bindUI() {
             if (state.audio.spiralEngine) state.audio.spiralEngine.setDefect(state.audio.spiral.defectCents);
             if (els.spiralDefectVal) els.spiralDefectVal.textContent = `${state.audio.spiral.defectCents.toFixed(1)}c`;
             refreshSpiralPitchForActiveVoices();
+            drawVirtualLumatone();
         };
         els.spiralDefect.oninput = applySpiralDefect;
         els.spiralDefect.onchange = applySpiralDefect;
@@ -18886,6 +22824,7 @@ function bindUI() {
             state.audio.spiral.anchorMode = (els.spiralAnchor.value === 'left-edge') ? 'left-edge' : 'fixed';
             updateSpiralUiState(getScaleZoneId());
             refreshSpiralPitchForActiveVoices();
+            drawVirtualLumatone();
         };
     }
     if (els.holdNotes) {
@@ -18908,6 +22847,8 @@ function bindUI() {
                 stopMelodyGenerator();
                 updateMelodyToggleUI();
             }
+            // STOP globale: termina e ripulisce anche loop playback/recording del Physical mode.
+            if (typeof clearPlaygroundLoopsNow === 'function') clearPlaygroundLoopsNow();
             disableKeep('A');
             disableKeep('B');
             allNotesOff();
@@ -18951,7 +22892,18 @@ function bindUI() {
     const syncArpFromUiAndStore = () => { syncArpFromUI(); syncPerformanceConfigFromUi(); };
     els.arpEnabled.onchange = syncArpFromUiAndStore;
     if (els.arpPresetSelect) {
-        els.arpPresetSelect.onchange = e => applyArpPreset(e.target.value);
+        els.arpPresetSelect.onchange = e => {
+            const key = String(e.target.value || '');
+            applyArpPreset(key);
+            if (els.arpMetricPhraseName) {
+                els.arpMetricPhraseName.value = key.startsWith('user:') ? key.slice(5) : '';
+            }
+            if (key.startsWith('user:')) {
+                updateMetricPhrasePresetStatus('User ARP preset selected. Save can update/rename.', '#9fd3ff');
+            } else {
+                updateMetricPhrasePresetStatus('Built-in ARP preset selected. Use Save to create a user copy.', '#9aa');
+            }
+        };
     }
     els.arpRate.onchange = syncArpFromUiAndStore;
     // ARP Rate select dropdown (visible in performance bar)
@@ -18998,6 +22950,129 @@ function bindUI() {
             updateArpParams({ swing: (parseInt(els.arpSwing.value, 10) || 0) / 100 });
             syncPerformanceConfigFromUi();
             updateRangeProgress(els.arpSwing);
+        };
+    }
+    if (els.arpMetricEnabled) {
+        els.arpMetricEnabled.onclick = () => {
+            const on = !els.arpMetricEnabled.classList.contains('toggle-on');
+            els.arpMetricEnabled.classList.toggle('toggle-on', on);
+            els.arpMetricEnabled.classList.toggle('toggle-off', !on);
+            els.arpMetricEnabled.textContent = on ? 'METRIC ON' : 'METRIC OFF';
+            syncArpFromUiAndStore();
+        };
+    }
+    if (els.arpMetricSeedPreset) {
+        els.arpMetricSeedPreset.onchange = () => {
+            const presetName = String(els.arpMetricSeedPreset.value || 'Phototactic');
+            const presetSeed = METRIC_TREE_SEEDS[presetName];
+            if (presetSeed && els.arpMetricSeed) {
+                els.arpMetricSeed.value = presetSeed.join(',');
+                if (els.arpMetricPhrasePreset) els.arpMetricPhrasePreset.value = 'Custom';
+            }
+            updateMetricSeedSyntaxBadge(els.arpMetricSeed?.value || '');
+            syncArpFromUiAndStore();
+        };
+    }
+    if (els.arpMetricPhrasePreset) {
+        els.arpMetricPhrasePreset.onchange = () => {
+            const key = String(els.arpMetricPhrasePreset.value || 'Custom');
+            const expr = getMetricPhraseExpressionByKey(key);
+            if (expr && els.arpMetricSeed) {
+                els.arpMetricSeed.value = expr;
+                if (els.arpMetricSeedPreset) els.arpMetricSeedPreset.value = 'Custom';
+            }
+            if (els.arpMetricPhraseName) {
+                els.arpMetricPhraseName.value = isMetricUserPresetKey(key) ? metricUserPresetNameFromKey(key) : '';
+            }
+            updateMetricSeedSyntaxBadge(els.arpMetricSeed?.value || '');
+            syncArpFromUiAndStore();
+        };
+    }
+    if (els.arpMetricSeed) {
+        els.arpMetricSeed.oninput = () => {
+            updateMetricSeedSyntaxBadge(els.arpMetricSeed.value || '');
+        };
+        els.arpMetricSeed.onchange = () => {
+            const raw = String(els.arpMetricSeed.value || '');
+            if (els.arpMetricSeedPreset) els.arpMetricSeedPreset.value = 'Custom';
+            if (els.arpMetricPhrasePreset) els.arpMetricPhrasePreset.value = getMetricPhrasePresetKeyByExpression(raw);
+            updateMetricSeedSyntaxBadge(raw);
+            syncArpFromUiAndStore();
+        };
+    }
+    if (els.arpMetricDepth) {
+        els.arpMetricDepth.onchange = syncArpFromUiAndStore;
+    }
+    if (els.arpMetricWither) {
+        els.arpMetricWither.oninput = () => {
+            updateRangeProgress(els.arpMetricWither);
+            syncArpFromUiAndStore();
+        };
+    }
+    if (els.arpMetricNesting) {
+        els.arpMetricNesting.onchange = syncArpFromUiAndStore;
+    }
+    if (els.arpMetricSpeed) {
+        els.arpMetricSpeed.oninput = () => {
+            updateRangeProgress(els.arpMetricSpeed);
+            syncArpFromUiAndStore();
+        };
+    }
+    if (els.arpMetricCycleMode) {
+        els.arpMetricCycleMode.onchange = () => {
+            const isCustom = els.arpMetricCycleMode.value === 'custom';
+            if (els.arpMetricCycleBars) els.arpMetricCycleBars.disabled = !isCustom;
+            syncArpFromUiAndStore();
+        };
+    }
+    if (els.arpMetricCycleBars) {
+        els.arpMetricCycleBars.oninput = () => {
+            syncArpFromUiAndStore();
+        };
+    }
+    if (els.arpMetricPhraseSave) {
+        els.arpMetricPhraseSave.onclick = () => {
+            const name = String(els.arpMetricPhraseName?.value || '').trim();
+            if (!name) {
+                updateMetricPhrasePresetStatus('Insert a preset name for the ARP preset.', '#ffb36a');
+                return;
+            }
+            const currentArpSel = String(els.arpPresetSelect?.value || '');
+            if (currentArpSel.startsWith('user:')) {
+                const oldName = currentArpSel.slice(5);
+                if (oldName && oldName !== name && state.arpUserPresets[oldName] != null) {
+                    delete state.arpUserPresets[oldName];
+                }
+            }
+            state.arpUserPresets[name] = captureArpPresetFromCurrentUi();
+            saveArpUserPresets(state.arpUserPresets);
+            const newKey = `user:${name}`;
+            refreshArpPresetSelectOptions(newKey);
+            if (els.arpPresetSelect) els.arpPresetSelect.value = newKey;
+            if (els.arpMetricPhraseName) els.arpMetricPhraseName.value = name;
+            updateMetricPhrasePresetStatus(`Saved ARP preset "${name}".`, '#6adf8f');
+            syncArpFromUiAndStore();
+        };
+    }
+    if (els.arpMetricPhraseDelete) {
+        els.arpMetricPhraseDelete.onclick = () => {
+            const key = String(els.arpPresetSelect?.value || '');
+            if (!key.startsWith('user:')) {
+                updateMetricPhrasePresetStatus('Select a user ARP preset to delete.', '#ffb36a');
+                return;
+            }
+            const name = key.slice(5);
+            if (!name || state.arpUserPresets[name] == null) {
+                updateMetricPhrasePresetStatus('Preset not found.', '#ff7070');
+                return;
+            }
+            delete state.arpUserPresets[name];
+            saveArpUserPresets(state.arpUserPresets);
+            refreshArpPresetSelectOptions('Init');
+            if (els.arpPresetSelect) els.arpPresetSelect.value = 'Init';
+            if (els.arpMetricPhraseName) els.arpMetricPhraseName.value = '';
+            updateMetricPhrasePresetStatus(`Deleted ARP preset "${name}".`, '#9aa');
+            syncArpFromUiAndStore();
         };
     }
     if (els.arpRatchet) {
@@ -20708,33 +24783,46 @@ function getFadeGainForZone(zoneId = 'A') {
 function getHighlightKeyForNote(note, zoneId = null) {
     if (!Number.isFinite(note)) return null;
     const z = getScaleZoneId(zoneId);
-    const grid = getGridDegrees(z);
-    const stepOrder = getCircleStepOrderForGrid(z, grid);
-    const stepsPerOct = Math.max(1, stepOrder.length);
-    const numOct = getVisibleOctavesForZone(z);
-    const totalSteps = Math.max(0, numOct * stepsPerOct);
-    if (!stepsPerOct || !totalSteps) return null;
-
-    const baseMIDI = 48 + (getCurrentOctaveForZone(z) * grid.periodSemitones) + grid.root;
-    let bestStep = 0;
+    const def = getScaleDefinition(z);
+    const period = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const root = Number.isFinite(def?.root) ? def.root : 0;
+    const stepCtx = getUniformScaleStepContext(def);
+    if (stepCtx && Number.isFinite(stepCtx.stepSemis) && stepCtx.stepSemis > 0) {
+        // Stable direct index for EDO-like scales (e.g. 31-EDO): avoids nearest-nearest jitter.
+        const raw = (note - root) / stepCtx.stepSemis;
+        const absStep = Math.round(raw);
+        return `s:${absStep}`;
+    }
+    const degrees = normalizeDegreesForPeriod(def?.degrees || [], period);
+    const stepsPerOct = degrees.length;
+    if (!stepsPerOct) return null;
+    const snapped = mapMidiNoteToScaleWithDef(note, def);
+    const targetOct = Math.floor((snapped - root) / period);
     let bestDist = Infinity;
+    let bestOct = targetOct;
+    let bestDeg = 0;
     const EPS = 1e-7;
-
-    for (let i = 0; i < totalSteps; i++) {
-        const cand = getCircleLayoutNoteAt(i, z, grid, baseMIDI, numOct).note;
-        const dist = Math.abs(cand - note);
-        if (dist < bestDist - EPS) {
-            bestDist = dist;
-            bestStep = i;
-        } else if (Math.abs(dist - bestDist) <= EPS && i < bestStep) {
-            bestStep = i;
+    for (let o = targetOct - 2; o <= targetOct + 2; o += 1) {
+        const base = root + (o * period);
+        for (let i = 0; i < stepsPerOct; i += 1) {
+            const cand = base + degrees[i];
+            const dist = Math.abs(cand - snapped);
+            const curAbs = (o * stepsPerOct) + i;
+            const bestAbs = (bestOct * stepsPerOct) + bestDeg;
+            const tieBreak = curAbs < bestAbs;
+            if (dist < bestDist - EPS || (Math.abs(dist - bestDist) <= EPS && tieBreak)) {
+                bestDist = dist;
+                bestOct = o;
+                bestDeg = i;
+            }
         }
     }
-
-    return `g:${bestStep}`;
+    if (!Number.isFinite(bestDist)) return null;
+    const absStep = (bestOct * stepsPerOct) + bestDeg;
+    return `s:${absStep}`;
 }
-
-
+ 
+ 
 function collectHighlightMaps(nowAudio = null) {
     const makeMaps = () => ({
         chordHighlightNotes: new Map(),
@@ -20762,6 +24850,16 @@ function collectHighlightMaps(nowAudio = null) {
         if (!key) return;
         z.chordDimNotes.add(key);
     };
+    const getStableNoteForHighlight = (obj, zoneId = 'A') => {
+        if (!obj || typeof obj !== 'object') return Number.isFinite(obj) ? obj : null;
+        if (Number.isFinite(obj.note) && Number.isFinite(obj.basePb)) {
+            const pbRange = Math.max(1, getPbRangeForZone(zoneId));
+            return obj.note + (obj.basePb * (pbRange / 8192));
+        }
+        if (Number.isFinite(obj.noteFloat)) return obj.noteFloat;
+        if (Number.isFinite(obj.note)) return obj.note;
+        return null;
+    };
 
     // Helper to find note under finger visual position
     const getVisualNote = (x, y, zoneId = 'A') => {
@@ -20773,7 +24871,13 @@ function collectHighlightMaps(nowAudio = null) {
          const totalSteps = Math.max(1, numOct * circleSteps);
          const clientX = state.canvasRect.left + x;
          const clientY = state.canvasRect.top + (Number.isFinite(y) ? y : (state.canvasRect.height * 0.5));
-         const stepExact = getCircleStepExactForPointer(clientX, clientY, zoneId, totalSteps, circleSteps);
+         if (isLumatoneViewActive(zoneId)) {
+             const hit = getLumatoneHitFromPoint(clientX, clientY, zoneId);
+             return hit?.noteExact ?? null;
+         }
+         const stepExact = isCircleDiesisViewActive(zoneId)
+             ? getCircleStepExactForPointer(clientX, clientY, zoneId, totalSteps, circleSteps)
+             : ((Math.max(0, Math.min(width - 1, x)) / width) * totalSteps);
          const stepIndex = Math.floor(stepExact);
          if (stepIndex < 0 || stepIndex >= totalSteps) return null;
          const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * grid.periodSemitones) + grid.root;
@@ -20787,8 +24891,8 @@ function collectHighlightMaps(nowAudio = null) {
         const touchAlpha = getTouchVisualAlpha(t, mode, nowAudio);
 
         if (t.isHoldGrab) {
-            const target = mapMidiNoteToScale(t.lastM?.exact ?? 0);
-            const source = mapMidiNoteToScale(t.initialExact ?? 0);
+            const target = mapMidiNoteToScale(t.lastM?.exact ?? 0, zoneId);
+            const source = mapMidiNoteToScale(t.initialExact ?? 0, zoneId);
             if (Number.isFinite(source)) setDim(zoneId, source);
             if (Number.isFinite(target)) setHighlight(zoneId, target, t.color, touchAlpha);
         }
@@ -20805,7 +24909,10 @@ function collectHighlightMaps(nowAudio = null) {
         }
 
         if (t.isArp && t.arpNotes) {
-            t.arpNotes.forEach(n => setHighlight(zoneId, (n.noteFloat ?? n.note), t.color, touchAlpha));
+            t.arpNotes.forEach(n => {
+                const stable = getStableNoteForHighlight(n, zoneId);
+                if (Number.isFinite(stable)) setHighlight(zoneId, stable, t.color, touchAlpha);
+            });
         } else {
             t.voices.forEach(v => {
                 const noteFloat = getVoiceNoteFloat(v);
@@ -20826,12 +24933,14 @@ function collectHighlightMaps(nowAudio = null) {
     getAllArpStates().forEach(arp => {
         arp.notes.forEach(n => {
             const zoneId = n.zone || 'A';
-            setHighlight(zoneId, (n.noteFloat ?? n.note), n.color, 1);
+            const stable = getStableNoteForHighlight(n, zoneId);
+            if (Number.isFinite(stable)) setHighlight(zoneId, stable, n.color, 1);
         });
         arp.active.forEach(entry => {
             const zoneId = entry.zone || 'A';
             const z = getMaps(zoneId);
-            const key = getHighlightKeyForNote(entry.noteFloat ?? entry.note, zoneId);
+            const stable = getStableNoteForHighlight(entry, zoneId);
+            const key = getHighlightKeyForNote(stable, zoneId);
             if (key) z.arpActiveNotes.set(key, entry.color);
         });
     });
@@ -20927,7 +25036,9 @@ function drawGridCells(width, height, grid, numOct, noteW, baseMIDI, fadeMul, fa
             pGrab = !pData && zList ? zList.find(d => d.grabbed) : null;
         }
         if (pData || pGrab) {
-            const rad = 20 + Math.sin(time/200)*5;
+            const pulse = 20 + Math.sin(time/200)*5;
+            const cap = Math.max(5, Math.min(18, noteW * 0.4));
+            const rad = Math.min(pulse, cap);
             const yBase = yTop + (yHeight / 2);
             const y = yBase + (((yTop + yHeight) - yBase) * fadeDrop);
             ctx.globalAlpha = fadeMul;
@@ -21103,6 +25214,7 @@ function drawGrainyRing(x, y, radius, color, phase) {
 }
 
 function drawHeldVoices(_fadeMul, _fadeDrop, height, nowAudio = null) {
+    if (isPolyTreeVisualMode('A') || (isDualModeEnabled() && isPolyTreeVisualMode('B'))) return;
     if (!state.heldVoices.length) return;
     state.heldVoices.forEach((v, i) => {
         const zoneId = v.zone || 'A';
@@ -21118,12 +25230,12 @@ function drawHeldVoices(_fadeMul, _fadeDrop, height, nowAudio = null) {
             v.bowFlash -= 0.03; // Slower fade for smoother effect
         }
 
-        const radius = getVisualBubbleRadius(m, 12, 22) + (flash * 10);
+        const radius = getVisualBubbleRadius(m, 12, 22, zoneId) + (flash * 10);
         v.phase = (v.phase || 0) + 0.2;
         const noteFloat = getVoiceNoteFloat(v);
         const fallbackX = getHeldVoiceX(v);
         const fallbackY = m.y + ((height - m.y) * fadeDrop);
-        const followTouch = !isCircleDiesisViewActive(zoneId);
+        const followTouch = true;
         const pt = getRenderedBubblePointForNote({
             noteFloat,
             zoneId,
@@ -21136,28 +25248,30 @@ function drawHeldVoices(_fadeMul, _fadeDrop, height, nowAudio = null) {
         });
         const x = pt.x;
         const y = pt.y;
+        const renderRadius = Number.isFinite(pt.radius) ? pt.radius : radius;
         const visualAlpha = flash > 0 ? Math.max(voiceAlpha, 0.2 + flash * 0.8) : voiceAlpha;
         const finalAlpha = fadeMul * visualAlpha;
         
         ctx.globalAlpha = finalAlpha;
 
         if (visual.sampler || visual.layer) {
-            drawPulseDisc(x, y, radius, v.color, m.press);
-            drawGrainyRing(x, y, radius, v.color, v.phase);
+            drawPulseDisc(x, y, renderRadius, v.color, m.press);
+            drawGrainyRing(x, y, renderRadius, v.color, v.phase);
         }
         if (visual.wt || visual.layer) {
             const waveColor = flash > 0 ? '#ffffff' : v.color;
-            drawWaveformLine(x, y, radius, waveColor, v.phase, 0.5);
+            drawWaveformLine(x, y, renderRadius, waveColor, v.phase, 0.5);
         }
 
         const bubbleColor = flash > 0 ? '#ffffff' : v.color;
-        drawNoteBubble(x, y, radius, bubbleColor, i === 0 ? "HOLD" : null);
+        drawNoteBubble(x, y, renderRadius, bubbleColor, i === 0 ? "HOLD" : null);
         ctx.globalAlpha = 1;
     });
 }
 
 
 function drawArpHoldTouches(_fadeMul, _fadeDrop, height) {
+    if (isPolyTreeVisualMode('A') || (isDualModeEnabled() && isPolyTreeVisualMode('B'))) return;
     if (!state.arpHoldTouches.length) return;
     state.arpHoldTouches.forEach(t => {
         const zoneId = t.zone || t.noteObjs?.[0]?.zone || 'A';
@@ -21166,12 +25280,12 @@ function drawArpHoldTouches(_fadeMul, _fadeDrop, height) {
         list.forEach((n, idx) => {
             const m = n.lastM || t.lastM;
             if (!m) return;
-            const radius = getVisualBubbleRadius(m, 10, 18);
+            const radius = getVisualBubbleRadius(m, 10, 18, zoneId);
             t.phase = (t.phase || 0) + 0.2;
             const noteFloat = n?.noteFloat ?? n?.note;
             const fallbackX = getArpHoldNoteX(n, m);
             const fallbackY = m.y + ((height - m.y) * fadeDrop);
-            const followTouch = !isCircleDiesisViewActive(zoneId);
+            const followTouch = true;
             const pt = getRenderedBubblePointForNote({
                 noteFloat,
                 zoneId,
@@ -21184,15 +25298,17 @@ function drawArpHoldTouches(_fadeMul, _fadeDrop, height) {
             });
             const x = pt.x;
             const y = pt.y;
+            const renderRadius = Number.isFinite(pt.radius) ? pt.radius : radius;
             const glow = n.color || t.color || '#ffaa00';
             ctx.globalAlpha = fadeMul;
-            drawNoteBubble(x, y, radius, glow, idx === 0 ? "ARP HOLD" : null);
+            drawNoteBubble(x, y, renderRadius, glow, idx === 0 ? "ARP HOLD" : null);
             ctx.globalAlpha = 1;
         });
     });
 }
 
 function drawActiveTouches(_fadeMul, _fadeDrop, height, nowAudio = null) {
+    if (isPolyTreeVisualMode('A') || (isDualModeEnabled() && isPolyTreeVisualMode('B'))) return;
     state.activeTouches.forEach(t => {
         const zoneId = t.zone || t.voices?.[0]?.zone || 'A';
         const circleActive = isCircleDiesisViewActive(zoneId);
@@ -21205,7 +25321,7 @@ function drawActiveTouches(_fadeMul, _fadeDrop, height, nowAudio = null) {
         }
         if (touchAlpha <= 0.001) return;
         if (!t.lastM) return;
-        const radius = getVisualBubbleRadius(t.lastM, 12, 22);
+        const radius = getVisualBubbleRadius(t.lastM, 12, 22, zoneId);
         t.phase += 0.2 + (t.vibratoSpeed * 0.06);
         const dragDelta = (Number.isFinite(t.lastM?.exact) && Number.isFinite(t.initialExact))
             ? (t.lastM.exact - t.initialExact)
@@ -21222,44 +25338,58 @@ function drawActiveTouches(_fadeMul, _fadeDrop, height, nowAudio = null) {
         const baseX = touchPtMain.x;
         let y = touchPtMain.y;
         y = getClampedVisualY(y, radius, height);
+        const mainPt = getRenderedBubblePointForNote({
+            noteFloat: Number.isFinite(leadNote) ? leadNote : null,
+            zoneId,
+            m: t.lastM,
+            fallbackX: baseX,
+            fallbackY: y,
+            radius,
+            height,
+            followTouch: true
+        });
+        const mainX = mainPt.x;
+        const mainY = mainPt.y;
+        const mainRadius = Number.isFinite(mainPt.radius) ? mainPt.radius : radius;
         ctx.globalAlpha = fadeMul * touchAlpha;
         if (visual.sampler || visual.layer) {
-            drawPulseDisc(baseX, y, radius, t.color, t.lastM.press);
-            drawGrainyRing(baseX, y, radius, t.color, t.phase);
+            drawPulseDisc(mainX, mainY, mainRadius, t.color, t.lastM.press);
+            drawGrainyRing(mainX, mainY, mainRadius, t.color, t.phase);
         }
         if (visual.wt || visual.layer) {
-            drawWaveformLine(baseX, y, radius, t.color, t.phase, t.vibratoSpeed);
+            drawWaveformLine(mainX, mainY, mainRadius, t.color, t.phase, t.vibratoSpeed);
         }
         const label = t.label
             ? t.label
             : (t.isGrab
                 ? "GRAB"
                 : (t.isArpHoldGrab ? "ARP HOLD" : (t.isArp ? "ARP" : `CH${t.voices[0].chan}`)));
-        drawNoteBubble(baseX, y, radius, t.color, label);
+        drawNoteBubble(mainX, mainY, mainRadius, t.color, label);
         if (microDebugEnabled) {
             const dbgNote = Number.isFinite(leadNote) ? leadNote : null;
             if (Number.isFinite(dbgNote)) {
                 const key = getHighlightKeyForNote(dbgNote, zoneId) || '--';
-                drawMicroDebugLabel(baseX, y - radius - 20, `${dbgNote.toFixed(3)} -> ${key}`, t.color);
+                drawMicroDebugLabel(mainX, mainY - mainRadius - 20, `${dbgNote.toFixed(3)} -> ${key}`, t.color);
             }
         }
         if (t.isArp && t.arpNotes) {
             t.arpNotes.forEach(n => {
                 const noteFloat = n.noteFloat ?? n.note;
                 const circlePt = getCircleVisualPointForNote(noteFloat, zoneId);
+                const childRadius = Math.max(8, mainRadius * 0.7);
                 const fallbackNX = circlePt ? circlePt.x : (getNearestNoteX(noteFloat, zoneId) ?? t.lastM.x);
-                const fallbackNY = circlePt ? circlePt.y : y;
+                const fallbackNY = circlePt ? circlePt.y : mainY;
                 const pt = getRenderedBubblePointForNote({
                     noteFloat,
                     zoneId,
                     m: n.lastM || t.lastM,
                     fallbackX: fallbackNX,
                     fallbackY: fallbackNY,
-                    radius: Math.max(8, radius * 0.7),
+                    radius: childRadius,
                     height,
                     followTouch: true
                 });
-                drawNoteBubble(pt.x, pt.y, Math.max(8, radius * 0.7), n.color || t.color, null);
+                drawNoteBubble(pt.x, pt.y, Number.isFinite(pt.radius) ? pt.radius : childRadius, n.color || t.color, null);
             });
         } else if (t.voices && t.voices.length > 1) {
             t.voices.forEach(v => {
@@ -21268,24 +25398,26 @@ function drawActiveTouches(_fadeMul, _fadeDrop, height, nowAudio = null) {
                     ? (voiceBase + dragDelta)
                     : voiceBase;
                 const circlePt = getCircleVisualPointForNote(noteFloat, zoneId);
+                const childRadius = Math.max(8, mainRadius * 0.7);
                 const fallbackNX = circlePt ? circlePt.x : (getNearestNoteX(noteFloat, zoneId) ?? t.lastM.x);
-                const fallbackNY = circlePt ? circlePt.y : y;
+                const fallbackNY = circlePt ? circlePt.y : mainY;
                 const pt = getRenderedBubblePointForNote({
                     noteFloat,
                     zoneId,
                     m: t.lastM,
                     fallbackX: fallbackNX,
                     fallbackY: fallbackNY,
-                    radius: Math.max(8, radius * 0.7),
+                    radius: childRadius,
                     height,
                     followTouch: true
                 });
-                drawNoteBubble(pt.x, pt.y, Math.max(8, radius * 0.7), v.color || t.color, null);
+                drawNoteBubble(pt.x, pt.y, Number.isFinite(pt.radius) ? pt.radius : childRadius, v.color || t.color, null);
             });
         }
         ctx.globalAlpha = 1;
     });
 }
+
 
 function drawBowFadersForZone(zoneId, height, noteW) {
     if (!state.audio.enabled) return;
@@ -21393,6 +25525,13 @@ function drawCircleGridView(width, height, grid, numOct, baseMIDI, maps, zoneId 
     const minR = Math.max(24, maxR * 0.18);
     const ringW = (maxR - minR) / Math.max(1, numOct);
     const guideDiv = Math.max(1, getCircleGuideDivisions(zoneId));
+    const polyOn = isPolyTreeVisualMode(zoneId);
+    if (polyOn) {
+        drawPolyPlannerTreesView(width, height, zoneId, baseMIDI);
+        return;
+    }
+    const polyRingA = Array.from({ length: Math.max(1, numOct) }, () => []);
+    const polyRingB = Array.from({ length: Math.max(1, numOct) }, () => []);
 
     ctx.save();
     ctx.beginPath();
@@ -21425,8 +25564,20 @@ function drawCircleGridView(width, height, grid, numOct, baseMIDI, maps, zoneId 
             fill = c.replace('hsl', 'hsla').replace(')', ', 0.45)');
         }
         drawAnnularSlice(ctx, cx, cy, r0, r1, a0, a1, fill, 'rgba(255,255,255,0.12)', 1);
+        if (polyOn) {
+            const plannerMap = getPolyPlannerMappingForMidi(note, zoneId);
+            if (plannerMap?.enabled && (plannerMap.branch === 'A' || plannerMap.branch === 'B')) {
+                const am = (a0 + a1) * 0.5;
+                const rm = r0 + ((r1 - r0) * 0.45);
+                const lx = cx + (Math.cos(am) * rm);
+                const ly = cy + (Math.sin(am) * rm);
+                const ringIdx = Math.max(0, Math.min(polyRingA.length - 1, ring));
+                if (plannerMap.branch === 'A') polyRingA[ringIdx].push({ x: lx, y: ly, a: am });
+                else polyRingB[ringIdx].push({ x: lx, y: ly, a: am });
+                drawPolyBranchLeaf(ctx, lx, ly, Math.max(8, ringW * 0.24), plannerMap.branch);
+            }
+        }
     }
-
     ctx.strokeStyle = 'rgba(255,255,255,0.16)';
     ctx.lineWidth = 1;
     for (let g = 0; g < guideDiv; g++) {
@@ -21435,6 +25586,10 @@ function drawCircleGridView(width, height, grid, numOct, baseMIDI, maps, zoneId 
         ctx.moveTo(cx + Math.cos(a) * minR, cy + Math.sin(a) * minR);
         ctx.lineTo(cx + Math.cos(a) * maxR, cy + Math.sin(a) * maxR);
         ctx.stroke();
+    }
+    if (polyOn) {
+        drawPolyBranchNetwork(ctx, polyRingA, 'A');
+        drawPolyBranchNetwork(ctx, polyRingB, 'B');
     }
 
     if (circleSteps <= 64) {
@@ -21480,7 +25635,9 @@ function drawCircleGridView(width, height, grid, numOct, baseMIDI, maps, zoneId 
         const noteFloat = getVoiceNoteFloat(v);
         const pt = getCircleVisualPointForNote(noteFloat, zoneId);
         if (!pt) return;
-        const rad = 20 + Math.sin(pulseT) * 5;
+        const pulse = 20 + Math.sin(pulseT) * 5;
+        const cap = Math.max(6, Math.min(20, (pt.radius || 12) * 0.9));
+        const rad = Math.min(pulse, cap);
         ctx.globalAlpha = 1;
         ctx.beginPath();
         ctx.strokeStyle = v.grabbed ? '#ffaa00' : '#00ff44';
@@ -21500,8 +25657,702 @@ function drawCircleGridView(width, height, grid, numOct, baseMIDI, maps, zoneId 
     const title = circleSteps === Math.max(1, grid.stepsPerOct || 12)
         ? `Circle of Diesis (${grid.stepsPerOct} steps)`
         : `Circle of Diesis (${circleSteps}/${grid.stepsPerOct} steps)`;
-    ctx.fillText(title, 8, 8);
+    ctx.fillText(polyOn ? `${title} | POLY branches ON` : title, 8, 8);
     ctx.restore();
+}
+
+function buildLumatoneSurfaceCells(width, height, zoneId = 'A') {
+    const cfg = getVirtualLumatoneConfig(zoneId);
+    const ringsRequested = Math.max(1, Math.min(10, parseInt(cfg.rings, 10) || 5));
+    // Keep rings requested by coverage logic; hex size adapts separately.
+    const rings = ringsRequested;
+    const layout = String(cfg.layout || 'classic').toLowerCase();
+    const rowSpecsBase = (layout === 'classic')
+        ? [
+            { leftTrim: 2, rightTrim: 2 },
+            { leftTrim: 1, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 2 },
+            { leftTrim: 2, rightTrim: 2 },
+            { leftTrim: 2, rightTrim: 3 }
+        ]
+        : [
+            { leftTrim: 2, rightTrim: 2 },
+            { leftTrim: 1, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 0 },
+            { leftTrim: 0, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 1 },
+            { leftTrim: 1, rightTrim: 2 },
+            { leftTrim: 2, rightTrim: 2 },
+            { leftTrim: 2, rightTrim: 2 }
+        ];
+    const rowCrop = Math.max(0, 4 - rings); // rings 4..1 -> crop 0..3 rows per side
+    const rowStart = Math.min(rowCrop, Math.max(0, rowSpecsBase.length - 4));
+    const rowEnd = Math.max(rowStart + 4, rowSpecsBase.length - rowCrop);
+    const rowSpecs = rowSpecsBase.slice(rowStart, rowEnd);
+    // Rings now controls visible range in main Lumatone view too:
+    // fewer rings -> fewer columns (less octave span) -> larger hexes.
+    const baseCols = 6 + (rings * 2); // 8..26 for rings 1..10
+    const rows = rowSpecs.length;
+    const logicalCells = [];
+    const periodSteps = Math.max(1, Number.isFinite(cfg.stepsPerOct) ? cfg.stepsPerOct : 31);
+    const canUseClassicLookup = layout === 'classic' && periodSteps === 31;
+    // Standard Bosanquet-style lookup (row-by-row) for a Classic hardware-like distribution.
+    // Values are step classes (0..30) and are tiled horizontally, then octave-lifted by cycle.
+    const CLASSIC_ROW_LOOKUP = [
+        [29, 3, 11, 16, 21, 24],
+        [1, 6, 9, 14, 19, 22, 27],
+        [30, 4, 12, 17, 22, 25],
+        [2, 7, 10, 15, 20, 23, 28],
+        [0, 5, 10, 13, 18, 23, 26],
+        [3, 8, 11, 16, 21, 24, 29],
+        [1, 6, 11, 14, 19, 24, 27],
+        [4, 9, 12, 17, 22, 25, 30],
+        [2, 7, 12, 15, 20, 25, 28],
+        [10, 15, 18, 23, 28, 0, 5],
+        [7, 12, 17, 22, 27, 1, 6]
+    ];
+    const modPeriod = (n) => ((n % periodSteps) + periodSteps) % periodSteps;
+    const spanSteps = Math.max(periodSteps, Number.isFinite(cfg.targetSpanSteps) ? cfg.targetSpanSteps : periodSteps);
+    const foldToSpan = (rawStep) => {
+        // Keep all cells inside the selected octave span so every hex remains playable.
+        const rel = (rawStep - (cfg.baseStep || 0));
+        const wrapped = ((rel % spanSteps) + spanSteps) % spanSteps;
+        return (cfg.baseStep || 0) + wrapped;
+    };
+    const classicStepForCell = (row, idxInRow) => {
+        const seq = CLASSIC_ROW_LOOKUP[row % CLASSIC_ROW_LOOKUP.length];
+        const seqLen = Math.max(1, seq.length);
+        const cycle = Math.floor(idxInRow / seqLen);
+        const stepClass = seq[idxInRow % seqLen];
+        // Preserve absolute growth across repeated horizontal tiles.
+        return (stepClass + (cycle * periodSteps) + (cfg.baseStep || 0));
+    };
+
+    const pushCell = (q, r, idxInRow) => {
+        const rawAbsStep = canUseClassicLookup
+            ? classicStepForCell(r, idxInRow)
+            : ((cfg.baseStep || 0) + (q * cfg.vectorQ) + (r * cfg.vectorR));
+        const absStep = foldToSpan(rawAbsStep);
+        const pc31 = modPeriod(absStep);
+        logicalCells.push({ q, r, row: r, slot: idxInRow, step: absStep, absStep, pc31 });
+    };
+
+    // Hardware-like row-by-row board with fixed silhouette in Classic mode.
+    for (let row = 0; row < rows; row += 1) {
+        const rowSpec = rowSpecs[row] || { leftTrim: 0, rightTrim: 0 };
+        const start = rowSpec.leftTrim || 0;
+        const end = baseCols - (rowSpec.rightTrim || 0);
+        const rowCols = Math.max(6, end - start);
+        let idxInRow = 0;
+        for (let col = start; col < end; col += 1) {
+            const q = col - start; // horizontal logical axis
+            const r = row;         // diagonal/logical row axis
+            pushCell(q, r, idxInRow);
+            idxInRow += 1;
+        }
+    }
+    const cloneMode = String(cfg.cloneMode || 'dense').toLowerCase();
+    const maxDup = Math.max(1, parseInt(cfg.hybridMax, 10) || 2);
+    const dupCount = new Map();
+    const filtered = [];
+    logicalCells.forEach((c) => {
+        if (cloneMode === 'dense') {
+            filtered.push(c);
+            return;
+        }
+        const key = `${c.absStep}`;
+        const used = dupCount.get(key) || 0;
+        const allow = (cloneMode === 'unique') ? (used < 1) : (used < maxDup);
+        if (!allow) return;
+        dupCount.set(key, used + 1);
+        filtered.push(c);
+    });
+    const cellsForLayout = (filtered.length ? filtered : logicalCells).map((c) => ({ ...c }));
+    // Ensure at least one representative cell for every step class.
+    // Without this, adaptive layouts can miss classes (e.g. 11 in 31-EDO),
+    // causing chord-step highlights to appear on wrong labels.
+    if (cellsForLayout.length >= periodSteps) {
+        const classCount = new Map();
+        cellsForLayout.forEach((c) => {
+            const cls = modPeriod(c.absStep);
+            classCount.set(cls, (classCount.get(cls) || 0) + 1);
+        });
+        const donorIndicesByClass = new Map();
+        cellsForLayout.forEach((c, idx) => {
+            const cls = modPeriod(c.absStep);
+            if (!donorIndicesByClass.has(cls)) donorIndicesByClass.set(cls, []);
+            donorIndicesByClass.get(cls).push(idx);
+        });
+        const retuneCellToClass = (cell, targetClass) => {
+            const curClass = modPeriod(cell.absStep);
+            const base = cell.absStep - curClass + targetClass;
+            const up = base + periodSteps;
+            const down = base - periodSteps;
+            const best = [base, up, down].reduce((acc, cand) => {
+                if (!Number.isFinite(acc)) return cand;
+                return Math.abs(cand - cell.absStep) < Math.abs(acc - cell.absStep) ? cand : acc;
+            }, Number.NaN);
+            cell.absStep = best;
+            cell.step = best;
+            cell.pc31 = modPeriod(best);
+        };
+        for (let targetClass = 0; targetClass < periodSteps; targetClass += 1) {
+            if ((classCount.get(targetClass) || 0) > 0) continue;
+            let donorClass = -1;
+            let donorCount = 0;
+            classCount.forEach((count, cls) => {
+                if (count > 1 && count > donorCount) {
+                    donorClass = cls;
+                    donorCount = count;
+                }
+            });
+            if (donorClass < 0) break;
+            const donorList = donorIndicesByClass.get(donorClass) || [];
+            const donorIdx = donorList.pop();
+            if (!Number.isFinite(donorIdx)) break;
+            const donorCell = cellsForLayout[donorIdx];
+            retuneCellToClass(donorCell, targetClass);
+            classCount.set(donorClass, Math.max(0, (classCount.get(donorClass) || 0) - 1));
+            classCount.set(targetClass, (classCount.get(targetClass) || 0) + 1);
+            if (!donorIndicesByClass.has(targetClass)) donorIndicesByClass.set(targetClass, []);
+            donorIndicesByClass.get(targetClass).push(donorIdx);
+        }
+    }
+    const rowOrder = Array.from(new Set(cellsForLayout.map((c) => c.row))).sort((a, b) => a - b);
+    const rowToCompact = new Map();
+    rowOrder.forEach((r, i) => rowToCompact.set(r, i));
+    const rowBuckets = new Map();
+    cellsForLayout.forEach((c) => {
+        const k = rowToCompact.get(c.row);
+        if (!rowBuckets.has(k)) rowBuckets.set(k, []);
+        rowBuckets.get(k).push(c);
+    });
+    rowBuckets.forEach((arr) => arr.sort((a, b) => a.slot - b.slot));
+
+    let maxColsUsed = 1;
+    rowBuckets.forEach((arr) => { if (arr.length > maxColsUsed) maxColsUsed = arr.length; });
+    const rowsUsed = Math.max(1, rowOrder.length);
+    const visualDensity = maxColsUsed + rowsUsed;
+    const sparsity = Math.max(0, Math.min(1, (24 - visualDensity) / 14));
+    const fitW = width / Math.max(6, (maxColsUsed * (1.45 - (sparsity * 0.20))) + 1.2);
+    const fitH = height / Math.max(5, (rowsUsed * (1.55 - (sparsity * 0.16))) + 0.8);
+    const maxHex = Math.round(36 + (sparsity * 28));
+    const hexSize = Math.max(10, Math.min(maxHex, Math.floor(Math.min(fitW, fitH))));
+    const dx = hexSize * 1.5;
+    const dy = hexSize * Math.sqrt(3) * 0.92;
+    const boardW = (maxColsUsed - 1) * dx + (hexSize * 2);
+    const boardH = (rowsUsed - 1) * dy + (hexSize * 2);
+    const x0 = (width - boardW) * 0.5 + hexSize;
+    const y0 = (height - boardH) * 0.5 + hexSize;
+
+    const cells = [];
+    rowBuckets.forEach((arr, compactRow) => {
+        const rowCols = arr.length;
+        const sourceRow = rowOrder[compactRow] || 0;
+        const rowShift = ((maxColsUsed - rowCols) * dx * 0.5) + ((sourceRow % 2) ? dx * 0.5 : 0);
+        const y = y0 + (compactRow * dy);
+        arr.forEach((c, idx) => {
+            const x = x0 + rowShift + (idx * dx);
+            cells.push({ ...c, x, y });
+        });
+    });
+    return {
+        cells,
+        hexSize,
+        cfg: { ...cfg, ringsEffective: rings, cloneMode, hybridMax: maxDup, cellsBeforeFilter: logicalCells.length, cellsAfterFilter: cells.length }
+    };
+}
+
+function getLumatoneStepClass(absStep, cfgOrSteps = 31) {
+    const stepsPerOct = Number.isFinite(cfgOrSteps?.stepsPerOct)
+        ? cfgOrSteps.stepsPerOct
+        : (Number.isFinite(cfgOrSteps) ? cfgOrSteps : 31);
+    const steps = Math.max(1, Math.floor(stepsPerOct));
+    return ((Math.round(absStep) % steps) + steps) % steps;
+}
+
+function getLumatoneCellSemis(absStep, zoneId = 'A', cfg = null, def = null, stepCtx = null) {
+    const z = getScaleZoneId(zoneId || 'A');
+    const useDef = def || getScaleDefinition(z);
+    const periodSemis = Number.isFinite(useDef?.periodSemitones) && useDef.periodSemitones > 0 ? useDef.periodSemitones : 12;
+    const useCtx = stepCtx || getUniformScaleStepContext(useDef);
+    const quantizeOn = (cfg && typeof cfg === 'object')
+        ? (cfg.quantize !== false)
+        : isLumatoneScaleQuantizeEnabled(z);
+    if (quantizeOn) return lumatoneSemisFromAbsStep(absStep, useDef, useCtx);
+    const fallbackSteps = Math.max(1, Number.isFinite(cfg?.stepsPerOct) ? cfg.stepsPerOct : 31);
+    return Math.round(absStep) * (periodSemis / fallbackSteps);
+}
+
+function getLumatoneHitFromPoint(clientX, clientY, zoneId = 'A', options = {}) {
+    const width = Math.floor(Number.isFinite(options.width) ? options.width : state.canvasRect.width);
+    const height = Math.floor(Number.isFinite(options.height) ? options.height : state.canvasRect.height);
+    const rect = options.rect || state.canvasRect;
+    if (!rect) return null;
+    const surface = buildLumatoneSurfaceCells(width, height, zoneId);
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    const hexRadius = Math.max(1e-6, surface.hexSize - 1);
+    const hitRadius = hexRadius + 1.5;
+    const insideCells = [];
+    surface.cells.forEach((c) => {
+        const verts = getFlatTopHexVertices(c.x, c.y, hitRadius);
+        if (isPointInPolygon(x, y, verts)) insideCells.push(c);
+    });
+    if (!insideCells.length) {
+        let nearest = null;
+        let nearestDist = Infinity;
+        surface.cells.forEach((c) => {
+            const d = Math.hypot(x - c.x, y - c.y);
+            if (d < nearestDist) {
+                nearest = c;
+                nearestDist = d;
+            }
+        });
+        if (!nearest || nearestDist > (hitRadius * 0.98)) return null;
+        insideCells.push(nearest);
+    }
+    let best = insideCells[0];
+    let bestDist = Math.hypot(x - best.x, y - best.y);
+    for (let i = 1; i < insideCells.length; i += 1) {
+        const c = insideCells[i];
+        const d = Math.hypot(x - c.x, y - c.y);
+        if (d < bestDist) {
+            best = c;
+            bestDist = d;
+        }
+    }
+    const localYNorm = getLocalYNormInFlatTopHex(x, y, best.x, best.y, hexRadius);
+    const def = getScaleDefinition(zoneId);
+    const periodSemis = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * periodSemis) + (Number.isFinite(def?.root) ? def.root : 0);
+    const stepCtx = getUniformScaleStepContext(def);
+    const semis = getLumatoneCellSemis(best.absStep, zoneId, surface.cfg, def, stepCtx);
+    const noteExact = baseMIDI + semis;
+    return { noteExact, cell: best, localYNorm, surface, hexRadius };
+}
+
+function getLumatoneVisualPointForNote(noteFloat, zoneId = 'A', options = {}) {
+    if (!options.force && !isLumatoneViewActive(zoneId)) return null;
+    if (!Number.isFinite(noteFloat)) return null;
+    const width = Math.floor(Number.isFinite(options.width) ? options.width : state.canvasRect.width);
+    const height = Math.floor(Number.isFinite(options.height) ? options.height : state.canvasRect.height);
+    const surface = buildLumatoneSurfaceCells(width, height, zoneId);
+    const def = getScaleDefinition(zoneId);
+    const periodSemis = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * periodSemis) + (Number.isFinite(def?.root) ? def.root : 0);
+    const stepCtx = getUniformScaleStepContext(def);
+    const stepsPerOct = Math.max(1, Math.floor(surface.cfg?.stepsPerOct || 31));
+    if (stepCtx && Number.isFinite(stepCtx.stepSemis) && stepCtx.stepSemis > 0) {
+        const targetAbs = Math.round((noteFloat - baseMIDI) / stepCtx.stepSemis);
+        const targetClass = ((targetAbs % stepsPerOct) + stepsPerOct) % stepsPerOct;
+        let bestByClass = null;
+        let bestByClassDist = Infinity;
+        surface.cells.forEach((c) => {
+            const cls = getLumatoneStepClass(c.absStep, surface.cfg);
+            if (cls !== targetClass) return;
+            const d = Math.abs(c.absStep - targetAbs);
+            if (d < bestByClassDist) {
+                bestByClassDist = d;
+                bestByClass = c;
+            }
+        });
+        if (bestByClass) {
+            return { x: bestByClass.x, y: bestByClass.y, radius: Math.max(6, surface.hexSize * 0.35), cell: bestByClass };
+        }
+    }
+    let best = null;
+    let bestDist = Infinity;
+    surface.cells.forEach((c) => {
+        const semis = getLumatoneCellSemis(c.absStep, zoneId, surface.cfg, def, stepCtx);
+        const noteExact = baseMIDI + semis;
+        const d = Math.abs(noteExact - noteFloat);
+        if (d < bestDist) {
+            bestDist = d;
+            best = c;
+        }
+    });
+    if (!best) return null;
+    return { x: best.x, y: best.y, radius: Math.max(6, surface.hexSize * 0.35), cell: best };
+}
+
+function getSurfaceVisualPointForNote(noteFloat, zoneId = 'A') {
+    if (!Number.isFinite(noteFloat)) return null;
+    const circlePt = getCircleVisualPointForNote(noteFloat, zoneId);
+    if (circlePt) return circlePt;
+    return getLumatoneVisualPointForNote(noteFloat, zoneId);
+}
+
+function getFlatTopHexVertices(cx, cy, radius) {
+    const verts = [];
+    for (let i = 0; i < 6; i += 1) {
+        const a = (Math.PI / 180) * (60 * i - 30);
+        verts.push({
+            x: cx + (radius * Math.cos(a)),
+            y: cy + (radius * Math.sin(a))
+        });
+    }
+    return verts;
+}
+
+function distancePointToSegment(px, py, ax, ay, bx, by) {
+    const vx = bx - ax;
+    const vy = by - ay;
+    const wx = px - ax;
+    const wy = py - ay;
+    const c1 = (wx * vx) + (wy * vy);
+    if (c1 <= 0) return Math.hypot(px - ax, py - ay);
+    const c2 = (vx * vx) + (vy * vy);
+    if (c2 <= 1e-9) return Math.hypot(px - ax, py - ay);
+    if (c2 <= c1) return Math.hypot(px - bx, py - by);
+    const t = c1 / c2;
+    const ix = ax + (t * vx);
+    const iy = ay + (t * vy);
+    return Math.hypot(px - ix, py - iy);
+}
+
+function getLumatoneBubbleFitForPoint(x, y, desiredRadius, zoneId = 'A', anchorCell = null) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+    const width = Math.max(1, Math.floor(state.canvasRect?.width || 0));
+    const height = Math.max(1, Math.floor(state.canvasRect?.height || 0));
+    if (!width || !height) return null;
+    const surface = buildLumatoneSurfaceCells(width, height, zoneId);
+    const hexRadius = Math.max(1, surface.hexSize - 1);
+    let best = null;
+    if (anchorCell && Number.isFinite(anchorCell.q) && Number.isFinite(anchorCell.r)) {
+        best = surface.cells.find((c) => c.q === anchorCell.q && c.r === anchorCell.r) || null;
+    }
+    if (!best) {
+        let bestDist = Infinity;
+        surface.cells.forEach((c) => {
+            const d = Math.hypot(x - c.x, y - c.y);
+            if (d < bestDist) {
+                best = c;
+                bestDist = d;
+            }
+        });
+    }
+    if (!best) return null;
+    const verts = getFlatTopHexVertices(best.x, best.y, hexRadius);
+    let px = x;
+    let py = y;
+    if (!isPointInPolygon(px, py, verts)) {
+        const dx = px - best.x;
+        const dy = py - best.y;
+        if (Math.abs(dx) < 1e-6 && Math.abs(dy) < 1e-6) {
+            px = best.x;
+            py = best.y;
+        } else {
+            let lo = 0;
+            let hi = 1;
+            for (let i = 0; i < 18; i += 1) {
+                const mid = (lo + hi) * 0.5;
+                const tx = best.x + (dx * mid);
+                const ty = best.y + (dy * mid);
+                if (isPointInPolygon(tx, ty, verts)) lo = mid;
+                else hi = mid;
+            }
+            px = best.x + (dx * lo * 0.985);
+            py = best.y + (dy * lo * 0.985);
+        }
+    }
+    let minEdgeDist = Infinity;
+    for (let i = 0; i < verts.length; i += 1) {
+        const a = verts[i];
+        const b = verts[(i + 1) % verts.length];
+        const d = distancePointToSegment(px, py, a.x, a.y, b.x, b.y);
+        if (d < minEdgeDist) minEdgeDist = d;
+    }
+    const margin = 1.5;
+    const maxR = Math.max(2, minEdgeDist - margin);
+    const radius = Math.max(2, Math.min(desiredRadius, maxR));
+    return { x: px, y: py, radius, cell: best };
+}
+
+function isPointInPolygon(x, y, vertices) {
+    let inside = false;
+    for (let i = 0, j = vertices.length - 1; i < vertices.length; j = i++) {
+        const xi = vertices[i].x;
+        const yi = vertices[i].y;
+        const xj = vertices[j].x;
+        const yj = vertices[j].y;
+        const intersects = ((yi > y) !== (yj > y))
+            && (x < (((xj - xi) * (y - yi)) / Math.max(1e-9, (yj - yi)) + xi));
+        if (intersects) inside = !inside;
+    }
+    return inside;
+}
+
+function getLocalYNormInFlatTopHex(x, y, cx, cy, radius) {
+    const vertices = getFlatTopHexVertices(cx, cy, radius);
+    const ys = [];
+    for (let i = 0; i < vertices.length; i += 1) {
+        const v1 = vertices[i];
+        const v2 = vertices[(i + 1) % vertices.length];
+        const minX = Math.min(v1.x, v2.x);
+        const maxX = Math.max(v1.x, v2.x);
+        if (x < (minX - 1e-6) || x > (maxX + 1e-6)) continue;
+        const dx = v2.x - v1.x;
+        if (Math.abs(dx) < 1e-6) {
+            ys.push(v1.y, v2.y);
+            continue;
+        }
+        const t = (x - v1.x) / dx;
+        if (t < -1e-6 || t > 1 + 1e-6) continue;
+        ys.push(v1.y + ((v2.y - v1.y) * t));
+    }
+    if (ys.length < 2) {
+        const top = cy - radius;
+        const bottom = cy + radius;
+        return Math.max(0, Math.min(1, (bottom - y) / Math.max(1e-6, (bottom - top))));
+    }
+    ys.sort((a, b) => a - b);
+    const topY = ys[0];
+    const bottomY = ys[ys.length - 1];
+    return Math.max(0, Math.min(1, (bottomY - y) / Math.max(1e-6, (bottomY - topY))));
+}
+
+function getLumatoneNoteExactForPointer(clientX, clientY, zoneId = 'A') {
+    const hit = getLumatoneHitFromPoint(clientX, clientY, zoneId);
+    if (!hit) return null;
+    const { cell, localYNorm, noteExact, hexRadius, surface } = hit;
+    const stepClass = getLumatoneStepClass(cell.absStep, surface.cfg);
+    state.experimental.virtualLumatone.lastSurfaceHit = {
+        q: cell.q,
+        r: cell.r,
+        step: cell.absStep,
+        stepClass,
+        pc31: stepClass,
+        localYNorm,
+        hexHeight: hexRadius * 2,
+        noteExact
+    };
+    state.experimental.virtualLumatone.lastOutput = {
+        noteIndex: cell.absStep,
+        stepClass,
+        pc31: stepClass,
+        frequency: midiToFreq(noteExact),
+        isFlatOctave: !!surface.cfg.doubleMode && surface.cfg.stepsPerOct === 31 && cell.absStep !== 0 && (Math.abs(cell.absStep) % 30 === 0),
+        q: cell.q,
+        r: cell.r
+    };
+    return { noteExact, cell, localYNorm };
+}
+
+function renderLumatoneSurface(targetCtx, width, height, maps, zoneId = 'A', options = {}) {
+    const surface = buildLumatoneSurfaceCells(width, height, zoneId);
+    const hit = options.hit || null;
+    const ghostRoot = Number.isFinite(hit?.step) ? hit.step : 0;
+    const lumaVisual = {
+        dimOverlayAlpha: 0.48,
+        highlightAlphaMul: 0.30,
+        highlightAlphaMin: 0.09,
+        highlightAlphaMax: 0.56,
+        arpAlpha: 0.45,
+        strokeActive: 'rgba(255,255,255,0.96)',
+        strokeIdle: 'rgba(255,255,255,0.24)'
+    };
+    const mapState = (maps && typeof maps === 'object') ? maps : {};
+    const chordHighlightNotes = mapState.chordHighlightNotes instanceof Map ? mapState.chordHighlightNotes : new Map();
+    const chordDimNotes = mapState.chordDimNotes instanceof Set ? mapState.chordDimNotes : new Set();
+    const arpActiveNotes = mapState.arpActiveNotes instanceof Map ? mapState.arpActiveNotes : new Map();
+    const quantizeOn = surface.cfg.quantize !== false;
+    const def = getScaleDefinition(zoneId);
+    const periodSemis = Number.isFinite(def?.periodSemitones) && def.periodSemitones > 0 ? def.periodSemitones : 12;
+    const baseMIDI = 48 + (getCurrentOctaveForZone(zoneId) * periodSemis) + (Number.isFinite(def?.root) ? def.root : 0);
+    const stepCtx = getUniformScaleStepContext(def);
+    const hasMapHighlights = (chordHighlightNotes.size + chordDimNotes.size + arpActiveNotes.size) > 0;
+    const stepsPerOct = Math.max(1, Math.floor(surface.cfg?.stepsPerOct || 31));
+    const parseStepKey = (key) => {
+        if (typeof key !== 'string') return Number.NaN;
+        const parts = key.split(':');
+        if (parts.length < 2) return Number.NaN;
+        const v = parseInt(parts[1], 10);
+        return Number.isFinite(v) ? v : Number.NaN;
+    };
+    const toClass = (step) => {
+        const n = Math.round(Number(step) || 0);
+        return ((n % stepsPerOct) + stepsPerOct) % stepsPerOct;
+    };
+    const highlightByClass = new Map();
+    const dimByClass = new Set();
+    const arpByClass = new Map();
+    chordHighlightNotes.forEach((hl, key) => {
+        const abs = parseStepKey(key);
+        if (!Number.isFinite(abs)) return;
+        const cls = toClass(abs);
+        const prev = highlightByClass.get(cls);
+        const prevAlpha = Number.isFinite(prev?.alpha) ? prev.alpha : 0;
+        const nextAlpha = Number.isFinite(hl?.alpha) ? hl.alpha : 1;
+        if (!prev || nextAlpha > prevAlpha) highlightByClass.set(cls, hl);
+    });
+    chordDimNotes.forEach((key) => {
+        const abs = parseStepKey(key);
+        if (!Number.isFinite(abs)) return;
+        dimByClass.add(toClass(abs));
+    });
+    arpActiveNotes.forEach((color, key) => {
+        const abs = parseStepKey(key);
+        if (!Number.isFinite(abs)) return;
+        arpByClass.set(toClass(abs), color);
+    });
+    const cellVisualStateByAbsStep = new Map();
+    const isOutOfScale = (cell) => {
+        if (!quantizeOn) return false;
+        const semis = getLumatoneCellSemis(cell.absStep, zoneId, surface.cfg, def, stepCtx);
+        const noteExact = baseMIDI + semis;
+        const snapped = mapMidiNoteToScaleWithDef(noteExact, def);
+        return Math.abs(snapped - noteExact) > 1e-3;
+    };
+    const getCellVisualState = (cell) => {
+        if (!hasMapHighlights) return null;
+        if (cellVisualStateByAbsStep.has(cell.absStep)) return cellVisualStateByAbsStep.get(cell.absStep);
+        const semis = getLumatoneCellSemis(cell.absStep, zoneId, surface.cfg, def, stepCtx);
+        const noteExact = baseMIDI + semis;
+        const key = getHighlightKeyForNote(noteExact, zoneId);
+        const cls = getLumatoneStepClass(cell.absStep, surface.cfg);
+        const highlight = (key ? chordHighlightNotes.get(key) : null) || highlightByClass.get(cls) || null;
+        const arpColor = (key ? arpActiveNotes.get(key) : null) || arpByClass.get(cls) || null;
+        const dim = !!((key && chordDimNotes.has(key)) || dimByClass.has(cls));
+        const out = {
+            active: !!(highlight || arpColor),
+            dim,
+            highlight,
+            arpColor
+        };
+        cellVisualStateByAbsStep.set(cell.absStep, out);
+        return out;
+    };
+
+    const findNearestByStep = (targetStep) => {
+        let best = null;
+        let bestDist = Infinity;
+        surface.cells.forEach((c) => {
+            const d = Math.abs(c.absStep - targetStep);
+            if (d < bestDist) {
+                bestDist = d;
+                best = c;
+            }
+        });
+        return best;
+    };
+
+    if (surface.cfg.stepsPerOct === 31) {
+        const superTri = [0, 11, 18].map((off) => findNearestByStep(ghostRoot + off)).filter(Boolean);
+        const neutralTri = [0, 9, 18].map((off) => findNearestByStep(ghostRoot + off)).filter(Boolean);
+        const drawGhost = (pts, stroke, alpha = 0.24) => {
+            if (pts.length < 3) return;
+            targetCtx.save();
+            targetCtx.globalAlpha = alpha;
+            targetCtx.strokeStyle = stroke;
+            targetCtx.lineWidth = 2;
+            targetCtx.beginPath();
+            pts.forEach((p, i) => {
+                if (i === 0) targetCtx.moveTo(p.x, p.y);
+                else targetCtx.lineTo(p.x, p.y);
+            });
+            targetCtx.closePath();
+            targetCtx.stroke();
+            targetCtx.restore();
+        };
+        drawGhost(superTri, '#4fdcff');
+        drawGhost(neutralTri, '#be6dff');
+    }
+
+    const activeAbsSteps = options.activeAbsSteps instanceof Set ? options.activeAbsSteps : null;
+    surface.cells.forEach((c) => {
+        const stepMod = getLumatoneStepClass(c.absStep, surface.cfg);
+        const isRoot = stepMod === 0;
+        const isFifth = surface.cfg.stepsPerOct === 31 && stepMod === 18;
+        const isNeutral3 = surface.cfg.stepsPerOct === 31 && stepMod === 9;
+        const isFlatOct = !!surface.cfg.doubleMode && surface.cfg.stepsPerOct === 31 && c.absStep !== 0 && (Math.abs(c.absStep) % 30 === 0);
+        const isHit = hit && hit.q === c.q && hit.r === c.r;
+        const visualState = getCellVisualState(c);
+        const isActive = (activeAbsSteps ? activeAbsSteps.has(c.absStep) : false) || !!visualState?.active;
+        const outOfScale = isOutOfScale(c);
+
+        let fill = 'rgba(34,42,68,0.90)';
+        if (isRoot) fill = 'rgba(255,85,85,0.94)';
+        else if (isFifth) fill = 'rgba(80,130,255,0.92)';
+        else if (isNeutral3) fill = 'rgba(195,98,255,0.92)';
+        else if (isFlatOct) fill = 'rgba(96,195,255,0.92)';
+        if (outOfScale) {
+            if (isRoot) fill = 'rgba(132,46,46,0.84)';
+            else if (isFifth) fill = 'rgba(50,78,150,0.82)';
+            else if (isNeutral3) fill = 'rgba(112,66,148,0.82)';
+            else if (isFlatOct) fill = 'rgba(66,122,158,0.82)';
+            else fill = 'rgba(22,27,44,0.92)';
+        }
+        drawHexPath(targetCtx, c.x, c.y, surface.hexSize - 1);
+        targetCtx.fillStyle = fill;
+        targetCtx.fill();
+        if (visualState?.dim && !visualState.active) {
+            targetCtx.save();
+            targetCtx.globalAlpha = lumaVisual.dimOverlayAlpha;
+            targetCtx.fillStyle = '#000';
+            drawHexPath(targetCtx, c.x, c.y, surface.hexSize - 1);
+            targetCtx.fill();
+            targetCtx.restore();
+        }
+        if (visualState?.highlight) {
+            const hl = visualState.highlight;
+            const alpha = Number.isFinite(hl?.alpha)
+                ? Math.max(lumaVisual.highlightAlphaMin, Math.min(lumaVisual.highlightAlphaMax, hl.alpha * lumaVisual.highlightAlphaMul))
+                : 0.28;
+            targetCtx.save();
+            targetCtx.globalAlpha = alpha;
+            targetCtx.fillStyle = hl?.color || '#ffaa00';
+            drawHexPath(targetCtx, c.x, c.y, surface.hexSize - 1);
+            targetCtx.fill();
+            targetCtx.restore();
+        }
+        if (visualState?.arpColor) {
+            targetCtx.save();
+            targetCtx.globalAlpha = lumaVisual.arpAlpha;
+            targetCtx.fillStyle = visualState.arpColor || '#00ff77';
+            drawHexPath(targetCtx, c.x, c.y, surface.hexSize - 1);
+            targetCtx.fill();
+            targetCtx.restore();
+        }
+        targetCtx.lineWidth = (isHit || isActive) ? 2.4 : 1.1;
+        targetCtx.strokeStyle = (isHit || isActive) ? lumaVisual.strokeActive : lumaVisual.strokeIdle;
+        targetCtx.stroke();
+        targetCtx.fillStyle = '#fff';
+        targetCtx.font = `bold ${Math.max(10, Math.floor(surface.hexSize * 0.42))}px ${CANVAS_FONT_FAMILY}`;
+        targetCtx.textAlign = 'center';
+        targetCtx.textBaseline = 'middle';
+        if (outOfScale && !isHit && !isActive) targetCtx.globalAlpha = 0.72;
+        targetCtx.fillText(String(stepMod), c.x, c.y);
+        targetCtx.globalAlpha = 1;
+    });
+
+    if (options.showTitle !== false) {
+        targetCtx.save();
+        targetCtx.globalAlpha = 0.76;
+        targetCtx.fillStyle = '#cfd2d6';
+        targetCtx.font = 'bold 11px Segoe UI, sans-serif';
+        targetCtx.textAlign = 'left';
+        targetCtx.textBaseline = 'top';
+        const modeLabel = surface.cfg.layout === 'melodic'
+            ? 'Melodic Mode'
+            : (surface.cfg.layout === 'harmonic' ? 'Harmonic Table' : 'Classic Mode');
+        const rEff = Number.isFinite(surface.cfg?.ringsEffective) ? surface.cfg.ringsEffective : (surface.cfg?.rings || 0);
+        targetCtx.fillText(`Lumatone View (${modeLabel}) - adaptive rings:${rEff} - steps:${surface.cfg.stepsPerOct}`, 8, 8);
+        targetCtx.restore();
+    }
+    return surface;
+}
+
+function drawLumatoneGridView(width, height, maps, zoneId = 'A') {
+    const hit = state.experimental?.virtualLumatone?.lastSurfaceHit || null;
+    renderLumatoneSurface(ctx, width, height, maps, zoneId, { hit, showTitle: true });
 }
 
 function draw() {
@@ -21528,20 +26379,37 @@ function draw() {
         ctx.restore();
     }
     if (isDualModeEnabled()) {
-        const gridA = getGridDegrees('A');
-        const gridB = getGridDegrees('B');
-        const numOctA = getVisibleOctavesForZone('A');
-        const numOctB = getVisibleOctavesForZone('B');
-        const noteWA = width / (numOctA * Math.max(1, getCircleStepOrderForGrid('A', gridA).length));
-        const noteWB = width / (numOctB * Math.max(1, getCircleStepOrderForGrid('B', gridB).length));
-        const baseMIDIA = 48 + (getCurrentOctaveForZone('A') * gridA.periodSemitones) + gridA.root;
-        const baseMIDIB = 48 + (getCurrentOctaveForZone('B') * gridB.periodSemitones) + gridB.root;
-        const fadeA = getFadeStateForZone('A');
-        const fadeB = getFadeStateForZone('B');
-        updateGridCache('A');
-        drawGridCells(width, height, gridA, numOctA, noteWA, baseMIDIA, fadeA.fadeMul, fadeA.fadeDrop, time, maps.A, getZoneBounds('A'), 'A');
-        updateGridCache('B');
-        drawGridCells(width, height, gridB, numOctB, noteWB, baseMIDIB, fadeB.fadeMul, fadeB.fadeDrop, time, maps.B, getZoneBounds('B'), 'B');
+        const dualFocusZone = getDualSurfaceFocusZone();
+        if (dualFocusZone) {
+            const grid = getGridDegrees(dualFocusZone);
+            const numOct = getVisibleOctavesForZone(dualFocusZone);
+            const noteW = width / (numOct * Math.max(1, getCircleStepOrderForGrid(dualFocusZone, grid).length));
+            const baseMIDI = 48 + (getCurrentOctaveForZone(dualFocusZone) * grid.periodSemitones) + grid.root;
+            const fade = getFadeStateForZone(dualFocusZone);
+            updateGridCache(dualFocusZone);
+            if (isCircleDiesisViewActive(dualFocusZone)) {
+                drawCircleGridView(width, height, grid, numOct, baseMIDI, maps[dualFocusZone], dualFocusZone);
+            } else if (isLumatoneViewActive(dualFocusZone)) {
+                drawLumatoneGridView(width, height, maps[dualFocusZone], dualFocusZone);
+            } else {
+                drawGridCells(width, height, grid, numOct, noteW, baseMIDI, fade.fadeMul, fade.fadeDrop, time, maps[dualFocusZone], null, dualFocusZone);
+            }
+        } else {
+            const gridA = getGridDegrees('A');
+            const gridB = getGridDegrees('B');
+            const numOctA = getVisibleOctavesForZone('A');
+            const numOctB = getVisibleOctavesForZone('B');
+            const noteWA = width / (numOctA * Math.max(1, getCircleStepOrderForGrid('A', gridA).length));
+            const noteWB = width / (numOctB * Math.max(1, getCircleStepOrderForGrid('B', gridB).length));
+            const baseMIDIA = 48 + (getCurrentOctaveForZone('A') * gridA.periodSemitones) + gridA.root;
+            const baseMIDIB = 48 + (getCurrentOctaveForZone('B') * gridB.periodSemitones) + gridB.root;
+            const fadeA = getFadeStateForZone('A');
+            const fadeB = getFadeStateForZone('B');
+            updateGridCache('A');
+            drawGridCells(width, height, gridA, numOctA, noteWA, baseMIDIA, fadeA.fadeMul, fadeA.fadeDrop, time, maps.A, getZoneBounds('A'), 'A');
+            updateGridCache('B');
+            drawGridCells(width, height, gridB, numOctB, noteWB, baseMIDIB, fadeB.fadeMul, fadeB.fadeDrop, time, maps.B, getZoneBounds('B'), 'B');
+        }
     } else {
         const grid = getGridDegrees('A');
         const numOct = getVisibleOctavesForZone('A');
@@ -21551,6 +26419,8 @@ function draw() {
         updateGridCache('A');
         if (isCircleDiesisViewActive('A')) {
             drawCircleGridView(width, height, grid, numOct, baseMIDI, maps.A, 'A');
+        } else if (isLumatoneViewActive('A')) {
+            drawLumatoneGridView(width, height, maps.A, 'A');
         } else {
             drawGridCells(width, height, grid, numOct, noteW, baseMIDI, fadeA.fadeMul, fadeA.fadeDrop, time, maps.A, null, 'A');
         }
@@ -21560,14 +26430,22 @@ function draw() {
     drawArpHoldTouches(1, 0, height);
     drawActiveTouches(1, 0, height, nowAudio);
     if (isDualModeEnabled()) {
-        const numOctA = getVisibleOctavesForZone('A');
-        const numOctB = getVisibleOctavesForZone('B');
-        const gridA = getGridDegrees('A');
-        const gridB = getGridDegrees('B');
-        const noteWA = width / (numOctA * Math.max(1, getCircleStepOrderForGrid('A', gridA).length));
-        const noteWB = width / (numOctB * Math.max(1, getCircleStepOrderForGrid('B', gridB).length));
-        drawBowFadersForZone('A', height, noteWA);
-        drawBowFadersForZone('B', height, noteWB);
+        const dualFocusZone = getDualSurfaceFocusZone();
+        if (dualFocusZone) {
+            const grid = getGridDegrees(dualFocusZone);
+            const numOct = getVisibleOctavesForZone(dualFocusZone);
+            const noteW = width / (numOct * Math.max(1, getCircleStepOrderForGrid(dualFocusZone, grid).length));
+            drawBowFadersForZone(dualFocusZone, height, noteW);
+        } else {
+            const numOctA = getVisibleOctavesForZone('A');
+            const numOctB = getVisibleOctavesForZone('B');
+            const gridA = getGridDegrees('A');
+            const gridB = getGridDegrees('B');
+            const noteWA = width / (numOctA * Math.max(1, getCircleStepOrderForGrid('A', gridA).length));
+            const noteWB = width / (numOctB * Math.max(1, getCircleStepOrderForGrid('B', gridB).length));
+            drawBowFadersForZone('A', height, noteWA);
+            drawBowFadersForZone('B', height, noteWB);
+        }
     } else {
         const numOct = getVisibleOctavesForZone('A');
         const grid = getGridDegrees('A');
@@ -21599,6 +26477,7 @@ function updateLayoutVars() {
 function refreshLayout() {
     updateLayoutVars();
     resizeCanvas();
+    drawVirtualLumatone();
     positionDualSplitLine();
     updateToggleLabels();
     resizeMelodyRollCanvas();
@@ -21613,6 +26492,7 @@ els.ui.addEventListener('transitionend', refreshLayout);
 els.performance.addEventListener('transitionend', refreshLayout);
 if (els.dualMode) {
     els.dualMode.addEventListener('change', () => {
+        state.dualMode = !!els.dualMode.checked;
         if (!isDualModeEnabled()) state.scaleEditLink = false;
         updateDualModeUI();
         requestDraw();
@@ -21629,6 +26509,7 @@ updateArpParamsToggleLabel();
 updateDualModeUI();
 setupMIDI();
 draw();
+setupVirtualLumatone();
 
 function updateToggleLabels() {
     const uiLabel = uiToggle ? uiToggle.querySelector('.btn-text') : null;
@@ -21839,9 +26720,10 @@ document.addEventListener('DOMContentLoaded', () => {
     Playground.init();
     // Default operativo: physics mode. La modalita tubes entra solo quando si trascina/posiziona un tubo.
     state.playground.mode = 'physics';
+    state.playground.enabled = false;
+    setSurfaceViewMode('keyboard');
     Playground.setConfig(state.playground);
 
-    const pgToggle = document.getElementById('playgroundToggle');
     const pgControls = document.getElementById('playgroundControls');
     const matBtns = document.querySelectorAll('.mat-btn');
     const btnRain = document.getElementById('btnSpawnRain');
@@ -21865,11 +26747,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const pgLoopBtn = document.getElementById('pgLoopRecord');
     const pgLoopClearBtn = document.getElementById('pgLoopClear');
     const btnAdvancedToggle = document.getElementById('pgAdvancedToggle');
+    const pgHudCollapseBtn = document.getElementById('pgHudCollapse');
     const pgCircleToggleTop = els.pgCircleViewToggle;
     const pgCircleActionsTop = els.pgCircleActions;
+    const pgLumatoneOptionsToggle = els.pgLumatoneOptionsToggle;
+    const vlPanelClose = els.vlPanelClose;
+    const lumatoneOptionsPanel = els.virtualLumatonePanel;
+    const pgCirclePanelTitle = document.getElementById('pgCirclePanelTitle');
+    const pgCirclePanelToggle = document.getElementById('pgCirclePanelToggle');
+    const pgQuadranRowTop = document.getElementById('pgQuadranRowTop');
     const pgQuadranLeftTop = els.pgQuadranLeftTop;
     const pgQuadranRightTop = els.pgQuadranRightTop;
-    const pgPolyPlannerTop = els.pgPolyPlannerTop;
     const pgCircleLabelModeTop = els.pgCircleLabelModeTop;
     const pgCircleQuadranScope = els.pgCircleQuadranScope;
     const pgCirclePolyToggleAdv = els.pgCirclePolyToggleAdv;
@@ -21889,7 +26777,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const circlePolyAnchor = els.circlePolyAnchor;
     const circlePolyBranchA = els.circlePolyBranchA;
     const circlePolyBranchB = els.circlePolyBranchB;
+    const polyTreeEditor = els.polyTreeEditor;
+    const polyTreeBranchAInline = els.polyTreeBranchAInline;
+    const polyTreeBranchBInline = els.polyTreeBranchBInline;
+    const polyTreeBranchAInterval = els.polyTreeBranchAInterval;
+    const polyTreeBranchBInterval = els.polyTreeBranchBInterval;
+    const polyTreeBranchAOctave = els.polyTreeBranchAOctave;
+    const polyTreeBranchBOctave = els.polyTreeBranchBOctave;
+    const polyTreeBranchAGenToggle = els.polyTreeBranchAGenToggle;
+    const polyTreeBranchBGenToggle = els.polyTreeBranchBGenToggle;
+    const polyTreeBranchAGen = els.polyTreeBranchAGen;
+    const polyTreeBranchBGen = els.polyTreeBranchBGen;
+    const polyTreePresetSelect = els.polyTreePresetSelect;
+    const polyTreePresetName = els.polyTreePresetName;
+    const polyTreePresetSave = els.polyTreePresetSave;
+    const polyTreePresetDel = els.polyTreePresetDel;
+    const polyTreeDragToggle = els.polyTreeDragToggle;
     const advancedPanel = document.getElementById('pgAdvancedPanel');
+    const pgAdvancedCloseBtn = document.getElementById('pgAdvancedClose');
     const pgSettingsTabs = document.getElementById('pgSettingsTabs');
     const pgTabButtons = pgSettingsTabs ? Array.from(pgSettingsTabs.querySelectorAll('.pg-tab-btn')) : [];
     const pgTabContents = advancedPanel ? Array.from(advancedPanel.querySelectorAll('.pg-tab-content')) : [];
@@ -21917,6 +26822,17 @@ document.addEventListener('DOMContentLoaded', () => {
             pane.classList.toggle('active', active);
         });
     };
+    const cleanupDuplicateUiControlsV1 = () => {
+        const nodes = Array.from(document.querySelectorAll('.circle-dup-control'));
+        nodes.forEach((node) => {
+            node.setAttribute('aria-hidden', 'true');
+            node.querySelectorAll('input, select, button, textarea').forEach((el) => {
+                el.setAttribute('tabindex', '-1');
+                el.disabled = true;
+            });
+        });
+    };
+    cleanupDuplicateUiControlsV1();
     const tubeEditorPanel = document.getElementById('pgTubeEditor');
     const tubeEditorCloseBtn = document.getElementById('pgTubeEditorClose');
     const streamBtn = document.getElementById('pgMacroStream');
@@ -21996,32 +26912,110 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    const pgViewPicker = els.pgViewPicker;
+    const pgViewButtons = Array.from(document.querySelectorAll('.pg-view-btn[data-view]'));
+    let viewPickerOpen = false;
+    let circlePanelCollapsed = false;
+    let lumatonePanelOpen = true;
+    let lumatonePanelCollapsed = false;
+    let playgroundPanelCollapsed = false;
+    let playgroundHudCollapsed = false;
+    let wasLumatoneView = false;
+    const setViewPickerOpen = (open) => {
+        viewPickerOpen = !!open;
+        if (pgViewPicker) {
+            pgViewPicker.classList.toggle('hidden', !viewPickerOpen);
+            pgViewPicker.setAttribute('aria-hidden', viewPickerOpen ? 'false' : 'true');
+        }
+        if (pgCircleToggleTop) {
+            pgCircleToggleTop.classList.toggle('toggle-on', viewPickerOpen);
+            pgCircleToggleTop.setAttribute('aria-expanded', viewPickerOpen ? 'true' : 'false');
+        }
+    };
+    const refreshPlaygroundHudUi = () => {
+        if (!pgControls) return;
+        pgControls.classList.toggle('is-collapsed', playgroundHudCollapsed);
+        if (pgHudCollapseBtn) {
+            pgHudCollapseBtn.textContent = playgroundHudCollapsed ? '+' : '-';
+            pgHudCollapseBtn.title = playgroundHudCollapsed ? 'Expand Playground main bar' : 'Collapse Playground main bar';
+            pgHudCollapseBtn.setAttribute('aria-label', playgroundHudCollapsed ? 'Expand Playground main bar' : 'Collapse Playground main bar');
+        }
+    };
+
     const refreshCircleTopUi = () => {
         normalizeCircleStepOrderStorage();
-        const circleOn = !!state.experimental?.circleView?.enabled;
+        const viewMode = getSurfaceViewMode();
+        const circleOn = viewMode === 'circle';
+        const polyOn = viewMode === 'poly';
+        const lumatoneOn = viewMode === 'lumatone';
+        if (lumatoneOn && !wasLumatoneView) lumatonePanelOpen = true;
+        wasLumatoneView = lumatoneOn;
         if (circleOn && !state.experimental?.quadran?.enabled) {
             state.experimental.quadran.enabled = true;
         }
-        if (pgCircleToggleTop) {
-            pgCircleToggleTop.classList.toggle('toggle-on', circleOn);
-            pgCircleToggleTop.classList.toggle('toggle-off', !circleOn);
-            const txt = pgCircleToggleTop.querySelector('.btn-text');
-            if (txt) txt.textContent = circleOn ? 'CIRCLE ON' : 'CIRCLE OFF';
+        if (polyOn) {
+            state.experimental.polyPlanner.enabled = true;
+            state.experimental.circleView.enabled = true;
+        } else {
+            state.experimental.polyPlanner.enabled = false;
         }
+        if (pgCircleToggleTop) {
+            pgCircleToggleTop.title = `View Menu (${getSurfaceViewLabel(viewMode)})`;
+        }
+        pgViewButtons.forEach((btn) => {
+            const isActive = String(btn.dataset.view || '') === viewMode;
+            btn.classList.toggle('is-active', isActive);
+            btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
         if (circleViewToggleAdv) {
-            circleViewToggleAdv.classList.toggle('toggle-on', circleOn);
-            circleViewToggleAdv.classList.toggle('toggle-off', !circleOn);
-            circleViewToggleAdv.textContent = circleOn ? 'CIRCLE ON' : 'CIRCLE OFF';
+            circleViewToggleAdv.classList.toggle('toggle-on', viewMode !== 'keyboard');
+            circleViewToggleAdv.classList.toggle('toggle-off', viewMode === 'keyboard');
+            circleViewToggleAdv.textContent = String(viewMode || 'keyboard').toUpperCase();
         }
         if (pgCircleActionsTop) {
-            pgCircleActionsTop.classList.toggle('hidden', !circleOn);
-            pgCircleActionsTop.setAttribute('aria-hidden', circleOn ? 'false' : 'true');
+            const showCirclePanel = circleOn || polyOn;
+            const shouldHide = !showCirclePanel;
+            pgCircleActionsTop.classList.toggle('hidden', shouldHide);
+            pgCircleActionsTop.classList.toggle('is-collapsed', showCirclePanel && circlePanelCollapsed);
+            pgCircleActionsTop.setAttribute('aria-hidden', shouldHide ? 'true' : 'false');
         }
-        const polyOn = !!state.experimental?.polyPlanner?.enabled;
-        if (pgPolyPlannerTop) {
-            pgPolyPlannerTop.classList.toggle('toggle-on', polyOn);
-            pgPolyPlannerTop.classList.toggle('toggle-off', !polyOn);
-            pgPolyPlannerTop.textContent = polyOn ? 'POLY ON' : 'POLY OFF';
+        if (pgCirclePanelTitle) {
+            pgCirclePanelTitle.textContent = polyOn ? 'POLY TREE' : 'CIRCLE VIEW';
+        }
+        if (pgCirclePanelToggle) {
+            pgCirclePanelToggle.textContent = circlePanelCollapsed ? '+' : '-';
+            pgCirclePanelToggle.title = circlePanelCollapsed ? 'Expand circle/poly controls' : 'Collapse circle/poly controls';
+            pgCirclePanelToggle.setAttribute('aria-label', circlePanelCollapsed ? 'Expand circle/poly controls' : 'Collapse circle/poly controls');
+        }
+        if (pgLumatoneOptionsToggle) {
+            pgLumatoneOptionsToggle.classList.toggle('hidden', !lumatoneOn);
+            pgLumatoneOptionsToggle.classList.toggle('toggle-on', lumatoneOn && lumatonePanelOpen);
+            pgLumatoneOptionsToggle.classList.toggle('toggle-off', lumatoneOn && !lumatonePanelOpen);
+            pgLumatoneOptionsToggle.title = lumatonePanelOpen ? 'Hide Lumatone options' : 'Show Lumatone options';
+            pgLumatoneOptionsToggle.setAttribute('aria-label', lumatonePanelOpen ? 'Hide Lumatone options' : 'Show Lumatone options');
+        }
+        if (lumatoneOptionsPanel) {
+            const showLumatonePanel = lumatoneOn && lumatonePanelOpen;
+            lumatoneOptionsPanel.classList.toggle('hidden', !showLumatonePanel);
+            lumatoneOptionsPanel.classList.toggle('is-collapsed', showLumatonePanel && lumatonePanelCollapsed);
+            lumatoneOptionsPanel.setAttribute('aria-hidden', showLumatonePanel ? 'false' : 'true');
+        }
+        if (vlPanelClose) {
+            vlPanelClose.textContent = lumatonePanelCollapsed ? '+' : '-';
+            vlPanelClose.title = lumatonePanelCollapsed ? 'Expand Lumatone view controls' : 'Collapse Lumatone view controls';
+            vlPanelClose.setAttribute('aria-label', lumatonePanelCollapsed ? 'Expand Lumatone view controls' : 'Collapse Lumatone view controls');
+        }
+        if (advancedPanel) {
+            const showAdvanced = !advancedPanel.classList.contains('hidden');
+            advancedPanel.classList.toggle('is-collapsed', showAdvanced && playgroundPanelCollapsed);
+        }
+        if (pgAdvancedCloseBtn) {
+            pgAdvancedCloseBtn.textContent = playgroundPanelCollapsed ? '+' : '-';
+            pgAdvancedCloseBtn.title = playgroundPanelCollapsed ? 'Expand Playground settings' : 'Collapse Playground settings';
+            pgAdvancedCloseBtn.setAttribute('aria-label', playgroundPanelCollapsed ? 'Expand Playground settings' : 'Collapse Playground settings');
+        }
+        if (pgQuadranRowTop) {
+            pgQuadranRowTop.classList.toggle('hidden', !(circleOn || polyOn));
         }
         if (pgCirclePolyToggleAdv) {
             pgCirclePolyToggleAdv.classList.toggle('toggle-on', polyOn);
@@ -22032,7 +27026,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const labelTxt = labelMode === '123' ? '-> Notes ABC' : '-> Steps 123';
         if (pgCircleLabelModeTop) pgCircleLabelModeTop.textContent = labelTxt;
         if (pgCircleLabelModeAdv) pgCircleLabelModeAdv.textContent = labelTxt;
+        if (pgCircleLabelModeTop) pgCircleLabelModeTop.classList.toggle('hidden', !circleOn);
+        if (pgCircleStepOrderTop) pgCircleStepOrderTop.classList.toggle('hidden', !circleOn);
+        if (pgCircleStepApplyTop) pgCircleStepApplyTop.classList.toggle('hidden', !circleOn);
+        if (pgCircleStepClearTop) pgCircleStepClearTop.classList.toggle('hidden', !circleOn);
+        if (els.pgCircleStepStatusTop) els.pgCircleStepStatusTop.classList.toggle('hidden', !circleOn);
+        if (els.pgCircleStepPreviewTop) els.pgCircleStepPreviewTop.classList.toggle('hidden', !circleOn);
+        if (pgCircleScaleNameTop) pgCircleScaleNameTop.classList.toggle('hidden', !circleOn);
+        if (pgCircleSaveScaleTop) pgCircleSaveScaleTop.classList.toggle('hidden', !circleOn);
+        const stepsTools = pgCircleStepApplyTop?.parentElement || null;
+        if (stepsTools) stepsTools.classList.toggle('hidden', !circleOn);
+        const saveRow = pgCircleScaleNameTop?.parentElement || null;
+        if (saveRow) saveRow.classList.toggle('hidden', !circleOn);
         const z = getActiveEditZoneId();
+        ensurePolyPlannerScaleDefaults(z);
         let orderInput = getCircleStepOrderInputForZone(z);
         if (!String(orderInput || '').trim()) {
             const cfg = ensureScaleConfigForZone(z);
@@ -22061,10 +27068,57 @@ document.addEventListener('DOMContentLoaded', () => {
             circlePolyAnchor.value = String(Math.max(0, Math.min(127, parseInt(state.experimental?.polyPlanner?.anchor, 10) || 69)));
         }
         if (circlePolyBranchA) {
-            circlePolyBranchA.value = (Array.isArray(state.experimental?.polyPlanner?.branchA) ? state.experimental.polyPlanner.branchA : [0,4,7]).join(',');
+            circlePolyBranchA.value = (Array.isArray(state.experimental?.polyPlanner?.branchA) ? state.experimental.polyPlanner.branchA : getPolyPlannerDefaultSteps(z)).join(',');
         }
         if (circlePolyBranchB) {
-            circlePolyBranchB.value = (Array.isArray(state.experimental?.polyPlanner?.branchB) ? state.experimental.polyPlanner.branchB : [2,5,9]).join(',');
+            circlePolyBranchB.value = (Array.isArray(state.experimental?.polyPlanner?.branchB) ? state.experimental.polyPlanner.branchB : getPolyPlannerDefaultSteps(z)).join(',');
+        }
+        const branchAVal = (Array.isArray(state.experimental?.polyPlanner?.branchA) ? state.experimental.polyPlanner.branchA : getPolyPlannerDefaultSteps(z)).join(',');
+        const branchBVal = (Array.isArray(state.experimental?.polyPlanner?.branchB) ? state.experimental.polyPlanner.branchB : getPolyPlannerDefaultSteps(z)).join(',');
+        if (polyTreeBranchAInline && polyTreeBranchAInline.value !== branchAVal) polyTreeBranchAInline.value = branchAVal;
+        if (polyTreeBranchBInline && polyTreeBranchBInline.value !== branchBVal) polyTreeBranchBInline.value = branchBVal;
+        if (polyTreeBranchAOctave) polyTreeBranchAOctave.value = String(parseInt(state.experimental?.polyPlanner?.branchAOctaveStart, 10) || 0);
+        if (polyTreeBranchBOctave) polyTreeBranchBOctave.value = String(parseInt(state.experimental?.polyPlanner?.branchBOctaveStart, 10) || 0);
+        const genAOn = state.experimental?.polyPlanner?.branchAGenEnabled !== false;
+        const genBOn = state.experimental?.polyPlanner?.branchBGenEnabled !== false;
+        const plannerPlayUi = ensurePolyPlannerPlayabilityDefaults(state.experimental?.polyPlanner) || {};
+        const dragOn = plannerPlayUi.dragEnabled !== false;
+        if (polyTreeBranchAGenToggle) {
+            polyTreeBranchAGenToggle.classList.toggle('toggle-on', genAOn);
+            polyTreeBranchAGenToggle.classList.toggle('toggle-off', !genAOn);
+            polyTreeBranchAGenToggle.textContent = 'INT';
+            polyTreeBranchAGenToggle.title = genAOn ? 'INT ON (click to disable)' : 'INT OFF (click to enable)';
+        }
+        if (polyTreeBranchBGenToggle) {
+            polyTreeBranchBGenToggle.classList.toggle('toggle-on', genBOn);
+            polyTreeBranchBGenToggle.classList.toggle('toggle-off', !genBOn);
+            polyTreeBranchBGenToggle.textContent = 'INT';
+            polyTreeBranchBGenToggle.title = genBOn ? 'INT ON (click to disable)' : 'INT OFF (click to enable)';
+        }
+        if (polyTreeBranchAInterval) polyTreeBranchAInterval.disabled = !genAOn;
+        if (polyTreeBranchBInterval) polyTreeBranchBInterval.disabled = !genBOn;
+        if (polyTreeBranchAGen) polyTreeBranchAGen.disabled = !genAOn;
+        if (polyTreeBranchBGen) polyTreeBranchBGen.disabled = !genBOn;
+        if (polyTreeDragToggle) {
+            polyTreeDragToggle.classList.toggle('toggle-on', dragOn);
+            polyTreeDragToggle.classList.toggle('toggle-off', !dragOn);
+            polyTreeDragToggle.textContent = dragOn ? 'DRAG ON' : 'DRAG OFF';
+            polyTreeDragToggle.title = dragOn ? 'Drag ON (click to disable)' : 'Drag OFF (click to enable)';
+        }
+        if (polyTreePresetSelect) {
+            const names = Object.keys(state.polyTreePresets || {}).sort();
+            const selected = polyTreePresetSelect.value;
+            fillSelectFromNames(polyTreePresetSelect, names, '');
+            if (selected && names.includes(selected)) polyTreePresetSelect.value = selected;
+            else if (names.length) polyTreePresetSelect.value = names[0];
+        }
+        if (polyTreePresetName && polyTreePresetSelect && !polyTreePresetName.value) {
+            polyTreePresetName.value = polyTreePresetSelect.value || '';
+        }
+        if (polyTreeEditor) {
+            const showPolyEditor = polyOn;
+            polyTreeEditor.classList.toggle('hidden', !showPolyEditor);
+            polyTreeEditor.setAttribute('aria-hidden', showPolyEditor ? 'false' : 'true');
         }
     };
 
@@ -22111,25 +27165,74 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pgCircleScaleNameAdv) pgCircleScaleNameAdv.value = name;
     };
 
-    if (pgCircleToggleTop) {
-        pgCircleToggleTop.addEventListener('click', () => {
-            const next = !state.experimental.circleView.enabled;
-            state.experimental.circleView.enabled = next;
-            if (next) {
-                // In Circle View, Quadran starts ON by default.
-                state.experimental.quadran.enabled = true;
+    const applySurfaceViewMode = (nextMode) => {
+        if (nextMode === 'playground') {
+            setSurfaceViewMode('playground');
+            if (typeof setEnabled === 'function' && !state.playground?.enabled) {
+                setEnabled(true);
             }
+        } else {
+            if (typeof setEnabled === 'function' && state.playground?.enabled) {
+                setEnabled(false);
+            }
+            setSurfaceViewMode(nextMode);
+        }
+        if (nextMode === 'circle') {
+            // In Circle View, Quadran starts ON by default.
+            state.experimental.quadran.enabled = true;
+        }
+        refreshCircleTopUi();
+        requestDraw();
+    };
+    const stepSurfaceView = () => applySurfaceViewMode(cycleSurfaceViewMode());
+
+    if (pgCircleToggleTop) {
+        pgCircleToggleTop.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            setViewPickerOpen(!viewPickerOpen);
+        });
+    }
+    pgViewButtons.forEach((btn) => {
+        btn.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            const mode = String(btn.dataset.view || 'keyboard').toLowerCase();
+            applySurfaceViewMode(mode);
+            setViewPickerOpen(false);
+        });
+    });
+    document.addEventListener('pointerdown', (ev) => {
+        if (!viewPickerOpen) return;
+        const target = ev.target;
+        const inToggle = !!(pgCircleToggleTop && target && pgCircleToggleTop.contains(target));
+        const inPicker = !!(pgViewPicker && target && pgViewPicker.contains(target));
+        if (!inToggle && !inPicker) setViewPickerOpen(false);
+    });
+    document.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Escape' && viewPickerOpen) setViewPickerOpen(false);
+    });
+    if (pgCirclePanelToggle) {
+        pgCirclePanelToggle.addEventListener('click', () => {
+            circlePanelCollapsed = !circlePanelCollapsed;
             refreshCircleTopUi();
-            requestDraw();
+        });
+    }
+    if (pgLumatoneOptionsToggle) {
+        pgLumatoneOptionsToggle.addEventListener('click', () => {
+            lumatonePanelOpen = !lumatonePanelOpen;
+            refreshCircleTopUi();
+        });
+    }
+    if (vlPanelClose) {
+        vlPanelClose.addEventListener('click', () => {
+            lumatonePanelCollapsed = !lumatonePanelCollapsed;
+            refreshCircleTopUi();
         });
     }
     if (circleViewToggleAdv) {
         circleViewToggleAdv.addEventListener('click', () => {
-            const next = !state.experimental.circleView.enabled;
-            state.experimental.circleView.enabled = next;
-            if (next) state.experimental.quadran.enabled = true;
-            refreshCircleTopUi();
-            requestDraw();
+            stepSurfaceView();
         });
     }
     if (pgQuadranLeftTop) {
@@ -22148,17 +27251,11 @@ document.addEventListener('DOMContentLoaded', () => {
             refreshCircleTopUi();
         });
     }
-    if (pgPolyPlannerTop) {
-        pgPolyPlannerTop.addEventListener('click', () => {
-            if (!state.experimental.circleView.enabled) return;
-            state.experimental.polyPlanner.enabled = !state.experimental.polyPlanner.enabled;
-            refreshCircleTopUi();
-            requestDraw();
-        });
-    }
     if (pgCirclePolyToggleAdv) {
         pgCirclePolyToggleAdv.addEventListener('click', () => {
-            state.experimental.polyPlanner.enabled = !state.experimental.polyPlanner.enabled;
+            const next = state.experimental.polyPlanner.enabled ? 'circle' : 'poly';
+            if (typeof setEnabled === 'function' && state.playground?.enabled) setEnabled(false);
+            setSurfaceViewMode(next);
             refreshCircleTopUi();
             requestDraw();
         });
@@ -22258,12 +27355,102 @@ document.addEventListener('DOMContentLoaded', () => {
             refreshCircleTopUi();
         });
     }
-    const applyPolyPlannerFields = () => {
-        const planner = state.experimental.polyPlanner || (state.experimental.polyPlanner = { enabled:false, branchA:[0,4,7], branchB:[2,5,9], anchor:69 });
+    const generateIntervalBranchValues = (intervalRaw, modulo, maxLen = 12) => {
+        const step = ((parseInt(intervalRaw, 10) || 0) % modulo + modulo) % modulo;
+        const out = [];
+        let cur = 0;
+        for (let i = 0; i < Math.max(1, Math.min(64, maxLen)); i += 1) {
+            out.push(cur);
+            cur = (cur + step) % modulo;
+        }
+        return out;
+    };
+    const getEditorStepCount = (rawText, fallback = 12, maxLen = 64) => {
+        const toks = String(rawText || '')
+            .split(',')
+            .map((t) => t.trim())
+            .filter((t) => t.length && Number.isFinite(parseInt(t, 10)));
+        const fb = Math.max(1, parseInt(fallback, 10) || 1);
+        const n = toks.length || fb;
+        return Math.max(1, Math.min(maxLen, n));
+    };
+    const applyPolyPlannerFields = (source = null) => {
+        const planner = state.experimental.polyPlanner || (state.experimental.polyPlanner = {
+            enabled:false, branchA:getPolyPlannerDefaultSteps(getActiveEditZoneId()), branchB:getPolyPlannerDefaultSteps(getActiveEditZoneId()), branchAEnabled:true, branchBEnabled:true, branchAOctaveStart:0, branchBOctaveStart:0, branchAGenEnabled:true, branchBGenEnabled:true, anchor:69, anchorStep:0,
+            focusA:0, focusB:0, hoverKey:'', activeKey:'', activeKeys:[], activeUntil:0, lastBranch:'A',
+            playability:{ hitPadding:18, hysteresisPx:16, branchLock:true, branchLockMode:'auto', legatoBranch:true, snapMode:'hard', softSnapMs:55, glideMs:100, v2Enabled:true, stretchMix:0.6, bendSemis:2.2, nodeDropMs:2200, rootRunStepMs:140, rootRunGate:0.64, dragEnabled:true }
+        });
+        if (!planner.playability || typeof planner.playability !== 'object') {
+            planner.playability = { hitPadding:18, hysteresisPx:16, branchLock:true, branchLockMode:'auto', legatoBranch:true, snapMode:'hard', softSnapMs:55, glideMs:100, v2Enabled:true, stretchMix:0.6, bendSemis:2.2, nodeDropMs:2200, rootRunStepMs:140, rootRunGate:0.64, dragEnabled:true };
+        }
+        ensurePolyPlannerPlayabilityDefaults(planner);
+        if (planner.branchAEnabled === undefined) planner.branchAEnabled = true;
+        if (planner.branchBEnabled === undefined) planner.branchBEnabled = true;
+        if (planner.branchAOctaveStart === undefined) planner.branchAOctaveStart = 0;
+        if (planner.branchBOctaveStart === undefined) planner.branchBOctaveStart = 0;
+        if (planner.branchAGenEnabled === undefined) planner.branchAGenEnabled = true;
+        if (planner.branchBGenEnabled === undefined) planner.branchBGenEnabled = true;
+        if (!planner.nodeLengthByKey || typeof planner.nodeLengthByKey !== 'object') planner.nodeLengthByKey = {};
+        const zone = getActiveEditZoneId();
+        ensurePolyPlannerScaleDefaults(zone);
+        const modulo = getPolyPlannerBranchModulo(zone);
+        const maxLen = getPolyPlannerBranchLimit(zone);
+        const rawA = (source === 'inlineA')
+            ? (polyTreeBranchAInline?.value || '')
+            : (circlePolyBranchA?.value || polyTreeBranchAInline?.value || '');
+        const rawB = (source === 'inlineB')
+            ? (polyTreeBranchBInline?.value || '')
+            : (circlePolyBranchB?.value || polyTreeBranchBInline?.value || '');
         if (circlePolyAnchor) planner.anchor = Math.max(0, Math.min(127, parseInt(circlePolyAnchor.value, 10) || 69));
-        if (circlePolyBranchA) planner.branchA = parsePitchClassList(circlePolyBranchA.value, planner.branchA || [0,4,7]);
-        if (circlePolyBranchB) planner.branchB = parsePitchClassList(circlePolyBranchB.value, planner.branchB || [2,5,9]);
+        if (source === 'inlineA') {
+            planner.branchA = parsePitchClassList(rawA, planner.branchA || getPolyPlannerDefaultSteps(zone), { modulo, maxLen });
+        } else if (source === 'inlineB') {
+            planner.branchB = parsePitchClassList(rawB, planner.branchB || getPolyPlannerDefaultSteps(zone), { modulo, maxLen });
+        } else {
+            planner.branchA = parsePitchClassList(rawA, planner.branchA || getPolyPlannerDefaultSteps(zone), { modulo, maxLen });
+            planner.branchB = parsePitchClassList(rawB, planner.branchB || getPolyPlannerDefaultSteps(zone), { modulo, maxLen });
+        }
+        planner.branchAOctaveStart = Math.max(-2, Math.min(4, parseInt(polyTreeBranchAOctave?.value, 10) || 0));
+        planner.branchBOctaveStart = Math.max(-2, Math.min(4, parseInt(polyTreeBranchBOctave?.value, 10) || 0));
+        planner.focusA = Math.max(0, Math.min(Math.max(0, planner.branchA.length - 1), parseInt(planner.focusA, 10) || 0));
+        planner.focusB = Math.max(0, Math.min(Math.max(0, planner.branchB.length - 1), parseInt(planner.focusB, 10) || 0));
+        // Branch regenerated/edited: clear volatile runtime states tied to old node indices.
+        const editedBranch = source === 'inlineA' ? 'A' : (source === 'inlineB' ? 'B' : '');
+        const keepBranch = editedBranch === 'A' ? 'B' : (editedBranch === 'B' ? 'A' : '');
+        const filterBranchKeyedMap = (obj, keep = '') => {
+            if (!obj || typeof obj !== 'object') return {};
+            if (!keep) return {};
+            const out = {};
+            const prefix = `${keep}:`;
+            Object.keys(obj).forEach((k) => {
+                if (String(k || '').startsWith(prefix)) out[k] = obj[k];
+            });
+            return out;
+        };
+        const rt = planner.playability?._runtime;
+        if (rt) {
+            rt.stretchByKey = filterBranchKeyedMap(rt.stretchByKey, keepBranch);
+            rt.droppedNodes = filterBranchKeyedMap(rt.droppedNodes, keepBranch);
+            rt.mutedNodeUntil = filterBranchKeyedMap(rt.mutedNodeUntil, keepBranch);
+        }
+        planner.nodeLengthByKey = filterBranchKeyedMap(planner.nodeLengthByKey, keepBranch);
+        const keepPrefix = keepBranch ? `${keepBranch}:` : '';
+        planner.hoverKey = (keepPrefix && String(planner.hoverKey || '').startsWith(keepPrefix)) ? planner.hoverKey : '';
+        planner.activeKeys = (Array.isArray(planner.activeKeys) && keepPrefix)
+            ? planner.activeKeys.filter((k) => String(k || '').startsWith(keepPrefix))
+            : [];
+        planner.activeKey = (planner.activeKeys.length && planner.activeKeys.includes(planner.activeKey))
+            ? planner.activeKey
+            : (planner.activeKeys[0] || '');
+        if (!planner.activeKeys.length) planner.activeUntil = 0;
+        const aTxt = planner.branchA.join(',');
+        const bTxt = planner.branchB.join(',');
+        if (circlePolyBranchA && circlePolyBranchA.value !== aTxt) circlePolyBranchA.value = aTxt;
+        if (circlePolyBranchB && circlePolyBranchB.value !== bTxt) circlePolyBranchB.value = bTxt;
+        if (polyTreeBranchAInline && polyTreeBranchAInline.value !== aTxt) polyTreeBranchAInline.value = aTxt;
+        if (polyTreeBranchBInline && polyTreeBranchBInline.value !== bTxt) polyTreeBranchBInline.value = bTxt;
         refreshCircleTopUi();
+        requestDraw();
     };
     if (circlePolyAnchor) {
         circlePolyAnchor.addEventListener('change', applyPolyPlannerFields);
@@ -22276,6 +27463,143 @@ document.addEventListener('DOMContentLoaded', () => {
         circlePolyBranchB.addEventListener('change', applyPolyPlannerFields);
         circlePolyBranchB.addEventListener('blur', applyPolyPlannerFields);
     }
+    if (polyTreeBranchAInline) {
+        polyTreeBranchAInline.addEventListener('change', () => applyPolyPlannerFields('inlineA'));
+        polyTreeBranchAInline.addEventListener('blur', () => applyPolyPlannerFields('inlineA'));
+    }
+    if (polyTreeBranchBInline) {
+        polyTreeBranchBInline.addEventListener('change', () => applyPolyPlannerFields('inlineB'));
+        polyTreeBranchBInline.addEventListener('blur', () => applyPolyPlannerFields('inlineB'));
+    }
+    if (polyTreeBranchAOctave) {
+        polyTreeBranchAOctave.addEventListener('change', () => applyPolyPlannerFields('inlineA'));
+        polyTreeBranchAOctave.addEventListener('blur', () => applyPolyPlannerFields('inlineA'));
+    }
+    if (polyTreeBranchBOctave) {
+        polyTreeBranchBOctave.addEventListener('change', () => applyPolyPlannerFields('inlineB'));
+        polyTreeBranchBOctave.addEventListener('blur', () => applyPolyPlannerFields('inlineB'));
+    }
+    if (polyTreeBranchAGenToggle) {
+        polyTreeBranchAGenToggle.addEventListener('click', () => {
+            const planner = state.experimental.polyPlanner || (state.experimental.polyPlanner = {});
+            planner.branchAGenEnabled = planner.branchAGenEnabled === false;
+            refreshCircleTopUi();
+        });
+    }
+    if (polyTreeBranchBGenToggle) {
+        polyTreeBranchBGenToggle.addEventListener('click', () => {
+            const planner = state.experimental.polyPlanner || (state.experimental.polyPlanner = {});
+            planner.branchBGenEnabled = planner.branchBGenEnabled === false;
+            refreshCircleTopUi();
+        });
+    }
+    if (polyTreeBranchAGen) {
+        polyTreeBranchAGen.addEventListener('click', () => {
+            const planner = state.experimental.polyPlanner || {};
+            if (planner.branchAGenEnabled === false) return;
+            const zone = getActiveEditZoneId();
+            const modulo = getPolyPlannerBranchModulo(zone);
+            const maxLen = getPolyPlannerBranchLimit(zone);
+            const currentCount = getEditorStepCount(
+                polyTreeBranchAInline?.value,
+                Array.isArray(planner.branchA) ? planner.branchA.length : 12,
+                maxLen
+            );
+            const values = generateIntervalBranchValues(polyTreeBranchAInterval?.value, modulo, currentCount);
+            if (polyTreeBranchAInline) polyTreeBranchAInline.value = values.join(',');
+            applyPolyPlannerFields('inlineA');
+        });
+    }
+    if (polyTreeBranchBGen) {
+        polyTreeBranchBGen.addEventListener('click', () => {
+            const planner = state.experimental.polyPlanner || {};
+            if (planner.branchBGenEnabled === false) return;
+            const zone = getActiveEditZoneId();
+            const modulo = getPolyPlannerBranchModulo(zone);
+            const maxLen = getPolyPlannerBranchLimit(zone);
+            const currentCount = getEditorStepCount(
+                polyTreeBranchBInline?.value,
+                Array.isArray(planner.branchB) ? planner.branchB.length : 12,
+                maxLen
+            );
+            const values = generateIntervalBranchValues(polyTreeBranchBInterval?.value, modulo, currentCount);
+            if (polyTreeBranchBInline) polyTreeBranchBInline.value = values.join(',');
+            applyPolyPlannerFields('inlineB');
+        });
+    }
+    if (polyTreeDragToggle) {
+        polyTreeDragToggle.addEventListener('click', () => {
+            const planner = state.experimental.polyPlanner || (state.experimental.polyPlanner = {});
+            const play = ensurePolyPlannerPlayabilityDefaults(planner);
+            if (!play) return;
+            play.dragEnabled = play.dragEnabled === false;
+            refreshCircleTopUi();
+        });
+    }
+    if (polyTreePresetSelect) {
+        polyTreePresetSelect.addEventListener('change', () => {
+            const name = String(polyTreePresetSelect.value || '').trim();
+            const preset = state.polyTreePresets?.[name];
+            if (!preset) return;
+            applyPolyTreePresetState(preset, getActiveEditZoneId());
+            const aTxt = (Array.isArray(state.experimental?.polyPlanner?.branchA) ? state.experimental.polyPlanner.branchA : getPolyPlannerDefaultSteps(getActiveEditZoneId())).join(',');
+            const bTxt = (Array.isArray(state.experimental?.polyPlanner?.branchB) ? state.experimental.polyPlanner.branchB : getPolyPlannerDefaultSteps(getActiveEditZoneId())).join(',');
+            if (polyTreeBranchAInline) polyTreeBranchAInline.value = aTxt;
+            if (polyTreeBranchBInline) polyTreeBranchBInline.value = bTxt;
+            if (polyTreePresetName) polyTreePresetName.value = name;
+            refreshCircleTopUi();
+            requestDraw();
+        });
+    }
+    if (polyTreePresetSave) {
+        polyTreePresetSave.addEventListener('click', () => {
+            const name = String(polyTreePresetName?.value || polyTreePresetSelect?.value || '').trim() || 'Preset';
+            applyPolyPlannerFields('inlineA');
+            applyPolyPlannerFields('inlineB');
+            state.polyTreePresets[name] = getPolyTreePresetState(getActiveEditZoneId());
+            savePolyTreePresets(state.polyTreePresets);
+            refreshPolyTreePresetSelect(state.polyTreePresets, name);
+            if (polyTreePresetName) polyTreePresetName.value = name;
+            refreshCircleTopUi();
+        });
+    }
+    if (polyTreePresetDel) {
+        polyTreePresetDel.addEventListener('click', () => {
+            const sel = String(polyTreePresetSelect?.value || '').trim();
+            if (!sel || sel === 'Init') return;
+            delete state.polyTreePresets[sel];
+            if (!state.polyTreePresets.Init) state.polyTreePresets.Init = getPolyTreePresetState(getActiveEditZoneId());
+            savePolyTreePresets(state.polyTreePresets);
+            refreshPolyTreePresetSelect(state.polyTreePresets, 'Init');
+            if (polyTreePresetName) polyTreePresetName.value = 'Init';
+            const initPreset = state.polyTreePresets.Init;
+            if (initPreset) {
+                applyPolyTreePresetState(initPreset, getActiveEditZoneId());
+                const aTxt = (Array.isArray(state.experimental?.polyPlanner?.branchA) ? state.experimental.polyPlanner.branchA : getPolyPlannerDefaultSteps(getActiveEditZoneId())).join(',');
+                const bTxt = (Array.isArray(state.experimental?.polyPlanner?.branchB) ? state.experimental.polyPlanner.branchB : getPolyPlannerDefaultSteps(getActiveEditZoneId())).join(',');
+                if (polyTreeBranchAInline) polyTreeBranchAInline.value = aTxt;
+                if (polyTreeBranchBInline) polyTreeBranchBInline.value = bTxt;
+            }
+            refreshCircleTopUi();
+            requestDraw();
+        });
+    }
+    const applyPolyTreePlayabilityUi = () => {
+        const planner = state.experimental.polyPlanner || (state.experimental.polyPlanner = {});
+        const play = ensurePolyPlannerPlayabilityDefaults(planner);
+        if (!play) return;
+        const snapMode = 'hard';
+        const lockMode = 'auto';
+        play.snapMode = snapMode;
+        play.branchLockMode = lockMode;
+        play.branchLock = true;
+        state.activeTouches.forEach((t) => {
+            if ((t.pitchInputMode || '') !== 'circle') return;
+            if (!t.polyTreeLockBranch) t.polyTreeLockBranch = '';
+        });
+        refreshCircleTopUi();
+        requestDraw();
+    };
     pgAdvancedSubtabs.forEach((btn) => {
         btn.addEventListener('click', () => setPgAdvancedTab(btn.dataset.pgAdvTab || 'engine'));
     });
@@ -22288,7 +27612,10 @@ document.addEventListener('DOMContentLoaded', () => {
         recording: false,
         startTs: 0,
         events: [],
-        loops: []
+        loops: [],
+        captureSeq: 1,
+        activeCaptureByBody: new Map(),
+        activeCaptureByChan: new Map()
     };
 
     const resetPgLoopRecording = () => {
@@ -22296,79 +27623,328 @@ document.addEventListener('DOMContentLoaded', () => {
         pgLoopState.recording = false;
         pgLoopState.startTs = 0;
         pgLoopState.events = [];
+        pgLoopState.captureSeq = 1;
+        pgLoopState.activeCaptureByBody.clear();
+        pgLoopState.activeCaptureByChan.clear();
+    };
+
+    const normalizePgLoopEvent = (ev, fallbackTimeMs = 0) => {
+        if (!ev) return null;
+        const noteRaw = Number.isFinite(ev.noteFloat) ? Number(ev.noteFloat) : (Number.isFinite(ev.note) ? Number(ev.note) : NaN);
+        if (!Number.isFinite(noteRaw)) return null;
+        const noteFloat = Math.max(0, Math.min(127, noteRaw));
+        const note = Math.max(0, Math.min(127, Math.round(Number.isFinite(ev.note) ? Number(ev.note) : noteFloat)));
+        const zone = ev.zone === 'B' ? 'B' : 'A';
+        const chan = Number.isFinite(ev.chan) ? Math.max(1, Math.min(16, Math.round(ev.chan))) : null;
+        return {
+            id: Number.isFinite(ev.id) ? Number(ev.id) : null,
+            timeMs: Math.max(0, Number.isFinite(ev.timeMs) ? Number(ev.timeMs) : Number(fallbackTimeMs) || 0),
+            durationMs: Math.max(8, Math.min(8000, Number.isFinite(ev.durationMs) ? Number(ev.durationMs) : 120)),
+            note,
+            noteFloat,
+            velocity: Math.max(1, Math.min(127, Math.round(Number.isFinite(ev.velocity) ? Number(ev.velocity) : 80))),
+            zone,
+            chan,
+            bodyId: Number.isFinite(ev.bodyId) ? Number(ev.bodyId) : null,
+            materialKey: typeof ev.materialKey === 'string' ? ev.materialKey : null,
+            materialName: typeof ev.materialName === 'string' ? ev.materialName : null,
+            materialAttack: Number.isFinite(ev.materialAttack) ? Number(ev.materialAttack) : null,
+            snapshot: ev.snapshot || null,
+            mpeFrames: Array.isArray(ev.mpeFrames) ? ev.mpeFrames
+                .map((f) => ({
+                    tMs: Math.max(0, Number.isFinite(f?.tMs) ? Number(f.tMs) : 0),
+                    pb: clampPb(Math.round(Number.isFinite(f?.pb) ? Number(f.pb) : 8192)),
+                    slide: Math.max(0, Math.min(127, Math.round(Number.isFinite(f?.slide) ? Number(f.slide) : 64))),
+                    press: Math.max(0, Math.min(127, Math.round(Number.isFinite(f?.press) ? Number(f.press) : 0)))
+                }))
+                .sort((a, b) => a.tMs - b.tMs)
+                : []
+        };
+    };
+
+    const buildInterpolatedMpeFrames = (frames, durationMs) => {
+        if (!Array.isArray(frames) || !frames.length) return [];
+        const dur = Math.max(1, Number.isFinite(durationMs) ? Number(durationMs) : 1);
+        const sorted = frames
+            .filter(f => Number.isFinite(f?.tMs))
+            .map(f => ({
+                tMs: Math.max(0, Math.min(dur, Number(f.tMs))),
+                pb: clampPb(Math.round(Number.isFinite(f.pb) ? f.pb : 8192)),
+                slide: Math.max(0, Math.min(127, Math.round(Number.isFinite(f.slide) ? f.slide : 64))),
+                press: Math.max(0, Math.min(127, Math.round(Number.isFinite(f.press) ? f.press : 0)))
+            }))
+            .sort((a, b) => a.tMs - b.tMs);
+        if (!sorted.length) return [];
+        const seeded = sorted.slice();
+        if (seeded[0].tMs > 0) seeded.unshift({ ...seeded[0], tMs: 0 });
+        const endFrame = seeded[seeded.length - 1];
+        if (endFrame.tMs < dur) seeded.push({ ...endFrame, tMs: dur });
+
+        const result = [];
+        const stepMs = 16;
+        for (let i = 0; i < seeded.length - 1; i += 1) {
+            const a = seeded[i];
+            const b = seeded[i + 1];
+            if (!result.length || result[result.length - 1].tMs !== a.tMs) result.push(a);
+            const span = b.tMs - a.tMs;
+            if (span <= stepMs) continue;
+            for (let t = a.tMs + stepMs; t < b.tMs; t += stepMs) {
+                const k = (t - a.tMs) / span;
+                result.push({
+                    tMs: t,
+                    pb: clampPb(Math.round(a.pb + ((b.pb - a.pb) * k))),
+                    slide: Math.max(0, Math.min(127, Math.round(a.slide + ((b.slide - a.slide) * k)))),
+                    press: Math.max(0, Math.min(127, Math.round(a.press + ((b.press - a.press) * k)))
+                    )
+                });
+            }
+        }
+        result.push(seeded[seeded.length - 1]);
+        return result;
+    };
+
+    const getPgLoopClockSec = () => {
+        const ctx = state.audio?.ctx;
+        if (ctx && ctx.state === 'running' && Number.isFinite(ctx.currentTime)) return ctx.currentTime;
+        return performance.now() / 1000;
+    };
+
+    const getPgLoopLookaheadMs = () => {
+        const raw = Number(state.playground?.advanced?.loopLookaheadMs);
+        return Math.max(20, Math.min(200, Number.isFinite(raw) ? raw : 70));
+    };
+
+    const getPgLoopTickMs = () => {
+        const raw = Number(state.playground?.advanced?.loopTickMs);
+        return Math.max(6, Math.min(60, Number.isFinite(raw) ? raw : 12));
+    };
+
+    const applyPgLoopSoftSnapBoundary = (lengthMs) => {
+        const len = Math.max(1, Number(lengthMs) || 1);
+        const enabled = !!state.playground?.advanced?.loopCaptureSoftSnap;
+        if (!enabled) return len;
+        const gridMsRaw = Number(state.playground?.advanced?.timingGridMs);
+        const gridMs = Number.isFinite(gridMsRaw) && gridMsRaw > 0 ? gridMsRaw : 0;
+        if (gridMs <= 0) return len;
+        const snapStrengthRaw = Number(state.playground?.advanced?.loopCaptureSnapStrength);
+        const snapStrength = Math.max(0, Math.min(1, Number.isFinite(snapStrengthRaw) ? snapStrengthRaw : 0.35));
+        const snapped = Math.round(len / gridMs) * gridMs;
+        return len + ((snapped - len) * snapStrength);
+    };
+
+    const buildPgLoopFromEvents = (events = [], forcedLengthMs = null) => {
+        const normalized = [];
+        events.forEach((ev, idx) => {
+            const e = normalizePgLoopEvent(ev, idx);
+            if (e) normalized.push(e);
+        });
+        if (!normalized.length) return null;
+        normalized.sort((a, b) => a.timeMs - b.timeMs);
+        let eventsOut = normalized;
+        let lengthMs = null;
+        if (Number.isFinite(forcedLengthMs)) {
+            lengthMs = Math.max(40, applyPgLoopSoftSnapBoundary(Number(forcedLengthMs)));
+            eventsOut = normalized
+                .filter(ev => ev.timeMs < lengthMs)
+                .map((ev) => {
+                    const remaining = Math.max(0, lengthMs - ev.timeMs);
+                    const nextDur = Math.max(0, Math.min(ev.durationMs, remaining));
+                    return {
+                        ...ev,
+                        durationMs: nextDur,
+                        mpeFrames: Array.isArray(ev.mpeFrames)
+                            ? ev.mpeFrames.filter(f => Number.isFinite(f?.tMs) && f.tMs <= nextDur)
+                            : []
+                    };
+                })
+                .filter(ev => ev.durationMs > 0);
+        }
+        if (lengthMs == null) {
+            const maxEndMs = eventsOut.reduce((m, ev) => Math.max(m, ev.timeMs + ev.durationMs), 0);
+            lengthMs = Math.max(80, maxEndMs + 2);
+        }
+        return { events: eventsOut, lengthMs };
     };
 
     const stopPgLoopPlayback = (loop) => {
         if (!loop) return;
         if (loop.interval) {
-            clearInterval(loop.interval);
+            clearTimeout(loop.interval);
             loop.interval = null;
         }
+        loop.playbackRunId = (loop.playbackRunId || 0) + 1;
         if (Array.isArray(loop.timers)) {
             loop.timers.forEach(t => clearTimeout(t));
         }
         loop.timers = [];
     };
 
-    const playPgLoopEvent = (ev, loopLengthMs = null) => {
+    const playPgLoopEvent = (ev, loopLengthMs = null, loopRef = null) => {
         if (!ev || !Number.isFinite(ev.note)) return;
         const zoneId = ev.zone || 'A';
         const output = getZoneOutput(zoneId);
         const chan = allocateMpeChannelForPlay(zoneId, output, { allowStealHeld: true });
-        const sendOut = state.midi.hardwareOutput ? (data) => sendMidiHardware(data) : (data) => sendMidi(data, output);
+        const sendOut = (data) => sendMidi(data, output);
         if (!chan) return;
-        const note = Math.max(0, Math.min(127, Math.round(ev.note)));
+        const noteExact = Number.isFinite(ev.noteFloat) ? Number(ev.noteFloat) : Number(ev.note);
+        const note = Math.max(0, Math.min(127, Math.round(noteExact)));
         const velocity = Math.max(1, Math.min(127, Math.round(ev.velocity || 80)));
-        const durationMs = Math.max(40, Math.round(ev.durationMs || 140));
-        const ghostDuration = Number.isFinite(loopLengthMs) ? Math.max(80, Math.round(loopLengthMs - (ev.timeMs || 0))) : durationMs;
+        const pbRange = Math.max(1, getPbRangeForZone(zoneId));
+        const detune = noteExact - note;
+        const defaultPb = clampPb(Math.round(8192 + (detune * (8192 / pbRange))));
+        const durationMs = Math.max(12, Number.isFinite(ev.durationMs) ? Number(ev.durationMs) : 140);
+        const ghostDuration = Number.isFinite(loopLengthMs) ? Math.max(40, (loopLengthMs - (ev.timeMs || 0))) : durationMs;
+        const mpeFrames = buildInterpolatedMpeFrames(ev.mpeFrames, durationMs);
+        const initialMpe = mpeFrames.find(f => f.tMs <= 0) || null;
+        const initialPb = initialMpe ? initialMpe.pb : defaultPb;
+        const initialSlide = initialMpe ? initialMpe.slide : 64;
+        const initialPress = initialMpe ? initialMpe.press : velocity;
         if (Playground?.spawnLoopGhost && ev.snapshot) {
             Playground.spawnLoopGhost(ev.snapshot, ghostDuration);
         }
+        // Mirror loop notes into visual physical-notes layer so keyboard/circle can display them
+        // even when Physical Mode UI is closed.
+        const visList = state.physicalNotes.get(note) || [];
+        visList.push({
+            chan,
+            note,
+            basePb: initialPb,
+            velocity,
+            grabbed: false,
+            zone: zoneId,
+            lastPb: initialPb,
+            lastSlide: initialSlide,
+            lastPress: initialPress,
+            onTs: Date.now(),
+            loopGhost: true
+        });
+        state.physicalNotes.set(note, visList);
         let internalChan = null;
         if (state.audio.enabled) {
             internalChan = getInternalAudioChannel(chan, zoneId);
-            state.audio.channelPress.set(internalChan, velocity);
-            void noteOnInternal(note, velocity, internalChan, null, { zoneId });
+            state.audio.channelPb.set(internalChan, initialPb);
+            updateChannelPitch(internalChan);
+            state.audio.channelTimbre.set(internalChan, initialSlide);
+            updateChannelTimbre(internalChan);
+            state.audio.channelPress.set(internalChan, initialPress);
+            updateChannelPress(internalChan);
+            // Keep loop playback envelope consistent with current synth/FX settings.
+            void noteOnInternal(note, velocity, chan, null, { zoneId });
         }
+        sendOut([0xE0 + chan - 1, initialPb & 0x7F, (initialPb >> 7) & 0x7F]);
+        sendOut([0xB0 + chan - 1, 74, initialSlide]);
+        sendOut([0xD0 + chan - 1, initialPress]);
         sendOut([0x90 + chan - 1, note, velocity]);
-        setTimeout(() => {
+        if (Array.isArray(mpeFrames) && mpeFrames.length > 1) {
+            mpeFrames.forEach((frame) => {
+                if (!frame || !Number.isFinite(frame.tMs) || frame.tMs <= 0) return;
+                const t = setTimeout(() => {
+                    sendOut([0xE0 + chan - 1, frame.pb & 0x7F, (frame.pb >> 7) & 0x7F]);
+                    sendOut([0xB0 + chan - 1, 74, frame.slide]);
+                    sendOut([0xD0 + chan - 1, frame.press]);
+                    const activeList = state.physicalNotes.get(note);
+                    if (Array.isArray(activeList)) {
+                        const vis = activeList.find(v => v && v.loopGhost && v.chan === chan && (v.zone || 'A') === zoneId);
+                        if (vis) {
+                            vis.lastPb = frame.pb;
+                            vis.lastSlide = frame.slide;
+                            vis.lastPress = frame.press;
+                        }
+                    }
+                    if (internalChan != null && state.audio.enabled) {
+                        state.audio.channelPb.set(internalChan, frame.pb);
+                        updateChannelPitch(internalChan);
+                        state.audio.channelTimbre.set(internalChan, frame.slide);
+                        updateChannelTimbre(internalChan);
+                        state.audio.channelPress.set(internalChan, frame.press);
+                        updateChannelPress(internalChan);
+                    }
+                }, frame.tMs);
+                if (loopRef && Array.isArray(loopRef.timers)) loopRef.timers.push(t);
+            });
+        }
+        const offT = setTimeout(() => {
             sendOut([0x80 + chan - 1, note, 0]);
-            if (internalChan != null) noteOffInternal(note, internalChan);
+            const activeList = state.physicalNotes.get(note);
+            if (Array.isArray(activeList) && activeList.length) {
+                const idx = activeList.findIndex(v => v && v.loopGhost && v.chan === chan && (v.zone || 'A') === zoneId);
+                if (idx >= 0) activeList.splice(idx, 1);
+                if (activeList.length) state.physicalNotes.set(note, activeList);
+                else state.physicalNotes.delete(note);
+            }
+            if (internalChan != null) noteOffInternal(note, chan);
             releaseMpeChannel(zoneId, chan);
         }, durationMs);
+        if (loopRef && Array.isArray(loopRef.timers)) loopRef.timers.push(offT);
     };
 
     const startPgLoopPlayback = (loop) => {
         if (!loop || !Array.isArray(loop.events) || !loop.events.length) return;
-        const lengthMs = Math.max(200, Math.round(loop.lengthMs || 0));
+        const built = buildPgLoopFromEvents(loop.events);
+        if (!built) return;
+        loop.events = built.events;
+        const lengthMs = Math.max(80, Number.isFinite(loop.lengthMs) ? Number(loop.lengthMs) : built.lengthMs);
         loop.lengthMs = lengthMs;
         stopPgLoopPlayback(loop);
-        const fireCycle = () => {
-            loop.timers = [];
-            loop.events.forEach((ev) => {
-                const delay = Math.max(0, Math.round(ev.timeMs || 0));
-                const t = setTimeout(() => playPgLoopEvent(ev, lengthMs), delay);
-                loop.timers.push(t);
-            });
+        loop.playbackRunId = (loop.playbackRunId || 0) + 1;
+        const runId = loop.playbackRunId;
+        loop.scheduler = {
+            startSec: getPgLoopClockSec(),
+            cycleIndex: 0,
+            eventIndex: 0
         };
-        fireCycle();
-        loop.interval = setInterval(fireCycle, lengthMs);
+        const lookaheadMs = getPgLoopLookaheadMs();
+        const tickMs = getPgLoopTickMs();
+        const lateToleranceMs = 8;
+        const evCount = loop.events.length;
+
+        const tick = () => {
+            if (loop.playbackRunId !== runId) return;
+            const nowSec = getPgLoopClockSec();
+            const elapsedMs = Math.max(0, (nowSec - loop.scheduler.startSec) * 1000);
+            const windowEndMs = elapsedMs + lookaheadMs;
+            let guard = 0;
+            while (guard < 4096) {
+                const ev = loop.events[loop.scheduler.eventIndex];
+                if (!ev) break;
+                const evTimeMs = Number.isFinite(ev.timeMs) ? Number(ev.timeMs) : 0;
+                const targetMs = (loop.scheduler.cycleIndex * lengthMs) + evTimeMs;
+                if (targetMs > windowEndMs) break;
+                if (targetMs >= (elapsedMs - lateToleranceMs)) {
+                    const delay = Math.max(0, targetMs - elapsedMs);
+                    const t = setTimeout(() => {
+                        if (loop.playbackRunId !== runId) return;
+                        playPgLoopEvent(ev, lengthMs, loop);
+                    }, delay);
+                    loop.timers.push(t);
+                }
+                loop.scheduler.eventIndex += 1;
+                if (loop.scheduler.eventIndex >= evCount) {
+                    loop.scheduler.eventIndex = 0;
+                    loop.scheduler.cycleIndex += 1;
+                }
+                guard += 1;
+            }
+            loop.interval = setTimeout(tick, tickMs);
+        };
+        tick();
     };
 
-    const finalizePgLoopRecording = () => {
+    const finalizePgLoopRecording = (forcedLengthMs = null) => {
         if (!Array.isArray(pgLoopState.events) || !pgLoopState.events.length) return null;
-        const maxMs = pgLoopState.events.reduce((m, ev) => Math.max(m, (ev.timeMs || 0) + (ev.durationMs || 0)), 0);
-        const lengthMs = Math.max(240, Math.round(maxMs));
+        const built = buildPgLoopFromEvents(pgLoopState.events, forcedLengthMs);
+        if (!built) return null;
         if (Playground?.clearScene) {
             Playground.clearScene({ keepEnvironment: true, keepWalls: true });
         }
         if (Playground?.clearLoopGhosts) Playground.clearLoopGhosts();
         const loop = {
             id: Date.now(),
-            events: pgLoopState.events.map(ev => ({ ...ev })),
-            lengthMs,
+            events: built.events.map(ev => ({ ...ev })),
+            lengthMs: built.lengthMs,
             interval: null,
-            timers: []
+            timers: [],
+            playbackRunId: 0
         };
         pgLoopState.loops.push(loop);
         startPgLoopPlayback(loop);
@@ -22435,6 +28011,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (Playground?.clearLoopGhosts) Playground.clearLoopGhosts();
         updatePgLoopButton();
     };
+    clearPlaygroundLoopsNow = stopAllPgLoops;
 
     const flushPgLoopsToMelody = () => {
         const events = collectPgLoopEventsForMelody();
@@ -22448,12 +28025,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = document.getElementById('pgLoopRecord');
         if (!btn) return;
         const on = !!pgLoopState.armed;
+        const recording = !!pgLoopState.recording;
         btn.classList.toggle('toggle-on', on);
         btn.classList.toggle('toggle-off', !on);
-        const label = on ? 'LOOP ON' : 'LOOP OFF';
+        btn.classList.toggle('is-recording', recording);
+        const label = recording ? 'LOOP REC' : (on ? 'LOOP ON' : 'LOOP OFF');
         const textEl = btn.querySelector('.btn-text');
         if (textEl) textEl.textContent = label;
         else btn.textContent = label;
+        btn.setAttribute('aria-label', recording ? 'Playground loop recording' : 'Playground loop');
+        btn.title = recording ? 'Loop recording in progress' : 'Loop Playground notes';
         if (pgLoopClearBtn) {
             const hasLoops = (pgLoopState.loops && pgLoopState.loops.length) || pgLoopState.recording;
             pgLoopClearBtn.disabled = !hasLoops;
@@ -22468,18 +28049,47 @@ document.addEventListener('DOMContentLoaded', () => {
             pgLoopState.recording = true;
             pgLoopState.startTs = now;
             pgLoopState.events = [];
+            pgLoopState.activeCaptureByBody.clear();
+            pgLoopState.activeCaptureByChan.clear();
+            updatePgLoopButton();
         }
         const timeMs = Math.max(0, now - pgLoopState.startTs);
-        const note = Number.isFinite(ev?.note) ? ev.note : null;
-        if (note == null) return;
-        pgLoopState.events.push({
-            timeMs,
-            durationMs: Math.max(20, Math.round(ev?.durationMs || 120)),
-            note: Math.round(note),
-            velocity: Math.max(1, Math.min(127, Math.round(ev?.velocity || 80))),
-            zone: ev?.zone || 'A',
-            snapshot: ev?.snapshot || null
-        });
+        const normalized = normalizePgLoopEvent({ ...ev, timeMs, id: pgLoopState.captureSeq++ }, timeMs);
+        if (!normalized) return;
+        if (!Array.isArray(normalized.mpeFrames)) normalized.mpeFrames = [];
+        pgLoopState.events.push(normalized);
+        if (Number.isFinite(normalized.bodyId)) {
+            pgLoopState.activeCaptureByBody.set(normalized.bodyId, normalized.id);
+        }
+        if (Number.isFinite(normalized.chan)) {
+            pgLoopState.activeCaptureByChan.set(`${normalized.zone}:${normalized.chan}`, normalized.id);
+        }
+    };
+
+    window.onPlaygroundMPE = (frame) => {
+        if (!pgLoopState.armed || !pgLoopState.recording) return;
+        if (!frame) return;
+        const frameTime = Number.isFinite(frame.timeMs) ? Number(frame.timeMs) : performance.now();
+        const zone = frame.zone === 'B' ? 'B' : 'A';
+        let targetId = null;
+        if (Number.isFinite(frame.bodyId)) {
+            targetId = pgLoopState.activeCaptureByBody.get(Number(frame.bodyId)) ?? null;
+        }
+        if (targetId == null && Number.isFinite(frame.chan)) {
+            targetId = pgLoopState.activeCaptureByChan.get(`${zone}:${Math.round(frame.chan)}`) ?? null;
+        }
+        if (targetId == null) return;
+        const event = pgLoopState.events.find(ev => ev && ev.id === targetId);
+        if (!event) return;
+        const eventStartAbs = pgLoopState.startTs + (Number(event.timeMs) || 0);
+        const relMs = Math.max(0, Math.min(Number(event.durationMs) || 0, frameTime - eventStartAbs));
+        if (!Array.isArray(event.mpeFrames)) event.mpeFrames = [];
+        const pb = clampPb(Math.round(Number.isFinite(frame.pb) ? Number(frame.pb) : 8192));
+        const slide = Math.max(0, Math.min(127, Math.round(Number.isFinite(frame.slide) ? Number(frame.slide) : 64)));
+        const press = Math.max(0, Math.min(127, Math.round(Number.isFinite(frame.press) ? Number(frame.press) : 0)));
+        const last = event.mpeFrames[event.mpeFrames.length - 1] || null;
+        if (last && Math.abs(last.tMs - relMs) < 3 && last.pb === pb && last.slide === slide && last.press === press) return;
+        event.mpeFrames.push({ tMs: relMs, pb, slide, press });
     };
 
     const tubeQuantizeBtn = document.getElementById('pgTubeQuantize');
@@ -22658,6 +28268,21 @@ document.addEventListener('DOMContentLoaded', () => {
         return !!added;
     };
 
+    const getPlaygroundReferenceLaneCount = () => {
+        const zone = (typeof getScaleZoneId === 'function' ? getScaleZoneId() : 'A') === 'B' ? 'B' : 'A';
+        const zoneScale = (state.scaleNotesByZone && state.scaleNotesByZone[zone]) || state.scaleNotes || {};
+        const notes = Array.isArray(zoneScale.notes) ? zoneScale.notes : [];
+        if (!notes.length) return 7;
+        const root = Number.isFinite(Number(zoneScale.root)) ? Number(zoneScale.root) : 0;
+        const cfg = (state.scaleConfigByZone && state.scaleConfigByZone[zone]) || {};
+        const octave = Number.isFinite(parseInt(cfg.octave, 10)) ? parseInt(cfg.octave, 10) : 0;
+        const base = 48 + root + (octave * 12);
+        const strict = notes.filter((n) => n >= base && n < (base + 12));
+        const nearby = notes.filter((n) => Math.abs(n - (base + 6)) <= 12);
+        const len = (strict.length ? strict : (nearby.length ? nearby : notes)).length;
+        return Math.max(1, Math.min(48, len || 7));
+    };
+
     const syncHudFromState = () => {
         const pg = state.playground;
         if (controls.energy) controls.energy.value = String(pg.macro.energy);
@@ -22724,7 +28349,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (controls.timingGrid) controls.timingGrid.value = String(pg.advanced.timingGridMs ?? 0);
         if (controls.swing) controls.swing.value = String(pg.advanced.swing ?? 0);
         if (controls.maxNotes) controls.maxNotes.value = String(pg.advanced.maxNotesPerSec ?? 0);
-        if (controls.pitchLanes) controls.pitchLanes.value = String(pg.advanced.pitchLanes ?? 0);
+        if (controls.pitchLanes) {
+            const manualLanes = Number.isFinite(Number(pg.advanced.pitchLanes)) ? Number(pg.advanced.pitchLanes) : 0;
+            controls.pitchLanes.value = String(manualLanes > 0 ? manualLanes : getPlaygroundReferenceLaneCount());
+        }
         if (controls.loopQuantizeStrength) controls.loopQuantizeStrength.value = String(Math.round((pg.advanced.loopQuantizeStrength ?? 0.35) * 100));
         if (controls.impactTimbre) controls.impactTimbre.value = String(pg.advanced.impactToTimbre ?? 0.35);
         if (controls.droneLevel) controls.droneLevel.value = String(pg.advanced.droneLevel ?? 0.6);
@@ -23086,11 +28714,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (state.playground.enabled) {
             Playground.start();
             if (pgControls) pgControls.style.display = 'flex';
-            if (pgToggle) {
-                pgToggle.classList.add('btn-accent');
-                const txt = pgToggle.querySelector('.btn-text');
-                if (txt) txt.innerText = 'KEYBOARD MODE';
-            }
             Playground.setConfig(state.playground);
             if (Playground.setMode) Playground.setMode(state.playground.mode || 'physics');
             if (Playground.setTubesConfig) Playground.setTubesConfig(state.playground.tubes || {});
@@ -23103,7 +28726,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 260);
             }
         } else {
-            flushPgLoopsToMelody();
+            // Keep native Physical loops running when switching back to Keyboard mode.
             Playground.stop();
             restoreAudioFollowBaseline();
             closePlaygroundOnboarding(false);
@@ -23112,18 +28735,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (btnAdvancedToggle) btnAdvancedToggle.classList.remove('toggle-on');
             setArmedTubeTemplate(null, null);
             setTubeEditorVisible(false);
-            if (pgToggle) {
-                pgToggle.classList.remove('btn-accent');
-                const txt = pgToggle.querySelector('.btn-text');
-                if (txt) txt.innerText = 'PHYSICS MODE';
-            }
         }
         savePlaygroundStateToStorage();
     };
-
-    if (pgToggle) {
-        pgToggle.onclick = () => setEnabled(!state.playground.enabled);
-    }
 
     if (matBtns.length > 0) {
         matBtns.forEach((btn) => {
@@ -23391,13 +29005,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!state.playground?.enabled) return;
             const nextOn = !pgLoopState.armed;
             if (nextOn) {
+                if (typeof resumeAudioContext === 'function') {
+                    resumeAudioContext().catch(() => {});
+                }
                 pgLoopState.armed = true;
                 pgLoopState.recording = false;
                 pgLoopState.startTs = 0;
                 pgLoopState.events = [];
             } else {
                 pgLoopState.armed = false;
-                finalizePgLoopRecording();
+                const stopTs = performance.now();
+                const forcedLen = (pgLoopState.recording && Number.isFinite(pgLoopState.startTs))
+                    ? Math.max(0, stopTs - pgLoopState.startTs)
+                    : null;
+                finalizePgLoopRecording(forcedLen);
             }
             updatePgLoopButton();
         });
@@ -23414,6 +29035,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 state.playground.interaction.mode = 'drawFling';
                 applyConfig();
             }
+        });
+    }
+    if (pgAdvancedCloseBtn && btnAdvancedToggle && advancedPanel) {
+        pgAdvancedCloseBtn.addEventListener('click', () => {
+            playgroundPanelCollapsed = !playgroundPanelCollapsed;
+            refreshCircleTopUi();
+        });
+    }
+    if (pgHudCollapseBtn) {
+        pgHudCollapseBtn.addEventListener('click', () => {
+            playgroundHudCollapsed = !playgroundHudCollapsed;
+            refreshPlaygroundHudUi();
         });
     }
 
@@ -23531,6 +29164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     syncHudFromState();
     applyConfig();
     setEnabled(!!state.playground.enabled);
+    refreshPlaygroundHudUi();
 
     setInterval(() => {
         if (!Playground || !voicesEl || !cpuEl) return;
