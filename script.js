@@ -12812,7 +12812,30 @@ function clampClientYToZone(clientY, zoneId) {
 function getClampedPointerEvent(e, zoneId) {
     const clampedY = clampClientYToZone(e.clientY, zoneId);
     if (clampedY === e.clientY) return e;
-    return { clientX: e.clientX, clientY: clampedY, width: e.width, height: e.height };
+    // Preserve touch/pointer metadata when clamping Y; losing these can change
+    // behaviour on touch devices (especially in dual-zone B where clamping is common).
+    return {
+        clientX: e.clientX,
+        clientY: clampedY,
+        width: e.width,
+        height: e.height,
+        pointerId: e.pointerId,
+        pointerType: e.pointerType,
+        pressure: e.pressure,
+        tangentialPressure: e.tangentialPressure,
+        tiltX: e.tiltX,
+        tiltY: e.tiltY,
+        twist: e.twist,
+        isPrimary: e.isPrimary,
+        button: e.button,
+        buttons: e.buttons,
+        ctrlKey: e.ctrlKey,
+        shiftKey: e.shiftKey,
+        altKey: e.altKey,
+        metaKey: e.metaKey,
+        timeStamp: e.timeStamp,
+        target: e.target
+    };
 }
 
 
