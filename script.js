@@ -21210,8 +21210,8 @@ canvas.addEventListener('pointerdown', e => {
     });
 });
 
-// Throttled pointermove handler for better performance
-let lastPointerMoveTime = 0;
+// Throttled pointermove handler for better performance (per-pointer in dual mode).
+// A global throttle can starve zone B updates when another pointer is moving.
 const POINTER_MOVE_THROTTLE_MS = 16; // ~60fps max
 
 canvas.addEventListener('pointermove', e => {
@@ -21240,13 +21240,14 @@ canvas.addEventListener('pointermove', e => {
     
     // Throttle pointermove events to reduce CPU load
     const now = performance.now();
-    if (now - lastPointerMoveTime < POINTER_MOVE_THROTTLE_MS) {
+    const lastMoveTs = Number.isFinite(t.lastMoveProcessTs) ? t.lastMoveProcessTs : 0;
+    if (now - lastMoveTs < POINTER_MOVE_THROTTLE_MS) {
         // Store last event data for next frame but skip heavy processing
         t.lastX = e.clientX;
         t.pendingEvent = e;
         return;
     }
-    lastPointerMoveTime = now;
+    t.lastMoveProcessTs = now;
     t.pendingEvent = null;
     
     requestDraw();
