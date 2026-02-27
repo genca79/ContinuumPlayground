@@ -1737,9 +1737,14 @@ const Playground = (function() {
         if (out) {
             try {
                 const type = status & 0xF0;
+                const payload = (type === 0xC0 || type === 0xD0)
+                    ? [status, data1]
+                    : [status, data1, data2 ?? 0];
+                if (typeof window.captureMidiOutEvent === 'function') {
+                    window.captureMidiOutEvent(payload, out);
+                }
                 // Program Change (0xC0) e Channel Pressure (0xD0) hanno 1 solo data byte.
-                if (type === 0xC0 || type === 0xD0) out.send([status, data1]);
-                else out.send([status, data1, data2 ?? 0]);
+                out.send(payload);
                 return true;
             } catch (_) {
                 return false;

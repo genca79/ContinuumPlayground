@@ -1275,6 +1275,9 @@ input[type="checkbox"]:checked::after {
     height: 18px;
     display: block;
 }
+.rec-controls-bar .rec-midi-extra.hidden {
+    display: none;
+}
 
 .rec-controls-bar .rec-timer {
     font-family: 'Courier New', monospace;
@@ -1294,6 +1297,46 @@ input[type="checkbox"]:checked::after {
     font-size: 18px;
     font-weight: bold;
     animation: countdown-pulse 0.5s ease-in-out infinite;
+}
+
+/* Recorder mode picker (WAV/MIDI) */
+.rec-mode-picker {
+    position: fixed;
+    inset: 0;
+    z-index: 132;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+.rec-mode-picker.hidden {
+    display: none;
+}
+.rec-mode-picker-panel {
+    min-width: 260px;
+    max-width: 90vw;
+    background: var(--bg-glass-heavy);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+}
+.rec-mode-picker-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #d9edf5;
+    margin-bottom: 10px;
+    letter-spacing: 0.4px;
+}
+.rec-mode-picker-actions {
+    display: flex;
+    gap: 8px;
+}
+.rec-mode-picker-actions .menu-btn {
+    flex: 1;
+    min-height: 36px;
 }
 
 @keyframes countdown-pulse {
@@ -2240,6 +2283,33 @@ body.dual-active .dual-split-line {
 
 #tabSampler .sampler-factory-box {
     min-width: 220px;
+}
+
+.sampler-factory-preload {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.sampler-factory-preload-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #c9d8ee;
+    cursor: pointer;
+    user-select: none;
+}
+
+#factoryPreloadProgress {
+    width: 100%;
+    height: 8px;
+}
+
+.sampler-factory-preload-status {
+    font-size: 10px;
+    color: #9db3d1;
+    min-height: 12px;
 }
 
 #tabSampler .sampler-user-box {

@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GENCA MPE Ultra Continuum: Hybrid Edition</title>
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia-wasm.web.js"></script>
-    <script src="https://unpkg.com/essentia.js@0.1.3/dist/essentia.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
     <script src="Playground.js"></script>
     
@@ -60,7 +61,41 @@
             </svg>
         </span>
     </button>
+    <button id="recMidiPlayBtn" class="menu-btn btn-accent rec-midi-extra hidden" title="Play MIDI recording">
+        <span class="btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <polygon points="7,4 21,12 7,20" fill="currentColor"/>
+            </svg>
+        </span>
+    </button>
+    <button id="recMidiExportBtn" class="menu-btn btn-ok rec-midi-extra hidden" title="Export MIDI recording">
+        <span class="btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 3v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 11l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </span>
+    </button>
+    <button id="recMidiClearBtn" class="menu-btn btn-danger rec-midi-extra hidden" title="Clear MIDI recording">
+        <span class="btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <path d="M4 7h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M9 7V5h6v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 7l1 12h8l1-12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+        </span>
+    </button>
     <span id="recTimer" class="rec-timer">00:00</span>
+</div>
+<div id="recModePicker" class="rec-mode-picker hidden" aria-hidden="true">
+    <div id="recModePickerPanel" class="rec-mode-picker-panel" role="dialog" aria-modal="true" aria-label="Choose recording mode">
+        <div class="rec-mode-picker-title">Choose Recording Mode</div>
+        <div class="rec-mode-picker-actions">
+            <button id="recModeWavBtn" class="menu-btn btn-ok" type="button"><span class="btn-text">WAV</span></button>
+            <button id="recModeMidiBtn" class="menu-btn btn-accent" type="button"><span class="btn-text">MIDI</span></button>
+        </div>
+    </div>
 </div>
 
 <div id="ui">
@@ -72,11 +107,11 @@
             </span>
             MIDI &amp; SYNTH
         </button>
-        <button class="ui-tab" data-tab="sampler" data-legend="SAMPLER: load samples, sets, and sampler options." data-legend-group="tabs">
+        <button class="ui-tab" data-tab="sampler" data-legend="INSTRUMENT: load samples, sets, and sampler options." data-legend-group="tabs">
             <span class="tab-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M4 15c2-6 4-6 6 0s4 6 6 0 4-6 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </span>
-            SAMPLER
+            INSTRUMENT
         </button>
         <button class="ui-tab" data-tab="scale" data-legend="SCALE: tuning, scale selection, and microtonal settings." data-legend-group="tabs">
             <span class="tab-icon" aria-hidden="true">
@@ -101,31 +136,64 @@
     <!-- === TAB CONTENT: MIDI === -->
     <div class="ui-tab-content active" id="tabMidi" data-tab-content="midi">
         <div class="ui-tabs-row ui-subtabs" id="midiSubTabs">
-            <button class="ui-tab active" data-subtab="midi-control">MIDI CONTROL</button>
-            <button class="ui-tab" data-subtab="midi-engine">INTERNAL SYNTH &amp; SAMPLER</button>
+            <button class="ui-tab active" data-subtab="midi-engine">INTERNAL SYNTH &amp; SAMPLER</button>
+            <button class="ui-tab" data-subtab="midi-control">MIDI CONTROL</button>
             <button class="ui-tab" data-subtab="midi-preset">GLOBAL PRESET</button>
         </div>
 
-        <div class="ui-subtab-content active" data-subtab-content="midi-control">
+        <div class="ui-subtab-content active" data-subtab-content="midi-engine">
+            <div class="ui-group-inline">
+                <div class="box"><label>Synth</label><button id="audioStart" class="menu-btn btn-ok audio-toggle"><span class="btn-text">INTERNAL SYNTH</span></button></div>
+                <div class="box" style="max-width:95px;"><label>DUAL Keyboard</label><input type="checkbox" id="dualMode" data-param="dualMode"></div>
+                <div class="box" id="audioZoneBox" style="max-width:80px;"><label>KEYBOARD</label><select id="audioZoneSelect"><option value="A">A</option><option value="B">B</option></select></div>
+                <div class="box" id="sampleSetMiniBox"><label>Instrument</label><select id="sampleSetSelectMini"></select></div>
+                <div class="box"><label>Mode</label><select id="wtMode"></select></div>
+                <div class="box" id="wtMixBox"><label>Mix</label><input type="range" id="wtMix" min="0" max="1" step="0.01" value="0.35"></div>
+                <div class="box" id="wtSelectBox"><label>SYNTH wave</label><select id="wtSelect"></select></div>
+                <div class="box" id="sampleArticulationMiniBox" style="display:flex;"><label>Articulation</label><select id="sampleArticulationSelectMini"></select></div>
+            </div>
+        </div>
+
+        <div class="ui-subtab-content" data-subtab-content="midi-control">
             <div class="ui-group-inline">
                 <div class="box"><label>MIDI In</label><select id="midiInSelect" data-param="midiInSelect"><option value="">Nessun Input</option></select></div>
                 <div class="box"><label>MIDI Out A</label><select id="midiOutSelect" data-param="midiOutSelect"></select></div>
                 <div class="box" id="midiOutBBox"><label>MIDI Out B</label><select id="midiOutSelectB" data-param="midiOutSelectB"></select></div>
-                <div class="box" style="max-width:70px;"><label>DUAL Keyboard</label><input type="checkbox" id="dualMode" data-param="dualMode"></div>
                 <div class="box" style="max-width:60px;"><label>Thru</label><input type="checkbox" id="midiThru" data-param="midiThru"></div>
                 <div class="box" style="max-width:90px;"><label>MPE Out</label><input type="checkbox" id="midiInMpe" data-param="midiInMpe" checked></div>
             </div>
-        </div>
-
-        <div class="ui-subtab-content" data-subtab-content="midi-engine">
-            <div class="ui-group-inline">
-                <div class="box"><label>Synth</label><button id="audioStart" class="menu-btn btn-ok audio-toggle"><span class="btn-text">INTERNAL SYNTH</span></button></div>
-                <div class="box" style="max-width:80px;"><label>KEYBOARD</label><select id="audioZoneSelect"><option value="A">A</option><option value="B">B</option></select></div>
-                <div class="box"><label>Mode</label><select id="wtMode"></select></div>
-                <div class="box" id="sampleSetMiniBox"><label>Sampler Set</label><select id="sampleSetSelectMini"></select></div>
-                <div class="box" id="wtMixBox"><label>Mix</label><input type="range" id="wtMix" min="0" max="1" step="0.01" value="0.35"></div>
-                <div class="box" id="wtSelectBox"><label>SYNTH wave</label><select id="wtSelect"></select></div>
-                <div class="box" id="sampleArticulationMiniBox" style="display:flex;"><label>Articulation</label><select id="sampleArticulationSelectMini"></select></div>
+            <div class="ui-group-inline" style="margin-top:8px;">
+                <div class="box" style="min-width:220px;">
+                    <label>MIDI Recorder (MuseScore)</label>
+                    <div style="font-size:11px; color:#89c3d7;">Use floating recorder bar (top) for REC/STOP and MIDI actions.</div>
+                </div>
+                <div class="box" style="max-width:120px;">
+                    <label>Quantize</label>
+                    <select id="midiRecQuantize">
+                        <option value="off" selected>Off</option>
+                        <option value="1/16">1/16</option>
+                        <option value="1/8">1/8</option>
+                        <option value="1/8T">1/8T</option>
+                        <option value="1/4">1/4</option>
+                        <option value="1/16T">1/16T</option>
+                        <option value="1/32">1/32</option>
+                    </select>
+                </div>
+                <div class="box" style="max-width:150px;">
+                    <label>Recorder Mode</label>
+                    <select id="midiRecMode">
+                        <option value="notation" selected>Notation-safe</option>
+                        <option value="expressive">Expressive MPE</option>
+                    </select>
+                </div>
+                <div class="box" style="max-width:110px;">
+                    <label>BPM</label>
+                    <input type="number" id="midiRecBpm" min="40" max="240" step="1" value="120">
+                </div>
+                <div class="box" style="min-width:220px;">
+                    <label>Status</label>
+                    <div id="midiRecStatus" style="font-size:11px; color:#9be7ff;">Ready</div>
+                </div>
             </div>
         </div>
 
@@ -155,10 +223,18 @@
                     </select>
                     <button id="factoryLoadBtn" class="menu-btn btn-accent" title="Load Factory"><span class="btn-text">LOAD</span></button>
                 </div>
+                <div class="sampler-factory-preload">
+                    <label class="sampler-factory-preload-toggle" for="factoryPreloadToggle">
+                        <input type="checkbox" id="factoryPreloadToggle" checked>
+                        <span>Preload factory on first launch</span>
+                    </label>
+                    <progress id="factoryPreloadProgress" max="100" value="0"></progress>
+                    <div id="factoryPreloadStatus" class="sampler-factory-preload-status">Factory preload idle</div>
+                </div>
             </div>
             <div class="box sampler-user-box">
                 <div class="sampler-set-header">
-                    <label>Sampler Set (User)</label>
+                    <label>Instrument (User)</label>
                     <div class="sampler-set-actions">
                         <button id="sampleSetNew" class="menu-btn btn-accent" title="New empty set"><span class="btn-text">NEW</span></button>
                         <button id="sampleSetSave" class="menu-btn btn-ok" title="Save current set"><span class="btn-text">SAVE</span></button>

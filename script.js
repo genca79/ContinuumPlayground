@@ -238,6 +238,7 @@ const els = {
     midiStatus: document.getElementById('midiStatus'),
     dualSplitLine: document.getElementById('dualSplitLine'),
     audioStart: document.getElementById('audioStart'),
+    audioZoneBox: document.getElementById('audioZoneBox'),
     audioZoneSelect: document.getElementById('audioZoneSelect'),
     audioStatus: document.getElementById('audioStatus'),
     sampleSetSelect: document.getElementById('sampleSetSelect'),
@@ -387,6 +388,9 @@ const els = {
     sampleClear14: document.getElementById('sampleClear14'),
     factorySelect: document.getElementById('factorySelect'),
     factoryLoadBtn: document.getElementById('factoryLoadBtn'),
+    factoryPreloadToggle: document.getElementById('factoryPreloadToggle'),
+    factoryPreloadProgress: document.getElementById('factoryPreloadProgress'),
+    factoryPreloadStatus: document.getElementById('factoryPreloadStatus'),
     matrixToggle: document.getElementById('matrixToggle'),
     matrixSceneSelect: document.getElementById('matrixSceneSelect'),
     matrixSceneDesc: document.getElementById('matrixSceneDesc'),
@@ -507,8 +511,25 @@ const els = {
     // Audio Recorder elements
     recStartBtn: document.getElementById('recStartBtn'),
     recStopBtn: document.getElementById('recStopBtn'),
+    recMidiPlayBtn: document.getElementById('recMidiPlayBtn'),
+    recMidiExportBtn: document.getElementById('recMidiExportBtn'),
+    recMidiClearBtn: document.getElementById('recMidiClearBtn'),
     recTimer: document.getElementById('recTimer'),
     recControls: document.getElementById('recControls'),
+    recModePicker: document.getElementById('recModePicker'),
+    recModePickerPanel: document.getElementById('recModePickerPanel'),
+    recModeWavBtn: document.getElementById('recModeWavBtn'),
+    recModeMidiBtn: document.getElementById('recModeMidiBtn'),
+    // MIDI Recorder elements
+    midiRecStartBtn: document.getElementById('midiRecStartBtn'),
+    midiRecStopBtn: document.getElementById('midiRecStopBtn'),
+    midiRecPlayBtn: document.getElementById('midiRecPlayBtn'),
+    midiRecExportBtn: document.getElementById('midiRecExportBtn'),
+    midiRecClearBtn: document.getElementById('midiRecClearBtn'),
+    midiRecQuantize: document.getElementById('midiRecQuantize'),
+    midiRecMode: document.getElementById('midiRecMode'),
+    midiRecBpm: document.getElementById('midiRecBpm'),
+    midiRecStatus: document.getElementById('midiRecStatus'),
     // Recording Editor elements
     recEditorModal: document.getElementById('recEditorModal'),
     recEditorClose: document.getElementById('recEditorClose'),
@@ -558,6 +579,26 @@ function initAllRangeSliders() {
 initAllRangeSliders();
 
 // setToggle element: toggles the original top `#ui` settings panel
+function activateDefaultSettingsPanel() {
+    const mainTabs = document.querySelectorAll('#mainTabsRow .ui-tab');
+    const mainContents = document.querySelectorAll('#ui > .ui-tab-content');
+    mainTabs.forEach(t => t.classList.remove('active'));
+    mainContents.forEach(c => c.classList.remove('active'));
+    const midiMainTab = document.querySelector('#mainTabsRow .ui-tab[data-tab="midi"]');
+    const midiMainContent = document.querySelector('#ui [data-tab-content="midi"]');
+    if (midiMainTab) midiMainTab.classList.add('active');
+    if (midiMainContent) midiMainContent.classList.add('active');
+
+    const midiSubTabs = document.querySelectorAll('#midiSubTabs .ui-tab');
+    const midiSubContents = document.querySelectorAll('#tabMidi .ui-subtab-content');
+    midiSubTabs.forEach(t => t.classList.remove('active'));
+    midiSubContents.forEach(c => c.classList.remove('active'));
+    const engineTab = document.querySelector('#midiSubTabs .ui-tab[data-subtab="midi-engine"]');
+    const engineContent = document.querySelector('#tabMidi [data-subtab-content="midi-engine"]');
+    if (engineTab) engineTab.classList.add('active');
+    if (engineContent) engineContent.classList.add('active');
+}
+
 const setToggleBtn = document.getElementById('setToggle');
 if (setToggleBtn) {
     setToggleBtn.addEventListener('click', () => {
@@ -566,6 +607,7 @@ if (setToggleBtn) {
             const isOpen = uiEl.classList.toggle('active');
             uiEl.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
             document.body.classList.toggle('ui-open', isOpen);
+            if (isOpen) activateDefaultSettingsPanel();
         }
     });
 
@@ -769,11 +811,11 @@ const FACTORY_LIBRARY = {
         { root: 0, file: null }, { root: 0, file: null }, { root: 0, file: null }, { root: 0, file: null }
     ],
     'Bassoon': [
-        { root: 34, file: 'samples/BassoonSustain_As1.wav', loop: false },
-        { root: 46, file: 'samples/BassoonSustain_As2.wav', loop: false },
+        { root: 34, file: 'samples/BassoonSustain_A#1.wav', loop: false },
+        { root: 46, file: 'samples/BassoonSustain_A#2.wav', loop: false },
         { root: 55, file: 'samples/BassoonSustain_G3.wav', loop: false },
-        { root: 68, file: 'samples/BassoonSustain_Gs4.wav', loop: false },
-        { root: 75, file: 'samples/BassoonSustain_Ds5.wav', loop: false },
+        { root: 68, file: 'samples/BassoonSustain_G#4.wav', loop: false },
+        { root: 75, file: 'samples/BassoonSustain_D#5.wav', loop: false },
         { root: 0, file: null }, { root: 0, file: null }
     ],
     'Cello': [
@@ -810,8 +852,12 @@ const FACTORY_FOLDER_LIBRARY = {
     'Glockenspiel': 'samples/Glockenspiel/',
     'Kalimba': 'samples/Kalimba/',
     'Lapsteel-articulations': 'samples/lapsteel-articulations/',
+    'Legacy Knight Piano': 'samples/Legacy Knight Piano/',
     'MDM Acoustic Guitar': 'samples/MDM Acoustic Guitar/',
+    'MDM Classic Guitar': 'samples/MDM Classic Guitar/',
+    'Piano - Steinway Grand': 'samples/Piano - Steinway Grand/',
     'RJS Guitar': 'samples/RJS Guitar/',
+    'Soft Spring Spurs': 'samples/Soft Spring Spurs/',
     'Violin Experiments': 'samples/Violin Experiments/',
     'Zither': 'samples/Zither/'
 };
@@ -868,6 +914,8 @@ const SAMPLE_SETS_KEY = 'genca_sample_sets_v1';
 const SAMPLE_ACTIVE_SET_KEY = 'genca_sample_active_set_v1';
 const SAMPLE_DB_NAME = 'genca_sample_db_v1';
 const SAMPLE_DB_STORE = 'samples';
+const FACTORY_PRELOAD_ENABLED_KEY = 'genca_factory_preload_enabled_v1';
+const FACTORY_PRELOAD_DONE_KEY = 'genca_factory_preload_done_v1';
 const FX_USER_PRESETS_KEY = 'genca_fx_presets_v1';
 const ARP_PRESETS = {
     Init: { rate: '1/16', gate: 60, sync: 'internal', bpm: 120, latch: false },
@@ -1226,6 +1274,17 @@ const state = {
     sampleLoadLastKey: '',
     sampleLoadLastTs: 0,
     samplerWriteLocks: 0,
+    factoryPreload: {
+        running: false,
+        cancelRequested: false,
+        total: 0,
+        done: 0,
+        setsTotal: 0,
+        setsDone: 0,
+        skipped: 0,
+        failed: 0,
+        status: ''
+    },
     arpHoldTouches: [],
     arpByZone: {
         A: createArpState(),
@@ -1351,13 +1410,13 @@ const state = {
         wavetableCoeffs: null,
         wavetableMorphGrid: null,
         wavetable: {
-            mode: 'layer',
+            mode: 'sampler',
             type: 'Saw',
             mix: 0.35
         },
         zones: {
-            A: { wavetable: { mode: 'layer', type: 'Saw', mix: 0.35 }, samplerGain: 1, activeSet: 'Default', activeArticulation: DEFAULT_ARTICULATION_ID, samples: [], morph: 0.5, fx: { ...DEFAULT_FX } },
-            B: { wavetable: { mode: 'layer', type: 'Saw', mix: 0.35 }, samplerGain: 1, activeSet: 'Default', activeArticulation: DEFAULT_ARTICULATION_ID, samples: [], morph: 0.5, fx: { ...DEFAULT_FX } }
+            A: { wavetable: { mode: 'sampler', type: 'Saw', mix: 0.35 }, samplerGain: 1, activeSet: 'Default', activeArticulation: DEFAULT_ARTICULATION_ID, samples: [], morph: 0.5, fx: { ...DEFAULT_FX } },
+            B: { wavetable: { mode: 'sampler', type: 'Saw', mix: 0.35 }, samplerGain: 1, activeSet: 'Default', activeArticulation: DEFAULT_ARTICULATION_ID, samples: [], morph: 0.5, fx: { ...DEFAULT_FX } }
         },
         macro: {
             morph: 0.5,
@@ -1485,6 +1544,18 @@ const state = {
         editorMode: 'recording',
         editorSlotIndex: null,
         editorOriginalName: ''
+    },
+    midiRecorder: {
+        isRecording: false,
+        isPlaying: false,
+        playbackSending: false,
+        startTs: 0,
+        timerInterval: null,
+        events: [],
+        eventSeq: 1,
+        playbackTimers: [],
+        playbackEndTimer: null,
+        visualActiveByKey: new Map()
     }
 };
 const FADE_TAIL_MS = 200;
@@ -1715,6 +1786,30 @@ function isFactoryAudioFile(pathname) {
     return /\.(wav|flac)$/i.test(String(pathname || ''));
 }
 
+function normalizeFactoryFileRef(pathLike) {
+    const raw = String(pathLike || '').trim().replace(/\\/g, '/');
+    if (!raw) return '';
+    try {
+        // Important: '#' is a legal filename char for these libraries, but URL parser
+        // would treat it as fragment and truncate the path.
+        const rawSafe = raw.replace(/#/g, '%23');
+        const u = new URL(rawSafe, window.location.href);
+        const normalizedPath = String(u.pathname || '')
+            .split('/')
+            .map(seg => {
+                if (!seg) return seg;
+                try { return encodeURIComponent(decodeURIComponent(seg)); }
+                catch (_) { return encodeURIComponent(seg); }
+            })
+            .join('/');
+        u.pathname = normalizedPath;
+        u.hash = '';
+        return u.toString();
+    } catch (_) {
+        return raw;
+    }
+}
+
 async function loadFactoryFolderManifest() {
     if (factoryFolderManifestCache) return factoryFolderManifestCache;
     if (factoryFolderManifestPromise) return factoryFolderManifestPromise;
@@ -1784,7 +1879,7 @@ async function collectFactoryFilesFromGithubApi(dirUrl, maxDepth = 3, visited = 
         const type = entry.type || '';
         if (type === 'file') {
             const dl = entry.download_url || '';
-            if (isFactoryAudioFile(dl)) files.push(dl);
+            if (isFactoryAudioFile(dl)) files.push(normalizeFactoryFileRef(dl));
             continue;
         }
         if (type === 'dir' && maxDepth > 0) {
@@ -1847,22 +1942,82 @@ async function collectFactoryFilesFromDirectory(dirUrl, maxDepth = 3, visited = 
             continue;
         }
 
-        if (isFactoryAudioFile(pathname)) files.push(target.toString());
+        if (isFactoryAudioFile(pathname)) files.push(normalizeFactoryFileRef(target.toString()));
     }
 
     return files;
 }
 
 async function buildFactoryPresetFromFolder(setName) {
+    const plans = await buildFactoryImportPlansFromFolder(setName);
+    if (!Array.isArray(plans) || !plans.length) return null;
+    return plans[0].presets;
+}
+
+function splitFactoryPathSegments(pathLike) {
+    const raw = String(pathLike || '').trim().replace(/\\/g, '/');
+    if (!raw) return [];
+    let pathname = raw;
+    try {
+        pathname = decodeURIComponent(new URL(raw, window.location.href).pathname || raw);
+    } catch (_) {
+        pathname = decodeURIComponent(raw.split('?')[0].split('#')[0]);
+    }
+    return pathname.split('/').filter(Boolean);
+}
+
+function findFactorySubfolderLabel(setName, fileRef) {
     const folder = FACTORY_FOLDER_LIBRARY[setName];
-    if (!folder) return null;
+    const fileSegs = splitFactoryPathSegments(fileRef);
+    const baseSegs = splitFactoryPathSegments(folder);
+    if (!fileSegs.length || !baseSegs.length) return DEFAULT_ARTICULATION_LABEL;
+
+    const lowerFile = fileSegs.map(s => String(s || '').toLowerCase());
+    const lowerBase = baseSegs.map(s => String(s || '').toLowerCase());
+    let start = -1;
+    for (let i = 0; i <= lowerFile.length - lowerBase.length; i += 1) {
+        let ok = true;
+        for (let j = 0; j < lowerBase.length; j += 1) {
+            if (lowerFile[i + j] !== lowerBase[j]) {
+                ok = false;
+                break;
+            }
+        }
+        if (ok) {
+            start = i + lowerBase.length;
+            break;
+        }
+    }
+    if (start < 0) return DEFAULT_ARTICULATION_LABEL;
+    const rel = fileSegs.slice(start);
+    if (rel.length <= 1) return DEFAULT_ARTICULATION_LABEL;
+    return sanitizeSamplerSetName(rel[0], DEFAULT_ARTICULATION_LABEL);
+}
+
+function buildFactoryPresetSlotsFromFiles(sortedFiles) {
+    const presets = Array.from({ length: SAMPLE_SLOT_COUNT }, (_, i) => ({ root: 0, file: null, loop: false }));
+    for (let i = 0; i < sortedFiles.length && i < SAMPLE_SLOT_COUNT; i += 1) {
+        const fallbackRoot = DEFAULT_SAMPLE_ROOTS[i] || 60;
+        presets[i] = {
+            root: inferSampleRootFromFilename(sortedFiles[i].name, fallbackRoot),
+            file: sortedFiles[i].url,
+            loop: false
+        };
+    }
+    return presets;
+}
+
+async function buildFactoryImportPlansFromFolder(setName) {
+    const folder = FACTORY_FOLDER_LIBRARY[setName];
+    if (!folder) return [];
 
     let files = [];
     const manifest = await loadFactoryFolderManifest();
     const manifestList = manifest && Array.isArray(manifest[setName]) ? manifest[setName] : null;
     if (manifestList && manifestList.length) {
-        const base = new URL(window.location.href);
-        files = manifestList.map(rel => new URL(String(rel || '').replace(/^\/+/, ''), base).toString());
+        files = manifestList
+            .map(rel => normalizeFactoryFileRef(String(rel || '').replace(/^\/+/, '')))
+            .filter(Boolean);
     } else {
         files = await collectFactoryFilesFromDirectory(folder, 4);
     }
@@ -1875,16 +2030,27 @@ async function buildFactoryPresetFromFolder(setName) {
 
     if (!sorted.length) throw new Error(`No WAV/FLAC found in ${folder}`);
 
-    const presets = Array.from({ length: SAMPLE_SLOT_COUNT }, (_, i) => ({ root: 0, file: null, loop: false }));
-    for (let i = 0; i < sorted.length && i < SAMPLE_SLOT_COUNT; i += 1) {
-        const fallbackRoot = DEFAULT_SAMPLE_ROOTS[i] || 60;
-        presets[i] = {
-            root: inferSampleRootFromFilename(sorted[i].name, fallbackRoot),
-            file: sorted[i].url,
-            loop: false
-        };
-    }
-    return presets;
+    const grouped = new Map();
+    sorted.forEach(entry => {
+        const label = findFactorySubfolderLabel(setName, entry.url);
+        if (!grouped.has(label)) grouped.set(label, []);
+        grouped.get(label).push(entry);
+    });
+
+    const plans = Array.from(grouped.entries()).map(([label, groupFiles]) => ({
+        label,
+        presets: buildFactoryPresetSlotsFromFiles(groupFiles)
+    }));
+
+    plans.sort((a, b) => {
+        const aDefault = String(a.label || '').toLowerCase() === DEFAULT_ARTICULATION_LABEL.toLowerCase();
+        const bDefault = String(b.label || '').toLowerCase() === DEFAULT_ARTICULATION_LABEL.toLowerCase();
+        if (aDefault && !bDefault) return -1;
+        if (bDefault && !aDefault) return 1;
+        return String(a.label || '').localeCompare(String(b.label || ''), undefined, { sensitivity: 'base', numeric: true });
+    });
+
+    return plans;
 }
 
 function getFactoryLibraryNames() {
@@ -1893,13 +2059,285 @@ function getFactoryLibraryNames() {
     return Array.from(names).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base', numeric: true }));
 }
 
+function isFileProtocolRuntime() {
+    try {
+        return String(window.location?.protocol || '').toLowerCase() === 'file:';
+    } catch (_) {
+        return false;
+    }
+}
+
+function isFactoryPreloadEnabled() {
+    try {
+        const raw = localStorage.getItem(FACTORY_PRELOAD_ENABLED_KEY);
+        if (raw == null || raw === '') return true;
+        return raw !== '0';
+    } catch (_) {
+        return true;
+    }
+}
+
+function setFactoryPreloadEnabled(enabled) {
+    try {
+        localStorage.setItem(FACTORY_PRELOAD_ENABLED_KEY, enabled ? '1' : '0');
+    } catch (_) {}
+}
+
+function isFactoryPreloadCompleted() {
+    try {
+        return localStorage.getItem(FACTORY_PRELOAD_DONE_KEY) === '1';
+    } catch (_) {
+        return false;
+    }
+}
+
+function setFactoryPreloadCompleted(done) {
+    try {
+        if (done) localStorage.setItem(FACTORY_PRELOAD_DONE_KEY, '1');
+        else localStorage.removeItem(FACTORY_PRELOAD_DONE_KEY);
+    } catch (_) {}
+}
+
+function getFactorySampleDbKey(setName, slotIndex, articulationId = DEFAULT_ARTICULATION_ID) {
+    const artId = normalizeArticulationId(articulationId, DEFAULT_ARTICULATION_ID);
+    return `${setName}::${artId}::${slotIndex}`;
+}
+
+function updateFactoryPreloadUi(extra = {}) {
+    const rt = state.factoryPreload || {};
+    Object.assign(rt, extra || {});
+    state.factoryPreload = rt;
+    if (els.factoryPreloadToggle) {
+        els.factoryPreloadToggle.checked = isFactoryPreloadEnabled();
+        els.factoryPreloadToggle.disabled = false;
+    }
+    if (els.factoryPreloadProgress) {
+        const total = Math.max(0, Number(rt.total) || 0);
+        const done = Math.max(0, Math.min(total || 0, Number(rt.done) || 0));
+        els.factoryPreloadProgress.max = total > 0 ? total : 100;
+        els.factoryPreloadProgress.value = total > 0 ? done : 0;
+    }
+    if (els.factoryPreloadStatus) {
+        if (typeof rt.status === 'string' && rt.status.trim()) {
+            els.factoryPreloadStatus.textContent = rt.status;
+            return;
+        }
+        if (rt.running) {
+            const total = Math.max(0, Number(rt.total) || 0);
+            const done = Math.max(0, Math.min(total || 0, Number(rt.done) || 0));
+            const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+            els.factoryPreloadStatus.textContent = `Preloading factory: ${done}/${total} (${pct}%)`;
+            return;
+        }
+        if (!isFactoryPreloadEnabled()) {
+            els.factoryPreloadStatus.textContent = 'Factory preload disabled';
+            return;
+        }
+        if (isFactoryPreloadCompleted()) {
+            els.factoryPreloadStatus.textContent = 'Factory preload completed';
+            return;
+        }
+        els.factoryPreloadStatus.textContent = 'Factory preload idle';
+    }
+}
+
+async function getSampleDbKeyIndex() {
+    try {
+        const db = await openSampleDB();
+        const tx = db.transaction(SAMPLE_DB_STORE, 'readonly');
+        const req = tx.objectStore(SAMPLE_DB_STORE).getAllKeys();
+        const keys = await new Promise((resolve) => {
+            req.onsuccess = () => resolve(Array.isArray(req.result) ? req.result : []);
+            req.onerror = () => resolve([]);
+        });
+        return new Set(keys.map(k => String(k || '')));
+    } catch (_) {
+        return new Set();
+    }
+}
+
+async function resolveFactoryPresets(setName) {
+    let presets = FACTORY_LIBRARY[setName] || null;
+    if (!presets && FACTORY_FOLDER_LIBRARY[setName]) {
+        presets = await buildFactoryPresetFromFolder(setName);
+    }
+    if (!Array.isArray(presets)) return null;
+    return presets;
+}
+
+async function preloadFactoryOnFirstLaunch() {
+    const rt = state.factoryPreload || {};
+    if (rt.running) return;
+    if (isFileProtocolRuntime()) {
+        updateFactoryPreloadUi({
+            running: false,
+            status: 'Factory preload unavailable on file://. Use http://localhost.'
+        });
+        return;
+    }
+    if (!isFactoryPreloadEnabled()) {
+        updateFactoryPreloadUi({ running: false, status: 'Factory preload disabled' });
+        return;
+    }
+    if (isFactoryPreloadCompleted()) {
+        updateFactoryPreloadUi({ running: false, status: 'Factory preload completed' });
+        return;
+    }
+
+    const setNames = getFactoryLibraryNames();
+    if (!setNames.length) {
+        setFactoryPreloadCompleted(true);
+        updateFactoryPreloadUi({ running: false, status: 'No factory sets found' });
+        return;
+    }
+
+    rt.running = true;
+    rt.cancelRequested = false;
+    rt.total = 0;
+    rt.done = 0;
+    rt.setsTotal = setNames.length;
+    rt.setsDone = 0;
+    rt.skipped = 0;
+    rt.failed = 0;
+    rt.status = 'Preparing factory preload...';
+    updateFactoryPreloadUi();
+
+    const presetsBySet = new Map();
+    try {
+        for (const setName of setNames) {
+            if (rt.cancelRequested) break;
+            try {
+                const presets = await resolveFactoryPresets(setName);
+                if (presets) presetsBySet.set(setName, presets);
+            } catch (err) {
+                rt.failed += 1;
+                console.error('Factory preload resolve error:', setName, err);
+            }
+        }
+
+        let totalFiles = 0;
+        presetsBySet.forEach((presets) => {
+            for (let i = 0; i < SAMPLE_SLOT_COUNT; i += 1) {
+                if (presets[i] && presets[i].file) totalFiles += 1;
+            }
+        });
+        rt.total = totalFiles;
+        rt.done = 0;
+        updateFactoryPreloadUi({ status: `Preloading factory: 0/${totalFiles}` });
+
+        if (totalFiles <= 0) {
+            setFactoryPreloadCompleted(true);
+            updateFactoryPreloadUi({ running: false, status: 'Factory preload completed (no files)' });
+            return;
+        }
+
+        const existingKeys = await getSampleDbKeyIndex();
+        for (const setName of setNames) {
+            if (rt.cancelRequested) break;
+            const presets = presetsBySet.get(setName);
+            if (!presets) {
+                rt.setsDone += 1;
+                continue;
+            }
+
+            for (let i = 0; i < SAMPLE_SLOT_COUNT; i += 1) {
+                if (rt.cancelRequested) break;
+                const slotCfg = presets[i];
+                if (!slotCfg || !slotCfg.file) continue;
+                const dbKey = getFactorySampleDbKey(setName, i, DEFAULT_ARTICULATION_ID);
+                if (existingKeys.has(dbKey)) {
+                    rt.skipped += 1;
+                    rt.done += 1;
+                    updateFactoryPreloadUi({
+                        status: `Preloading ${setName} (${rt.done}/${rt.total})`
+                    });
+                    continue;
+                }
+                try {
+                    const fileRef = normalizeFactoryFileRef(slotCfg.file);
+                    const response = await fetch(fileRef);
+                    if (!response.ok) throw new Error(`Fetch failed: ${fileRef} (${response.status})`);
+                    const arrayBuffer = await response.arrayBuffer();
+                    const root = Number.isFinite(slotCfg.root)
+                        ? slotCfg.root
+                        : inferSampleRootFromFilename(slotCfg.file, DEFAULT_SAMPLE_ROOTS[i] || 60);
+                    await saveSampleToDB(i, {
+                        name: decodeURIComponent((String(fileRef).split('/').pop() || '').trim()),
+                        root,
+                        data: arrayBuffer
+                    }, setName, DEFAULT_ARTICULATION_ID);
+                    existingKeys.add(dbKey);
+                } catch (err) {
+                    rt.failed += 1;
+                    console.error('Factory preload sample error:', setName, normalizeFactoryFileRef(slotCfg.file), err);
+                } finally {
+                    rt.done += 1;
+                    updateFactoryPreloadUi({
+                        status: `Preloading ${setName} (${rt.done}/${rt.total})`
+                    });
+                }
+            }
+            rt.setsDone += 1;
+        }
+
+        if (rt.cancelRequested) {
+            updateFactoryPreloadUi({
+                running: false,
+                status: `Factory preload stopped (${rt.done}/${rt.total})`
+            });
+            return;
+        }
+
+        const allOk = rt.failed === 0;
+        if (allOk) setFactoryPreloadCompleted(true);
+        updateFactoryPreloadUi({
+            running: false,
+            status: allOk
+                ? `Factory preload completed (${rt.done}/${rt.total})`
+                : `Factory preload completed with ${rt.failed} errors`
+        });
+    } finally {
+        rt.running = false;
+        rt.cancelRequested = false;
+        updateFactoryPreloadUi();
+    }
+}
+
+function maybeStartFactoryPreloadOnStartup() {
+    if (isFileProtocolRuntime()) {
+        updateFactoryPreloadUi({
+            running: false,
+            status: 'Factory preload unavailable on file://. Use http://localhost.'
+        });
+        return;
+    }
+    if (!isFactoryPreloadEnabled()) {
+        updateFactoryPreloadUi({ running: false, status: 'Factory preload disabled' });
+        return;
+    }
+    if (isFactoryPreloadCompleted()) {
+        updateFactoryPreloadUi({ running: false, status: 'Factory preload completed' });
+        return;
+    }
+    setTimeout(() => { void preloadFactoryOnFirstLaunch(); }, 250);
+}
+
 function initFactoryUI() {
     if (!els.factorySelect || !els.factoryLoadBtn) return;
     clearChildren(els.factorySelect);
     getFactoryLibraryNames().forEach(name => {
         appendOption(els.factorySelect, name, name);
     });
+    updateFactoryPreloadUi();
     els.factoryLoadBtn.onclick = async () => {
+        if (isFileProtocolRuntime()) {
+            if (els.midiStatus) els.midiStatus.innerText = 'FACTORY LOAD UNAVAILABLE ON file:// (use localhost)';
+            updateFactoryPreloadUi({
+                running: false,
+                status: 'Factory loading unavailable on file://. Use http://localhost.'
+            });
+            return;
+        }
         await withSamplerWriteLock(async () => {
             await autosaveCurrentSampleSet('before factory load');
             const setName = els.factorySelect.value;
@@ -1913,60 +2351,85 @@ function initFactoryUI() {
 
             els.midiStatus.innerText = `LOADING FACTORY SET "${setName}"...`;
 
-            let presets = FACTORY_LIBRARY[setName] || null;
-            if (!presets && FACTORY_FOLDER_LIBRARY[setName]) {
+            let importPlans = [];
+            const legacyPresets = FACTORY_LIBRARY[setName] || null;
+            if (legacyPresets) {
+                importPlans = [{ label: DEFAULT_ARTICULATION_LABEL, presets: legacyPresets }];
+            } else if (FACTORY_FOLDER_LIBRARY[setName]) {
                 try {
-                    presets = await buildFactoryPresetFromFolder(setName);
+                    importPlans = await buildFactoryImportPlansFromFolder(setName);
                 } catch (err) {
                     console.error('Factory folder load error:', err);
                     els.midiStatus.innerText = `FACTORY LOAD ERROR (${setName})`;
                     return;
                 }
             }
-            if (!presets) return;
+            if (!Array.isArray(importPlans) || !importPlans.length) return;
 
             if (els.sampleSetName) els.sampleSetName.value = setName;
             setActiveSampleSetName(setName, zoneKey);
             refreshSampleSetSelect(setName, zoneKey);
-            const articulationId = getActiveSampleArticulationId(zoneKey);
 
             stopVoicesInternalByZone(zoneKey);
-            for (let i = 0; i < SAMPLE_SLOT_COUNT; i++) {
-                const slotCfg = presets[i];
-                if (sampleFileEls[i]) sampleFileEls[i].value = '';
-                if (!slotCfg || !slotCfg.file) {
-                    clearSampleSlot(i);
-                    continue;
+            let firstImportedArtId = null;
+            for (const plan of importPlans) {
+                const label = plan.label || DEFAULT_ARTICULATION_LABEL;
+                let articulationId = getArticulationIdByLabel(setName, label);
+                if (!articulationId) {
+                    articulationId = createSampleArticulation(setName, label, zoneKey);
                 }
-                try {
-                    const response = await fetch(slotCfg.file);
-                    if (!response.ok) throw new Error(`File non trovato: ${slotCfg.file}`);
-                    const arrayBuffer = await response.arrayBuffer();
-                    const audioBuffer = await state.audio.ctx.decodeAudioData(arrayBuffer.slice(0));
-                    const root = Number.isFinite(slotCfg.root) ? slotCfg.root : inferSampleRootFromFilename(slotCfg.file, DEFAULT_SAMPLE_ROOTS[i] || 60);
+                if (!articulationId) continue;
 
-                    state.audio.samples[i].buffer = audioBuffer;
-                    state.audio.samples[i].name = decodeURIComponent((slotCfg.file.split('/').pop() || '').trim());
-                    state.audio.samples[i].data = arrayBuffer;
-                    state.audio.samples[i].root = root;
-                    state.audio.samples[i].loop = !!slotCfg.loop;
+                await loadSampleArticulation(articulationId, zoneKey);
+                await clearCurrentArticulationSlots(setName, articulationId);
+                if (!firstImportedArtId) firstImportedArtId = articulationId;
 
-                    if (sampleRootEls[i]) sampleRootEls[i].value = midiToNoteName(root);
-                    updateSampleName(i);
+                const presets = Array.isArray(plan.presets) ? plan.presets : [];
+                for (let i = 0; i < SAMPLE_SLOT_COUNT; i++) {
+                    const slotCfg = presets[i];
+                    if (sampleFileEls[i]) sampleFileEls[i].value = '';
+                    if (!slotCfg || !slotCfg.file) {
+                        clearSampleSlot(i);
+                        continue;
+                    }
+                    try {
+                        const fileRef = normalizeFactoryFileRef(slotCfg.file);
+                        const response = await fetch(fileRef);
+                        if (!response.ok) throw new Error(`File non trovato: ${fileRef}`);
+                        const arrayBuffer = await response.arrayBuffer();
+                        const audioBuffer = await state.audio.ctx.decodeAudioData(arrayBuffer.slice(0));
+                        const root = Number.isFinite(slotCfg.root) ? slotCfg.root : inferSampleRootFromFilename(fileRef, DEFAULT_SAMPLE_ROOTS[i] || 60);
 
-                    await saveSampleToDB(i, {
-                        name: state.audio.samples[i].name,
-                        root,
-                        data: arrayBuffer
-                    }, setName, articulationId);
-                } catch (err) {
-                    console.error('Errore caricamento sample factory:', err);
-                    if (sampleNameEls[i]) sampleNameEls[i].textContent = `Err: ${slotCfg.file}`;
+                        state.audio.samples[i].buffer = audioBuffer;
+                        state.audio.samples[i].name = decodeURIComponent((fileRef.split('/').pop() || '').trim());
+                        state.audio.samples[i].data = arrayBuffer;
+                        state.audio.samples[i].root = root;
+                        state.audio.samples[i].loop = !!slotCfg.loop;
+
+                        if (sampleRootEls[i]) sampleRootEls[i].value = midiToNoteName(root);
+                        updateSampleName(i);
+
+                        await saveSampleToDB(i, {
+                            name: state.audio.samples[i].name,
+                            root,
+                            data: arrayBuffer
+                        }, setName, articulationId);
+                    } catch (err) {
+                        console.error('Errore caricamento sample factory:', err);
+                        if (sampleNameEls[i]) sampleNameEls[i].textContent = `Err: ${normalizeFactoryFileRef(slotCfg.file)}`;
+                    }
                 }
+
+                saveSampleRootsForSet(setName, articulationId);
+                saveSampleGainsForSet(setName, articulationId);
+                saveSampleLoopsForSet(setName, articulationId);
+                await autoTrimLoadedSlots({ silent: true });
             }
 
-            saveSampleRootsForSet(setName, articulationId);
-            saveSampleLoopsForSet(setName, articulationId);
+            if (firstImportedArtId) {
+                await loadSampleArticulation(firstImportedArtId, zoneKey);
+            }
+
             const currentSets = getSampleSetsState();
             ensureSampleSet(setName, currentSets);
             saveSampleSetsState(currentSets);
@@ -2939,6 +3402,8 @@ async function initRecorderWorklet() {
 }
 
 async function startRecording() {
+    if (state.midiRecorder?.isRecording) stopMidiRecorderCapture();
+    state.recorder.activeMode = 'audio';
     // Initialize audio context if needed (even if enabled flag is true)
     if (!state.audio.ctx || !state.audio.master) {
         await initAudioContext();
@@ -3028,6 +3493,7 @@ function stopRecording() {
         clearInterval(state.recorder.timerInterval);
         state.recorder.timerInterval = null;
     }
+    state.recorder.activeMode = null;
 }
 
 function updateRecTimer() {
@@ -8188,10 +8654,8 @@ async function setAudioEnabled(isEnabled) {
     updateActiveOutput();
     updateAudioStatus();
     
-    // Show/hide REC controls based on Internal Synth state
-    if (els.recControls) {
-        els.recControls.style.display = isEnabled ? 'flex' : 'none';
-    }
+    // Keep recorder bar always visible; recording mode is selected dynamically.
+    if (els.recControls) els.recControls.style.display = 'flex';
 }
 
 function getChannelPbSemis(chan) {
@@ -8751,6 +9215,7 @@ async function loadSampleSet(name, zoneId = getActiveAudioZoneId()) {
 
     const artId = getActiveSampleArticulationId(zoneKey);
     await loadSampleArticulation(artId, zoneKey);
+    await autoTrimLoadedSlots({ silent: true });
     applyArticulationRuleToUI(setName);
     updateAudioStatus();
     if (els.midiStatus) els.midiStatus.innerText = `SET "${setName}" LOADED (${zoneKey})`;
@@ -8987,6 +9452,7 @@ function setSamplerWriteUIEnabled(enabled) {
         els.audioZoneSelect,
         els.factorySelect,
         els.factoryLoadBtn,
+        els.factoryPreloadToggle,
         els.sampleBatchPick,
         els.sampleBatchFolder
     ].forEach(ctrl => {
@@ -9221,8 +9687,20 @@ async function autoTrimSampleSlot(slotIndex, opts = {}) {
 }
 
 async function autoTrimAllSampleSlots() {
+    const summary = await autoTrimLoadedSlots({ silent: true });
+    if (!summary) return;
+    if (summary.withAudio === 0) {
+        alert('No loaded samples to trim.');
+        return;
+    }
+    const removedMs = state.audio.ctx ? Math.round((summary.removedSamples / state.audio.ctx.sampleRate) * 1000) : 0;
+    alert(`Auto trim done: ${summary.trimmed}/${summary.withAudio} slots updated${summary.removedSamples > 0 ? ` (${removedMs} ms removed)` : ''}.`);
+}
+
+async function autoTrimLoadedSlots(options = {}) {
+    const silent = !!options.silent;
     await initAudioContext();
-    if (!state.audio.ctx) return;
+    if (!state.audio.ctx) return null;
 
     let withAudio = 0;
     let trimmed = 0;
@@ -9239,17 +9717,14 @@ async function autoTrimAllSampleSlots() {
         }
     }
 
-    if (withAudio === 0) {
-        alert('No loaded samples to trim.');
-        return;
-    }
-
     saveSampleRootsForSet(state.audio.activeSet || 'Default', state.audio.activeArticulation || getActiveSampleArticulationId());
     updateAudioStatus();
     updateAllSampleNames();
 
-    const removedMs = state.audio.ctx ? Math.round((removedSamples / state.audio.ctx.sampleRate) * 1000) : 0;
-    alert(`Auto trim done: ${trimmed}/${withAudio} slots updated${removedSamples > 0 ? ` (${removedMs} ms removed)` : ''}.`);
+    if (!silent && els.midiStatus) {
+        els.midiStatus.innerText = `AUTO TRIM: ${trimmed}/${withAudio} SLOTS UPDATED`;
+    }
+    return { withAudio, trimmed, removedSamples };
 }
 function clearSampleSlot(slotIndex) {
     state.audio.samples[slotIndex].buffer = null;
@@ -9452,12 +9927,25 @@ function releaseHeldCollectionsByZone(zoneId) {
 
 function allNotesOff() {
     stopMelodyGenerator();
-    const targets = [state.midi.output, state.midi.outputB].filter(Boolean);
+    const uniqueById = new Map();
+    [state.midi.output, state.midi.outputB, state.midi.hardwareOutput, state.midi.hardwareOutputB]
+        .filter(Boolean)
+        .forEach((out) => {
+            const key = String(out.id || Math.random());
+            if (!uniqueById.has(key)) uniqueById.set(key, out);
+        });
+    const targets = Array.from(uniqueById.values());
     if (!targets.length) return;
     targets.forEach(out => {
         for (let ch = 0; ch < 16; ch++) {
+            // Sustain OFF first, then all-notes/all-sound off.
+            out.send([0xB0 + ch, 64, 0]);
             out.send([0xB0 + ch, 123, 0]);
             out.send([0xB0 + ch, 120, 0]);
+            // Fallback for hosts that ignore CC123/120: explicit NoteOff for all notes.
+            for (let note = 0; note < 128; note += 1) {
+                out.send([0x80 + ch, note, 0]);
+            }
         }
     });
     state.activeTouches.clear();
@@ -12516,73 +13004,75 @@ function setupMIDI() {
     if (navigator.requestMIDIAccess) {
         navigator.requestMIDIAccess({ sysex: false }).then(access => {
             state.midi.access = access;
-            const outputs = Array.from(access.outputs.values());
-            const inputs = Array.from(access.inputs.values());
-            
-            clearChildren(els.midiOutSelect);
-            appendOption(els.midiOutSelect, '', 'Scegli Output...');
-            outputs.forEach(o => appendOption(els.midiOutSelect, o.id, o.name || o.id || 'MIDI OUT'));
-            state.midi.hardwareOutput = null;
-            els.midiOutSelect.value = '';
-            updateActiveOutput();
-            els.midiOutSelect.onchange = () => {
-                state.midi.hardwareOutput = access.outputs.get(els.midiOutSelect.value) || null;
+
+            const applyCurrentSelections = () => {
+                state.midi.hardwareOutput = access.outputs.get(els.midiOutSelect?.value || '') || null;
+                state.midi.hardwareOutputB = access.outputs.get(els.midiOutSelectB?.value || '') || null;
+                if (state.midi.input) state.midi.input.onmidimessage = null;
+                state.midi.input = access.inputs.get(els.midiInSelect?.value || '') || null;
+                if (state.midi.input) state.midi.input.onmidimessage = handleExternalMIDI;
                 refreshZoneMpePools();
                 updateActiveOutput();
                 setPitchBendRange(getPbRangeForZone('A'), 'A');
-            };
-            if (els.midiOutSelectB) {
-                clearChildren(els.midiOutSelectB);
-                appendOption(els.midiOutSelectB, '', 'Scegli Output B...');
-                outputs.forEach(o => appendOption(els.midiOutSelectB, o.id, o.name || o.id || 'MIDI OUT B'));
-                state.midi.hardwareOutputB = null;
-                els.midiOutSelectB.value = '';
-                els.midiOutSelectB.onchange = () => {
-                    state.midi.hardwareOutputB = access.outputs.get(els.midiOutSelectB.value) || null;
-                    refreshZoneMpePools();
-                    updateActiveOutput();
-                    setPitchBendRange(getPbRangeForZone('B'), 'B');
-                };
-            }
-            refreshZoneMpePools();
-            updateMidiStatusBase();
-            setPitchBendRange(getPbRangeForZone('A'), 'A');
-            setPitchBendRange(getPbRangeForZone('B'), 'B');
-
-            clearChildren(els.midiInSelect);
-            appendOption(els.midiInSelect, '', 'Scegli Input...');
-            inputs.forEach(i => appendOption(els.midiInSelect, i.id, i.name || i.id || 'MIDI IN'));
-            els.midiInSelect.value = '';
-            state.midi.input = null;
-            els.midiInSelect.onchange = () => {
-                if (state.midi.input) state.midi.input.onmidimessage = null;
-                state.midi.input = access.inputs.get(els.midiInSelect.value);
-                if (state.midi.input) state.midi.input.onmidimessage = handleExternalMIDI;
-                els.midiStatus.innerText = state.midi.input ? 'MIDI IN READY' : 'NESSUN MIDI IN';
+                setPitchBendRange(getPbRangeForZone('B'), 'B');
+                updateMidiStatusBase();
                 updateOctaveUiLock();
             };
-            
-            // Applica le impostazioni MIDI salvate nel preset Init dopo che i dropdown sono popolati
+
+            const refreshMidiPortLists = () => {
+                const outputs = Array.from(access.outputs.values());
+                const inputs = Array.from(access.inputs.values());
+
+                const prevOutA = els.midiOutSelect?.value || state.midi.hardwareOutput?.id || '';
+                const prevOutB = els.midiOutSelectB?.value || state.midi.hardwareOutputB?.id || '';
+                const prevIn = els.midiInSelect?.value || state.midi.input?.id || '';
+
+                clearChildren(els.midiOutSelect);
+                appendOption(els.midiOutSelect, '', 'Scegli Output...');
+                outputs.forEach(o => appendOption(els.midiOutSelect, o.id, o.name || o.id || 'MIDI OUT'));
+                els.midiOutSelect.value = outputs.some(o => o.id === prevOutA) ? prevOutA : '';
+
+                if (els.midiOutSelectB) {
+                    clearChildren(els.midiOutSelectB);
+                    appendOption(els.midiOutSelectB, '', 'Scegli Output B...');
+                    outputs.forEach(o => appendOption(els.midiOutSelectB, o.id, o.name || o.id || 'MIDI OUT B'));
+                    els.midiOutSelectB.value = outputs.some(o => o.id === prevOutB) ? prevOutB : '';
+                }
+
+                clearChildren(els.midiInSelect);
+                appendOption(els.midiInSelect, '', 'Scegli Input...');
+                inputs.forEach(i => appendOption(els.midiInSelect, i.id, i.name || i.id || 'MIDI IN'));
+                els.midiInSelect.value = inputs.some(i => i.id === prevIn) ? prevIn : '';
+
+                applyCurrentSelections();
+            };
+
+            els.midiOutSelect.onchange = () => applyCurrentSelections();
+            if (els.midiOutSelectB) els.midiOutSelectB.onchange = () => applyCurrentSelections();
+            els.midiInSelect.onchange = () => applyCurrentSelections();
+
+            refreshMidiPortLists();
+
+            // Applica le impostazioni MIDI salvate nel preset Init dopo il primo popolamento.
             if (state.presets.Init) {
                 const preset = state.presets.Init;
                 if (preset.midiOutId && access.outputs.has(preset.midiOutId)) {
                     els.midiOutSelect.value = preset.midiOutId;
-                    state.midi.hardwareOutput = access.outputs.get(preset.midiOutId);
-                    updateActiveOutput();
                 }
                 if (els.midiOutSelectB && preset.midiOutIdB && access.outputs.has(preset.midiOutIdB)) {
                     els.midiOutSelectB.value = preset.midiOutIdB;
-                    state.midi.hardwareOutputB = access.outputs.get(preset.midiOutIdB);
-                    updateActiveOutput();
                 }
                 if (preset.midiInId && access.inputs.has(preset.midiInId)) {
                     els.midiInSelect.value = preset.midiInId;
-                    if (state.midi.input) state.midi.input.onmidimessage = null;
-                    state.midi.input = access.inputs.get(preset.midiInId);
-                    if (state.midi.input) state.midi.input.onmidimessage = handleExternalMIDI;
                 }
-                updateOctaveUiLock();
+                applyCurrentSelections();
             }
+
+            // Refresh live when virtual ports appear/disappear (loopMIDI, IAC, etc.).
+            access.onstatechange = () => {
+                refreshMidiPortLists();
+                setMidiRecStatus?.('MIDI ports refreshed');
+            };
         }).catch(() => {
             updateMidiStatusBase();
         });
@@ -12944,6 +13434,7 @@ function releaseMpeChannel(zoneId, chan) {
 function sendMidi(data, output) {
     const out = output || state.midi.output;
     if (!out) return;
+    captureMidiOutEvent(data, out);
     if (data && data.length >= 3) {
         const status = data[0] & 0xF0;
         if (status === 0x90 && data[2] > 0) {
@@ -12955,6 +13446,680 @@ function sendMidi(data, output) {
 
 function sendMidiHardware(data, options = {}) {
     if (state.midi.hardwareOutput) state.midi.hardwareOutput.send(data);
+}
+
+function setMidiRecStatus(text, isError = false) {
+    if (!els.midiRecStatus) return;
+    els.midiRecStatus.textContent = String(text || '');
+    els.midiRecStatus.style.color = isError ? '#ff9f9f' : '#9be7ff';
+}
+
+function setFloatingRecUi(active, mode = '') {
+    const midiMode = mode === 'midi' || state.recorder.activeMode === 'midi';
+    if (els.recStartBtn) {
+        els.recStartBtn.classList.toggle('recording', !!active);
+        els.recStartBtn.disabled = !!active;
+        if (mode) els.recStartBtn.title = `Recording ${mode.toUpperCase()}`;
+    }
+    if (els.recStopBtn) els.recStopBtn.disabled = !active;
+    if (els.recTimer) {
+        els.recTimer.classList.toggle('active', !!active);
+    }
+    if (els.recMidiPlayBtn) els.recMidiPlayBtn.classList.toggle('hidden', !midiMode);
+    if (els.recMidiExportBtn) els.recMidiExportBtn.classList.toggle('hidden', !midiMode);
+    if (els.recMidiClearBtn) els.recMidiClearBtn.classList.toggle('hidden', !midiMode);
+}
+
+function updateMidiRecTimerDisplay() {
+    if (!state.midiRecorder?.isRecording || !els.recTimer) return;
+    const elapsed = Math.floor((performance.now() - (state.midiRecorder.startTs || performance.now())) / 1000);
+    const mins = Math.floor(elapsed / 60).toString().padStart(2, '0');
+    const secs = (elapsed % 60).toString().padStart(2, '0');
+    els.recTimer.textContent = `${mins}:${secs}`;
+}
+
+function startMidiRecTimer() {
+    if (state.midiRecorder.timerInterval) clearInterval(state.midiRecorder.timerInterval);
+    if (els.recTimer) {
+        els.recTimer.textContent = '00:00';
+        els.recTimer.classList.add('active');
+    }
+    state.midiRecorder.timerInterval = setInterval(updateMidiRecTimerDisplay, 100);
+}
+
+function stopMidiRecTimer(reset = true) {
+    if (state.midiRecorder.timerInterval) {
+        clearInterval(state.midiRecorder.timerInterval);
+        state.midiRecorder.timerInterval = null;
+    }
+    if (els.recTimer) {
+        els.recTimer.classList.remove('active');
+        if (reset) els.recTimer.textContent = '00:00';
+    }
+}
+
+function addMidiRecVisualGhost(ev) {
+    if (!ev || !Number.isFinite(ev.note)) return;
+    const zoneId = ev.zone === 'B' ? 'B' : 'A';
+    const key = `${zoneId}:${ev.channel}:${ev.note}`;
+    const marker = {
+        chan: 0,
+        note: Math.max(0, Math.min(127, Math.round(ev.note))),
+        basePb: 0,
+        velocity: Math.max(1, Math.min(127, Math.round(ev.velocity || 80))),
+        grabbed: false,
+        zone: zoneId,
+        lastPb: 8192,
+        lastSlide: 64,
+        lastPress: Math.max(1, Math.min(127, Math.round(ev.velocity || 80))),
+        onTs: Date.now(),
+        midiRecGhost: true
+    };
+    const list = state.physicalNotes.get(marker.note) || [];
+    list.push(marker);
+    state.physicalNotes.set(marker.note, list);
+    const stack = state.midiRecorder.visualActiveByKey.get(key) || [];
+    stack.push(marker);
+    state.midiRecorder.visualActiveByKey.set(key, stack);
+    requestDraw();
+}
+
+function removeMidiRecVisualGhost(ev) {
+    if (!ev || !Number.isFinite(ev.note)) return;
+    const zoneId = ev.zone === 'B' ? 'B' : 'A';
+    const key = `${zoneId}:${ev.channel}:${ev.note}`;
+    const stack = state.midiRecorder.visualActiveByKey.get(key);
+    const marker = stack && stack.length ? stack.pop() : null;
+    if (!stack || !stack.length) state.midiRecorder.visualActiveByKey.delete(key);
+    if (!marker) return;
+    const list = state.physicalNotes.get(marker.note);
+    if (!Array.isArray(list) || !list.length) return;
+    const idx = list.indexOf(marker);
+    if (idx >= 0) list.splice(idx, 1);
+    if (list.length) state.physicalNotes.set(marker.note, list);
+    else state.physicalNotes.delete(marker.note);
+    requestDraw();
+}
+
+function clearMidiRecVisualGhosts() {
+    if (!state.midiRecorder?.visualActiveByKey) return;
+    state.midiRecorder.visualActiveByKey.forEach((stack) => {
+        (stack || []).forEach((marker) => {
+            if (!marker || !Number.isFinite(marker.note)) return;
+            const list = state.physicalNotes.get(marker.note);
+            if (!Array.isArray(list) || !list.length) return;
+            const idx = list.indexOf(marker);
+            if (idx >= 0) list.splice(idx, 1);
+            if (list.length) state.physicalNotes.set(marker.note, list);
+            else state.physicalNotes.delete(marker.note);
+        });
+    });
+    state.midiRecorder.visualActiveByKey.clear();
+    requestDraw();
+}
+
+function hasInternalRecorderSource() {
+    return !!state.audio.enabled;
+}
+
+function hasMidiOutRecorderSource() {
+    return !!(state.midi.hardwareOutput || state.midi.hardwareOutputB);
+}
+
+function openRecorderModePicker() {
+    return new Promise((resolve) => {
+        if (!els.recModePicker || !els.recModeWavBtn || !els.recModeMidiBtn) {
+            resolve(null);
+            return;
+        }
+        const picker = els.recModePicker;
+        const wavBtn = els.recModeWavBtn;
+        const midiBtn = els.recModeMidiBtn;
+
+        const close = (result = null) => {
+            picker.classList.add('hidden');
+            picker.setAttribute('aria-hidden', 'true');
+            wavBtn.removeEventListener('click', onWav);
+            midiBtn.removeEventListener('click', onMidi);
+            picker.removeEventListener('click', onBackdrop);
+            document.removeEventListener('keydown', onKey);
+            resolve(result);
+        };
+        const onWav = () => close('audio');
+        const onMidi = () => close('midi');
+        const onBackdrop = (e) => {
+            if (e.target === picker) close(null);
+        };
+        const onKey = (e) => {
+            if (e.key === 'Escape') close(null);
+        };
+
+        picker.classList.remove('hidden');
+        picker.setAttribute('aria-hidden', 'false');
+        wavBtn.addEventListener('click', onWav);
+        midiBtn.addEventListener('click', onMidi);
+        picker.addEventListener('click', onBackdrop);
+        document.addEventListener('keydown', onKey);
+        wavBtn.focus();
+    });
+}
+
+async function chooseFloatingRecorderMode() {
+    const hasInternal = hasInternalRecorderSource();
+    const hasMidiOut = hasMidiOutRecorderSource();
+    if (hasInternal && !hasMidiOut) return 'audio';
+    if (!hasInternal && hasMidiOut) return 'midi';
+    if (hasInternal && hasMidiOut) {
+        return await openRecorderModePicker();
+    }
+    return null;
+}
+
+async function startFloatingRecorder() {
+    const mode = await chooseFloatingRecorderMode();
+    if (!mode) {
+        setMidiRecStatus('No valid recording source selected', true);
+        return;
+    }
+    if (mode === 'audio') {
+        state.recorder.activeMode = 'audio';
+        startRecording();
+        return;
+    }
+    state.recorder.activeMode = 'midi';
+    startMidiRecorderCapture();
+}
+
+function stopFloatingRecorder() {
+    const mode = state.recorder.activeMode || (state.recorder.isRecording ? 'audio' : (state.midiRecorder.isRecording ? 'midi' : null));
+    if (mode === 'audio') {
+        stopRecording();
+        state.recorder.activeMode = null;
+        return;
+    }
+    if (mode === 'midi') {
+        stopMidiRecorderCapture();
+        state.recorder.activeMode = null;
+    }
+}
+
+function updateMidiRecButtons() {
+    const rec = state.midiRecorder || {};
+    if (els.recMidiPlayBtn) els.recMidiPlayBtn.disabled = !!rec.isRecording;
+    if (els.recMidiExportBtn) els.recMidiExportBtn.disabled = !!rec.isRecording || !(rec.events && rec.events.length);
+    if (els.recMidiClearBtn) els.recMidiClearBtn.disabled = !!rec.isRecording || !(rec.events && rec.events.length);
+}
+
+function getMidiRecBpm() {
+    const ui = parseInt(els.midiRecBpm?.value, 10);
+    if (Number.isFinite(ui) && ui >= 40 && ui <= 240) return ui;
+    const perf = parseInt(els.arpBpm?.value, 10);
+    if (Number.isFinite(perf) && perf >= 40 && perf <= 240) return perf;
+    return 120;
+}
+
+function isMidiRecExpressiveMode() {
+    return String(els.midiRecMode?.value || 'notation') === 'expressive';
+}
+
+function getMidiRecQuantizeStepBeats() {
+    const q = String(els.midiRecQuantize?.value || 'off');
+    if (q === '1/4') return 1;
+    if (q === '1/8') return 0.5;
+    if (q === '1/8T') return 1 / 3;
+    if (q === '1/16') return 0.25;
+    if (q === '1/16T') return 1 / 6;
+    if (q === '1/32') return 0.125;
+    return 0;
+}
+
+function getMidiRecQuantizeStepMs(bpm = 120) {
+    const beats = getMidiRecQuantizeStepBeats();
+    if (beats <= 0) return 0;
+    return (60000 / Math.max(40, bpm)) * beats;
+}
+
+function inferMidiRecZoneFromOutputAndChannel(output, channel) {
+    const ch = Math.max(1, Math.min(16, Number(channel) || 1));
+    if (output && output === state.midi.outputB) return 'B';
+    if (output && output === state.midi.output) return 'A';
+    if (isDualModeEnabled() && state.midi.output && state.midi.outputB && state.midi.output === state.midi.outputB) {
+        return ch >= 9 ? 'B' : 'A';
+    }
+    return 'A';
+}
+
+function captureMidiOutEvent(data, output) {
+    const rec = state.midiRecorder;
+    if (!rec || !rec.isRecording || rec.playbackSending) return;
+    if (!Array.isArray(data) || data.length < 2) return;
+    const status = data[0] & 0xF0;
+    const channel = (data[0] & 0x0F) + 1;
+    const tMs = Math.max(0, Math.round(performance.now() - (rec.startTs || performance.now())));
+    const zone = inferMidiRecZoneFromOutputAndChannel(output, channel);
+    const expressive = isMidiRecExpressiveMode();
+
+    if (status === 0x90 || status === 0x80) {
+        const note = Math.max(0, Math.min(127, Math.round(data[1] || 0)));
+        const vel = Math.max(0, Math.min(127, Math.round(data[2] || 0)));
+        const kind = (status === 0x90 && vel > 0) ? 'on' : 'off';
+        rec.events.push({
+            id: rec.eventSeq++,
+            tMs,
+            type: kind,
+            channel,
+            note,
+            velocity: kind === 'on' ? Math.max(1, vel || 90) : 0,
+            zone
+        });
+    } else if (expressive && status === 0xE0 && data.length >= 3) {
+        const pb = Math.max(0, Math.min(16383, ((data[2] & 0x7F) << 7) | (data[1] & 0x7F)));
+        rec.events.push({
+            id: rec.eventSeq++,
+            tMs,
+            type: 'pb',
+            channel,
+            pb,
+            zone
+        });
+    } else if (expressive && status === 0xD0) {
+        const press = Math.max(0, Math.min(127, Math.round(data[1] || 0)));
+        rec.events.push({
+            id: rec.eventSeq++,
+            tMs,
+            type: 'press',
+            channel,
+            press,
+            zone
+        });
+    } else if (expressive && status === 0xB0 && (data[1] & 0x7F) === 74 && data.length >= 3) {
+        const slide = Math.max(0, Math.min(127, Math.round(data[2] || 0)));
+        rec.events.push({
+            id: rec.eventSeq++,
+            tMs,
+            type: 'cc74',
+            channel,
+            value: slide,
+            zone
+        });
+    } else {
+        return;
+    }
+
+    if (rec.events.length % 32 === 0) {
+        setMidiRecStatus(`REC ${rec.events.length} events`);
+    }
+}
+
+// Expose capture hook for engines that send MIDI outside this module (e.g. Playground.js).
+window.captureMidiOutEvent = captureMidiOutEvent;
+
+function normalizeMidiRecEvents(events) {
+    return (Array.isArray(events) ? events : [])
+        .filter(ev => {
+            if (!Number.isFinite(ev?.tMs) || !Number.isFinite(ev?.channel)) return false;
+            const t = String(ev?.type || '');
+            if ((t === 'on' || t === 'off') && Number.isFinite(ev?.note)) return true;
+            if (t === 'pb' && Number.isFinite(ev?.pb)) return true;
+            if (t === 'cc74' && Number.isFinite(ev?.value)) return true;
+            if (t === 'press' && Number.isFinite(ev?.press)) return true;
+            return false;
+        })
+        .map(ev => ({
+            id: Number.isFinite(ev.id) ? ev.id : 0,
+            tMs: Math.max(0, Number(ev.tMs) || 0),
+            type: ['on', 'off', 'pb', 'cc74', 'press'].includes(String(ev.type)) ? String(ev.type) : 'off',
+            channel: Math.max(1, Math.min(16, Math.round(ev.channel || 1))),
+            note: Math.max(0, Math.min(127, Math.round(ev.note || 0))),
+            velocity: Math.max(0, Math.min(127, Math.round(ev.velocity || 0))),
+            pb: Math.max(0, Math.min(16383, Math.round(ev.pb || 8192))),
+            value: Math.max(0, Math.min(127, Math.round(ev.value || 0))),
+            press: Math.max(0, Math.min(127, Math.round(ev.press || 0))),
+            zone: ev.zone === 'B' ? 'B' : 'A'
+        }))
+        .sort((a, b) => (a.tMs - b.tMs) || (a.id - b.id));
+}
+
+function buildMidiRecNotesFromEvents(events, fallbackDurMs = 140) {
+    const normalized = normalizeMidiRecEvents(events).filter(ev => ev.type === 'on' || ev.type === 'off');
+    const openByKey = new Map();
+    const notes = [];
+    let maxMs = 0;
+    normalized.forEach(ev => {
+        if (ev.tMs > maxMs) maxMs = ev.tMs;
+        const key = `${ev.channel}:${ev.note}`;
+        if (ev.type === 'on') {
+            const q = openByKey.get(key) || [];
+            q.push(ev);
+            openByKey.set(key, q);
+            return;
+        }
+        const q = openByKey.get(key);
+        if (!q || !q.length) return;
+        const on = q.shift();
+        notes.push({
+            channel: on.channel,
+            note: on.note,
+            velocity: Math.max(1, on.velocity || 90),
+            zone: on.zone === 'B' ? 'B' : 'A',
+            startMs: on.tMs,
+            endMs: Math.max(on.tMs + 6, ev.tMs)
+        });
+    });
+    const finalEnd = maxMs + Math.max(40, fallbackDurMs);
+    openByKey.forEach((q) => {
+        q.forEach((on) => {
+            notes.push({
+                channel: on.channel,
+                note: on.note,
+                velocity: Math.max(1, on.velocity || 90),
+                zone: on.zone === 'B' ? 'B' : 'A',
+                startMs: on.tMs,
+                endMs: Math.max(on.tMs + Math.max(40, fallbackDurMs), finalEnd)
+            });
+        });
+    });
+    return notes.sort((a, b) => (a.startMs - b.startMs) || (a.note - b.note));
+}
+
+function quantizeMidiRecNotes(notes, stepMs) {
+    if (!Array.isArray(notes) || !notes.length) return [];
+    if (!(stepMs > 0)) return notes.map(n => ({ ...n }));
+    const minDur = Math.max(20, stepMs);
+    return notes.map((n) => {
+        const start = Math.round(n.startMs / stepMs) * stepMs;
+        let end = Math.round(n.endMs / stepMs) * stepMs;
+        if (end <= start) end = start + minDur;
+        return { ...n, startMs: Math.max(0, start), endMs: Math.max(start + minDur, end) };
+    }).sort((a, b) => (a.startMs - b.startMs) || (a.note - b.note));
+}
+
+function buildMidiRecEventsFromNotes(notes) {
+    const events = [];
+    let seq = 1;
+    (Array.isArray(notes) ? notes : []).forEach((n) => {
+        events.push({
+            id: seq++,
+            tMs: Math.max(0, n.startMs),
+            type: 'on',
+            channel: n.channel,
+            note: n.note,
+            velocity: Math.max(1, n.velocity || 90),
+            zone: n.zone === 'B' ? 'B' : 'A'
+        });
+        events.push({
+            id: seq++,
+            tMs: Math.max(0, n.endMs),
+            type: 'off',
+            channel: n.channel,
+            note: n.note,
+            velocity: 0,
+            zone: n.zone === 'B' ? 'B' : 'A'
+        });
+    });
+    return events.sort((a, b) => {
+        if (a.tMs !== b.tMs) return a.tMs - b.tMs;
+        if (a.type !== b.type) return a.type === 'off' ? -1 : 1;
+        return a.id - b.id;
+    });
+}
+
+function getMidiRecProcessedEvents(options = {}) {
+    const rec = state.midiRecorder;
+    const source = normalizeMidiRecEvents(rec.events || []);
+    if (!source.length) return [];
+    const bpm = Math.max(40, Math.min(240, Number(options.bpm) || getMidiRecBpm()));
+    const stepMs = options.quantizeOff ? 0 : getMidiRecQuantizeStepMs(bpm);
+    const noteEvents = source.filter(ev => ev.type === 'on' || ev.type === 'off');
+    const notes = buildMidiRecNotesFromEvents(noteEvents, stepMs || 120);
+    const qNotes = quantizeMidiRecNotes(notes, stepMs);
+    let merged = buildMidiRecEventsFromNotes(qNotes);
+    if (isMidiRecExpressiveMode()) {
+        const extra = source.filter(ev => ev.type !== 'on' && ev.type !== 'off');
+        merged = merged.concat(extra);
+    }
+    const priority = (ev) => {
+        if (ev.type === 'off') return 0;
+        if (ev.type === 'pb' || ev.type === 'cc74' || ev.type === 'press') return 1;
+        return 2; // on
+    };
+    return merged.sort((a, b) => {
+        if (a.tMs !== b.tMs) return a.tMs - b.tMs;
+        if (priority(a) !== priority(b)) return priority(a) - priority(b);
+        return (a.id || 0) - (b.id || 0);
+    });
+}
+
+function writeMidiVarLenBytes(value) {
+    let v = Math.max(0, Math.floor(value || 0));
+    const bytes = [v & 0x7F];
+    v >>= 7;
+    while (v > 0) {
+        bytes.unshift((v & 0x7F) | 0x80);
+        v >>= 7;
+    }
+    return bytes;
+}
+
+function makeMidiTrackChunk(trackBytes) {
+    const len = trackBytes.length >>> 0;
+    const out = new Uint8Array(8 + len);
+    out[0] = 0x4D; out[1] = 0x54; out[2] = 0x72; out[3] = 0x6B; // MTrk
+    out[4] = (len >>> 24) & 0xFF;
+    out[5] = (len >>> 16) & 0xFF;
+    out[6] = (len >>> 8) & 0xFF;
+    out[7] = len & 0xFF;
+    out.set(trackBytes, 8);
+    return out;
+}
+
+function concatUint8Arrays(chunks) {
+    const total = chunks.reduce((sum, c) => sum + c.length, 0);
+    const out = new Uint8Array(total);
+    let off = 0;
+    chunks.forEach((c) => { out.set(c, off); off += c.length; });
+    return out;
+}
+
+function buildMidiFileFromRecorderEvents(events, bpm = 120, ppq = 480) {
+    const safeBpm = Math.max(40, Math.min(240, Math.round(bpm || 120)));
+    const safePpq = Math.max(96, Math.min(960, Math.round(ppq || 480)));
+    const evs = normalizeMidiRecEvents(events);
+    const msToTick = (ms) => Math.max(0, Math.round((ms * safePpq * safeBpm) / 60000));
+
+    const tempoMicros = Math.round(60000000 / safeBpm);
+    const tempoTrack = [];
+    tempoTrack.push(0x00, 0xFF, 0x51, 0x03, (tempoMicros >> 16) & 0xFF, (tempoMicros >> 8) & 0xFF, tempoMicros & 0xFF);
+    tempoTrack.push(0x00, 0xFF, 0x2F, 0x00);
+
+    const noteTrackEvents = evs.map(ev => ({
+        tick: msToTick(ev.tMs),
+        type: ev.type,
+        data: (() => {
+            const ch = (Math.max(1, ev.channel) - 1) & 0x0F;
+            if (ev.type === 'on') return [0x90 + ch, ev.note & 0x7F, Math.max(1, ev.velocity || 90) & 0x7F];
+            if (ev.type === 'off') return [0x80 + ch, ev.note & 0x7F, 0];
+            if (ev.type === 'pb') {
+                const pb = Math.max(0, Math.min(16383, Math.round(ev.pb || 8192)));
+                return [0xE0 + ch, pb & 0x7F, (pb >> 7) & 0x7F];
+            }
+            if (ev.type === 'cc74') return [0xB0 + ch, 74, Math.max(0, Math.min(127, Math.round(ev.value || 0)))];
+            if (ev.type === 'press') return [0xD0 + ch, Math.max(0, Math.min(127, Math.round(ev.press || 0)))];
+            return [0x80 + ch, ev.note & 0x7F, 0];
+        })()
+    })).sort((a, b) => {
+        if (a.tick !== b.tick) return a.tick - b.tick;
+        const pri = (t) => (t === 'off' ? 0 : (t === 'pb' || t === 'cc74' || t === 'press' ? 1 : 2));
+        if (pri(a.type) !== pri(b.type)) return pri(a.type) - pri(b.type);
+        return 0;
+    });
+
+    const noteTrack = [];
+    let lastTick = 0;
+    noteTrackEvents.forEach((ev) => {
+        const delta = Math.max(0, ev.tick - lastTick);
+        noteTrack.push(...writeMidiVarLenBytes(delta), ...ev.data);
+        lastTick = ev.tick;
+    });
+    noteTrack.push(0x00, 0xFF, 0x2F, 0x00);
+
+    const header = new Uint8Array(14);
+    header[0] = 0x4D; header[1] = 0x54; header[2] = 0x68; header[3] = 0x64; // MThd
+    header[4] = 0x00; header[5] = 0x00; header[6] = 0x00; header[7] = 0x06;
+    header[8] = 0x00; header[9] = 0x01; // format 1
+    header[10] = 0x00; header[11] = 0x02; // 2 tracks
+    header[12] = (safePpq >> 8) & 0xFF;
+    header[13] = safePpq & 0xFF;
+
+    const tempoChunk = makeMidiTrackChunk(Uint8Array.from(tempoTrack));
+    const noteChunk = makeMidiTrackChunk(Uint8Array.from(noteTrack));
+    return concatUint8Arrays([header, tempoChunk, noteChunk]);
+}
+
+function stopMidiRecorderPlayback(sendAllNotesOff = true) {
+    const rec = state.midiRecorder;
+    if (!rec) return;
+    if (Array.isArray(rec.playbackTimers)) {
+        rec.playbackTimers.forEach((id) => clearTimeout(id));
+    }
+    rec.playbackTimers = [];
+    if (rec.playbackEndTimer) {
+        clearTimeout(rec.playbackEndTimer);
+        rec.playbackEndTimer = null;
+    }
+    clearMidiRecVisualGhosts();
+    rec.isPlaying = false;
+    rec.playbackSending = false;
+    if (sendAllNotesOff) {
+        const outs = [state.midi.output, state.midi.outputB].filter(Boolean);
+        outs.forEach((out) => {
+            for (let ch = 1; ch <= 16; ch += 1) {
+                sendMidi([0xB0 + ch - 1, 123, 0], out);
+            }
+        });
+    }
+    updateMidiRecButtons();
+}
+
+function startMidiRecorderPlayback() {
+    const rec = state.midiRecorder;
+    if (!rec || rec.isRecording) return;
+    const events = getMidiRecProcessedEvents({ bpm: getMidiRecBpm() });
+    if (!events.length) {
+        setMidiRecStatus('No MIDI events to play', true);
+        return;
+    }
+    stopMidiRecorderPlayback(false);
+    rec.isPlaying = true;
+    rec.playbackSending = true;
+    updateMidiRecButtons();
+    setMidiRecStatus(`PLAY ${events.length} events`);
+
+    const maxMs = events.reduce((m, ev) => Math.max(m, ev.tMs || 0), 0);
+    rec.playbackTimers = events.map((ev) => setTimeout(() => {
+        const out = ev.zone === 'B' ? (state.midi.outputB || state.midi.output) : state.midi.output;
+        if (!out) return;
+        if (ev.type === 'on') {
+            addMidiRecVisualGhost(ev);
+            const status = 0x90 + (Math.max(1, ev.channel) - 1);
+            sendMidi([status, ev.note, Math.max(1, ev.velocity || 90)], out);
+            return;
+        }
+        if (ev.type === 'off') {
+            removeMidiRecVisualGhost(ev);
+            const status = 0x80 + (Math.max(1, ev.channel) - 1);
+            sendMidi([status, ev.note, 0], out);
+            return;
+        }
+        if (ev.type === 'pb') {
+            const pb = Math.max(0, Math.min(16383, Math.round(ev.pb || 8192)));
+            const status = 0xE0 + (Math.max(1, ev.channel) - 1);
+            sendMidi([status, pb & 0x7F, (pb >> 7) & 0x7F], out);
+            return;
+        }
+        if (ev.type === 'cc74') {
+            const v = Math.max(0, Math.min(127, Math.round(ev.value || 0)));
+            const status = 0xB0 + (Math.max(1, ev.channel) - 1);
+            sendMidi([status, 74, v], out);
+            return;
+        }
+        if (ev.type === 'press') {
+            const press = Math.max(0, Math.min(127, Math.round(ev.press || 0)));
+            const status = 0xD0 + (Math.max(1, ev.channel) - 1);
+            sendMidi([status, press], out);
+        }
+    }, Math.max(0, Math.round(ev.tMs))));
+
+    rec.playbackEndTimer = setTimeout(() => {
+        rec.playbackSending = false;
+        rec.isPlaying = false;
+        rec.playbackEndTimer = null;
+        rec.playbackTimers = [];
+        clearMidiRecVisualGhosts();
+        updateMidiRecButtons();
+        setMidiRecStatus('Playback completed');
+    }, Math.max(0, Math.round(maxMs + 120)));
+}
+
+function startMidiRecorderCapture() {
+    const rec = state.midiRecorder;
+    if (!rec) return;
+    stopMidiRecorderPlayback(true);
+    rec.events = [];
+    rec.eventSeq = 1;
+    rec.startTs = performance.now();
+    rec.isRecording = true;
+    startMidiRecTimer();
+    setFloatingRecUi(true, 'midi');
+    updateMidiRecButtons();
+    setMidiRecStatus('REC 0 events');
+}
+
+function stopMidiRecorderCapture() {
+    const rec = state.midiRecorder;
+    if (!rec || !rec.isRecording) return;
+    rec.isRecording = false;
+    stopMidiRecTimer(true);
+    setFloatingRecUi(false);
+    updateMidiRecButtons();
+    setMidiRecStatus(`Recorded ${rec.events.length} events`);
+}
+
+function clearMidiRecorderCapture() {
+    const rec = state.midiRecorder;
+    if (!rec) return;
+    stopMidiRecorderPlayback(true);
+    rec.isRecording = false;
+    rec.events = [];
+    rec.eventSeq = 1;
+    stopMidiRecTimer(true);
+    setFloatingRecUi(false);
+    updateMidiRecButtons();
+    setMidiRecStatus('Recorder cleared');
+}
+
+function exportMidiRecorderToFile() {
+    const bpm = getMidiRecBpm();
+    const events = getMidiRecProcessedEvents({ bpm });
+    if (!events.length) {
+        setMidiRecStatus('No MIDI events to export', true);
+        return;
+    }
+    const bytes = buildMidiFileFromRecorderEvents(events, bpm, 480);
+    const blob = new Blob([bytes], { type: 'audio/midi' });
+    const url = URL.createObjectURL(blob);
+    const now = new Date();
+    const stamp = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `midi_recording_${stamp}.mid`;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+        URL.revokeObjectURL(url);
+        a.remove();
+    }, 0);
+    setMidiRecStatus(`Exported ${events.length} events @ ${bpm} BPM`);
 }
 
 
@@ -15247,6 +16412,9 @@ function updateDualModeUI() {
         els.midiOutSelectB.disabled = !enabled;
     }
     if (els.audioZoneSelect) {
+        if (els.audioZoneBox) {
+            els.audioZoneBox.style.display = enabled ? '' : 'none';
+        }
         els.audioZoneSelect.disabled = !enabled;
         if (enabled) {
             syncScaleConfigFromUi(prevEditZone);
@@ -24126,16 +25294,41 @@ function bindUI() {
     }
     // Audio Recorder bindings
     if (els.recStartBtn) {
-        els.recStartBtn.onclick = () => startRecording();
+        els.recStartBtn.onclick = () => startFloatingRecorder();
     }
     if (els.recStopBtn) {
-        els.recStopBtn.onclick = () => stopRecording();
+        els.recStopBtn.onclick = () => stopFloatingRecorder();
     }
+    if (els.recMidiPlayBtn) els.recMidiPlayBtn.onclick = () => {
+        if (state.midiRecorder.isPlaying) stopMidiRecorderPlayback(true);
+        else startMidiRecorderPlayback();
+    };
+    if (els.recMidiExportBtn) els.recMidiExportBtn.onclick = () => exportMidiRecorderToFile();
+    if (els.recMidiClearBtn) els.recMidiClearBtn.onclick = () => clearMidiRecorderCapture();
+    if (els.midiRecBpm) {
+        els.midiRecBpm.addEventListener('change', () => {
+            const bpm = getMidiRecBpm();
+            els.midiRecBpm.value = String(bpm);
+        });
+    }
+    if (els.midiRecQuantize) {
+        els.midiRecQuantize.addEventListener('change', () => {
+            setMidiRecStatus(`Quantize ${els.midiRecQuantize.value || 'off'}`);
+        });
+    }
+    if (els.midiRecMode) {
+        els.midiRecMode.addEventListener('change', () => {
+            const modeTxt = isMidiRecExpressiveMode() ? 'Expressive MPE' : 'Notation-safe';
+            setMidiRecStatus(`Mode ${modeTxt}`);
+        });
+    }
+    updateMidiRecButtons();
+    setMidiRecStatus('Mode Notation-safe');
     // Make recorder bar draggable
     if (els.recControls) {
         setupDraggableRecControls();
-        // Set initial visibility based on Internal Synth state
-        els.recControls.style.display = state.audio.enabled ? 'flex' : 'none';
+        // Keep floating recorder bar always visible.
+        els.recControls.style.display = 'flex';
     }
     // Setup recording editor events
     setupRecordingEditorEvents();
@@ -24162,6 +25355,22 @@ function bindUI() {
                 applyArticulationRuleToUI(value);
             };
         }
+    }
+    if (els.factoryPreloadToggle) {
+        els.factoryPreloadToggle.checked = isFactoryPreloadEnabled();
+        els.factoryPreloadToggle.onchange = () => {
+            const enabled = !!els.factoryPreloadToggle.checked;
+            setFactoryPreloadEnabled(enabled);
+            if (!enabled && state.factoryPreload?.running) {
+                state.factoryPreload.cancelRequested = true;
+                updateFactoryPreloadUi({ status: 'Stopping factory preload...' });
+                return;
+            }
+            updateFactoryPreloadUi();
+            if (enabled && !isFactoryPreloadCompleted() && !state.factoryPreload?.running) {
+                void preloadFactoryOnFirstLaunch();
+            }
+        };
     }
     if (els.sampleSetName) {
         // Keep this as a plain text draft field: the set is created/selected only on NEW/SAVE.
@@ -24623,6 +25832,7 @@ function bindUI() {
     updateAllSampleNames();
     loadFxForSet(state.audio.activeSet, getActiveAudioZoneId());
     loadSavedSamples(state.audio.activeSet, state.audio.activeArticulation || getActiveSampleArticulationId());
+    maybeStartFactoryPreloadOnStartup();
     updateFxValueDisplays();
     setFxEnabled(state.audio.fxEnabled);
     updateWavetableUI();
